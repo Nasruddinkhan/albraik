@@ -1,7 +1,5 @@
 
 
-<<<<<<< HEAD
-=======
 
 #### Prerequisites
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.
