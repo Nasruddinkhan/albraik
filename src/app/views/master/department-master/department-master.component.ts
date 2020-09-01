@@ -20,6 +20,7 @@ export class DepartmentMasterComponent implements OnInit {
   }
 
   addDeparment() {
+    
     this.departmentNames.push(this.fb.group({departments:''}));
   }
 

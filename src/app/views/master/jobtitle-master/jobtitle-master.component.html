@@ -15,11 +15,11 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" formControlName="jobtittle">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" (click)="addJobTitle()" *ngIf="pointIndex === 0"
-                                        class="btn btn-success btn-sm" type="button">أضف
+                                    <button class="btn btn-outline-secondary" (click)="addJobTitle()"
+                                        class="btn btn-success btn-sm" type="button">أضف <i class="icon-plus"></i>
                                     </button>
                                     <button class="btn btn-outline-secondary" (click)="deleteaddJobTitle(pointIndex)" *ngIf="pointIndex !== 0"
-                                        class="btn btn-danger btn-sm" type="button">حذف</button>
+                                        class="btn btn-danger btn-sm" type="button">حذف <i class="icon-minus"></i></button>
                                 </div>
                             </div>
                         </div>
