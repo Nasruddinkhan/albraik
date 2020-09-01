@@ -33,7 +33,8 @@ td, th{
 }
 
 .card-header {
-   background-color: #63c2de !important;
+  // background-color: #63c2de !important; #ffc107
+   background-color: #ffc107 !important;
    border-bottom: unset !important;
    color:white;
    font-weight: bold;
@@ -53,7 +54,7 @@ th{
    float: right;
 }
 body{
-   font-size: 12px !important;
+   font-size: 14px !important;
 }
 
 .ngx-pagination a, .ngx-pagination button {
@@ -125,6 +126,13 @@ transition: all 0.3s;
 
 .card {
    border: 1px solid #BBB !important;
+   box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+}
+
+.card-footer {
+   padding: 0.75rem 1.25rem;
+   background-color: #f0f3f5 !important;
+   border: 1px solid #c8ced3 !important;
    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
 }
 .sidebar-minimized .sidebar .sidebar-minimizer {

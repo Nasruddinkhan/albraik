@@ -1,0 +1,31 @@
+
+<div class="card">
+    <div class="card-header">
+      Job <i class="icon-people"></i>
+
+    </div>
+    <div class="card-body">
+        <form [formGroup]="jobTitileForm">
+            <div formArrayName="jobtittle_names">
+                <div class="row" *ngFor="let item of jobTitleNames.controls; let pointIndex=index"
+                    [formGroupName]="pointIndex">
+                    <div class="form-group col-sm-6">
+                        <label>عنوان وظيفي </label>
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" formControlName="jobtittle">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="addJobTitle()" *ngIf="pointIndex === 0"
+                                        class="btn btn-success btn-sm" type="button">أضف
+                                    </button>
+                                    <button class="btn btn-outline-secondary" (click)="deleteaddJobTitle(pointIndex)" *ngIf="pointIndex !== 0"
+                                        class="btn btn-danger btn-sm" type="button">حذف</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

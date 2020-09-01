@@ -13,5 +13,7 @@ export class LoginComponent {
     console.log('logiin component');
     this.router.navigate(["/dashboard"]);
   }
-
+  onRegisterCompany(){
+    this.router.navigate(["/register"]);
+  }
  }

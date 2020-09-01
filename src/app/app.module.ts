@@ -40,7 +40,12 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-
+import { CompanyMasterComponent } from './views/master/company-master/company-master.component';
+import { DepartmentMasterComponent } from './views/master/department-master/department-master.component';
+import { JobtitleMasterComponent } from './views/master/jobtitle-master/jobtitle-master.component';
+import { CompanyRegisterComponent } from './views/master/component.register.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   imports: [
     BrowserModule,
@@ -54,7 +59,13 @@ import { ChartsModule } from 'ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true
+    }), 
   ],
   declarations: [
     AppComponent,
@@ -62,7 +73,11 @@ import { ChartsModule } from 'ng2-charts';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CompanyMasterComponent,
+    DepartmentMasterComponent,
+    JobtitleMasterComponent,
+    CompanyRegisterComponent
   ],
   providers: [{
     provide: LocationStrategy,

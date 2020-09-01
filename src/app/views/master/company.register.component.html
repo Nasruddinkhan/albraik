@@ -1,0 +1,24 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <app-company-master #comanyMst></app-company-master>
+            <!-- <br> -->
+            <app-department-master #deptMst></app-department-master>
+
+            <app-jobtitle-master #jobMst></app-jobtitle-master>
+         
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-sm btn-success" (click)="comanyMst.onSubmit();
+                                deptMst.onSubmit();
+                                jobMst.onSubmit();
+                                getDtata();">إنشاء شركة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
