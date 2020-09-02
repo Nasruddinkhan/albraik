@@ -6,7 +6,7 @@
     <div class="card-body">
         <form [formGroup]="departmentForm">
             <div formArrayName="department_names">
-                <div class="row" *ngFor="let item of departmentNames.controls; let pointIndex=index"
+                <div class="row" *ngFor="let item of departmentNames.controls ; let pointIndex=index"
                     [formGroupName]="pointIndex">
                     <div class="form-group col-sm-6">
                         <label>اسم القسم                        </label>

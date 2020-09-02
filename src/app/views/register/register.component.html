@@ -5,7 +5,7 @@
         <div class="col-md-6 mx-auto">
           <div class="card mx-4">
             <div class="card-body p-4">
-              <form>
+              <form [formGroup]="registerForm" (ngSubmit)="registerAdmin()" >
                 <h1>إنشاء المسؤول
                 </h1>
                 <p class="text-muted">إنشاء حساب المسؤول</p>
@@ -13,27 +13,63 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
                   </div>
-                  <input type="text" class="form-control" placeholder="البريد الإلكتروني" autocomplete="username" required>
+                  <input type="text" 
+                         class="form-control"  
+                         formControlName="email" 
+                         placeholder="البريد الإلكتروني" 
+                         [ngClass]="{ 'is-invalid': isSubmitted && f.email.touched &&  f.email.errors }">
+                  <div *ngIf="f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required"><b>البريد الالكتروني مطلوب</b></div>
+                    <div *ngIf="f.email.errors.email"><b>الرجاء إدخال بريد إلكتروني صحيح</b></div>
+                </div>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-phone"></i></span>
                   </div>
-                  <input type="text" class="form-control" placeholder="رقم جوال المشرف" autocomplete="email" required>
+                  <input type="text" 
+                        class="form-control" 
+                        formControlName="phoneNumber" 
+                        maxlength="12"
+                        placeholder="رقم جوال المشرف"
+                        [ngClass]="{ 'is-invalid':  isSubmitted && f.phoneNumber.touched &&  f.phoneNumber.errors }">
+                    <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                      <div *ngIf="f.phoneNumber.errors.required"><b>رقم الهاتف مطلوب</b></div>
+                       <div *ngIf="f.phoneNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div> 
+                       <div *ngIf="f.phoneNumber.errors.pattern">الرقم العربي مطلوب </div>
+                  </div>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
-                  <input type="password" class="form-control" placeholder="كلمة المرور" autocomplete="new-password" required>
+                  <input type="password"
+                         class="form-control"  
+                         formControlName="password"  
+                         placeholder="كلمة المرور"
+                         [ngClass]="{ 'is-invalid':  isSubmitted && f.password.touched &&  f.password.errors }"> 
+                    <div *ngIf="f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required"><b>كلمة المرور مطلوبة</b></div>
+                      <div *ngIf="f.password.errors.minlength">يجب أن تكون كلمة المرور ٨ أحرف على الأقل</div>
+                      <div *ngIf="f.password.errors.maxlength"><b>يجب أن يكون طول كلمة المرور أقل من ١٦	</b></div> 
+                   </div>
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
-                  <input type="password" class="form-control" placeholder="تأكيد كلمة المرور" autocomplete="new-password" required>
+                  <input type="password"
+                         class="form-control"  
+                         formControlName="confpassword" 
+                         placeholder="تأكيد كلمة المرور"
+                         [ngClass]="{ 'is-invalid':  isSubmitted && f.confpassword.touched &&  f.confpassword.errors }">
+                       <div *ngIf="f.confpassword.errors" class="invalid-feedback">
+                          <div *ngIf="f.confpassword.errors.required"><b>كلمة المرور مطلوبة</b></div>
+                          <div *ngIf="f.confpassword.errors.mustMatch"><b>يجب ان تتطابق كلمات المرور</b></div>
+                       </div>
+                  
                 </div>
-                <button type="button" (click)="registerAdmin()" class="btn btn-block btn-success">إنشاء المسؤول</button>
+                <button type="button" (click)="registerAdmin()" class="btn-register btn btn-block btn-success">إنشاء المسؤول</button>
               </form>
             </div>
           </div>

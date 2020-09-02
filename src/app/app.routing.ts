@@ -60,14 +60,17 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'registercompany',
+        loadChildren: () => import('./views/master/master.module').then(m => m.MasterModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./views/users/users.module').then(u => u.UserModule)
       }
     ]
   },
-  {
-    path:'companyregister',
-    component:CompanyRegisterComponent
-  },
- 
   { path: '**', component: P404Component }
 ];
 

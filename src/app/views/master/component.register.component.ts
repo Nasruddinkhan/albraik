@@ -36,7 +36,7 @@ import { ToastrService } from 'ngx-toastr';
       }
       validateErrors(isErrorMsg:string){
         this.toastr.error(isErrorMsg, 'أخطاء التحقق من الصحة', {
-          positionClass: 'toast-bottom-right'
+          positionClass: 'toast-bottom-left'
         });
       }
       ngOnDestroy(){

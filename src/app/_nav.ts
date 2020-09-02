@@ -6,7 +6,17 @@ export const navItems: INavData[] = [
     url: '/dashboard',
     icon: 'icon-speedometer'
   },  
+   {
+    name: 'لوحة القيادة',
+    url: '/registercompany',
+    icon: 'icon-star'
+  },
   {
+    name: 'المستعمل',
+    url: '/users',
+    icon: 'icon-people'
+  }
+  /* {
     name: 'الصفحات',
     url: '/pages',
     icon: 'icon-star',
@@ -32,5 +42,5 @@ export const navItems: INavData[] = [
         icon: 'icon-star'
       }
     ]
-  }
+  } */
 ];
