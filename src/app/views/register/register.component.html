@@ -17,7 +17,7 @@
                          class="form-control"  
                          formControlName="email" 
                          placeholder="البريد الإلكتروني" 
-                         [ngClass]="{ 'is-invalid': isSubmitted && f.email.touched &&  f.email.errors }">
+                         [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.email.errors }">
                   <div *ngIf="f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.required"><b>البريد الالكتروني مطلوب</b></div>
                     <div *ngIf="f.email.errors.email"><b>الرجاء إدخال بريد إلكتروني صحيح</b></div>
@@ -32,7 +32,7 @@
                         formControlName="phoneNumber" 
                         maxlength="12"
                         placeholder="رقم جوال المشرف"
-                        [ngClass]="{ 'is-invalid':  isSubmitted && f.phoneNumber.touched &&  f.phoneNumber.errors }">
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.phoneNumber.errors }">
                     <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
                       <div *ngIf="f.phoneNumber.errors.required"><b>رقم الهاتف مطلوب</b></div>
                        <div *ngIf="f.phoneNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div> 
@@ -47,7 +47,7 @@
                          class="form-control"  
                          formControlName="password"  
                          placeholder="كلمة المرور"
-                         [ngClass]="{ 'is-invalid':  isSubmitted && f.password.touched &&  f.password.errors }"> 
+                         [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.password.errors }"> 
                     <div *ngIf="f.password.errors" class="invalid-feedback">
                       <div *ngIf="f.password.errors.required"><b>كلمة المرور مطلوبة</b></div>
                       <div *ngIf="f.password.errors.minlength">يجب أن تكون كلمة المرور ٨ أحرف على الأقل</div>
@@ -62,14 +62,14 @@
                          class="form-control"  
                          formControlName="confpassword" 
                          placeholder="تأكيد كلمة المرور"
-                         [ngClass]="{ 'is-invalid':  isSubmitted && f.confpassword.touched &&  f.confpassword.errors }">
+                         [ngClass]="{ 'is-invalid red-border-class':  isSubmitted  &&  f.confpassword.errors }">
                        <div *ngIf="f.confpassword.errors" class="invalid-feedback">
                           <div *ngIf="f.confpassword.errors.required"><b>كلمة المرور مطلوبة</b></div>
                           <div *ngIf="f.confpassword.errors.mustMatch"><b>يجب ان تتطابق كلمات المرور</b></div>
                        </div>
                   
                 </div>
-                <button type="button" (click)="registerAdmin()" class="btn-register btn btn-block btn-success">إنشاء المسؤول</button>
+                <button type="button" (click)="registerAdmin()" class=" btn btn-block btn-success">إنشاء المسؤول</button>
               </form>
             </div>
           </div>
