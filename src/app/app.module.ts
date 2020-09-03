@@ -43,10 +43,13 @@ import { ChartsModule } from 'ng2-charts';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { MasterModule } from './views/master/master.module';
 import { ApplicationPipeModule } from './app.pipes.module';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ShareComponentModule } from './share.component';
+import { CompanyRegisterComponent } from './views/master/component.register.component';
+import { JobtitleMasterComponent } from './views/master/jobtitle-master/jobtitle-master.component';
+import { CompanyMasterComponent } from './views/master/company-master/company-master.component';
+import { DepartmentMasterComponent } from './views/master/department-master/department-master.component';
 
 @NgModule({
   imports: [
@@ -76,7 +79,8 @@ import { ShareComponentModule } from './share.component';
     AppComponent,
     ...APP_CONTAINERS,
     LoginComponent,
-    RegisterComponent  ],
+    RegisterComponent ,
+    CompanyRegisterComponent, JobtitleMasterComponent,DepartmentMasterComponent, CompanyMasterComponent ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
