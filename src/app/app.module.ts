@@ -50,12 +50,15 @@ import { CompanyRegisterComponent } from './views/master/component.register.comp
 import { JobtitleMasterComponent } from './views/master/jobtitle-master/jobtitle-master.component';
 import { CompanyMasterComponent } from './views/master/company-master/company-master.component';
 import { DepartmentMasterComponent } from './views/master/department-master/department-master.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './views/service/token-interceptor.service';
 
 @NgModule({
   imports: [
     ShareComponentModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     AppAsideModule,
     AppBreadcrumbModule.forRoot(),
@@ -84,7 +87,14 @@ import { DepartmentMasterComponent } from './views/master/department-master/depa
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }
+
+],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
