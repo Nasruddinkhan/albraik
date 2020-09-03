@@ -2,15 +2,22 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Dashboard',
+    name: 'لوحة القيادة',
     url: '/dashboard',
     icon: 'icon-speedometer'
+  },  
+   {
+    name: 'لوحة القيادة',
+    url: '/registercompany',
+    icon: 'icon-star'
   },
-
-  
-  
   {
-    name: 'Pages',
+    name: 'المستعمل',
+    url: '/users',
+    icon: 'icon-people'
+  }
+  /* {
+    name: 'الصفحات',
     url: '/pages',
     icon: 'icon-star',
     children: [
@@ -35,5 +42,5 @@ export const navItems: INavData[] = [
         icon: 'icon-star'
       }
     ]
-  }
+  } */
 ];

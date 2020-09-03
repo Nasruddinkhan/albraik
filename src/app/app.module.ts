@@ -41,8 +41,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { MasterModule } from './views/master/master.module';
+import { ApplicationPipeModule } from './app.pipes.module';
+import { ColorSketchModule } from 'ngx-color/sketch';
+import { ShareComponentModule } from './share.component';
+
 @NgModule({
   imports: [
+    ShareComponentModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -54,16 +62,21 @@ import { ChartsModule } from 'ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true
+    }),
+    ColorSketchModule,
+    ApplicationPipeModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
-    P404Component,
-    P500Component,
     LoginComponent,
-    RegisterComponent
-  ],
+    RegisterComponent  ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy

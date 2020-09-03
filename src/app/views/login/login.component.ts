@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+   styleUrls: ['login.component.css']
 })
 export class LoginComponent {
 
@@ -13,5 +14,7 @@ export class LoginComponent {
     console.log('logiin component');
     this.router.navigate(["/dashboard"]);
   }
-
+  onRegisterCompany(){
+    this.router.navigate(["/register"]);
+  }
  }
