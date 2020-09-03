@@ -21,7 +21,7 @@ export class RegisterComponent  implements OnInit{
      return;
    }
    console.log( JSON.stringify(this.registerForm.value));
-    //this.router.navigate(["/companyregister"]);
+    this.router.navigate(["/companyregister"]);
   }
   get f() { return this.registerForm.controls; }
   ngOnInit(){

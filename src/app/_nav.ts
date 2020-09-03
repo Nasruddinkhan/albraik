@@ -5,11 +5,6 @@ export const navItems: INavData[] = [
     name: 'لوحة القيادة',
     url: '/dashboard',
     icon: 'icon-speedometer'
-  },  
-   {
-    name: 'لوحة القيادة',
-    url: '/registercompany',
-    icon: 'icon-star'
   },
   {
     name: 'المستعمل',
