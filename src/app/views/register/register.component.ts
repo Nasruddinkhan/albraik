@@ -12,6 +12,7 @@ import { ToasterMsgService } from '../service/toaster-msg.service';
 
 })
 export class RegisterComponent  implements OnInit{
+  loading = false;
   registerForm:FormGroup;
   isSubmitted = false;
   constructor(private router:Router,
@@ -24,11 +25,14 @@ export class RegisterComponent  implements OnInit{
   if (this.registerForm.invalid) {
      return;
    }
+   this.loading =   true;
    this.registerService.registerAdmin (JSON.stringify(this.registerForm.value)).subscribe((resp:any)=>{
+    this.loading =   false;
     this.toastService.susessMessage('إضافة المستخدم بنجاح');
-    this.registerForm.reset();
+    this.router.navigate(["/register"]);
    },err=>{
-    this.toastService.errorMessage('إضافة المستخدم بنجاح');
+    this.loading =   false;
+    this.toastService.errorMessage(err.error.message);
    });
   
   }

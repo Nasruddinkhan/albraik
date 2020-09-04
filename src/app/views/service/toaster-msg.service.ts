@@ -12,7 +12,7 @@ export class ToasterMsgService {
     });
   }
   public errorMessage(message : any){
-    this.toastr.error(message, 'نجاح</b>', {
+    this.toastr.error(message, 'نجاح', {
       positionClass: 'toast-bottom-left'
     });
   }

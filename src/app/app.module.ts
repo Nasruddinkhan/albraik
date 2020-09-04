@@ -52,7 +52,7 @@ import { CompanyMasterComponent } from './views/master/company-master/company-ma
 import { DepartmentMasterComponent } from './views/master/department-master/department-master.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './views/service/token-interceptor.service';
-
+import { NgxLoadingModule } from 'ngx-loading';
 @NgModule({
   imports: [
     ShareComponentModule,
@@ -75,6 +75,7 @@ import { TokenInterceptorService } from './views/service/token-interceptor.servi
       maxOpened: 1,
       autoDismiss: true
     }),
+    NgxLoadingModule,
     ColorSketchModule,
     ApplicationPipeModule
   ],
