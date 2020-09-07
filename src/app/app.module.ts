@@ -15,9 +15,6 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import { DefaultLayoutComponent } from './containers';
-
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
@@ -53,6 +50,7 @@ import { DepartmentMasterComponent } from './views/master/department-master/depa
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './views/service/token-interceptor.service';
 import { NgxLoadingModule } from 'ngx-loading';
+import { ChangePasswordComponent } from './views/change-password/change-password.component';
 @NgModule({
   imports: [
     ShareComponentModule,
@@ -84,7 +82,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     ...APP_CONTAINERS,
     LoginComponent,
     RegisterComponent ,
-    CompanyRegisterComponent, JobtitleMasterComponent,DepartmentMasterComponent, CompanyMasterComponent ],
+    CompanyRegisterComponent, JobtitleMasterComponent,DepartmentMasterComponent, CompanyMasterComponent, ChangePasswordComponent ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy

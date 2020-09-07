@@ -13,4 +13,7 @@ export class AdminRegistrationService {
     return this.http.post(this.baseURL +`/register/admin`, adminRegister );
   }
   
+  public changePassword(changePassword) : Observable<any>  {
+    return this.http.post(this.baseURL +`/api/changepassword`, changePassword );
+  }
 }

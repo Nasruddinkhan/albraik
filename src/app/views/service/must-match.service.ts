@@ -18,3 +18,7 @@ export function MustMatch(controlName: string, matchingControlName: string) {
         }
     }
 }
+
+export function checkNullEmpty(value) { 
+    return ( value == null ||    value == undefined ||     value.length == 0) ?true:false
+} 

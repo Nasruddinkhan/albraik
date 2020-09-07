@@ -9,6 +9,8 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { CompanyRegisterComponent } from './views/master/component.register.component';
+import { AuthGuardService } from './views/service/auth-guard.service';
+import { ChangePasswordComponent } from './views/change-password/change-password.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +31,14 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'changepassword/:userID',
+    data: {
+      title: 'change Password'
+    },
+    component: ChangePasswordComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: '500',
     component: P500Component,
     data: {
@@ -44,11 +54,12 @@ export const routes: Routes = [
   },
 
   {
-    path: 'companyregister',
+    path: 'companyregister/:userID',
     component: CompanyRegisterComponent,
     data: {
       title: 'Register Page'
-    }
+    },
+    canActivate: [AuthGuardService]
   },
   {
     path: 'register',
@@ -67,12 +78,14 @@ export const routes: Routes = [
      
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
+        canActivate: [AuthGuardService]
       },
    
       {
         path: 'users',
-        loadChildren: () => import('./views/users/users.module').then(u => u.UserModule)
+        loadChildren: () => import('./views/users/users.module').then(u => u.UserModule),
+        canActivate: [AuthGuardService]
       }
     ]
   },
