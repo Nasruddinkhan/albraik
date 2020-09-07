@@ -1,0 +1,8 @@
+:root {
+    --first-color:  #8D6E63;
+    --second-color: #ffff8c;
+  } 
+
+  .temp{
+    background-color:var(--first-color);
+  }

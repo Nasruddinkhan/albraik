@@ -1,1 +1,114 @@
-<p>user works!</p>
+<!-- <p>user works!</p> -->
+
+<div class="card">
+    <div class="card-header">
+     المعلومات الرئيسية / Key Information <i class="icon-people"></i>    
+    </div>
+    <div class="card-body">
+    
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label >الاسم الأول / *First Name </label>
+                <input type="text" class="form-control" required>
+                
+                <!-- <div class="invalid-feedback">
+                    <div ><b>اسم الشركة مطلوب</b></div>
+                </div> -->
+            </div>
+            <div class="form-group col-sm-3">
+                <label >اسم الأب / Father Name</label>
+                <input type="text" class="form-control" >
+                <div class="invalid-feedback">
+                    <div ><b>اسم الشركة مطلوب</b></div>
+                </div>
+            </div>              
+            <div class="form-group col-sm-3">
+                <label >اسم العائلة / *Family Name</label>
+                <input type="text" class="form-control" >
+                <div class="invalid-feedback">
+                    <div ><b>اسم الشركة مطلوب</b></div>
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="sel1"> الدور  في النظام / *Select Role</label>
+                <select class="form-control" id="sel1">
+                    <option> حدد الدور / Select Role</option>
+                    <option>مساعد / Associate</option>
+                    <option> المؤيد / Advocate</option>
+                    <option> محامي أول / Senior Advocate</option>
+                
+                </select>
+            </div>              
+        </div>
+    </div>       
+</div>
+
+<div class="card">
+    <div class="card-header">
+        معلومات مهمة / Job Information <i class="icon-people"></i>   
+    </div>
+    <div class="card-body">
+    
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label for="dept"> الإدراة / *Department</label>
+                <select class="form-control" id="dept">
+                    <option> حدد الدور / IT</option>
+                    <option>مساعد / Finance</option>
+                    <option> المؤيد / Test</option>
+                    <option> محامي أول / Test2</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-3">
+                <label >المسمى الوظيفي / *Job Title</label>
+                <input type="text" class="form-control" >
+                <div class="invalid-feedback">
+                    <div ><b>اسم الشركة مطلوب</b></div>
+                 </div>
+            </div> 
+              
+            <div class="form-group col-sm-3">
+                <label >تاريخ الانضمام / *Joining Date</label>
+                <input type="text" class="form-control" >
+                <div class="invalid-feedback">
+                    <div ><b>اسم الشركة مطلوب</b></div>
+                </div>
+            </div> 
+                      
+            
+        </div>
+    </div> 
+   
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-md btn-success">إنشاء شركة</button>
+        </div>
+    </div>
+</div>
+
+ <!-- <div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <app-company-master #comanyMst></app-company-master>
+            <!-- <br> -->
+            <!-- <app-department-master #deptMst></app-department-master>
+
+            <app-jobtitle-master #jobMst></app-jobtitle-master>
+         
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-md btn-success" (click)="comanyMst.onSubmit();
+                                deptMst.onSubmit();
+                                jobMst.onSubmit();
+                                getDtata();">إنشاء شركة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+   </div>
+    </main>
+</div> --> 
