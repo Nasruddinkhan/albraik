@@ -12,15 +12,20 @@
                         <label>اسم القسم                        </label>
                         <div class="input-group mb-3">
                             <div class="input-group">
-                                <input type="text" class="form-control" formControlName="departments" >
+                                <input type="text" class="form-control" formControlName="departments" 
+                               
+                                required>  
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" (click)="addDeparment()" *ngIf="pointIndex === 0"
+                                    <button class="btn btn-outline-secondary" (click)="addDeparment()" *ngIf="pointIndex === 0" [disabled]="getValidity(pointIndex)"
                                         class="btn btn-success btn-sm" type="button">أضف
                                     </button>
                                     <button class="btn btn-outline-secondary" (click)="deleteDepartment(pointIndex)" *ngIf="pointIndex !== 0"
                                         class="btn btn-danger btn-sm" type="button">حذف</button>
                                 </div>
                             </div>
+                        </div>
+                        <div *ngIf="getValidity(pointIndex)" style="color:red">
+                          <b>  department name is required </b>
                         </div>
                     </div>
                 </div>
