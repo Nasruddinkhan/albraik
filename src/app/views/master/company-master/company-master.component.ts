@@ -28,7 +28,6 @@ export class CompanyMasterComponent implements OnInit {
     if (this.companyForm.invalid) {
       return;
      }
-    
      this.companyForm.controls.isError.setValue(true);
      this.companyMst = new CompanyMaster( this.companyForm.value['companyName'], 
                             this.companyForm.value['phoneNumber'],

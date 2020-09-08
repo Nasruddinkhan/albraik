@@ -1,7 +1,7 @@
 export class CompanyMaster {
     companyName: string;
     phoneNumber: string;
-    faxNumber:string;
+        faxNumber:string;
     address:string;
     currentFileUpload: FileList; 
     departments:[];

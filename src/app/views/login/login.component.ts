@@ -43,6 +43,5 @@ export class LoginComponent {
       this.loading =   false;
       this.toastService.errorMessage(err.error.message);
     });
-
   }
 }
