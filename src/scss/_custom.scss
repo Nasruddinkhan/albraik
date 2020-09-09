@@ -81,11 +81,12 @@ body{
 }
 .sidebar {
    color: #181b1e !important;
-   background: white !important;
+   background: #d7ccc8 !important;
    border: 1px solid #BBB !important;
    box-shadow: 0 1px 30px 0 rgba(32, 33, 36, .28) !important;
    border-top-left-radius: 10px !important;
    border-bottom-left-radius: 10px !important;
+   
 }
 .nav-link {
    color: black  !important;
@@ -98,11 +99,12 @@ body{
    border-right: 1px solid #BBB !important;
 }
 .sidebar .nav-link.active {
-   background: #b8e0ff  !important;
-   color:green !important;
+   background-color: #8D6E63 !important;
+   border-radius: 10px !important; 
+   color:rgb(255, 255, 255) !important;
    font-weight: bold;
    white-space: nowrap  !important;
-   
+   border-radius: 10px !important; 
 }
 
 .customInput{
@@ -133,14 +135,14 @@ transition: all 0.3s;
 }*/
 
 .theme-default .bs-datepicker-head {
-   background-color: #63c2de !important;
+   background-color: #8D6E63 !important;
 }
 
 .theme-green .bs-datepicker-head {
-   background-color:  #63c2de !important;
+   background-color:  #8D6E63 !important;
 }
 .theme-green .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td.selected span, .theme-green .bs-datepicker-body table td span[class*="select-"]:after, .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
-   background-color: #63c2de !important;
+   background-color: #8D6E63 !important;
 }
 
 .card {
@@ -156,14 +158,14 @@ transition: all 0.3s;
 }
 .sidebar-minimized .sidebar .sidebar-minimizer {
 
-   background-color: #63c2de !important;
+   background-color: #8D6E63 !important;
 }
 
 .sidebar .sidebar-minimizer:hover {
-   background-color: #1985ac !important;
+   background-color: #8D6E63 !important;
 }
 .sidebar .sidebar-minimizer {
-   background-color: #63c2de !important;
+   background-color: #8D6E63 !important;
    border-top-left-radius: 9px !important;;
 }
 .red-border-class{

@@ -27,7 +27,7 @@
         </div>
         <div class="row">
             <div class="form-group col-sm-6">
-                <label >اسم الشركة </label>
+                <label >العنوان</label>
                 <textarea class="form-control" formControlName="address" rows="3" [ngClass]="{ 'is-invalid': f.address.touched &&  f.address.errors }"></textarea>
                 <div *ngIf="f.address.errors" class="invalid-feedback">
                     <div *ngIf="f.address.errors.required"><b>العنوان مطلوب </b></div>
