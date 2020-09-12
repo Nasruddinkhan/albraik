@@ -33,10 +33,11 @@ export class LoginComponent {
     this.loading = true;
     this.loginService.loginUser(userObj).then((loginUser:any)=>{
       sessionStorage.setItem('token',loginUser.token); 
+      sessionStorage.setItem('role', loginUser.role);
       this.toastService.susessMessage('successfull login')
       this.loading =   false;
       if(!loginUser.isFtl && checkNullEmpty(loginUser.companyId))
-          this.router.navigate([`/companyregister/${loginUser.id}`]);
+          this.router.navigate([`/dashboard`]);
       if(loginUser.isFtl)
            this.router.navigate([`/changepassword/${loginUser.id}`]);
     },err=>{

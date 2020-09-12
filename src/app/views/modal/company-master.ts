@@ -3,9 +3,7 @@ export class CompanyMaster {
     phoneNumber: string;
         faxNumber:string;
     address:string;
-    currentFileUpload: FileList; 
-    departments:[];
-    jobTittle:[]
+    
     constructor(companyName: string,
         phoneNumber: string,
         faxNumber:string,

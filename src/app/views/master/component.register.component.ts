@@ -1,46 +1,38 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
-import { CompanyMasterComponent } from './company-master/company-master.component';
-import { DepartmentMasterComponent } from './department-master/department-master.component';
-import { JobtitleMasterComponent } from './jobtitle-master/jobtitle-master.component';
-import { ToastrService } from 'ngx-toastr';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { CompanyRegistrationService } from '../service/company-registration.service';
+import { MasterPages } from '../modal/master-page';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-master-company-register',
     templateUrl: './company.register.component.html'
   })
-  export class CompanyRegisterComponent implements OnDestroy {
-    @ViewChild(CompanyMasterComponent) master;
-    @ViewChild(DepartmentMasterComponent) departmentMaster; 
-    @ViewChild(JobtitleMasterComponent) jobTitle; 
-    constructor(private toastr:ToastrService) { }
-  
-  
-      getDtata() {
-      /*   this.toastr.error('check toaster', 'Internal Errors', {
-          positionClass: 'toast-bottom-right'
-        }); */
-        
-        if(!this.master.companyForm.value['isError'])
-            this.validateErrors('تعبئة جميع الحقول الإلزامية للشركة');
-        // else if(!this.departmentMaster.departmentForm.value['isError'])
-        // this.validateErrors('تعبئة جميع الحقول الإلزامية للشركة');
-        // else if(!this.jobTitle.jobTitileForm.value['isError'])
-        // this.validateErrors('تعبئة جميع الحقول الإلزامية للشركة');
-        else{
-   
-        this.master.companyMst.departments = this.departmentMaster.departmentForm.value.department_names.map(item=> item.departments);
-        this.master.companyMst.jobTittle = this.jobTitle.jobTitileForm.value.jobtittle_names.map(item=> item.jobtittle);
-        console.log(JSON.stringify( this.master.companyMst));
+  export class CompanyRegisterComponent implements OnInit, OnDestroy{
+    role: string;
+    pageName : string;
+    masterList : MasterPages[];
+    private subscription: Subscription;
+    constructor(private companyReg : CompanyRegistrationService){}
+    ngOnInit() {
+      this.role = sessionStorage.getItem("role");
+      this.onLoads();
+    }
+    
+    onLoads(){
+      this.subscription = this.companyReg.getMasterPages(this.role).subscribe((res:MasterPages[])=>{
+        this.masterList = res;
+      });
+    }
 
-        }
-      }
-      validateErrors(isErrorMsg:string){
-        this.toastr.error(isErrorMsg, 'أخطاء التحقق من الصحة', {
-          positionClass: 'toast-bottom-left'
-        });
-      }
-      ngOnDestroy(){
-        
-      }
+    changed(e: string){
+      console.log(e);
+      this.pageName = e;
+    }
+
+    ngOnDestroy(){
+      this.masterList=[];
+      this.subscription.unsubscribe();
+      console.log('destroy component');
+    }
   }
   

@@ -10,6 +10,11 @@ export const navItems: INavData[] = [
     name: 'المستعمل',
     url: '/users',
     icon: 'icon-people'
+  },
+  {
+    name: 'Master / رئيس',
+    url: '/master',
+    icon: 'icon-people'
   }
   /* {
     name: 'الصفحات',
