@@ -1,15 +1,17 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
 
 <div class="card">
     <div class="card-header">
       Job <i class="icon-people"></i>
 
     </div>
+    <form [formGroup]="jobTitileForm"  (ngSubmit)="onSubmit()">
+
     <div class="card-body">
-        <form [formGroup]="jobTitileForm">
             <div formArrayName="jobtittle_names">
                 <div class="row" *ngFor="let item of jobTitleNames.controls; let pointIndex=index"
                     [formGroupName]="pointIndex">
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-5">
                         <label>عنوان وظيفي </label>
                         <div class="input-group mb-3">
                             <div class="input-group">
@@ -26,6 +28,42 @@
                     </div>
                 </div>
             </div>
-        </form>
+       
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-md btn-success">إنشاء شركة</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<div class="card" *ngIf="jobs?.length > 0">
+    <div class="card-header">
+        jobtittle Details<i class="icon-people"></i>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                  <th width="5"> SR</th>
+                <th>JobTitle Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let d of jobs; let i = index">
+                  <td> {{ i + 1}}</td>
+                <td>{{d.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col-xs-12 col-12">
+             <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
+                         previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
+                         [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
+           </div> 
     </div>
 </div>

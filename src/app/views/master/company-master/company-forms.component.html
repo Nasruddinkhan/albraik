@@ -1,3 +1,5 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+
 <div class="card">
     <div class="card-header">
         <i class="fa fa-align-justify"></i> Add Company
@@ -61,7 +63,5 @@
         </div>
         </form>
     </div>
-<!--     <div class="card-footer">
-       
-    </div> -->
 </div>
+<app-company-details [commpanyMst]="comapnyObj"></app-company-details>

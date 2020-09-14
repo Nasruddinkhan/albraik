@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChartsModule } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
 
@@ -30,6 +31,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
             maxOpened: 1,
             autoDismiss: true
           }),
+          PaginationModule.forRoot(),
           BsDropdownModule.forRoot(),
           TabsModule.forRoot()],
 
@@ -45,6 +47,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
         ReactiveFormsModule,
         HttpClientModule,
         ChartsModule,
+        PaginationModule,
         TabsModule
     ]
 

@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MasterPages } from '../modal/master-page';
+import { CompanyMaster } from '../modal/company-master';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,12 @@ export class CompanyRegistrationService {
   public getMasterPages(roles : String) : Observable<MasterPages[]>  {
     return this.http.get<MasterPages[]>(this.baseURL +`/api/master/${roles}/role`);
   }
-  public createCompany(formDate :FormData){
-    console.log(formDate);
-    this.http.post(this.baseURL +`/api/create/upload/comapnay`, formDate)
-        .subscribe(res => {
-          console.log(res);
-        }) 
+  public createCompany(formDate :FormData, userID : string) : Observable<CompanyMaster>{
+   return this.http.post<CompanyMaster>(this.baseURL +`/api/create/upload/${userID}/comapnay`, formDate);
   }
+
+  public getCompany( companyId : string) : Observable<CompanyMaster>{
+    return this.http.get<CompanyMaster>(this.baseURL +`/api/get/${companyId}/comapnay`);
+   }
+  
 }
