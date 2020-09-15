@@ -18,6 +18,7 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  todayNumber: number = Date.now();
   locale = 'ar';
   locales = listLocales();
   userID: string;
@@ -104,7 +105,7 @@ export class UserComponent implements OnInit {
   }
   findAllUsers(){
     this.loading = false
-    this.userService.findAllUsers( this.userID).subscribe((res:UserMaster[])=>{
+    this.userService.findAllUsers( ).subscribe((res:UserMaster[])=>{
       this.users = res;
       this.loading = false;
     },err=>{

@@ -1,3 +1,5 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+
 <div class="card">
     <div class="card-header">
         المعلومات الرئيسية / Add User <i class="icon-people"></i>
@@ -102,15 +104,16 @@
               <tr>
                   <th width="5"> SR</th>
                 <th>Email</th>
-                <th>Phone Number</th>
+                <th>Name</th>
+                <th>Joining Date</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let u of users; let i = index">
                   <td> {{ i + 1}}</td>
                 <td>{{u.email}}</td>
-                <th>{{u.phoneNumber}}</th>
-                <th>{{u.joiningDate }}</th>
+                <th>{{u.name}}</th>
+                <th>{{u.joiningDate| date:'yyyy-MM-dd'  }}</th>
               </tr>
             </tbody>
           </table>

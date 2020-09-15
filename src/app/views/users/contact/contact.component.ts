@@ -12,7 +12,8 @@ import { ToasterMsgService } from '../../service/toaster-msg.service';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-
+    loading = false;
+    isSubmitted = false;
     createContactForm:FormGroup;
     role: string;
     pageName : string;
@@ -26,38 +27,33 @@ export class ContactComponent implements OnInit {
 
       this.createContactForm = this.fb.group({
         name:['',Validators.required],
-        ContactTypeID:['',Validators.required],
+        contactTypeId:['',Validators.required],
         phoneNumber: ['', [Validators.required,  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
         mobileNumber: ['', [Validators.required,  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
         email: ['', [Validators.required, Validators.email]],
-        faxNumber: ['', [Validators.required,  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
-        address:['',Validators.required],
-        comment:['',Validators.required]
-      },
-       {
-        // validator: MustMatch('password', 'confpassword')
-    });
+        faxNumber: ['', [  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
+        address:[''],
+        comment:['']
+      });
 
       this.onLoads();
     }
+    get f() { return this.createContactForm.controls; }
 
     createContact(){
-      // this.isSubmitted = true;
+       this.isSubmitted = true;
      if (this.createContactForm.invalid) {
         return;
       }
-      // this.loading =   true;
       this.contactSearch.createContact (JSON.stringify(this.createContactForm.value)).subscribe((resp:any)=>{
-      //  this.loading =   false;
+        this.loading =   false;
        this.toastService.susessMessage('إضافة المستخدم بنجاح');
-      //  this.router.navigate(["/register"]);
+       this.onLoads();
       },err=>{
-      //  this.loading =   false;
+        this.onLoads();
        this.toastService.errorMessage(err.error.message);
       });
-      this.createContactForm.reset();
-      //this.registerForm.markAsPristine();
-     // this.registerForm.markAsUntouched();
+    //  this.createContactForm.reset();
      }
     
     onLoads(){

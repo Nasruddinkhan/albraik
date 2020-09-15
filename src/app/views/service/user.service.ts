@@ -12,8 +12,8 @@ export class UserService {
   private baseURL = environment.baseUrl + 'infra';
   constructor(private http: HttpClient) { }
   
-  public findAllUsers(userId : String) : Observable<UserMaster[]>  {
-    return this.http.get<UserMaster[]>(this.baseURL +`/api/get/${userId}/users`);
+  public findAllUsers() : Observable<UserMaster[]>  {
+    return this.http.get<UserMaster[]>(this.baseURL +`/api/user`);
   }
 
   public createUsers(users : string): Observable<UserMaster>  {

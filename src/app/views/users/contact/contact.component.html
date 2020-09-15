@@ -1,149 +1,170 @@
-
-
-    <div class="card">
-        <div class="card-header card-border">
-            إضافة جهة اتصال / Add Contact <i class="icon-people"></i>    
-        </div>
-        <div class="card-body">
-            <form [formGroup]="createContactForm" (ngSubmit)="createContact()" >
-                <div class="row">
-                    <div class="form-group col-sm-3">
-                        <label >الاسم الأول / *Name </label>
-                        <input type="text" class="form-control"  formControlName="name" required>
-                        
-
-                        <!-- <ng-container *ngFor="let contact of contactList;">
-                            <input type="text" class="form-control" placeholder="Name" [value]="contact.name" required/>
-                        </ng-container> -->
-                    </div>
-
-                    <div class="form-group col-sm-3">
-                        <label for="sel1"> فئة جهة الإتصال / *Contact Type</label>
-                        <select    #mySelect class="form-control" (change)="changed(mySelect.value)" formControlName="contactTypeId">
-                            <option selected>Choose...</option>
-                            <option *ngFor="let master of masterList" [value]="master.contactTypeID"> {{master.name}}</option>
-                        </select>
-                    </div>          
-                    
-                    <div class="form-group col-sm-3">
-                        <label >رقم الهاتف / Phone number</label>
-                        <input type="text" class="form-control"  formControlName="phoneNumber" >
-                        <div class="invalid-feedback">
-                            <div ><b>اسم الشركة مطلوب</b></div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-sm-3">
-                        <label >رقم الجوال / *Mobile number</label>
-                        <input type="text" class="form-control"  formControlName="mobileNumber">
-                        <div class="invalid-feedback">
-                            <div ><b>اسم الشركة مطلوب</b></div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-3">
-                        <label >البريد الإلكتروني / *Email</label>
-                        <input type="email" class="form-control" formControlName="email">
-                        <div class="invalid-feedback">
-                            <div ><b>اسم الشركة مطلوب</b></div>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-3">
-                        <label >رقم الفاكس / Fax Number</label>
-                        <input type="text" class="form-control" formControlName="faxNumber">
-                        <div class="invalid-feedback">
-                            <div ><b>اسم الشركة مطلوب</b></div>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-3">
-                        <label >العنوان / Address</label>
-                        <textarea class="form-control" formControlName="address"></textarea>
-                        <div class="invalid-feedback">
-                            <div ><b>اسم الشركة مطلوب</b></div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-3">
-                        <label >الملاحظات / Comment</label>
-                        <textarea class="form-control" formControlName="comment"></textarea>
-                        <div class="invalid-feedback">
-                            <div ><b>اسم الشركة مطلوب</b></div>
-                        </div>
-                    </div>
-                    
-                
-                    <div class="form-group col-sm-4">
-                        <div>
-                            <button type="button"  (click)="createContact()" class="btn btn-md btn-success">إضافة جهة الإتصال</button>
-                        </div>
-                    
-                    </div>            
-                </div>
-            </form>
-        </div>       
-    </div>
-    <!-- <p>{{addContactForm.value | json}}</p> -->
-
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
 
 <div class="card">
     <div class="card-header card-border">
-        بحث جهة الاتصال / Search Contact <i class="icon-people"></i>    
+        إضافة جهة اتصال / Add Contact <i class="icon-people"></i>
+    </div>
+    <form [formGroup]="createContactForm" (ngSubmit)="createContact()">
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label>الاسم الأول / *Name </label>
+                    <input type="text" class="form-control" formControlName="name"
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.name.errors }">
+                    <div *ngIf="f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required"><b>Role Id is required</b></div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label for="sel1"> فئة جهة الإتصال / *Contact Type</label>
+                    <select #mySelect class="form-control" (change)="changed(mySelect.value)"
+                        formControlName="contactTypeId"
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.contactTypeId.errors }">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let master of masterList" [value]="master.id"> {{master.name}}
+                        </option>
+                    </select>
+                    <div *ngIf="f.contactTypeId.errors" class="invalid-feedback">
+                        <div *ngIf="f.contactTypeId.errors.required"><b>Contact is required</b></div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label>رقم الهاتف / Phone number</label>
+                    <input type="text" class="form-control" formControlName="phoneNumber" maxlength="12"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.phoneNumber.errors }">
+                    <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.phoneNumber.errors.required"><b>رقم الهاتف مطلوب</b></div>
+                        <div *ngIf="f.phoneNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div>
+                        <div *ngIf="f.phoneNumber.errors.pattern">الرقم العربي مطلوب </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label>رقم الجوال / *Mobile number</label>
+                    <input type="text" class="form-control" formControlName="mobileNumber" maxlength="12"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.mobileNumber.errors }">
+                    <div *ngIf="f.mobileNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.mobileNumber.errors.required"><b>رقم الهاتف مطلوب</b></div>
+                        <div *ngIf="f.mobileNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div>
+                        <div *ngIf="f.mobileNumber.errors.pattern">الرقم العربي مطلوب </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label>البريد الإلكتروني / *Email</label>
+                    <input type="email" class="form-control" formControlName="email"
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.email.errors }">
+                    <div *ngIf="f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required"><b>البريد الالكتروني مطلوب</b></div>
+                        <div *ngIf="f.email.errors.email"><b>الرجاء إدخال بريد إلكتروني صحيح</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>رقم الفاكس / Fax Number</label>
+                    <input type="text" class="form-control" formControlName="faxNumber"
+                    [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.faxNumber.errors }">
+                    <div *ngIf="f.faxNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.faxNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div>
+                        <div *ngIf="f.faxNumber.errors.pattern">الرقم العربي مطلوب </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>العنوان / Address</label>
+                    <textarea class="form-control" formControlName="address"></textarea>
+                    <div class="invalid-feedback">
+                        <div><b>اسم الشركة مطلوب</b></div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label>الملاحظات / Comment</label>
+                    <textarea class="form-control" formControlName="comment"></textarea>
+                    <div class="invalid-feedback">
+                        <div><b>اسم الشركة مطلوب</b></div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-sm-4">
+                    <div>
+                        <button type="button" (click)="createContact()" class="btn btn-md btn-success">إضافة جهة
+                            الإتصال</button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- </form> -->
+         <!--    <p>{{createContactForm.value | json}}</p> -->
+        </div>
+    </form>
+</div>
+
+<div class="card">
+    <div class="card-header card-border">
+        بحث جهة الاتصال / Search Contact <i class="icon-people"></i>
     </div>
     <div class="card-body">
-    
+
         <div class="row">
 
             <div class="form-group col-sm-3">
-                <label >أكتب هنا  / Type here</label>
-                <input type="text" class="form-control" >
+                <label>أكتب هنا / Type here</label>
+                <input type="text" class="form-control">
                 <div class="invalid-feedback">
-                    <div ><b>اسم الشركة مطلوب</b></div>
+                    <div><b>اسم الشركة مطلوب</b></div>
                 </div>
             </div>
-        
+
             <div class="form-group col-sm-3">
                 <label for="sel1"> حدد نوع الاتصال / *Select Contact type</label>
-                <select    #mySelect class="form-control" (change)="changed(mySelect.value)">
+                <select #mySelect class="form-control" (change)="changed(mySelect.value)">
                     <option selected>Choose...</option>
                     <option *ngFor="let master of masterList" [value]="master.contactTypeID"> {{master.name}}</option>
                 </select>
-            </div>  
-          
+            </div>
+
             <div class="form-group col-sm-3">
-                <label ></label>
+                <label></label>
                 <div>
                     <button type="submit" class="btn btn-md btn-success"> بحث جهة الاتصال </button>
                 </div>
-               
-            </div> 
+
+            </div>
 
             <div class="card-body">
                 <table class="table table-bordered table-striped table-sm">
-                  <thead>
-                    <tr>
-                      <th>Contact Name</th>
-                      <th>Contact Category</th>
-                      <th>Contact Mobile</th>
-                      <th>Contact Email</th>
-                      <th>Edit/Update</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let contact of contactList">
-                     
-                      <td>{{contact.name}}</td>
-                      <td>{{contact.contact_type_id}}</td>
-                      <td>{{contact.mobile_number}}</td>
-                      <td>{{contact.email}}</td>
-                      <td><button type="button" class="btn btn-sm btn-success"> Edit / Update  </button></td>
-                    </tr>
-                  </tbody>
+                    <thead>
+                        <tr>
+                            <th>Contact Name</th>
+                            <th>Contact Category</th>
+                            <th>Contact Mobile</th>
+                            <th>Contact Email</th>
+                            <th>Edit/Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contact of contactList">
+
+                            <td>{{contact.name}}</td>
+                            <td>{{contact.contact_type_id}}</td>
+                            <td>{{contact.mobile_number}}</td>
+                            <td>{{contact.email}}</td>
+                            <td>
+
+                                <span class="badge badge-primary">edit <i class="fas fa-bars"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-               
-              </div>
-           
-        </div>  
-    </div>       
+
+            </div>
+
+        </div>
+    </div>
 </div>
 
 
