@@ -17,6 +17,6 @@ export class UserService {
   }
 
   public createUsers(users : string): Observable<UserMaster>  {
-    return this.http.post<UserMaster>(this.baseURL +`/api/save/users`, users);
+    return this.http.post<UserMaster>(this.baseURL +`/api/user`, users);
   }
 }
