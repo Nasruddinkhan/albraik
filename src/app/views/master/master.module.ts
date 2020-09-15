@@ -8,10 +8,12 @@ import {CompanyMasterComponent} from './company-master/company-master.component'
 import { from } from 'rxjs';
 import { CompanyDetailsComponent } from './company-master/company-details.component';
 import { CompanyFormsComponent } from './company-master/company-forms.component';
+import { UserComponent } from './user/user.component';
+import { RoleMasterComponent } from './role-master/role-master.component';
 @NgModule({
     declarations: [CompanyRegisterComponent, CompanyFormsComponent,
         CompanyMasterComponent, CompanyDetailsComponent,
-        DepartmentMasterComponent,JobtitleMasterComponent],
+        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent],
     imports: [
       MasterRoutingModule,
       SharedModule,

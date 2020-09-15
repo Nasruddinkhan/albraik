@@ -9,10 +9,12 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
 import { ChartsModule } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import {  arLocale } from 'ngx-bootstrap/locale';
+ defineLocale('ar', arLocale);
 
 @NgModule({
 
@@ -33,7 +35,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
           }),
           PaginationModule.forRoot(),
           BsDropdownModule.forRoot(),
-          TabsModule.forRoot()],
+          TabsModule.forRoot(),
+        ],
 
     exports:[  
         CommonModule, 
@@ -49,7 +52,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
         ChartsModule,
         PaginationModule,
         TabsModule
-    ]
+        ]
 
    })
 
