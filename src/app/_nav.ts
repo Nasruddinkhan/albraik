@@ -15,8 +15,13 @@ export const navItems: INavData[] = [
     name: 'Master / رئيس',
     url: '/master',
     icon: 'icon-people'
-  }
-  /* {
+  },
+  {
+    name: 'Contact / إدارة الاتصال',
+    url: '/contact',
+    icon: 'icon-people'
+  },
+  {
     name: 'الصفحات',
     url: '/pages',
     icon: 'icon-star',
@@ -42,5 +47,5 @@ export const navItems: INavData[] = [
         icon: 'icon-star'
       }
     ]
-  } */
+  } 
 ];

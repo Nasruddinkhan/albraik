@@ -8,7 +8,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-
+import {ContactComponent} from  './views/users/contact/contact.component';
 import { AuthGuardService } from './views/service/auth-guard.service';
 import { ChangePasswordComponent } from './views/change-password/change-password.component';
 
@@ -84,6 +84,13 @@ export const routes: Routes = [
         canActivate: [AuthGuardService]
       },
       
+      {
+     
+
+        path: 'contact',
+        loadChildren: () => import('./views/users/contact/contact.module').then(u => u.ContactModule),
+        canActivate: [AuthGuardService]
+      },
     ]
   },
   { path: '**', component: P404Component }

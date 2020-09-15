@@ -9,7 +9,7 @@
                 <select    #mySelect class="form-control" (change)="changed(mySelect.value)">
                     <option selected>Choose...</option>
                     <option *ngFor="let master of masterList" [value]="master.masterId"> {{master.masterDescription}}</option>
-                  </select>
+                </select>
              </div>
         </div>
     </div>
