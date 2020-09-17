@@ -4,6 +4,8 @@ import { JobTitleModel } from '../../modal/jobtitle';
 import { JobService } from '../../service/job.service';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { JobMaster } from '../../modal/jobtitle-master';
+import { checkNullEmpty } from '../../service/must-match.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jobtitle-master',
@@ -16,6 +18,7 @@ export class JobtitleMasterComponent implements OnInit {
   jobsMsr: JobMaster;
   name: Array<String>;
   constructor(private fb: FormBuilder,
+    private router: Router,
     private toastService: ToasterMsgService,
     private jobService: JobService) { }
   userID: string;
@@ -28,13 +31,16 @@ export class JobtitleMasterComponent implements OnInit {
   ngOnInit() {
     this.userID  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
+    if(checkNullEmpty( this.companyId )){
+      this.router.navigate([`/master/company`]);
+    }
     this.findAllJobs();
     this.jobTitileForm = this.fb.group({
       jobtittle_names: this.fb.array([this.fb.group({jobtittle:''})])
     })
   }
   findAllJobs(){
-    this.loading = false
+    this.loading = true;
     this.jobService.findAllJobTitles( this.userID).subscribe((res:JobTitleModel[])=>{
       this.jobs = res;
       this.loading = false;

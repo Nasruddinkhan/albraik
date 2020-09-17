@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReversePipe } from './views/pipes/reverse-pipe.pipe';
+import { DateLocaleFilter } from './views/pipes/localdate-pipe';
 
 
 @NgModule({
@@ -7,10 +8,12 @@ import { ReversePipe } from './views/pipes/reverse-pipe.pipe';
 
     ],
     declarations:[
-        ReversePipe
+        ReversePipe,
+        DateLocaleFilter
     ],
     exports:[
-        ReversePipe
+        ReversePipe,
+        DateLocaleFilter
     ]
 })
 export class ApplicationPipeModule{}

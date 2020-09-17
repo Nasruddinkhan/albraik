@@ -1,8 +1,19 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
 
 <div class="card">
+    <app-role-det [rolemst]= "roles"></app-role-det>
+    <div class="row">
+        <div class="col-xs-12 col-12 text-center">
+         <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
+                     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
+                     [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
+       </div> 
+    </div>
+</div>
+
+<div class="card">
     <div class="card-header">
-      Job <i class="icon-people"></i>
+      Roles <i class="icon-people"></i>
 
     </div>
     <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()">
@@ -38,32 +49,4 @@
         </div>
     </div>
 </form>
-</div>
-<div class="card" *ngIf="roles?.length > 0">
-    <div class="card-header">
-        Role Details<i class="icon-people"></i>
-    </div>
-    <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
-            <thead>
-              <tr>
-                  <th width="5"> SR</th>
-                <th>Role Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let d of roles; let i = index">
-                  <td> {{ i + 1}}</td>
-                <td>{{d.name}}</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="row">
-            <div class="col-xs-12 col-12">
-             <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
-                         previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
-                         [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
-           </div> 
-    </div>
 </div>

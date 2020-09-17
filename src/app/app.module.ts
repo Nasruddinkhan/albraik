@@ -29,10 +29,7 @@ import { AppRoutingModule } from './app.routing';
 import { ApplicationPipeModule } from './app.pipes.module';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ShareComponentModule } from './share.component';
-import { CompanyRegisterComponent } from './views/master/component.register.component';
-import { JobtitleMasterComponent } from './views/master/jobtitle-master/jobtitle-master.component';
-import { CompanyMasterComponent } from './views/master/company-master/company-master.component';
-import { DepartmentMasterComponent } from './views/master/department-master/department-master.component';
+
 import {  HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './views/service/token-interceptor.service';
 import { ChangePasswordComponent } from './views/change-password/change-password.component';

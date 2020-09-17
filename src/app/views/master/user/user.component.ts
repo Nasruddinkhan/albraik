@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,  LOCALE_ID, Inject} from '@angular/core';
 import { RoleService } from '../../service/role.service';
 import { RoleModel } from '../../modal/role';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
@@ -11,6 +11,8 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 import { UserMaster } from '../../modal/user-master';
 import { UserService } from '../../service/user.service';
+import { checkNullEmpty } from '../../service/must-match.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -36,14 +38,20 @@ export class UserComponent implements OnInit {
               private jobService : JobService,
               private localeService: BsLocaleService,
               private userService: UserService,
-              private toastService: ToasterMsgService) { 
+              private toastService: ToasterMsgService,
+              private router: Router
+              ) { 
              this.localeService.use(this.locale);
+             
               }
     
   ngOnInit() {
 
     this.userID  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
+    if(checkNullEmpty( this.companyId )){
+      this.router.navigate([`/master/company`]);
+    }
     this.findAllRoles();
     this.findAllDepartments();
     this.findAllJobs();
@@ -77,7 +85,7 @@ export class UserComponent implements OnInit {
       this.dept = res;
       this.loading = false;
     }, err=>{
-      this.toastService.errorMessage(err.error.message);
+      //this.toastService.errorMessage(err.error.message);
       this.loading = false;
     });
   }
@@ -88,7 +96,7 @@ export class UserComponent implements OnInit {
       this.roles = res;
       this.loading = false;
     }, err=>{
-      this.toastService.errorMessage(err.error.message);
+     // this.toastService.errorMessage(err.error.message);
       this.loading = false;
     })
 
@@ -100,7 +108,7 @@ export class UserComponent implements OnInit {
       this.jobs = res;
       this.loading = false;
     },err=>{
-      this.toastService.errorMessage(err.error.message);
+     // this.toastService.errorMessage(err.error.message);
     });
   }
   findAllUsers(){

@@ -12,8 +12,9 @@ export class DefaultLayoutComponent implements OnInit {
 
   ngOnInit(){
     let role  = sessionStorage.getItem("role");
+    console.log(navItems);
     if(role === 'USER'){
-      
+    //  delete navItems[1]
     }
     //  delete navItems[2];
 

@@ -14,7 +14,35 @@ export const navItems: INavData[] = [
   {
     name: 'Master / رئيس',
     url: '/master',
-    icon: 'icon-people'
+    icon: 'icon-people',
+     children: [
+       {
+         name: 'Company',
+         url: '/master/company',
+         icon: 'fa fa-fw fa-cubes',
+         
+       },
+       {
+        name: 'Department',
+        url: '/master/department',
+        icon: 'fa fa-fw fa-cubes',
+      },
+      {
+       name: 'Jobtitle',
+       url: '/master/jobtitle',
+       icon: 'fa fa-fw fa-cubes',
+     },
+     {
+      name: 'Role',
+      url: '/master/role',
+      icon: 'fa fa-fw fa-cubes',
+    },
+    {
+     name: 'User',
+     url: '/master/user',
+     icon: 'fa fa-fw fa-cubes',
+   }
+     ]
   },
   {
     name: 'Contact / إدارة الاتصال',

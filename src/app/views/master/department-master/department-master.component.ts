@@ -4,6 +4,8 @@ import { DepartmentMaster } from '../../modal/department-master';
 import { DeptService } from '../../service/dept.service';
 import { DepartmentModel } from '../../modal/department';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
+import { Router } from '@angular/router';
+import { checkNullEmpty } from '../../service/must-match.service';
 
 @Component({
   selector: 'app-department-master',
@@ -24,12 +26,17 @@ export class DepartmentMasterComponent implements OnInit {
   numPages: number = 0;
   maxSize: number = 5;
   constructor(private fb: FormBuilder,
+              private  router:  Router,
               private toastService: ToasterMsgService,
               private deptService: DeptService) { }
   submitted = false;
   ngOnInit() {
     this.userID  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
+    console.log(this.companyId );
+    if(checkNullEmpty( this.companyId )){
+      this.router.navigate([`/master/company`]);
+    }
     this.findAlldepartments();
     this.departmentForm = this.fb.group({  
       department_names: this.fb.array([this.fb.group({departments:''})])
@@ -51,7 +58,7 @@ export class DepartmentMasterComponent implements OnInit {
   }
 
   findAlldepartments(){
-    this.loading = false
+    this.loading = true;
     this.deptService.findAlldepartments( this.userID).subscribe((res:DepartmentModel[])=>{
       this.depts = res;
       this.loading = false;

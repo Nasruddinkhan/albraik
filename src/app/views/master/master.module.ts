@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CompanyRegisterComponent } from './component.register.component';
 import { MasterRoutingModule } from './master-routing.module';
 import { SharedModule } from '../../share.module';
 import { JobtitleMasterComponent } from './jobtitle-master/jobtitle-master.component';
@@ -10,13 +9,16 @@ import { CompanyDetailsComponent } from './company-master/company-details.compon
 import { CompanyFormsComponent } from './company-master/company-forms.component';
 import { UserComponent } from './user/user.component';
 import { RoleMasterComponent } from './role-master/role-master.component';
+import { ApplicationPipeModule } from '../../app.pipes.module';
+import { RoleDetailsComponent } from './role-master/role-details.component';
 @NgModule({
-    declarations: [CompanyRegisterComponent, CompanyFormsComponent,
-        CompanyMasterComponent, CompanyDetailsComponent,
+    declarations: [ CompanyFormsComponent,
+        CompanyMasterComponent, CompanyDetailsComponent,RoleDetailsComponent,
         DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent],
     imports: [
       MasterRoutingModule,
       SharedModule,
+      ApplicationPipeModule
     ]
   })
 export class MasterModule{}

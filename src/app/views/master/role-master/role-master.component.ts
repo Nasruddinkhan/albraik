@@ -4,6 +4,8 @@ import { RoleMaster  } from '../../modal/role-master'
 import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { RoleService } from '../../service/role.service';
 import { RoleModel } from '../../modal/role';
+import { checkNullEmpty } from '../../service/must-match.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-role-master',
   templateUrl: './role-master.component.html',
@@ -16,6 +18,7 @@ export class RoleMasterComponent implements OnInit {
   name: Array<String>;
   constructor(private fb: FormBuilder,
     private toastService: ToasterMsgService,
+    private router : Router,
     private roleService: RoleService) { }
   userID: string;
   companyId : string;
@@ -27,13 +30,16 @@ export class RoleMasterComponent implements OnInit {
   ngOnInit() {
     this.userID  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
+    if(checkNullEmpty( this.companyId )){
+      this.router.navigate([`/master/company`]);
+    }
     this.findAllRoles();
     this.roleForm = this.fb.group({
       role_names: this.fb.array([this.fb.group({role:''})])
     })
   }
   findAllRoles(){
-    this.loading = false
+    this.loading = true
     this.roleService.findAllRoles( this.userID).subscribe((res:RoleModel[])=>{
       this.roles = res;
       this.loading = false;
