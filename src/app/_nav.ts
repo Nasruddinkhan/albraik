@@ -7,50 +7,45 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'المستعمل / Add User',
+    name: 'المستعمل',
     url: '/users',
     icon: 'icon-people'
   },
   {
-    name: 'رئيس / Master',
+    name: 'Master / رئيس',
     url: '/master',
     icon: 'icon-people',
-     children: [
-       {
-         name: 'المكتب / Company',
-         url: '/master/company',
-         icon: 'fa fa-fw fa-cubes',
-         
-       },
-       {
-        name: 'الإدارات / Department',
+    children: [
+      {
+        name: 'Company',
+        url: '/master/company',
+        icon: 'fa fa-fw fa-cubes',
+
+      },
+      {
+        name: 'Department',
         url: '/master/department',
         icon: 'fa fa-fw fa-cubes',
       },
       {
-       name: 'المسميات / Jobtitle',
-       url: '/master/jobtitle',
-       icon: 'fa fa-fw fa-cubes',
-     },
-     {
-      name: 'الأدوار / Role',
-      url: '/master/role',
-      icon: 'fa fa-fw fa-cubes',
-    },
-    {
-     name: 'المستعمل / User',
-     url: '/master/user',
-     icon: 'fa fa-fw fa-cubes',
-   },
-   {
-    name: 'نوع المشروع / Create case',
-    url: '',
-    icon: 'fa fa-fw fa-cubes',
-   }
-     ]
+        name: 'Jobtitle',
+        url: '/master/jobtitle',
+        icon: 'fa fa-fw fa-cubes',
+      },
+      {
+        name: 'Role',
+        url: '/master/role',
+        icon: 'fa fa-fw fa-cubes',
+      },
+      {
+        name: 'User',
+        url: '/master/user',
+        icon: 'fa fa-fw fa-cubes',
+      }
+    ]
   },
   {
-    name: 'إدارة الاتصال / Contact',
+    name: 'Contact / إدارة الاتصال',
     url: '/contact',
     icon: 'icon-people'
   }
