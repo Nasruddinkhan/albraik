@@ -12,7 +12,7 @@
                 <div class="row" *ngFor="let item of departmentNames.controls ; let pointIndex=index"
                     [formGroupName]="pointIndex">
                     <div class="form-group col-sm-5">
-                        <label>اسم القسم                        </label>
+                        <label>Department / اسم القسم</label>
                         <div class="input-group mb-3">
                             <div class="input-group">
                                 <input type="text" class="form-control" formControlName="departments" 
@@ -53,7 +53,7 @@
             <thead>
               <tr>
                   <th width="5"> SR</th>
-                <th>Department Name</th>
+                <th>Departments</th>
               </tr>
             </thead>
             <tbody>

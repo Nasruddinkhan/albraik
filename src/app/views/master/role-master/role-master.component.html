@@ -13,7 +13,7 @@
 
 <div class="card">
     <div class="card-header">
-      Roles <i class="icon-people"></i>
+        الأدوار / Roles <i class="icon-people"></i>
 
     </div>
     <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()">
@@ -23,7 +23,7 @@
                 <div class="row" *ngFor="let item of roleNames.controls; let pointIndex=index"
                     [formGroupName]="pointIndex">
                     <div class="form-group col-sm-5">
-                        <label>عنوان وظيفي </label>
+                        <label>الأدوار / Roles</label>
                         <div class="input-group mb-3">
                             <div class="input-group">
                                 <input type="text" class="form-control" formControlName="role">
