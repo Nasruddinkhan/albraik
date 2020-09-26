@@ -19,8 +19,8 @@ describe('CoreUI template', () => {
     expect(await page.getParagraphText()).toEqual('Traffic');
   });
 
-  it('should display footer containing creativeLabs', async () => {
-    expect(await page.getFooterText()).toContain('creativeLabs');
+  it('should display footer containing Albraik Law Management', async () => {
+    expect(await page.getFooterText()).toContain('Albraik Law Management');
   });
 
   it('should toggle `sidebar-minimized` body.class on `sidebar-minimizer` click', () => {
