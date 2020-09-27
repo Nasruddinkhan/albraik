@@ -2,3 +2,10 @@
     border: 1px solid red;
     box-shadow: 2px 1px 2px 0px red;
   }
+
+  @media (min-width: 576px){
+    .modal-dialog {
+        max-width: 75% !important;
+       
+    }
+ }

@@ -11,7 +11,7 @@
        // url('../assets/fonts/pacifico-latin-regular.svg#Pacifico') format('svg'); /* Legacy iOS */
 }
 :root {
-   --first-color:  #8D6E63;
+   --first-color:  #563d7c;
    --second-color: #ffff8c;
  } 
 .main .container-fluid {
@@ -20,15 +20,26 @@
 }
 .form-control {
    border-radius: 4px !important;
+   border-color: var(--ui-border-color);
+   background-color: var(--primary-background-color);
+    /* font-size: 12px; */
+    padding: 2px 5px 3px 6px;
+    min-width: 100%;
+    flex: 1;
 
-   font-size: 12px !important;
    transition: unset !important;
    outline: none;
-   border: 1px solid #e4e7ea;
-   box-shadow: 2px 3px 2px 0px #e4e7ea;
+   font-size: 18px !important;
+    font-weight: 300;
+   //box-shadow: 2px 3px 2px 0px #e4e7ea;
    //padding-left: 15px !important;
    //padding-right: 15px !important;
+   height: 40px !important;
+
+   border: 0.5px solid #BBB;
 }
+
+
 
 td, th{
    text-align: center;
@@ -99,7 +110,7 @@ body{
    border-right: 1px solid #BBB !important;
 }
 .sidebar .nav-link.active {
-   background-color: #8D6E63 !important;
+   background-color:#563d7c !important;
   /*  border-radius: 10px !important;  */
    color:rgb(255, 255, 255) !important;
    font-weight: bold;
