@@ -102,9 +102,9 @@ body{
 .nav-link {
    color: black  !important;
 }
-.app-header {
-   box-shadow: 21px 1px 10px 3px rgba(32, 33, 36, .28) !important;
-}
+// .app-header {
+//    box-shadow: 21px 1px 10px 3px rgba(32, 33, 36, .28) !important;
+// }
 .sidebar .nav-dropdown.open {
    background: #fff !important;
    border-right: 1px solid #BBB !important;
@@ -169,14 +169,14 @@ transition: all 0.3s;
 }
 .sidebar-minimized .sidebar .sidebar-minimizer {
 
-   background-color: #8D6E63 !important;
+   background-color: #563d7c !important;
 }
 
 .sidebar .sidebar-minimizer:hover {
-   background-color: #8D6E63 !important;
+   background-color: #705c8d !important;
 }
 .sidebar .sidebar-minimizer {
-   background-color: #8D6E63 !important;
+   background-color: #563d7c !important;
    border-top-left-radius: 9px !important;;
 }
 .red-border-class{
