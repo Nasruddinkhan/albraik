@@ -183,3 +183,10 @@ transition: all 0.3s;
   text-overflow: ellipsis;
 
 }
+
+@media (min-width: 576px){
+   .modal-dialog {
+       max-width: 75% !important;
+      
+   }
+}

@@ -11,14 +11,20 @@ import { UserComponent } from './user/user.component';
 import { RoleMasterComponent } from './role-master/role-master.component';
 import { ApplicationPipeModule } from '../../app.pipes.module';
 import { RoleDetailsComponent } from './role-master/role-details.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectFormComponent } from './project/project-form.component';
+import { ShareComponentModule } from '../../share.component';
 @NgModule({
     declarations: [ CompanyFormsComponent,
         CompanyMasterComponent, CompanyDetailsComponent,RoleDetailsComponent,
-        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent],
+        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent],
     imports: [
       MasterRoutingModule,
       SharedModule,
+      ShareComponentModule,
       ApplicationPipeModule
-    ]
+    ],
+    bootstrap: [ProjectFormComponent]
+
   })
 export class MasterModule{}

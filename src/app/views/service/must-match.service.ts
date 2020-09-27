@@ -22,3 +22,7 @@ export function MustMatch(controlName: string, matchingControlName: string) {
 export function checkNullEmpty(value) { 
     return ( value === null || value === 'null' ||    value === undefined ||     value.length === 0) ?true:false
 } 
+
+export function checkUserRole(value) { 
+    return  value === 'ADMIN' ? true:false
+} 

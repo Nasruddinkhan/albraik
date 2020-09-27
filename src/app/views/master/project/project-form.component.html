@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="modal-body">
+      <form #newProjectForm="ngForm" (ngSubmit)="onSubmit(newProjectForm)">
+        <div class="card">
+          <div class="card-header   text-center">
+            <h4>{{action}} Project</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="form-group col-sm-3">
+                <label for="Project Type">Project Type <span style="color:red">*</span></label>
+                <input type="text" class="form-control" required [(ngModel)]="projectType" name="projectType"
+                  [ngClass]="{'red-border-class': !projectType1.valid && projectType1.touched}" #projectType1="ngModel">
+                <div *ngIf="!projectType1.valid && projectType1.touched" style="color:red">
+                  projectType is required
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="Name">Name <span style="color:red">*</span></label>
+                <input type="text" class="form-control" required [(ngModel)]="name" name="name"
+                  [ngClass]="{'red-border-class': !name1.valid && name1.touched}" #name1="ngModel">
+                <div *ngIf="!name1.valid && name1.touched" style="color:red">
+                  name is required
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="StartDate">StartDate <span style="color:red">*</span></label>
+                <input type="text" class="form-control" required [(ngModel)]="startDate" name="startDate"
+                  [ngClass]="{'red-border-class': !startDate1.valid && startDate1.touched}" #startDate1="ngModel">
+                <div *ngIf="!startDate1.valid && startDate1.touched" style="color:red">
+                  Start Date is required
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="Priority">Priority <span style="color:red">*</span></label>
+                <input type="text" class="form-control" required [(ngModel)]="priority" name="priority"
+                  [ngClass]="{'red-border-class': !priority1.valid && priority1.touched}" #priority1="ngModel">
+                <div *ngIf="!priority1.valid && priority1.touched" style="color:red">
+                  Priority is required
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-3">
+                <label for="Manager">Manager <span style="color:red">*</span></label>
+                <input type="text" class="form-control" required [(ngModel)]="manager" name="manager"
+                  [ngClass]="{'red-border-class': !manager1.valid && manager1.touched}" #manager1="ngModel">
+                <div *ngIf="!manager1.valid && manager1.touched" style="color:red">
+                  manager is required
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="Drawer Number ">Drawer Number <span style="color:red">*</span></label>
+                <input type="text" class="form-control" required [(ngModel)]="drawerName" name="drawerName"
+                  [ngClass]="{'red-border-class': !drawerName1.valid && drawerName1.touched}" #drawerName1="ngModel">
+                <div *ngIf="!drawerName1.valid && drawerName1.touched" style="color:red">
+                  drawername is required
+                </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label> Objective</label>
+                <textarea type="text" class="form-control" required [(ngModel)]="objective" name="objective"
+                  [ngClass]="{'red-border-class': !objective1.valid && objective1.touched}"
+                  #objective1="ngModel"></textarea>
+                <div *ngIf="!objective1.valid && objective1.touched" style="color:red">
+                  objective is required
+                </div>
+                
+              </div>
+              <div class="form-group col-sm-3">
+                <label> Comment</label>
+                <textarea type="text" class="form-control" required [(ngModel)]="comment" name="comment"></textarea>
+              </div>
+             <!--  <div class="form-group col-sm-1">
+                <input type="checkbox" class="form-check-input" > Hidden Project
+              </div> -->
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

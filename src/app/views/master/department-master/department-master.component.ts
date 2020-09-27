@@ -5,7 +5,7 @@ import { DeptService } from '../../service/dept.service';
 import { DepartmentModel } from '../../modal/department';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { Router } from '@angular/router';
-import { checkNullEmpty } from '../../service/must-match.service';
+import { checkNullEmpty, checkUserRole } from '../../service/must-match.service';
 
 @Component({
   selector: 'app-department-master',
@@ -31,6 +31,11 @@ export class DepartmentMasterComponent implements OnInit {
               private deptService: DeptService) { }
   submitted = false;
   ngOnInit() {
+    let role=sessionStorage.getItem('role')
+    
+    if(!checkUserRole(role )){
+      this.router.navigate([`/master/unathurise`]);
+    }
     this.userID  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
     console.log(this.companyId );

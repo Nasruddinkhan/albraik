@@ -41,6 +41,11 @@ export const navItems: INavData[] = [
         name: 'User',
         url: '/master/user',
         icon: 'fa fa-fw fa-cubes',
+      },
+      {
+        name: 'Project',
+        url: '/master/project',
+        icon: 'fa fa-fw fa-cubes',
       }
     ]
   },

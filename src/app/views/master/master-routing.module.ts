@@ -6,6 +6,8 @@ import { DepartmentMasterComponent } from './department-master/department-master
 import { JobtitleMasterComponent } from './jobtitle-master/jobtitle-master.component';
 import { RoleMasterComponent } from './role-master/role-master.component';
 import { UserComponent } from './user/user.component';
+import { ProjectComponent } from './project/project.component';
+import { P404Component } from '../error/404.component';
 
 const routes: Routes = [
   {
@@ -57,7 +59,23 @@ const routes: Routes = [
       component: UserComponent,
       canActivate: [AuthGuardService]
     }
-
+    ,
+    {
+      path: 'project',
+      data: {
+        title: 'Project'
+      },
+      component: ProjectComponent,
+      canActivate: [AuthGuardService]
+    },{
+      path:'unathurise',
+      data: {
+        title: 'Project'
+      },
+      component: P404Component,
+      canActivate: [AuthGuardService]
+    }
+    
     
     ]
   }
