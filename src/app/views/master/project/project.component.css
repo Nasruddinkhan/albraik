@@ -29,9 +29,8 @@
     font-size: 20px;
 }
 
-@media (min-width: 576px){
-.modal-dialog {
-    max-width: 75% !important;
-   
-}
+td, th {
+    text-align: center;
+    font-size: 20px !important;
+    vertical-align: middle  !important;
 }

@@ -40,6 +40,27 @@
 }
 
 
+.form-control_textarea {
+   border-radius: 4px !important;
+   border-color: var(--ui-border-color);
+   background-color: var(--primary-background-color);
+    /* font-size: 12px; */
+    padding: 2px 5px 3px 6px;
+    min-width: 100%;
+    flex: 1;
+
+   transition: unset !important;
+   outline: none;
+   font-size: 18px !important;
+    font-weight: 300;
+   //box-shadow: 2px 3px 2px 0px #e4e7ea;
+   //padding-left: 15px !important;
+   //padding-right: 15px !important;
+
+
+   border: 0.5px solid #BBB;
+}
+
 
 td, th{
    text-align: center;

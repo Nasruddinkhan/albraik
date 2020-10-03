@@ -9,7 +9,7 @@ import { ColorEvent } from 'ngx-color';
 export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
-
+  isCollapsed = true;
   ngOnInit(){
     let role  = sessionStorage.getItem("role");
     console.log(navItems);

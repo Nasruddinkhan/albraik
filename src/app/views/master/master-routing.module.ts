@@ -8,6 +8,12 @@ import { RoleMasterComponent } from './role-master/role-master.component';
 import { UserComponent } from './user/user.component';
 import { ProjectComponent } from './project/project.component';
 import { P404Component } from '../error/404.component';
+import { ProjectFormComponent } from './project/project-form.component';
+import { CaseComponent } from './project/case/case.component';
+import { ExecutedCaseComponent } from './project/executed-case/executed-case.component';
+import { DeedOwnershipComponent } from './project/deed-ownership/deed-ownership.component';
+import { CompanyEstablishmentComponent } from './project/company-establishment/company-establishment.component';
+import { InheritenceComponent } from './project/inheritence/inheritence.component';
 
 const routes: Routes = [
   {
@@ -75,8 +81,55 @@ const routes: Routes = [
       component: P404Component,
       canActivate: [AuthGuardService]
     }
-    
-    
+    ,{
+      path:'createcase',
+      data: {
+        title: 'Project'
+      },
+      component: ProjectFormComponent,
+      canActivate: [AuthGuardService]
+    } ,{
+      path:'case',
+      data: {
+        title: 'Case'
+      },
+      component: CaseComponent,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path:'executed-case',
+      data: {
+        title: 'Executed-Case'
+      },
+      component: ExecutedCaseComponent,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path:'deed-ownership',
+      data: {
+        title: 'Deed-Ownership'
+      },
+      component: DeedOwnershipComponent,
+      canActivate: [AuthGuardService]
+    }   
+    ,
+    {
+      path:'company-establishment',
+      data: {
+        title: 'company establishment'
+      },
+      component: CompanyEstablishmentComponent, 
+      canActivate: [AuthGuardService]
+    } ,
+    {
+      path:'inherit',
+      data: {
+        title: 'inherit'
+      },
+      component: InheritenceComponent,
+      canActivate: [AuthGuardService]
+    }
+   
     ]
   }
 ];

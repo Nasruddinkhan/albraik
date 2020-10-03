@@ -46,6 +46,13 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'logout',
+    component: LoginComponent,
+    data: {
+      title: 'Logout Sucess'
+    }
+  },
+  {
     path: 'login',
     component: LoginComponent,
     data: {

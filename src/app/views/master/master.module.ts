@@ -14,17 +14,21 @@ import { RoleDetailsComponent } from './role-master/role-details.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectFormComponent } from './project/project-form.component';
 import { ShareComponentModule } from '../../share.component';
+import { CaseComponent } from './project/case/case.component';
+import { ExecutedCaseComponent } from './project/executed-case/executed-case.component';
+import { DeedOwnershipComponent } from './project/deed-ownership/deed-ownership.component';
+import { CompanyEstablishmentComponent } from './project/company-establishment/company-establishment.component';
+import { InheritenceComponent } from './project/inheritence/inheritence.component';
+import { ProjectDtlComponent } from './project/project-dtl/project-dtl.component';
 @NgModule({
     declarations: [ CompanyFormsComponent,
         CompanyMasterComponent, CompanyDetailsComponent,RoleDetailsComponent,
-        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent],
+        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent],
     imports: [
       MasterRoutingModule,
       SharedModule,
       ShareComponentModule,
       ApplicationPipeModule
-    ],
-    bootstrap: [ProjectFormComponent]
-
+    ]
   })
 export class MasterModule{}

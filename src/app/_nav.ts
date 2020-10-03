@@ -7,11 +7,6 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'المستعمل',
-    url: '/users',
-    icon: 'icon-people'
-  },
-  {
     name: 'Master / رئيس',
     url: '/master',
     icon: 'icon-people',

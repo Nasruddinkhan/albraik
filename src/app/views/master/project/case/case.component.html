@@ -1,0 +1,170 @@
+<form #newCaseForm="ngForm" (ngSubmit)="newCaseForm.form.valid && onSubmit(newCaseForm)">
+    <div class="card">
+      <div class="card-header ">
+  
+        {{action}} Case<i class="icon-people"></i>
+  
+      </div>
+   
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="Case">Case number in court <span style="color:red">*</span></label>
+  
+            <input type="text" class="form-control" required [(ngModel)]="casemodel.name" name="caseno"
+              [ngClass]="{'red-border-class': !caseno1.valid && caseno1.touched}" #caseno1="ngModel">
+            <div *ngIf="!caseno1.valid && caseno1.touched" style="color:red">
+              case no is required
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="Court Name">Court Name <span style="color:red">*</span></label>
+            <select #mySelect class="form-control" (change)="changed(mySelect.value)" required [(ngModel)]="casemodel.courtName"
+              name="courtName" [ngClass]="{'red-border-class': !courtName1.valid && courtName1.touched}"
+              #courtName1="ngModel">
+              <option selected>Choose...</option>
+            </select>
+            <div *ngIf="!courtName1.valid && courtName1.touched" style="color:red">
+              Court Name is required
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          
+          <div class="form-group col-sm-6">
+            <label for="Judge Name">Judge Name<span style="color:red">*</span></label>
+            <select #mySelect class="form-control" (change)="changed(mySelect.value)" required [(ngModel)]="casemodel.judgeName"
+              name="judgeName" [ngClass]="{'red-border-class': !judgeName1.valid && judgeName1.touched}"
+              #judgeName1="ngModel">
+              <option selected>Choose...</option>
+            </select>
+            <div *ngIf="!judgeName1.valid && judgeName1.touched" style="color:red">
+              Judge Name is required
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6">
+            <label for="Office">Office <span style="color:red">*</span></label>
+  
+            <input type="text" class="form-control" required [(ngModel)]="casemodel.name" name="office"
+              [ngClass]="{'red-border-class': !office1.valid && office1.touched}" #office1="ngModel">
+            <div *ngIf="!office1.valid && office1.touched" style="color:red">
+              office is required
+            </div>
+          </div>
+        </div>
+        
+          <div class="row">
+            
+          <div class="form-group col-sm-6">
+            <label for="Consultant">Consultant <span style="color:red">*</span></label>
+  
+            <input type="text" class="form-control" required [(ngModel)]="casemodel.consultant" name="consultant"
+              [ngClass]="{'red-border-class': !consultant1.valid && consultant1.touched}" #consultant1="ngModel">
+            <div *ngIf="!consultant1.valid && consultant1.touched" style="color:red">
+              consultant is required
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="Consultant Engagement Date">Consultant Engagement Date <span style="color:red">*</span></label>
+            <input type="text" class="form-control" required [(ngModel)]="casemodel.consulantDate" name="consulantDate"
+            [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+            bsDatepicker #dp="bsDatepicker"
+              [ngClass]="{'red-border-class': !consultEngagementDt1.valid && consultEngagementDt1.touched}" #consultEngagementDt1="ngModel">
+            <div *ngIf="!consultEngagementDt1.valid && consultEngagementDt1.touched" style="color:red">
+              consultant engagement date is required
+            </div>
+          </div>
+        
+        </div>
+        <div class="row">
+          
+          <div class="form-group col-sm-6">
+            <label for="Client">Client <span style="color:red">*</span></label>
+            <select #mySelect class="form-control" (change)="changed(mySelect.value)" required [(ngModel)]="casemodel.client"
+              name="client" [ngClass]="{'red-border-class': !client1.valid && client1.touched}"
+              #client1="ngModel">
+              <option selected>Choose...</option>
+            </select>
+            <div *ngIf="!client1.valid && client1.touched" style="color:red">
+              client is required
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6">
+            <label for="Office">Client Position in Court <span style="color:red">*</span></label>
+            <div class="custom-control form-control-lg custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="customCheck1" 
+               [(ngModel)]="casemodel.clientPositionCourt" name="clientPositionCourt">
+              <label class="custom-control-label" for="customCheck1"> 
+                Prosecutor / مدعي
+            </label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" class="custom-control-input" id="customCheck1" 
+            [(ngModel)]="casemodel.clientPositionCourt" name="clientPositionCourt">
+           <label class="custom-control-label" for="customCheck1"> 
+             Prosecutor / مدعي
+         </label>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="Opposing">Opposing <span style="color:red">*</span></label>
+  
+            <select #mySelect class="form-control" (change)="changed(mySelect.value)" required [(ngModel)]="casemodel.opposing"
+              name="opposing" [ngClass]="{'red-border-class': !opposing1.valid && opposing1.touched}" #opposing1="ngModel">
+              <option selected>Choose...</option>
+              <option *ngFor="let d of dept" [value]="d.id"> {{d.name}}</option>
+            </select>
+            <div *ngIf="!opposing1.valid && opposing1.touched" style="color:red">
+              opposing is required
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="Opposing Position in Court">Opposing Position in Court <span style="color:red">*</span></label>
+            <div class="custom-control form-control-lg custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="customCheck1" 
+               [(ngModel)]="casemodel.oppPosiCourt" name="hiddinProject">
+              <label class="custom-control-label" for="customCheck1"> 
+                Prosecutor / مدعي
+            </label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" class="custom-control-input" id="customCheck1" 
+            [(ngModel)]="casemodel.oppPosiCourt" name="hiddinProject">
+           <label class="custom-control-label" for="customCheck1"> 
+             Prosecutor / مدعي
+         </label>
+          </div>
+          </div>
+        </div>
+       <div class="row">
+          <div class="form-group col-sm-6">
+            <label> Opposing Representer</label>
+            <select #mySelect class="form-control" (change)="changed(mySelect.value)" required [(ngModel)]="casemodel.oppRepisenter"
+              name="opposingrep" [ngClass]="{'red-border-class': !opposingrep1.valid && opposingrep1.touched}" #opposingrep1="ngModel">
+              <option selected>Choose...</option>
+              <option *ngFor="let d of dept" [value]="d.id"> {{d.name}}</option>
+            </select>
+            <div *ngIf="!opposingrep1.valid && opposingrep1.touched" style="color:red">
+              opposing representer is required
+            </div>
+  
+          </div>
+          <div class="form-group col-sm-6">
+            <label> Consultant Engagement Text</label>
+            <textarea type="text" rows="2" class="form-control_textarea" required [(ngModel)]="casemodel.consltEnggTxt" name="consultEngagement"></textarea>
+          </div>
+          
+        </div>
+      
+  
+      </div>
+      <div class="card-footer text-center">
+        <button type="submit" class="btn btn-success btn-lg"
+         >Submit</button> 
+         <button type="reset" class="btn btn-danger btn-lg" 
+         >reset</button> 
+      </div>
+    </div>
+  </form>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../share.module';
 import { AppRoutingModule } from '../app.routing';
-import { DefaultLayoutComponent } from './default-layout';
+import { DefaultLayoutComponent } from './index';
 import {
     AppAsideModule,
     AppBreadcrumbModule,
