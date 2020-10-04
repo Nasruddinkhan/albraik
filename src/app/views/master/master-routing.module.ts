@@ -14,6 +14,7 @@ import { ExecutedCaseComponent } from './project/executed-case/executed-case.com
 import { DeedOwnershipComponent } from './project/deed-ownership/deed-ownership.component';
 import { CompanyEstablishmentComponent } from './project/company-establishment/company-establishment.component';
 import { InheritenceComponent } from './project/inheritence/inheritence.component';
+import { CourtComponent } from './court/court.component';
 
 const routes: Routes = [
   {
@@ -127,6 +128,14 @@ const routes: Routes = [
         title: 'inherit'
       },
       component: InheritenceComponent,
+      canActivate: [AuthGuardService]
+    } ,
+    {
+      path:'court',
+      data: {
+        title: 'court'
+      },
+      component: CourtComponent,
       canActivate: [AuthGuardService]
     }
    

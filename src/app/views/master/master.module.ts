@@ -20,10 +20,11 @@ import { DeedOwnershipComponent } from './project/deed-ownership/deed-ownership.
 import { CompanyEstablishmentComponent } from './project/company-establishment/company-establishment.component';
 import { InheritenceComponent } from './project/inheritence/inheritence.component';
 import { ProjectDtlComponent } from './project/project-dtl/project-dtl.component';
+import { CourtComponent } from './court/court.component';
 @NgModule({
     declarations: [ CompanyFormsComponent,
         CompanyMasterComponent, CompanyDetailsComponent,RoleDetailsComponent,
-        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent],
+        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent],
     imports: [
       MasterRoutingModule,
       SharedModule,

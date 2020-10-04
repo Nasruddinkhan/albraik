@@ -1,6 +1,6 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
 
-<div class="card">
+<!-- <div class="card">
     <app-role-det [rolemst]= "roles"></app-role-det>
     <div class="row">
         <div class="col-xs-12 col-12 text-center">
@@ -9,24 +9,23 @@
                      [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
        </div> 
     </div>
-</div>
+</div> -->
 
 <div class="card">
     <div class="card-header">
-        <i class="fa fa-stumbleupon"></i> الأدوار / Roles 
+      جهة نظر القضية / Court <i class="icon-people"></i>
 
     </div>
-    <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()">
+    <!-- <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()"> -->
 
     <div class="card-body">
-            <div formArrayName="role_names">
-                <div class="row" *ngFor="let item of roleNames.controls; let pointIndex=index"
-                    [formGroupName]="pointIndex">
+            <div >
+                <div class="row">
                     <div class="form-group col-sm-5">
-                        <label>الأدوار / Roles</label>
+                        <label>جهة نظر القضية / Court</label>
                         <div class="input-group mb-3">
                             <div class="input-group">
-                                <input type="text" class="form-control" formControlName="role">
+                                <input type="text" class="form-control" >
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" (click)="addRole()"
                                         class="btn btn-success btn-sm" type="button">أضف <i class="icon-plus"></i>
@@ -48,5 +47,5 @@
             </div>
         </div>
     </div>
-</form>
+<!-- </form> -->
 </div>

@@ -7,35 +7,40 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'Master / رئيس',
+    name: ' رئيس / Master',
     url: '/master',
     icon: 'icon-people',
     children: [
       {
-        name: 'Company',
+        name: 'الشركة / Company',
         url: '/master/company',
-        icon: 'fa fa-fw fa-cubes',
+        icon: 'fa fa-building',
 
       },
       {
-        name: 'Department',
+        name: 'الإدراة / Department',
         url: '/master/department',
-        icon: 'fa fa-fw fa-cubes',
+        icon: 'fa fa-sitemap',
       },
       {
-        name: 'Jobtitle',
+        name: 'المسمى الوظيفي / Job title',
         url: '/master/jobtitle',
-        icon: 'fa fa-fw fa-cubes',
+        icon: 'fa fa-black-tie',
       },
       {
-        name: 'Role',
+        name: 'الأدوار / Role',
         url: '/master/role',
-        icon: 'fa fa-fw fa-cubes',
+        icon: 'fa fa-stumbleupon',
       },
       {
-        name: 'User',
+        name: 'جهة نظر القضية / Court',
+        url: '/master/court',
+        icon: 'fa fa-university',
+      },
+      {
+        name: 'المستعمل / User',
         url: '/master/user',
-        icon: 'fa fa-fw fa-cubes',
+        icon: 'fa fa-user',
       },
       {
         name: 'Project',
@@ -45,7 +50,7 @@ export const navItems: INavData[] = [
     ]
   },
   {
-    name: 'Contact / إدارة الاتصال',
+    name: 'إدارة الاتصال / Contact',
     url: '/contact',
     icon: 'icon-people'
   }
