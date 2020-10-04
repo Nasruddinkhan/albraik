@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { Subscription } from 'rxjs';
+import { DeedModel } from '../../../modal/deed-model';
 import { ProjectModel } from '../../../modal/project-model';
 import { SubjectType } from '../../../modal/subject-type';
 import { ProjectService } from '../../../service/project.service';
+import { ToasterMsgService } from '../../../service/toaster-msg.service';
 
 @Component({
   selector: 'app-deed-ownership',
@@ -12,34 +16,45 @@ import { ProjectService } from '../../../service/project.service';
 })
 export class DeedOwnershipComponent implements OnInit {
 
-
   action = 'Add';
-  locale = 'ar';
-  project:ProjectModel ;
-  subType:SubjectType[];
-  priorityList:any[];
-  constructor( private localeService: BsLocaleService,
-    private projectService: ProjectService) {
-    this.localeService.use(this.locale);
-    this.priorityList = [{'key':'low','value' : 'Low منخفض '},{'key':'medium', 'value' : 'Medium متوسط '},{'key':'high','value':'High ​​مرتفع'}];
-    this.project = new ProjectModel('','',null
-  ,'','','','', false);
+  deedModel:DeedModel; 
+  sucription:Subscription;
+  constructor(private projectService: ProjectService, 
+    private router: Router,
+    private toster : ToasterMsgService,
+    private activeRoute: ActivatedRoute) {
+    this.deedModel = new DeedModel;
  
    }
 
-  ngOnInit(): void {
-   this.getProjectType();
+  ngOnInit() {
+    this.activeRoute.paramMap.subscribe(paramMap => {
+      if (!paramMap.has('project')) {
+        return;
+      }
+      this.deedModel.project = JSON.parse(paramMap.get('project'));
+     
+     });
   }
-  getProjectType(){
-      this.projectService.getProjectType().subscribe((res:SubjectType[])=>{
-        this.subType = res;
-      })
-  }
+ 
   onSubmit(form: NgForm){
    console.log(JSON.stringify(form.value));
+   this.deedModel.projectDetailsId = null;
+   this.deedModel.dooOfficeReference = form.value.dooOfficeReference;
+   this.deedModel.dooCaseNumber = form.value.dooCaseNumber;
+   this.deedModel.dooCaseObserverName = form.value.dooCaseObserverName;
+   this.deedModel.dooCourtId =  form.value.dooCourtId;
+   this.deedModel.dooReferentDate = form.value.dooReferentDate;
+   console.log(JSON.stringify(this.deedModel));
+   this.sucription = this.projectService.addDeedCase( this.deedModel).subscribe((res:DeedModel)=>{
+    this.router.navigate([`/master/project`])
+      this.toster.susessMessage('Add deed successfully');
+      form.reset();  
+    },err=>{
+      this.toster.errorMessage(err.error.message);
+    });
   }
   changed(value : string){
     console.log(value);
   }
-
 }

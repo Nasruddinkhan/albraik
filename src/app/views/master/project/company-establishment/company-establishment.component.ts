@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { ProjectModel } from '../../../modal/project-model';
-import { SubjectType } from '../../../modal/subject-type';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Establisement } from '../../../modal/establisment-model';
 import { ProjectService } from '../../../service/project.service';
+import { ToasterMsgService } from '../../../service/toaster-msg.service';
 
 @Component({
   selector: 'app-company-establishment',
@@ -12,27 +13,34 @@ import { ProjectService } from '../../../service/project.service';
 })
 export class CompanyEstablishmentComponent implements OnInit {
   action = 'Add';
-  project:ProjectModel ;
-  subType:SubjectType[];
-  priorityList:any[];
-  constructor( private localeService: BsLocaleService,
-    private projectService: ProjectService) {
-    this.priorityList = [{'key':'low','value' : 'Low منخفض '},{'key':'medium', 'value' : 'Medium متوسط '},{'key':'high','value':'High ​​مرتفع'}];
-    this.project = new ProjectModel('','',null
-  ,'','','','', false);
- 
+  establisment:Establisement ;
+  sucription: Subscription;
+  constructor(private projectService: ProjectService, 
+             private router: Router,
+            private toster : ToasterMsgService,
+            private activeRoute: ActivatedRoute) {
    }
 
-  ngOnInit(): void {
-   this.getProjectType();
+  ngOnInit() {
+    this.establisment = new Establisement;
+    this.activeRoute.paramMap.subscribe(paramMap => {
+      if (!paramMap.has('project')) {
+        return;
+      }
+      this.establisment.project = JSON.parse(paramMap.get('project'));
+     });
   }
-  getProjectType(){
-      this.projectService.getProjectType().subscribe((res:SubjectType[])=>{
-        this.subType = res;
-      })
-  }
+
   onSubmit(form: NgForm){
-   console.log(JSON.stringify(form.value));
+    this.establisment.companyName = form.value.companyName;
+    console.log(JSON.stringify( this.establisment));
+    this.sucription = this.projectService.addEstiblishmentCompanyCase( this.establisment).subscribe((res:Establisement)=>{
+    this.router.navigate([`/master/project`])
+      this.toster.susessMessage('Add case successfully');
+      form.reset();  
+    },err=>{
+      this.toster.errorMessage(err.error.message);
+    });
   }
   changed(value : string){
     console.log(value);

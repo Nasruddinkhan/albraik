@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { ProjectModel } from '../../../modal/project-model';
-import { SubjectType } from '../../../modal/subject-type';
+import { Subscription } from 'rxjs';
+import { VerditModel } from '../../../modal/verdict-model';
 import { ProjectService } from '../../../service/project.service';
+import { ToasterMsgService } from '../../../service/toaster-msg.service';
+enum VeditType  { V, I, NONE };
 @Component({
   selector: 'app-executed-case',
   templateUrl: './executed-case.component.html',
@@ -13,28 +16,53 @@ export class ExecutedCaseComponent implements OnInit {
 
   action = 'Add';
   locale = 'ar';
-  project:ProjectModel ;
-  subType:SubjectType[];
-  priorityList:any[];
+  verdit:VerditModel;
+  verditcheckboxtype = VeditType;
+  verditcurrentlyChecked: VeditType;
+  sucription: Subscription;
   constructor( private localeService: BsLocaleService,
-    private projectService: ProjectService) {
+    private projectService: ProjectService, 
+    private router: Router,
+    private toster : ToasterMsgService,
+    private activeRoute: ActivatedRoute) {
     this.localeService.use(this.locale);
-    this.priorityList = [{'key':'low','value' : 'Low منخفض '},{'key':'medium', 'value' : 'Medium متوسط '},{'key':'high','value':'High ​​مرتفع'}];
-    this.project = new ProjectModel('','',null
-  ,'','','','', false);
+   this.verdit =new VerditModel; 
  
    }
 
   ngOnInit(): void {
-   this.getProjectType();
+    this.activeRoute.paramMap.subscribe(paramMap => {
+      if (!paramMap.has('project')) {
+        return;
+      }
+      this.verdit.project = JSON.parse(paramMap.get('project'));
+      
+     });
   }
-  getProjectType(){
-      this.projectService.getProjectType().subscribe((res:SubjectType[])=>{
-        this.subType = res;
-      })
+  selectVerditCheckBox(targetType: VeditType) {
+    if(this.verditcurrentlyChecked === targetType) {
+      this.verditcurrentlyChecked = VeditType.NONE;
+      return;
+    }
+    this.verditcurrentlyChecked = targetType;
+     console.log(this.verditcurrentlyChecked);
   }
   onSubmit(form: NgForm){
    console.log(JSON.stringify(form.value));
+   this.verdit.projectDetailsId=null;
+   this.verdit.verdictExecutedCaseId= form.value.verdictExecutedCaseId;
+   this.verdit.verdictNumber = form.value.verdictNumber;
+   this.verdit.verdictDate =form.value.verdictDate;
+   this.verdit.verdictDecisionDate = form.value.verdictDecisionDate;
+   this.verdit.verdictType = this.verditcurrentlyChecked?'V':'I';
+   console.log(JSON.stringify(this.verdit));
+   this.sucription = this.projectService.addVerditCase(  this.verdit).subscribe((res:VerditModel)=>{
+    this.router.navigate([`/master/project`])
+      this.toster.susessMessage('Add case successfully');
+      form.reset();  
+    },err=>{
+      this.toster.errorMessage(err.error.message);
+    });
   }
   changed(value : string){
     console.log(value);

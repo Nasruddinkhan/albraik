@@ -1,4 +1,4 @@
-<form #newProjectForm="ngForm" (ngSubmit)="onSubmit(newProjectForm)">
+<form #newProjectForm="ngForm" autocomplete="off" (ngSubmit)="onSubmit(newProjectForm)">
     <div class="card">
       <div class="card-header ">
   
@@ -11,18 +11,18 @@
           <div class="form-group col-sm-6">
             <label for="Executed Case">Executed Case <span style="color:red">*</span></label>
   
-            <input type="text" class="form-control" required [(ngModel)]="project.name" name="executedcase"
-              [ngClass]="{'red-border-class': !executedcase1.valid && executedcase1.touched}" #executedcase1="ngModel">
-            <div *ngIf="!executedcase1.valid && executedcase1.touched" style="color:red">
+            <input type="text" class="form-control" required [(ngModel)]="verdit.verdictExecutedCaseId" name="verdictExecutedCaseId"
+              [ngClass]="{'red-border-class': !verdictExecutedCaseId1.valid && verdictExecutedCaseId1.touched}" #verdictExecutedCaseId1="ngModel">
+            <div *ngIf="!verdictExecutedCaseId1.valid && verdictExecutedCaseId1.touched" style="color:red">
               executedcase is required
             </div>
           </div>
           <div class="form-group col-sm-6">
             <label for="Verdict Number">Verdict Number <span style="color:red">*</span></label>
   
-            <input type="text" class="form-control" required [(ngModel)]="project.name" name="verdictnumber"
-              [ngClass]="{'red-border-class': !verdictnumber1.valid && verdictnumber1.touched}" #verdictnumber1="ngModel">
-            <div *ngIf="!verdictnumber1.valid && verdictnumber1.touched" style="color:red">
+            <input type="text" class="form-control" required [(ngModel)]="verdit.verdictNumber" name="verdictNumber"
+              [ngClass]="{'red-border-class': !verdictNumber1.valid && verdictNumber1.touched}" #verdictNumber1="ngModel">
+            <div *ngIf="!verdictNumber1.valid && verdictNumber1.touched" style="color:red">
               verdictnumber is required
             </div>
           </div>
@@ -31,11 +31,11 @@
           
           <div class="form-group col-sm-6">
             <label for="Date"> Date <span style="color:red">*</span></label>
-            <input type="text" class="form-control" required [(ngModel)]="project.startDate" name="date"
+            <input type="text" class="form-control" required [(ngModel)]="verdit.verdictDate" name="verdictDate"
             [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
             bsDatepicker #dp="bsDatepicker"
-              [ngClass]="{'red-border-class': !date1.valid && date1.touched}" #date1="ngModel">
-            <div *ngIf="!date1.valid && date1.touched" style="color:red">
+              [ngClass]="{'red-border-class': !verdictDate1.valid && verdictDate1.touched}" #verdictDate1="ngModel">
+            <div *ngIf="!verdictDate1.valid && verdictDate1.touched" style="color:red">
                date is required
             </div>
           </div>
@@ -43,9 +43,9 @@
           <div class="form-group col-sm-6">
             <label for="Source">Source <span style="color:red">*</span></label>
   
-            <input type="text" class="form-control" required [(ngModel)]="project.name" name="source"
-              [ngClass]="{'red-border-class': !source1.valid && source1.touched}" #source1="ngModel">
-            <div *ngIf="!source1.valid && source1.touched" style="color:red">
+            <input type="text" class="form-control" required [(ngModel)]="verdit.verdictSource" name="verdictSource"
+              [ngClass]="{'red-border-class': !verdictSource1.valid && verdictSource1.touched}" #verdictSource1="ngModel">
+            <div *ngIf="!verdictSource1.valid && verdictSource1.touched" style="color:red">
                 Source is required
             </div>
           </div>
@@ -54,7 +54,7 @@
           <div class="row">
           <div class="form-group col-sm-6">
             <label for="Office">Verdict Type<span style="color:red">*</span></label>
-            <div class="custom-control form-control-lg custom-checkbox">
+        <!--     <div class="custom-control form-control-lg custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="customCheck1" 
                [(ngModel)]="project.hiddinProject" name="hiddinProject">
               <label class="custom-control-label" for="customCheck1"> 
@@ -66,15 +66,31 @@
            <label class="custom-control-label" for="customCheck1"> 
             Included in Work ((مشمول بالتقاء العمل))
          </label>
-          </div>
+          </div> -->
+       
+          <br>
+          Verified / ((مصدق)) <input type="checkbox"  
+        
+          name="Verified"
+          [(ngModel)]="Verified"
+          value="R"
+          [checked]="verditcurrentlyChecked === verditcheckboxtype.V" (click)="selectVerditCheckBox(verditcheckboxtype.V)">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+            Included in Work ((مشمول بالتقاء العمل))<input type="checkbox"
+           
+            name="includeWork"
+            [(ngModel)]="includeWork"
+            value="P"
+            [checked]="verditcurrentlyChecked === verditcheckboxtype.I"
+            (click)="selectVerditCheckBox(verditcheckboxtype.I)">
           </div>
           <div class="form-group col-sm-6">
             <label for="Verdict Decision Date">Verdict Decision Date <span style="color:red">*</span></label>
-            <input type="text" class="form-control" required [(ngModel)]="project.startDate" name="verdictdecisiondate"
+            <input type="text" class="form-control" required [(ngModel)]="verdit.verdictDecisionDate" name="verdictdecisiondate"
             [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
             bsDatepicker #dp="bsDatepicker"
-              [ngClass]="{'red-border-class': !verdictdecisiondate1.valid && verdictdecisiondate1.touched}" #verdictdecisiondate1="ngModel">
-            <div *ngIf="!verdictdecisiondate1.valid && verdictdecisiondate1.touched" style="color:red">
+              [ngClass]="{'red-border-class': !verdictDecisionDate1.valid && verdictDecisionDate1.touched}" #verdictDecisionDate1="ngModel">
+            <div *ngIf="!verdictDecisionDate1.valid && verdictDecisionDate1.touched" style="color:red">
                 Verdict Decision Date date is required
             </div>
           </div>
@@ -84,8 +100,8 @@
   
       </div>
       <div class="card-footer text-center">
-        <button type="submit" class="btn btn-success btn-lg"
-         >Next</button> 
+        <button type="submit" [disabled]="!newProjectForm.form.valid" class="btn btn-success btn-lg"
+         >Submit</button> 
          <button type="reset" class="btn btn-danger btn-lg"
          >reset</button> 
       </div>
