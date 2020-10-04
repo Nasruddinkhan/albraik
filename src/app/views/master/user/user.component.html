@@ -2,7 +2,7 @@
 
 <div class="card">
     <div class="card-header">
-        المعلومات الرئيسية / Add User <i class="fa fa-user-plus"></i>
+        <i class="fa fa-user-plus"></i> المعلومات الرئيسية / Add User 
     </div>
     <form [formGroup]="userForm" (ngSubmit)="registerUser()">
 
@@ -96,7 +96,7 @@
 </div>
 <div class="card" *ngIf="users?.length > 0">
     <div class="card-header">
-        بيانات المستخدم / User Details <i class="fa fa-user"></i>
+        <i class="fa fa-user"></i>  بيانات المستخدم / User Details 
     </div>
     <div class="card-body">
         <table class="table table-bordered table-striped table-sm">
