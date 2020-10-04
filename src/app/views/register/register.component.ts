@@ -34,7 +34,9 @@ export class RegisterComponent  implements OnInit{
     this.loading =   false;
     this.toastService.errorMessage(err.error.message);
    });
-  
+   this.registerForm.reset();
+   //this.registerForm.markAsPristine();
+  // this.registerForm.markAsUntouched();
   }
   get f() { return this.registerForm.controls; }
   ngOnInit(){

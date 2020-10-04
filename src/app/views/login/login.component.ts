@@ -33,16 +33,19 @@ export class LoginComponent {
     this.loading = true;
     this.loginService.loginUser(userObj).then((loginUser:any)=>{
       sessionStorage.setItem('token',loginUser.token); 
+      sessionStorage.setItem('role', loginUser.role);
+      sessionStorage.setItem('userId', loginUser.id)
+      sessionStorage.setItem('companyId', loginUser.companyId)
+
       this.toastService.susessMessage('successfull login')
       this.loading =   false;
-      if(!loginUser.isFtl && checkNullEmpty(loginUser.companyId))
-          this.router.navigate([`/companyregister/${loginUser.id}`]);
+      if(!loginUser.isFtl)
+          this.router.navigate([`/dashboard`]);
       if(loginUser.isFtl)
            this.router.navigate([`/changepassword/${loginUser.id}`]);
     },err=>{
       this.loading =   false;
       this.toastService.errorMessage(err.error.message);
     });
-
   }
 }

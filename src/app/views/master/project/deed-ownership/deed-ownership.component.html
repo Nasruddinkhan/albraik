@@ -1,0 +1,66 @@
+<form #newProjectForm="ngForm" (ngSubmit)="onSubmit(newProjectForm)">
+    <div class="card">
+      <div class="card-header ">
+        {{action}} Deed - Ownership<i class="icon-people"></i>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="Office Reference">Office Reference<span style="color:red">*</span></label>
+            <input type="text" class="form-control" required [(ngModel)]="project.name" name="officereference"
+              [ngClass]="{'red-border-class': !officereference1.valid && officereference1.touched}" #officereference1="ngModel">
+            <div *ngIf="!officereference1.valid && officereference1.touched" style="color:red">
+              officereference is required
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="Court Name">Court Name <span style="color:red">*</span></label>
+            <input type="text" class="form-control" required [(ngModel)]="project.name" name="courtname"
+              [ngClass]="{'red-border-class': !courtname1.valid && courtname1.touched}" #courtname1="ngModel">
+            <div *ngIf="!courtname1.valid && courtname1.touched" style="color:red">
+              courtname is required
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="Name of Case Observer">Name of Case Observer<span style="color:red">*</span></label>
+    
+              <input type="text" class="form-control" required [(ngModel)]="project.name" name="caseobserver"
+                [ngClass]="{'red-border-class': !caseobserver1.valid && caseobserver1.touched}" #caseobserver1="ngModel">
+              <div *ngIf="!caseobserver1.valid && caseobserver1.touched" style="color:red">
+                case observer is required
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="Case number in court">Case number in court <span style="color:red">*</span></label>
+    
+              <input type="text" class="form-control" required [(ngModel)]="project.name" name="casenocourt"
+                [ngClass]="{'red-border-class': !casenocourt1.valid && casenocourt1.touched}" #casenocourt1="ngModel">
+              <div *ngIf="!casenocourt1.valid && casenocourt1.touched" style="color:red">
+                casenocourt is required
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          
+          <div class="form-group col-sm-6">
+            <label for="Date"> Date <span style="color:red">*</span></label>
+            <input type="text" class="form-control" required [(ngModel)]="project.startDate" name="date"
+            [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+            bsDatepicker #dp="bsDatepicker"
+              [ngClass]="{'red-border-class': !date1.valid && date1.touched}" #date1="ngModel">
+            <div *ngIf="!date1.valid && date1.touched" style="color:red">
+               date is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <button type="submit" class="btn btn-success btn-lg"
+         >Submit</button> 
+         <button type="reset" class="btn btn-danger btn-lg"
+         >Reset</button> 
+      </div>
+    </div>
+  </form>

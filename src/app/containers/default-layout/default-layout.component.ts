@@ -1,4 +1,4 @@
-import {Component, ElementRef, Renderer2} from '@angular/core';
+import {Component, ElementRef, Renderer2, OnInit} from '@angular/core';
 import { navItems } from '../../_nav';
 import { ColorEvent } from 'ngx-color';
 
@@ -6,9 +6,19 @@ import { ColorEvent } from 'ngx-color';
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent {
+export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
+  isCollapsed = true;
+  ngOnInit(){
+    let role  = sessionStorage.getItem("role");
+    console.log(navItems);
+    if(role === 'USER'){
+    //  delete navItems[1]
+    }
+    //  delete navItems[2];
+
+  }
  constructor(private elementRef: ElementRef, private renderer: Renderer2){
 
  }

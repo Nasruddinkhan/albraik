@@ -7,35 +7,51 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'المستعمل',
-    url: '/users',
-    icon: 'icon-people'
-  }
-  /* {
-    name: 'الصفحات',
-    url: '/pages',
-    icon: 'icon-star',
+    name: ' رئيس / Master',
+    url: '/master',
+    icon: 'icon-people',
     children: [
       {
-        name: 'Login',
-        url: '/login',
-        icon: 'icon-star'
+        name: 'الشركة / Company',
+        url: '/master/company',
+        icon: 'fa fa-building',
+
       },
       {
-        name: 'Register',
-        url: '/register',
-        icon: 'icon-star'
+        name: 'الإدراة / Department',
+        url: '/master/department',
+        icon: 'fa fa-sitemap',
       },
       {
-        name: 'Error 404',
-        url: '/404',
-        icon: 'icon-star'
+        name: 'المسمى الوظيفي / Job title',
+        url: '/master/jobtitle',
+        icon: 'fa fa-black-tie',
       },
       {
-        name: 'Error 500',
-        url: '/500',
-        icon: 'icon-star'
+        name: 'الأدوار / Role',
+        url: '/master/role',
+        icon: 'fa fa-stumbleupon',
+      },
+      {
+        name: 'جهة نظر القضية / Court',
+        url: '/master/court',
+        icon: 'fa fa-university',
+      },
+      {
+        name: 'المستعمل / User',
+        url: '/master/user',
+        icon: 'fa fa-user',
+      },
+      {
+        name: 'Project',
+        url: '/master/project',
+        icon: 'fa fa-fw fa-cubes',
       }
     ]
-  } */
+  },
+  {
+    name: 'إدارة الاتصال / Contact',
+    url: '/contact',
+    icon: 'icon-people'
+  }
 ];

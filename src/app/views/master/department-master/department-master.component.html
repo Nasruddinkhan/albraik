@@ -1,18 +1,23 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+
 <div class="card">
     <div class="card-header">
-        Department <i class="icon-people"></i>
+        <i class="fa fa-sitemap"></i> الإدراة / Add Department 
 
     </div>
+    <form [formGroup]="departmentForm"  (ngSubmit)="onSubmit()">
     <div class="card-body">
-        <form [formGroup]="departmentForm">
+      
             <div formArrayName="department_names">
                 <div class="row" *ngFor="let item of departmentNames.controls ; let pointIndex=index"
                     [formGroupName]="pointIndex">
-                    <div class="form-group col-sm-6">
-                        <label>اسم القسم                        </label>
+                    <div class="form-group col-sm-5">
+                        <label>Department / اسم القسم</label>
                         <div class="input-group mb-3">
                             <div class="input-group">
-                                <input type="text" class="form-control" formControlName="departments" >
+                                <input type="text" class="form-control" formControlName="departments" 
+        
+                                required>  
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" (click)="addDeparment()" *ngIf="pointIndex === 0"
                                         class="btn btn-success btn-sm" type="button">أضف
@@ -22,9 +27,48 @@
                                 </div>
                             </div>
                         </div>
+                       <!--  <div *ngIf="getValidity(pointIndex)" style="color:red">
+                          <b>  department name is required </b>
+                        </div> -->
                     </div>
                 </div>
             </div>
-        </form>
+       
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-md btn-success">إنشاء شركة</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<div class="card" *ngIf="depts?.length > 0">
+    <div class="card-header">
+        <i class="fa fa-sitemap"></i> الإدراة / Department Details
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                  <th width="5"> SR</th>
+                <th>Departments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let d of depts; let i = index">
+                  <td> {{ i + 1}}</td>
+                <td>{{d.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col-xs-12 col-12">
+             <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
+                         previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
+                         [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
+           </div> 
     </div>
 </div>

@@ -12,9 +12,9 @@
                   <p class="text-muted">تسجيل الدخول إلى حسابك</p>
                   <div class="form-group">
                   <div class="input-group">
-                    <div class="input-group-prepend">
+                   <!--  <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
-                    </div>
+                    </div> -->
                     <input type="text" class="form-control" placeholder="البريد الإلكتروني" 
                      oninput="this.value=this.value.toLowerCase()" name="username" #Username="ngModel"
                       [(ngModel)]="username" autocomplete="username" required>
@@ -25,9 +25,9 @@
                 </div>
                   <div class="form-group">
                   <div class="input-group">
-                    <div class="input-group-prepend">
+                  <!--   <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
-                    </div>
+                    </div> -->
                     <input type="password" class="form-control" placeholder="كلمه السر" name="password" #Password="ngModel" [(ngModel)]="password" autocomplete="current-password" required>
                   </div>
                   <div *ngIf="isSubmit&&Password.errors">

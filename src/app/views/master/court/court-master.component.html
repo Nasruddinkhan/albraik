@@ -1,0 +1,51 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+
+<!-- <div class="card">
+    <app-role-det [rolemst]= "roles"></app-role-det>
+    <div class="row">
+        <div class="col-xs-12 col-12 text-center">
+         <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
+                     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
+                     [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
+       </div> 
+    </div>
+</div> -->
+
+<div class="card">
+    <div class="card-header">
+      جهة نظر القضية / Court <i class="icon-people"></i>
+
+    </div>
+    <!-- <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()"> -->
+
+    <div class="card-body">
+            <div >
+                <div class="row">
+                    <div class="form-group col-sm-5">
+                        <label>جهة نظر القضية / Court</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" >
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="addRole()"
+                                        class="btn btn-success btn-sm" type="button">أضف <i class="icon-plus"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" (click)="deleteRole(pointIndex)" *ngIf="pointIndex !== 0"
+                                        class="btn btn-danger btn-sm" type="button">حذف <i class="icon-minus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-md btn-success">إنشاء شركة</button>
+            </div>
+        </div>
+    </div>
+<!-- </form> -->
+</div>

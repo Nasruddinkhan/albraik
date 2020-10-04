@@ -1,21 +1,20 @@
 export class CompanyMaster {
-    companyName: string;
+    id: number;
+    name: string;
     phoneNumber: string;
     faxNumber:string;
-    logo:string;
     address:string;
-    departments:[];
-    jobTittle:[]
-    constructor(companyName: string,
+    companyLogo:string
+    constructor(id : number, companyName: string,companyLogo : string,
         phoneNumber: string,
         faxNumber:string,
-        logo:string,
         address:string){
-            this.companyName = companyName;
+            this.name = name;
             this.phoneNumber = phoneNumber;
             this.faxNumber = faxNumber;
-            this.logo = logo;
             this.address = address;
+            this.id = id;
+            this.companyLogo = companyLogo;
     }
 
 }

@@ -1,0 +1,62 @@
+
+<div class="card" >
+    <div class="card-header">
+        Project Details<i class="icon-people"></i>
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+          <button type="button" class="btn btn-success btn-circle btn-md"  [disabled]="projects?.length>0" (click)="createCase()"><div class="plus_bold" > + </div></button> 
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-info btn-circle btn-md"   [disabled]="projects?.length>1 || projects?.length === 0" ><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
+ 
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-danger btn-circle btn-md" [disabled]="projects?.length === 0"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
+         
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-dark btn-circle btn-md" [disabled]="projects?.length>0" ><div class="plus_bold" ><i class="fa fa-search-plus "></i> </div></button> 
+          
+
+        </div>
+         <div class="row">
+            <table class="table table-bordered table-striped table-md" *ngIf="projectList?.length>0" >
+               <thead>
+                 <tr>
+                   <th></th>
+                   <th>Profile</th>
+                   <th>Project Type</th>
+                   <th>Priority</th>
+                   <th>Drawer Name</th>
+                   <th>Manager</th>
+                   <th>Objective</th>
+                   <th>Comment</th>
+                 </tr>
+               </thead>
+               <tbody>
+              <tr *ngFor="let project of projectList">
+                   <td>
+                      <input type="checkbox"  [value]="project.project_id" (change)="onCheckboxChange($event)" />
+
+
+                   </td>
+                  <td ><img src={{project.case_logo}} class="rounded-circle"  height="50" width="50" /></td>
+                  <td>{{project.project_type_id}} {{project.projectId}}</td>
+                  <td>{{project.priority}}</td>
+                  <td>{{project.drawer_number}}</td>
+                  <td>{{project.manager_id}}</td>
+                  <td>{{project.objective}}</td>
+                  <td>{{project.comment}}</td>
+               </tr>
+           
+               </tbody>
+             </table>
+             <div class="row">
+              <div class="col-xs-12 col-12">
+               <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
+                           previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
+                           [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
+             </div> 
+             </div>
+         </div>
+ 
+    </div>
+</div>
