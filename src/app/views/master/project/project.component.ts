@@ -1,4 +1,5 @@
 import { Component, OnInit,TemplateRef  } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ProjectModel } from '../../modal/project-model';
@@ -12,8 +13,11 @@ import { ProjectService } from '../../service/project.service';
 export class ProjectComponent implements OnInit {
   caseList:ProjectModel[];
   constructor(private router: Router,
-              private projectService: ProjectService) { }
+              private projectService: ProjectService) {
+             
+               }
   searchText: string;
+  projects = [];
   pageNo = 1;
   bigTotalItems: number;
   numPages: number = 0;
@@ -35,9 +39,27 @@ export class ProjectComponent implements OnInit {
 
   findAllTask(){
     this.projectService.findAllTask(this.userid,this.pageNo).subscribe((res:any)=>{
+      console.log(res);
       this.projectList=res.content;
       console.log(this.projectList);
      this.bigTotalItems = res.totalElements;
     });
+  }
+
+  onCheckboxChange(e) {
+    if (e.target.checked) {
+      this.projects.push(e.target.value);
+    } else {
+      this.projects.filter(item =>{
+        console.log(e.target.value === item);
+        if(e.target.value === item){
+            const index: number = this.projects.indexOf(item);
+            if (index !== -1) {
+              this.projects.splice(index, 1);
+             }      
+        } 
+      });
+    }
+    this.projects = Array.from(new Set(this.projects));
   }
 }

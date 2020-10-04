@@ -62,8 +62,10 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
       return;
     }
     this.projectService.addProjectTask(this.project).subscribe((res:ProjectModel)=>{
-      form.reset();  
+      
+      this.router.navigate([`/master/project`])
       this.toster.susessMessage('Add task successfully');
+      form.reset();  
     },err=>{
       this.toster.errorMessage(err.error.message);
     });

@@ -4,16 +4,19 @@ import { ActivatedRoute } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { CaseModel } from '../../../modal/case-model';
 import { ProjectModel } from '../../../modal/project-model';
-import { SubjectType } from '../../../modal/subject-type';
 import { ProjectService } from '../../../service/project.service';
-
+enum ClientPositionType  { P, R, NONE };
+enum OpositionPositionType  { P, R, NONE };
 @Component({
   selector: 'app-case',
   templateUrl: './case.component.html',
   styleUrls: ['./case.component.css']
 })
 export class CaseComponent implements OnInit {
-
+  check_box_type = ClientPositionType;
+  currentlyChecked: ClientPositionType;
+  oppcheckboxtype = OpositionPositionType;
+  oppcurrentlyChecked: OpositionPositionType;
   action = 'Add';
   locale = 'ar';
   project:ProjectModel ;
@@ -55,5 +58,20 @@ export class CaseComponent implements OnInit {
   changed(value : string){
     console.log(value);
   }
+  selectCheckBox(targetType: ClientPositionType) {
+    if(this.currentlyChecked === targetType) {
+      this.currentlyChecked = ClientPositionType.NONE;
+      return;
+    }
+    console.log( this.currentlyChecked );
+    this.currentlyChecked = targetType;
+  }
 
+  selectOpositionCheckBox(targetType: OpositionPositionType) {
+    if(this.oppcurrentlyChecked === targetType) {
+      this.oppcurrentlyChecked = OpositionPositionType.NONE;
+      return;
+    }
+    this.oppcurrentlyChecked = targetType;
+  }
 }
