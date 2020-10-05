@@ -22,7 +22,9 @@
           <select #mySelect class="form-control" (change)="changed(mySelect.value)" required
             [(ngModel)]="casemodel.caseCourtId" name="caseCourtId"
             [ngClass]="{'red-border-class': !caseCourtId1.valid && caseCourtId1.touched}" #caseCourtId1="ngModel">
-            <option selected>Choose...</option>
+            <option value="" selected>Choose...</option>
+            <option *ngFor="let court of courts" [value]="court.id">{{court.name}} </option>
+
           </select>
           <div *ngIf="!caseCourtId1.valid && caseCourtId1.touched" style="color:red">
             Court Name is required
@@ -37,6 +39,8 @@
             [(ngModel)]="casemodel.caseJudgeId" name="caseJudgeId"
             [ngClass]="{'red-border-class': !caseJudgeId1.valid && caseJudgeId1.touched}" #caseJudgeId1="ngModel">
             <option selected>Choose...</option>
+            <option *ngFor="let contact of contactList" [value]="contact.id">{{contact.name}} </option>
+
           </select>
           <div *ngIf="!caseJudgeId1.valid && caseJudgeId1.touched" style="color:red">
             Judge Name is required
@@ -59,7 +63,7 @@
         <div class="form-group col-sm-6">
           <label for="Consultant">Consultant <span style="color:red">*</span></label>
 
-          <input type="text" class="form-control" required [(ngModel)]="casemodel.caseConsultantId1" name="caseConsultantId"
+          <input type="text" class="form-control" required [(ngModel)]="casemodel.caseConsultantId" name="caseConsultantId"
             [ngClass]="{'red-border-class': !caseConsultantId1.valid && caseConsultantId1.touched}" #caseConsultantId1="ngModel">
           <div *ngIf="!caseConsultantId1.valid && caseConsultantId1.touched" style="color:red">
             consultant is required
@@ -84,7 +88,8 @@
           <select #mySelect class="form-control" (change)="changed(mySelect.value)" required
             [(ngModel)]="casemodel.caseClientId" name="caseClientId"
             [ngClass]="{'red-border-class': !caseClientId1.valid && caseClientId1.touched}" #caseClientId1="ngModel">
-            <option selected>Choose...</option>
+            <option value="" selected>Choose...</option>
+            <option *ngFor="let client of clientList" [value]="client.id">{{client.name}} </option>
           </select>
           <div *ngIf="!caseClientId1.valid && caseClientId1.touched" style="color:red">
             client is required
@@ -124,12 +129,13 @@
           <label for="Opposing">Opposing <span style="color:red">*</span></label>
 
           <select #mySelect class="form-control" (change)="changed(mySelect.value)" required
-            [(ngModel)]="casemodel.caseOpposing" name="caseOpposing"
-            [ngClass]="{'red-border-class': !caseOpposing1.valid && caseOpposing1.touched}" #caseOpposing1="ngModel">
-            <option selected>Choose...</option>
-            <option *ngFor="let d of dept" [value]="d.id"> {{d.name}}</option>
+            [(ngModel)]="casemodel.caseOpposingId" name="caseOpposingId"
+            [ngClass]="{'red-border-class': !caseOpposingId1.valid && caseOpposingId1.touched}" #caseOpposingId1="ngModel">
+            <option value="" selected>Choose...</option>
+            <option *ngFor="let opp of oppsingList" [value]="opp.id">{{opp.name}} </option>
+           
           </select>
-          <div *ngIf="!caseOpposing1.valid && caseOpposing1.touched" style="color:red">
+          <div *ngIf="!caseOpposingId1.valid && caseOpposingId1.touched" style="color:red">
             Opposing is required
           </div>
         </div>
@@ -156,8 +162,8 @@
           <select #mySelect class="form-control" (change)="changed(mySelect.value)" required
             [(ngModel)]="casemodel.caseOpposingRepresenterId" name="caseOpposingRepresenterId"
             [ngClass]="{'red-border-class': !caseOpposingRepresenterId1.valid && caseOpposingRepresenterId1.touched}" #caseOpposingRepresenterId1="ngModel">
-            <option selected>Choose...</option>
-            <option *ngFor="let d of dept" [value]="d.id"> {{d.name}}</option>
+            <option value="" selected>Choose...</option>
+            <option *ngFor="let opp of oppsingRepList" [value]="opp.id">{{opp.name}} </option> 
           </select>
           <div *ngIf="!caseOpposingRepresenterId1.valid && caseOpposingRepresenterId1.touched" style="color:red">
             opposing representer is required

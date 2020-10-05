@@ -8,6 +8,8 @@ import { SubjectType } from '../../modal/subject-type';
 import { ProjectService } from '../../service/project.service';
 import { checkNullEmpty } from '../../service/must-match.service';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
+import { UserMaster } from '../../modal/user-master';
+import { UserService } from '../../service/user.service';
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -22,8 +24,10 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
   type: string = null;
   userId: string;
   subription: Subscription;
+  users : UserMaster[];
   constructor(private router: Router,
     private toster : ToasterMsgService,
+    private userService: UserService,
     private localeService: BsLocaleService,
     private projectService: ProjectService) {
     this.localeService.use(this.locale);
@@ -33,12 +37,30 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
  
    }
   ngOnDestroy(){
-    this.subription.unsubscribe();
-    console.log('clear all refrence data');
+     this.subription.unsubscribe();
+     this.project = null;
+     this.subType = null;
+     this.priorityList = null;
+     this.type = null;
+     this.userId = null;
+     this.users  = null;
+     this.router = null;
+     this.projectService = null;
+     this.toster = null;
+     this.userService = null;
+     this.localeService = null;
+     console.log('clear all refrence data');
+
   }
   ngOnInit(): void {
    this.getProjectType();
+   this.getUsers();
    this.userId = sessionStorage.getItem("userId");
+  }
+  getUsers() {
+    this.subription = this.userService.findAllUsers().subscribe((userres:UserMaster[])=>{
+      this.users = userres;
+    });
   }
   getProjectType(){
     this.subription = this.projectService.getProjectType().subscribe((res:SubjectType[])=>{
@@ -47,14 +69,14 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
   }
   onSubmit(form: NgForm){
     this.project.projectId = null;
-    this.project.projectTypeId = form.value.projectType;
+    this.project.projectTypeId = form.value.projectTypeId;
     this.project.name =  form.value.name;
     this.project.startDate = form.value.startDate;
     this.project.comment =  form.value.comment;
-    this.project.drawerNumber = form.value.drawerName;
+    this.project.drawerNumber = form.value.drawerNumber;
     this.project.hiddinProject = form.value.hiddinProject;
     this.project.priority = form.value.priority;
-    this.project.managerId = "1";//form.value.manager;
+    this.project.managerId = form.value.managerId;
     this.project.objective = form.value.objective;
     this.project.createdBy = this.userId;
     if(!checkNullEmpty(this.type)){

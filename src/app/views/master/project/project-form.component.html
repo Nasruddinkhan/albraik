@@ -7,13 +7,13 @@
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="Project Type">Project Type <span style="color:red">*</span></label>
-          <select  class="form-control" (change)="changedProjectType($event.target.value)" required [(ngModel)]="project.projectType"
-            name="projectType" [ngClass]="{'red-border-class': !projectType1.valid && (projectType1.dirty || projectType1.touched)}"
-            #projectType1="ngModel">
+          <select  class="form-control" (change)="changedProjectType($event.target.value)" required [(ngModel)]="project.projectTypeId"
+            name="projectTypeId" [ngClass]="{'red-border-class': !projectTypeId1.valid && (projectTypeId1.dirty || projectTypeId1.touched)}"
+            #projectTypeId1="ngModel">
             <option selected>Choose...</option>
             <option *ngFor="let s of subType" [value]="s.id"> {{s.name }} - {{ s.english_name}}</option>
           </select>
-          <div *ngIf="!projectType1.valid && (projectType1.dirty || projectType1.touched)" style="color:red">
+          <div *ngIf="!projectTypeId1.valid && (projectTypeId1.dirty || projectTypeId1.touched)" style="color:red">
             projectType is required
           </div>
         </div>
@@ -54,20 +54,20 @@
         <div class="form-group col-sm-6">
           <label for="Manager">Manager <span style="color:red">*</span></label>
 
-          <select #mySelect class="form-control"  required [(ngModel)]="project.manager"
-            name="manager" [ngClass]="{'red-border-class': !manager1.valid && manager1.touched}" #manager1="ngModel">
-            <option selected>Choose...</option>
-            <option *ngFor="let d of dept" [value]="d.id"> {{d.name}}</option>
+          <select #mySelect class="form-control"  required [(ngModel)]="project.managerId"
+            name="managerId" [ngClass]="{'red-border-class': !managerId1.valid && managerId1.touched}" #managerId1="ngModel">
+            <option value="" selected>Choose...</option>
+            <option *ngFor="let user of users" [value]="user.id">{{user.name}} - {{user.email}}</option>
           </select>
-          <div *ngIf="!manager1.valid && manager1.touched" style="color:red">
+          <div *ngIf="!managerId1.valid && managerId1.touched" style="color:red">
             manager is required
           </div>
         </div>
         <div class="form-group col-sm-6">
           <label for="Drawer Number ">Drawer Number <span style="color:red">*</span></label>
-          <input type="text" class="form-control" required [(ngModel)]="project.drawerName" name="drawerName"
-            [ngClass]="{'red-border-class': !drawerName1.valid && drawerName1.touched}" #drawerName1="ngModel">
-          <div *ngIf="!drawerName1.valid && drawerName1.touched" style="color:red">
+          <input type="text" class="form-control" required [(ngModel)]="project.drawerNumber" name="drawerNumber"
+            [ngClass]="{'red-border-class': !drawerNumber1.valid && drawerNumber1.touched}" #drawerNumber1="ngModel">
+          <div *ngIf="!drawerNumber1.valid && drawerNumber1.touched" style="color:red">
             drawername is required
           </div>
         </div>

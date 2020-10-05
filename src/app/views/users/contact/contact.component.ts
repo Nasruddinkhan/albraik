@@ -28,8 +28,8 @@ export class ContactComponent implements OnInit {
       this.createContactForm = this.fb.group({
         name:['',Validators.required],
         contactTypeId:['',Validators.required],
-        phoneNumber: ['', [Validators.required,  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
-        mobileNumber: ['', [Validators.required,  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
+        phoneNumber: ['', [Validators.required,  Validators.minLength(12)]],
+        mobileNumber: ['', [Validators.required,  Validators.minLength(12) ]],
         email: ['', [Validators.required, Validators.email]],
         faxNumber: ['', [  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
         address:[''],

@@ -23,8 +23,11 @@ import { ProjectDtlComponent } from './project/project-dtl/project-dtl.component
 import { CourtComponent } from './court/court.component';
 @NgModule({
     declarations: [ CompanyFormsComponent,
-        CompanyMasterComponent, CompanyDetailsComponent,RoleDetailsComponent,
-        DepartmentMasterComponent,JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent],
+                   CompanyMasterComponent, 
+                   CompanyDetailsComponent,
+                   RoleDetailsComponent,
+                   DepartmentMasterComponent,
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent],
     imports: [
       MasterRoutingModule,
       SharedModule,

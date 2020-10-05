@@ -20,6 +20,8 @@ export class ExecutedCaseComponent implements OnInit {
   verditcheckboxtype = VeditType;
   verditcurrentlyChecked: VeditType;
   sucription: Subscription;
+  includeWork:string;
+  Verified:string;
   constructor( private localeService: BsLocaleService,
     private projectService: ProjectService, 
     private router: Router,

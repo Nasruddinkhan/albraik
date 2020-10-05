@@ -90,7 +90,7 @@
                         formControlName="contactTypeId"
                         [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.contactTypeId.errors }">
                         <option selected>Choose...</option>
-                        <option *ngFor="let master of masterList" [value]="master.id"> {{master.name}}
+                        <option *ngFor="let master of masterList" [value]="master.id"> {{master.name}} - {{master.english_name}}
                         </option>
                     </select>
                     <div *ngIf="f.contactTypeId.errors" class="invalid-feedback">

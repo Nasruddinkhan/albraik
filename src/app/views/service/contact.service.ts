@@ -32,4 +32,8 @@ export class ContactSearchService {
   public createContact(contact) : Observable<Contact>  {
     return this.http.post<Contact>(this.baseURL +`/api/contact`,contact);
   }
+  public getContactType(contactType: Number) : Observable<Contact[]>  {
+    return this.http.get<Contact[]>(this.baseURL +`/api/contact?contactTypeId=${contactType}`);
+  }
+  
 }

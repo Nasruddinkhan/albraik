@@ -18,7 +18,7 @@
 
         </div>
          <div class="row">
-            <table class="table table-bordered table-striped table-md" *ngIf="projectList?.length>0" >
+            <table class="table table-bordered table-striped table-sm" *ngIf="projectList?.length>0" >
                <thead>
                  <tr>
                    <th></th>
@@ -51,7 +51,7 @@
              </table>
              <div class="row">
               <div class="col-xs-12 col-12">
-               <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"  [(ngModel)]="bigCurrentPage"  class="pagination-sm"  (pageChanged)="pageChanged($event)"
+               <pagination [totalItems]="bigTotalItems"  [maxSize]="maxSize"   class="pagination-sm"  (pageChanged)="pageChanged($event)"
                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" 
                            [boundaryLinks]="true" [rotate]="false"  (numPages)="numPages = $event"></pagination>
              </div> 
