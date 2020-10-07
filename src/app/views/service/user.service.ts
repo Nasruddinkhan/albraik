@@ -19,4 +19,8 @@ export class UserService {
   public createUsers(users : string): Observable<UserMaster>  {
     return this.http.post<UserMaster>(this.baseURL +`/api/user`, users);
   }
+
+  public findJobtitle (companyId: string, name : string,): Observable<UserMaster[]>  {
+    return this.http.get<UserMaster[]>(this.baseURL +`/api/user/${companyId}/${name}/jobtitle`);
+  }
 }

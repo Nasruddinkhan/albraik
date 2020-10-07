@@ -62,9 +62,14 @@
 
         <div class="form-group col-sm-6">
           <label for="Consultant">Consultant <span style="color:red">*</span></label>
-
-          <input type="text" class="form-control" required [(ngModel)]="casemodel.caseConsultantId" name="caseConsultantId"
-            [ngClass]="{'red-border-class': !caseConsultantId1.valid && caseConsultantId1.touched}" #caseConsultantId1="ngModel">
+          
+          <select  class="form-control" required
+          [(ngModel)]="casemodel.caseConsultantId" name="caseConsultantId"
+          [ngClass]="{'red-border-class': !caseConsultantId1.valid && caseConsultantId1.touched}" #caseConsultantId1="ngModel">
+          <option value="" selected>Choose...</option>
+          <option *ngFor="let user of users" [value]="user.id">{{user.email}} </option>
+        </select>
+        
           <div *ngIf="!caseConsultantId1.valid && caseConsultantId1.touched" style="color:red">
             consultant is required
           </div>
