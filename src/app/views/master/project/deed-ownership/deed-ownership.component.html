@@ -15,8 +15,13 @@
           </div>
           <div class="form-group col-sm-6">
             <label for="Court Name">Court Name <span style="color:red">*</span></label>
-            <input type="text" class="form-control" required [(ngModel)]="deedModel.dooCourtId" name="dooCourtId"
-              [ngClass]="{'red-border-class': !dooCourtId1.valid && dooCourtId1.touched}" #dooCourtId1="ngModel">
+            <select class="form-control" required [(ngModel)]="deedModel.dooCourtId" name="dooCourtId"
+            [ngClass]="{'red-border-class': !dooCourtId1.valid && dooCourtId1.touched}" #dooCourtId1="ngModel">
+            <option value="" selected>Choose...</option>
+            <option *ngFor="let court of courts" [value]="court.id">{{court.name}} </option>
+
+          </select>
+       
             <div *ngIf="!dooCourtId1.valid && dooCourtId1.touched" style="color:red">
               courtname is required
             </div>
@@ -57,7 +62,7 @@
         </div>
       </div>
       <div class="card-footer text-center">
-        <button type="submit" class="btn btn-success btn-lg"
+        <button type="submit" [disabled]="!newProjectForm.form.valid" class="btn btn-success btn-lg"
          >Submit</button> 
          <button type="reset" class="btn btn-danger btn-lg"
          >Reset</button> 

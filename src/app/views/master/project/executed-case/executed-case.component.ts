@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Subscription } from 'rxjs';
+import { ProjectModel } from '../../../modal/project-model';
 import { VerditModel } from '../../../modal/verdict-model';
 import { ProjectService } from '../../../service/project.service';
 import { ToasterMsgService } from '../../../service/toaster-msg.service';
@@ -13,7 +14,8 @@ enum VeditType  { V, I, NONE };
   styleUrls: ['./executed-case.component.css']
 })
 export class ExecutedCaseComponent implements OnInit {
-
+  caseType="a2bd22d5-2703-444d-9628-b2fb040df14d";
+  companyId :string;
   action = 'Add';
   locale = 'ar';
   verdit:VerditModel;
@@ -22,6 +24,7 @@ export class ExecutedCaseComponent implements OnInit {
   sucription: Subscription;
   includeWork:string;
   Verified:string;
+  cases:ProjectModel[];
   constructor( private localeService: BsLocaleService,
     private projectService: ProjectService, 
     private router: Router,
@@ -33,6 +36,8 @@ export class ExecutedCaseComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.companyId =  sessionStorage.getItem("companyId");
+    this.getAllCase();
     this.activeRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('project')) {
         return;
@@ -40,6 +45,13 @@ export class ExecutedCaseComponent implements OnInit {
       this.verdit.project = JSON.parse(paramMap.get('project'));
       
      });
+  }
+  getAllCase(){
+    this.projectService.findCase (this.companyId, this.caseType).subscribe((res:ProjectModel[])=>{
+      this.cases = res;
+    },err=>{
+      this.toster.susessMessage(err.error.message);
+    })
   }
   selectVerditCheckBox(targetType: VeditType) {
     if(this.verditcurrentlyChecked === targetType) {

@@ -20,11 +20,6 @@ export class DepartmentMasterComponent implements OnInit {
   userID: string;
   companyId: string;
   depts: DepartmentModel[];
-  pageNo = 1;
-  bigTotalItems: number;
-
-  numPages: number = 0;
-  maxSize: number = 5;
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastService: ToasterMsgService,
@@ -70,7 +65,6 @@ export class DepartmentMasterComponent implements OnInit {
     this.deptService.findAlldepartments(this.userID).subscribe((res: DepartmentModel[]) => {
       this.depts = res;
       this.loading = false;
-      this.bigTotalItems = res.length;
     }, err => {
       this.depts = [];
       this.loading = false;
@@ -104,8 +98,5 @@ export class DepartmentMasterComponent implements OnInit {
     })
   }
   }
-  pageChanged(event: any): void {
-    this.pageNo = event.page;
-    this.findAlldepartments();
-  }
+
 }

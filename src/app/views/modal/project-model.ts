@@ -10,6 +10,7 @@ export class ProjectModel{
     hiddinProject: boolean;  
     managerId:string;
     createdBy:string;
+    companyId:string;
     constructor( projectTypeId: string,
         name: string,
         startDate: Date,
@@ -17,6 +18,7 @@ export class ProjectModel{
         drawerName: string,
         objective: string,
         comment: string,
+        companyId: string,
         hiddinProject: boolean){
         this.projectTypeId =projectTypeId;
         this.name =       name;

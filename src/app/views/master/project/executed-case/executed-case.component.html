@@ -10,9 +10,13 @@
         <div class="row">
           <div class="form-group col-sm-6">
             <label for="Executed Case">Executed Case <span style="color:red">*</span></label>
-  
-            <input type="text" class="form-control" required [(ngModel)]="verdit.verdictExecutedCaseId" name="verdictExecutedCaseId"
-              [ngClass]="{'red-border-class': !verdictExecutedCaseId1.valid && verdictExecutedCaseId1.touched}" #verdictExecutedCaseId1="ngModel">
+            <select  class="form-control"  required [(ngModel)]="verdit.verdictExecutedCaseId" name="verdictExecutedCaseId"
+            [ngClass]="{'red-border-class': !verdictExecutedCaseId1.valid && verdictExecutedCaseId1.touched}" #verdictExecutedCaseId1="ngModel">
+            <option value="" selected>Choose...</option>
+            <option *ngFor="let case of cases" [value]="case.projectId">{{case.name}} </option>
+
+          </select>
+        
             <div *ngIf="!verdictExecutedCaseId1.valid && verdictExecutedCaseId1.touched" style="color:red">
               executedcase is required
             </div>

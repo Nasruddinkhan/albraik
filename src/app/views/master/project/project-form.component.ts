@@ -23,8 +23,10 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
   priorityList:any[];
   type: string = null;
   userId: string;
+  companyId: string;
   subription: Subscription;
   users : UserMaster[];
+
   constructor(private router: Router,
     private toster : ToasterMsgService,
     private userService: UserService,
@@ -33,7 +35,7 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
     this.localeService.use(this.locale);
     this.priorityList = [{'key':'low','value' : 'Low منخفض '},{'key':'medium', 'value' : 'Medium متوسط '},{'key':'high','value':'High ​​مرتفع'}];
     this.project = new ProjectModel('','',null
-  ,'','','','', false);
+  ,'','','','','', false);
  
    }
   ngOnDestroy(){
@@ -56,6 +58,8 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
    this.getProjectType();
    this.getUsers();
    this.userId = sessionStorage.getItem("userId");
+   this.companyId =  sessionStorage.getItem("companyId");
+
   }
   getUsers() {
     this.subription = this.userService.findAllUsers().subscribe((userres:UserMaster[])=>{
@@ -79,6 +83,7 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
     this.project.managerId = form.value.managerId;
     this.project.objective = form.value.objective;
     this.project.createdBy = this.userId;
+    this.project.companyId = this.companyId;
     if(!checkNullEmpty(this.type)){
       this.router.navigate([`/master/${this.type}`,{'project':JSON.stringify(this.project)}]);
       return;

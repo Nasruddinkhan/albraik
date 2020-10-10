@@ -45,5 +45,7 @@ export class ProjectService {
   public addVerditCase(verdit: VerditModel):Observable<VerditModel> {
     return this.http.post<VerditModel>(this.baseURL+`/api/create/verditcase`, verdit);
   }
-  
+  findCase(companyId:string, projectType:string):Observable<ProjectModel[]>{
+    return this.http.get<ProjectModel[]>(this.baseURL+`/api/get/${projectType}/${companyId}/allcases`);
+  }
 }

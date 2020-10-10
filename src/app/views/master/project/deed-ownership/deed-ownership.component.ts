@@ -3,9 +3,11 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Subscription } from 'rxjs';
+import { CourtModel } from '../../../modal/court';
 import { DeedModel } from '../../../modal/deed-model';
 import { ProjectModel } from '../../../modal/project-model';
 import { SubjectType } from '../../../modal/subject-type';
+import { CourtService } from '../../../service/court.service';
 import { ProjectService } from '../../../service/project.service';
 import { ToasterMsgService } from '../../../service/toaster-msg.service';
 
@@ -19,15 +21,18 @@ export class DeedOwnershipComponent implements OnInit {
   action = 'Add';
   deedModel:DeedModel; 
   sucription:Subscription;
+  courts: CourtModel[];
   constructor(private projectService: ProjectService, 
     private router: Router,
     private toster : ToasterMsgService,
+    private courtService: CourtService,
     private activeRoute: ActivatedRoute) {
     this.deedModel = new DeedModel;
  
    }
 
   ngOnInit() {
+    this.findAllCourt();
     this.activeRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('project')) {
         return;
@@ -56,5 +61,13 @@ export class DeedOwnershipComponent implements OnInit {
   }
   changed(value : string){
     console.log(value);
+  }
+
+  findAllCourt() {
+    this.courtService.findAllCourt().subscribe((res: CourtModel[]) => {
+      this.courts = res;
+    }, err => {
+      this.courts = [];
+    });
   }
 }

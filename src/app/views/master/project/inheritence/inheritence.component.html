@@ -7,9 +7,12 @@
         <div class="row">
           <div class="form-group col-sm-6">
             <label for=" Inheretence Owner Name"> Inheretence Owner Name<span style="color:red">*</span></label>
-  
-            <input type="text" class="form-control" required [(ngModel)]="inherit.inheritanceOwnerId" name="inheritanceOwnerId"
-              [ngClass]="{'red-border-class': !inheritanceOwnerId1.valid && inheritanceOwnerId1.touched}" #inheritanceOwnerId1="ngModel">
+            <select #mySelect class="form-control" required [(ngModel)]="inherit.inheritanceOwnerId" name="inheritanceOwnerId"
+            [ngClass]="{'red-border-class': !inheritanceOwnerId1.valid && inheritanceOwnerId1.touched}" #inheritanceOwnerId1="ngModel">
+            <option selected>Choose...</option>
+            <option *ngFor="let contact of inheritContact" [value]="contact.id">{{contact.name}} </option>
+          </select>
+
             <div *ngIf="!inheritanceOwnerId1.valid && inheritanceOwnerId1.touched" style="color:red">
               inheritownername is required
             </div>

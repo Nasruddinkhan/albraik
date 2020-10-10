@@ -18,5 +18,5 @@
             </tbody>
         </table>
 
-
+        <pagination  *ngIf="depts?.length > 0" [totalItems]="depts.length" (pageChanged)="pageChanged($event)"></pagination>
     </div>
