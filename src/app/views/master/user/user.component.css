@@ -2,3 +2,9 @@
     border: 1px solid red;
     box-shadow: 2px 1px 2px 0px red;
   }
+
+  td, th {
+    text-align: center;
+    font-size: 15px !important;
+    vertical-align: middle  !important;
+}

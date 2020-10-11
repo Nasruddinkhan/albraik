@@ -42,14 +42,14 @@
             </div>
 
         </div>
-        <div class="card-footer">
+        <!-- <div class="card-footer">
             <div class="row">
                 <div class="col text-center">
                     <button type="submit" [disabled]="!departmentForm.valid" class="btn btn-md btn-success">إنشاء شركة</button>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <app-dept-details [depts]="depts"></app-dept-details>
     </form>
 </div>
 
-<app-dept-details [depts]="depts"></app-dept-details>

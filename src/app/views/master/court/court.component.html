@@ -1,12 +1,45 @@
 <div class="card" >
     <div class="card-header">
-        <i class="fa fa-university"></i> جهة نظر القضية / Court Details
+        <i class="fa fa-university"></i> جهة نظر القضية / Add Court
     </div>
 
+    <form [formGroup]="addCourtForm"  (ngSubmit)="onSubmit()">
+        <div class="card-body">
+            <div formArrayName="court_names">
+                <div class="row" *ngFor="let item of courtNames.controls; let pointIndex=index"
+                [formGroupName]="pointIndex">
+                    <div class="form-group col-sm-5">
+                        <label>جهة نظر القضية / Court</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" formControlName="addCourt" >
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="addCourt()"
+                                        class="btn btn-success btn-sm" type="button">أضف <i class="icon-plus"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" (click)="deleteaddCourt(pointIndex)" *ngIf="pointIndex !== 0"
+                                        class="btn btn-danger btn-sm" type="button">حذف <i class="icon-minus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <!-- <div class="card-footer">
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-md btn-success">إنشاء شركة</button>
+                </div>
+            </div>
+        </div> -->
+        
+    </form>
    
 
-    <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
+    <div >
+        <table class="table table-striped table-sm">
             <thead>
             <tr>
                 <th width="5"> SR</th>
@@ -24,7 +57,7 @@
 
 </div>
 
-<div class="card">
+<!-- <div class="card">
     <div class="card-header">
         <i class="fa fa-university"></i> جهة نظر القضية / Add Court
     </div>
@@ -61,4 +94,4 @@
         </div>
         
     </form>
-</div>
+</div> -->

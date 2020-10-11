@@ -84,22 +84,22 @@
             </div> 
 <!--             <p>{{userForm.value | json}}</p>
  -->        </div>
-    <div class="card-footer">
+    <!-- <div class="card-footer">
         <div class="row">
             <div class="col text-center">
                 <button type="submit" class="btn btn-md btn-success">إنشاء شركة</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </form>
 
-</div>
-<div class="card" *ngIf="users?.length > 0">
-    <div class="card-header">
+
+<div  *ngIf="users?.length > 0">
+    <!-- <div class="card-header">
         <i class="fa fa-user"></i>  بيانات المستخدم / User Details 
-    </div>
-    <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
+    </div> -->
+    <div >
+        <table class="table table-striped table-sm">
             <thead>
               <tr>
                   <th width="5"> SR</th>
@@ -123,4 +123,5 @@
             
            </div> 
     </div>
+</div>
 </div>

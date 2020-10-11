@@ -11,3 +11,9 @@
     font-size: 10px; 
     text-align: center; 
 } 
+
+td, th {
+    text-align: center;
+    font-size: 15px !important;
+    vertical-align: middle  !important;
+}
