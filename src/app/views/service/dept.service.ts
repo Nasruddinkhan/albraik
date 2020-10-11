@@ -20,4 +20,8 @@ export class DeptService {
   public createDepartment(department : DepartmentMaster): Observable<DepartmentModel[]>  {
     return this.http.post<DepartmentModel[]>(this.baseURL +`/api/save/departments`, department);
   }
+  async isExsitDepartment(usertId: string, companyId: string, name:string): Promise<DepartmentModel>  {
+    return await this.http.get<DepartmentModel>(this.baseURL +`/api/get/${usertId}/${companyId}/${name}/name`).toPromise();
+  }
+  
 }

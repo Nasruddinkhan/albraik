@@ -1,0 +1,22 @@
+<div class="card" *ngIf="depts?.length > 0">
+    <div class="card-header">
+        <i class="fa fa-sitemap"></i> الإدراة / Department Details
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th width="5"> SR</th>
+                    <th>Departments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d of depts; let i = index">
+                    <td> {{ i + 1}}</td>
+                    <td>{{d.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <pagination  *ngIf="depts?.length > 0" [totalItems]="depts.length" (pageChanged)="pageChanged($event)"></pagination>
+    </div>

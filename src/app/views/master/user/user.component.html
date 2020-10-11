@@ -2,7 +2,7 @@
 
 <div class="card">
     <div class="card-header">
-        المعلومات الرئيسية / Add User <i class="fa fa-user-plus"></i>
+        <i class="fa fa-user-plus"></i> المعلومات الرئيسية / Add User 
     </div>
     <form [formGroup]="userForm" (ngSubmit)="registerUser()">
 
@@ -23,7 +23,7 @@
                 </div>
                <div class="form-group col-sm-4">
                     <label>الأدوار / Role</label>
-                    <select #mySelect class="form-control" formControlName="roleId" (change)="changed(mySelect.value)"
+                    <select #mySelect class="form-control" formControlName="roleId"
                     [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.roleId.errors }">
                         <option selected>Choose...</option>
                         <option *ngFor="let role of roles" [value]="role.id"> {{role.name}}</option>
@@ -35,7 +35,7 @@
       
                 <div class="form-group col-sm-4">
                     <label>الإدراة / Departments</label>
-                    <select #mySelect class="form-control" formControlName="departmentId" (change)="changed(mySelect.value)"
+                    <select #mySelect class="form-control" formControlName="departmentId" 
                     [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.departmentId.errors }">
                         <option selected>Choose...</option>
                         <option *ngFor="let d of dept" [value]="d.id"> {{d.name}}</option>
@@ -48,7 +48,7 @@
              <div class="row">
                 <div class="form-group col-sm-4">
                     <label>مهنة / Job </label>
-                    <select #mySelect class="form-control"  formControlName="jobTitleId" (change)="changed(mySelect.value)"
+                    <select #mySelect class="form-control"  formControlName="jobTitleId"
                     [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.jobTitleId.errors }">
                         <option selected>Choose...</option>
                         <option *ngFor="let j of jobs" [value]="j.id"> {{j.name}}</option>
@@ -96,7 +96,7 @@
 </div>
 <div class="card" *ngIf="users?.length > 0">
     <div class="card-header">
-        بيانات المستخدم / User Details <i class="fa fa-user"></i>
+        <i class="fa fa-user"></i>  بيانات المستخدم / User Details 
     </div>
     <div class="card-body">
         <table class="table table-bordered table-striped table-sm">

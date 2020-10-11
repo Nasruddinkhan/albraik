@@ -19,11 +19,6 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'dashboard',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: '404',
     component: P404Component,
     data: {

@@ -2,14 +2,14 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'لوحة القيادة',
+    name: 'لوحة القيادة / Dashboard',
     url: '/dashboard',
     icon: 'icon-speedometer'
   },
   {
     name: ' رئيس / Master',
     url: '/master',
-    icon: 'icon-people',
+    icon: 'fa fa-th-list',
     children: [
       {
         name: 'الشركة / Company',
@@ -43,15 +43,15 @@ export const navItems: INavData[] = [
         icon: 'fa fa-user',
       },
       {
-        name: 'Project',
+        name: 'نوع المشروع / Project',
         url: '/master/project',
-        icon: 'fa fa-fw fa-cubes',
+        icon: 'fa fa-suitcase',
       }
     ]
   },
   {
     name: 'إدارة الاتصال / Contact',
     url: '/contact',
-    icon: 'icon-people'
+    icon: 'fa fa-address-book'
   }
 ];

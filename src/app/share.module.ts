@@ -14,6 +14,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import {  arLocale } from 'ngx-bootstrap/locale';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
  defineLocale('ar', arLocale);
 
 @NgModule({
@@ -26,8 +29,10 @@ import {  arLocale } from 'ngx-bootstrap/locale';
         PerfectScrollbarModule,
         CollapseModule.forRoot(),
         FormsModule,
+        TranslateModule.forRoot(),
         ReactiveFormsModule,
         HttpClientModule,
+        TooltipModule.forRoot(),
         ChartsModule,
         ToastrModule.forRoot({
             maxOpened: 1,
@@ -40,6 +45,7 @@ import {  arLocale } from 'ngx-bootstrap/locale';
 
     exports:[  
         CommonModule, 
+        TranslateModule,
         PerfectScrollbarModule,
         CollapseModule,
         ModalModule,
@@ -51,7 +57,8 @@ import {  arLocale } from 'ngx-bootstrap/locale';
         HttpClientModule,
         ChartsModule,
         PaginationModule,
-        TabsModule
+        TabsModule,
+        TooltipModule
         ]
 
    })

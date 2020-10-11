@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { DepartmentMaster } from '../../modal/department-master';
 import { DeptService } from '../../service/dept.service';
 import { DepartmentModel } from '../../modal/department';
@@ -18,33 +18,28 @@ export class DepartmentMasterComponent implements OnInit {
   name: Array<String>;
   departments: DepartmentMaster;
   userID: string;
-  companyId : string;
-  depts:DepartmentModel[];
-  pageNo = 1;
-  bigTotalItems: number;
-
-  numPages: number = 0;
-  maxSize: number = 5;
+  companyId: string;
+  depts: DepartmentModel[];
   constructor(private fb: FormBuilder,
-              private  router:  Router,
-              private toastService: ToasterMsgService,
-              private deptService: DeptService) { }
+    private router: Router,
+    private toastService: ToasterMsgService,
+    private deptService: DeptService) { }
   submitted = false;
   ngOnInit() {
-    let role=sessionStorage.getItem('role')
-    
-    if(!checkUserRole(role )){
+    let role = sessionStorage.getItem('role')
+
+    if (!checkUserRole(role)) {
       this.router.navigate([`/master/unathurise`]);
     }
-    this.userID  = sessionStorage.getItem("userId");
-    this.companyId =  sessionStorage.getItem("companyId");
-    console.log(this.companyId );
-    if(checkNullEmpty( this.companyId )){
+    this.userID = sessionStorage.getItem("userId");
+    this.companyId = sessionStorage.getItem("companyId");
+    console.log(this.companyId);
+    if (checkNullEmpty(this.companyId)) {
       this.router.navigate([`/master/company`]);
     }
     this.findAlldepartments();
-    this.departmentForm = this.fb.group({  
-      department_names: this.fb.array([this.fb.group({departments:''})])
+    this.departmentForm = this.fb.group({
+      department_names: this.fb.array([this.fb.group({ departments: '' },[Validators.required])])
     })
   }
   get departmentNames() {
@@ -55,46 +50,53 @@ export class DepartmentMasterComponent implements OnInit {
   }
   addDeparment() {
     this.submitted = true;
-    this.departmentNames.push(this.fb.group({departments:''}));
+    this.departmentNames.push(this.fb.group({ departments: '' }));
   }
 
   deleteDepartment(index) {
     this.departmentNames.removeAt(index);
   }
-
-  findAlldepartments(){
+  deleteDept() {
+    if (this.departmentNames.length > 1)
+      this.departmentNames.removeAt(this.departmentNames.length - 1);
+  }
+  findAlldepartments() {
     this.loading = true;
-    this.deptService.findAlldepartments( this.userID).subscribe((res:DepartmentModel[])=>{
+    this.deptService.findAlldepartments(this.userID).subscribe((res: DepartmentModel[]) => {
       this.depts = res;
       this.loading = false;
-      this.bigTotalItems = res.length;
-    },err=>{
+    }, err => {
       this.depts = [];
       this.loading = false;
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     this.name = new Array<String>();
     this.departmentForm.value['department_names'].map(item => {
       this.name.push(item.departments);
     });
-    this.departments = new DepartmentMaster(this.userID,  this.companyId, this.name);
+    this.departments = new DepartmentMaster(this.userID, this.companyId, this.name);
     this.loading = true;
-    this.deptService.createDepartment( this.departments).subscribe((res:DepartmentModel[])=>{
+    this.deptService.createDepartment(this.departments).subscribe((res: DepartmentModel[]) => {
       this.loading = false;
       this.departmentForm.reset();
       this.toastService.susessMessage('department created successfully')
       this.findAlldepartments();
-    },err=>{
+    }, err => {
       this.loading = false;
       this.toastService.errorMessage(err.error.message);
       this.findAlldepartments();
     });
   }
 
-  pageChanged(event: any): void {
-    this.pageNo = event.page;
-    this.findAlldepartments();
+ async isExsitDepartment(name : string){ 
+   if(name.length >0){
+    this.deptService.isExsitDepartment(this.userID, this.companyId, name).then((res:DepartmentModel)=>{
+    },err=>{
+      this.toastService.errorMessage(err.error.message);
+    })
   }
+  }
+
 }

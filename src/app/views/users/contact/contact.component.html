@@ -2,7 +2,7 @@
 
 <div class="card">
     <div class="card-header card-border">
-        بحث جهة الاتصال / Search Contact <i class="icon-people"></i>
+    <i class="fa fa-address-book"></i> بحث جهة الاتصال / Search Contact 
     </div>
     <div class="card-body">
 
@@ -69,7 +69,7 @@
 
 <div class="card">
     <div class="card-header card-border">
-        إضافة جهة اتصال / Add Contact <i class="icon-people"></i>
+        <i class="fa fa-address-book"></i> إضافة جهة اتصال / Add Contact
     </div>
     <form [formGroup]="createContactForm" (ngSubmit)="createContact()">
 
@@ -90,7 +90,7 @@
                         formControlName="contactTypeId"
                         [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.contactTypeId.errors }">
                         <option selected>Choose...</option>
-                        <option *ngFor="let master of masterList" [value]="master.id"> {{master.name}}
+                        <option *ngFor="let master of masterList" [value]="master.id"> {{master.name}} - {{master.english_name}}
                         </option>
                     </select>
                     <div *ngIf="f.contactTypeId.errors" class="invalid-feedback">

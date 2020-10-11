@@ -26,3 +26,4 @@ export function checkNullEmpty(value) {
 export function checkUserRole(value) { 
     return  value === 'ADMIN' ? true:false
 } 
+

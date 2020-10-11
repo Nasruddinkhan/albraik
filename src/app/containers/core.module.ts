@@ -21,6 +21,9 @@ import { ToasterMsgService } from '../views/service/toaster-msg.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectService } from '../views/service/project.service';
+import { ContactSearchService } from '../views/service/contact.service';
+import { CourtService } from '../views/service/court.service';
 
   const APP_CONTAINERS = [
     DefaultLayoutComponent
@@ -54,7 +57,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TabsModule
   ],
   providers: [
-    AdminRegistrationService,  AuthGuardService, CompanyRegistrationService, LoginService, ToasterMsgService
+    AdminRegistrationService, ProjectService,
+     AuthGuardService,ContactSearchService,
+      CompanyRegistrationService, LoginService, 
+      ToasterMsgService, CourtService
   ]
 })
 export class CoreModule {}

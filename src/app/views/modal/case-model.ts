@@ -2,16 +2,18 @@ import { ProjectModel } from './project-model';
 
 export class CaseModel{
     project: ProjectModel;
-    courtName:string;
-    caseno: string;
-    judgeName:string;
-    office:string;
-    consultant:string;
-    consulantDate:Date;
-    client:string;
-    clientPositionCourt:string;
-    opposing:string;
-    oppPosiCourt:string
-    oppRepisenter:string;
-    consltEnggTxt:string
+    projectDetailsId:number;
+    caseCourtId:string;
+    caseNumber: string;
+    caseJudgeId: string;
+    caseOffice:string;
+    caseConsultantId:string;
+    caseConsultantEngagementDate:Date;
+    caseClientId: string;
+    caseClientPosition:string;
+    caseOpposingId:string;
+    caseOpposingPosition:string
+    caseOpposingRepresenterId:string;
+    caseConsultantEngagementText:string
 }
+
