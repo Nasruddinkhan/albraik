@@ -55,29 +55,46 @@ export class RoleMasterComponent implements OnInit {
   }
 
   addRole() {
-    this.roleNames.push(this.fb.group({role:''}));
+    this.roleNames.push(this.fb.group({role: this.roleNames.controls[0].value.role}));
   }
 
   deleteRole(index) {
     this.roleNames.removeAt(index);
   }
+
+  displayAddRoleField() {
+    let icons = document.getElementById("icons");
+    icons.style.display = "none";
+    let addRoleField = document.getElementById("addRoleField");
+    addRoleField.style.display = "block";
+  }
+
+  displayIcons() {
+    let addRoleField = document.getElementById("addRoleField");
+    addRoleField.style.display = "none";
+    let icons = document.getElementById("icons");
+    icons.style.display = "block";
+  }
+
   onSubmit(){
-    console.log('jobtitle onSubmit');
-    this.name = new Array<String>();
-    this.roleForm.value['role_names'].map(item => {
-      this.name.push(item.role);
-    });
-    this.roleMst = new RoleMaster(this.userID,  this.companyId, this.name);
-    this.loading = true;
-    this.roleService.createRole( this.roleMst).subscribe((res:RoleModel[])=>{
-      this.loading = false;
-      this.roleForm.reset();
-      this.toastService.susessMessage('role created successfully')
-      this.findAllRoles();
-    },err=>{
-      this.loading = false;
-      this.toastService.errorMessage(err.error.message);
-      this.findAllRoles();
-    });
+    this.roleNames.push(this.fb.group({role: this.roleNames.controls[0].value.role}));
+    console.log(this.roleNames.controls[1].value.role);
+    // console.log('jobtitle onSubmit');
+    // this.name = new Array<String>();
+    // this.roleForm.value['role_names'].map(item => {
+    //   this.name.push(item.role);
+    // });
+    // this.roleMst = new RoleMaster(this.userID,  this.companyId, this.name);
+    // this.loading = true;
+    // this.roleService.createRole( this.roleMst).subscribe((res:RoleModel[])=>{
+    //   this.loading = false;
+    //   this.roleForm.reset();
+    //   this.toastService.susessMessage('role created successfully')
+    //   this.findAllRoles();
+    // },err=>{
+    //   this.loading = false;
+    //   this.toastService.errorMessage(err.error.message);
+    //   this.findAllRoles();
+    // });
   }
 }

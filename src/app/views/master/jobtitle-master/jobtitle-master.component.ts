@@ -28,6 +28,8 @@ export class JobtitleMasterComponent implements OnInit {
   bigTotalItems: number;
   numPages: number = 0;
   maxSize: number = 5;
+  checkValidity = false;
+  checkedJobs: number[] = [];
   ngOnInit() {
     this.userID  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
@@ -37,7 +39,7 @@ export class JobtitleMasterComponent implements OnInit {
     this.findAllJobs();
     this.jobTitileForm = this.fb.group({
       jobtittle_names: this.fb.array([this.fb.group({jobtittle:''})])
-    })
+    });
   }
   findAllJobs(){
     this.loading = true;
@@ -56,24 +58,55 @@ export class JobtitleMasterComponent implements OnInit {
   }
 
   addJobTitle() {
-    this.jobTitleNames.push(this.fb.group({jobtittle:''}));
+    if (this.jobTitileForm.invalid) {
+      this.checkValidity = true;
+      return;
+    }
+    this.checkValidity = false;
+
+    this.jobTitleNames.insert(1, this.fb.group({ jobtittle: this.jobTitleNames.controls[0].value.jobtittle }));
+    this.jobTitleNames.insert(0, this.fb.group({ jobtittle: '' }));
+    this.jobTitleNames.removeAt(1);
   }
 
   deleteaddJobTitle(index) {
     this.jobTitleNames.removeAt(index);
   }
+
+  onCheckboxChange(e) {
+    if (e.target.checked) {
+      this.checkedJobs.push(e.target.value);
+    } else {
+      let indx = -1;
+      for (let i = 0; i < this.checkedJobs.length; ++i) {
+        if (this.checkedJobs[i] === e.target.value) {
+          indx = i;
+        }
+      }
+      this.checkedJobs.splice(indx, 1);
+    }
+    
+  }
+
   onSubmit(){
     console.log('jobtitle onSubmit');
+    if (this.jobTitleNames.length === 1) {
+      this.toastService.errorMessage(".At least one job title is required");
+      return;
+    }
     this.name = new Array<String>();
-    this.jobTitileForm.value['jobtittle_names'].map(item => {
-      this.name.push(item.jobtittle);
-    });
+    for (let i = 1; i < this.jobTitleNames.length; ++i) {
+      this.name.push(this.jobTitleNames.controls[i].value.jobtittle);
+    }
     this.jobsMsr = new JobMaster(this.userID,  this.companyId, this.name);
     this.loading = true;
     this.jobService.createJobTitle( this.jobsMsr).subscribe((res:JobTitleModel[])=>{
       this.loading = false;
-      this.jobTitleNames.reset();
-      this.toastService.susessMessage('department created successfully')
+      this.jobTitileForm = this.fb.group({
+        jobtittle_names: this.fb.array([this.fb.group({jobtittle:''})])
+      });
+      this.checkValidity = false;
+      this.toastService.susessMessage('Department created successfully');
       this.findAllJobs();
     },err=>{
       this.loading = false;
