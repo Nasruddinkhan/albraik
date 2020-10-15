@@ -219,6 +219,20 @@ transition: all 0.3s;
 
 }
 
+.success {
+   color: white !important;
+   .mat-simple-snackbar-action {
+       color: white !important;
+   }
+}
+
+.failure {
+   color: hotpink !important;
+   .mat-simple-snackbar-action {
+       color: hotpink !important;
+   }
+}
+
 @media (min-width: 576px){
    .modal-dialog {
        max-width: 75% !important;

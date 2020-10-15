@@ -27,6 +27,8 @@ import { MatTableModule } from '@angular/material/table';
 import { JobtitleDialogComponent } from './jobtitle-master/jobtitle-dialog/jobtitle-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [ CompanyFormsComponent,
@@ -47,7 +49,9 @@ import {MatButtonModule} from '@angular/material/button';
       MatIconModule,
       MatTableModule,
       MatDialogModule,
-      MatButtonModule
+      MatButtonModule,
+      MatChipsModule,
+      MatSnackBarModule
     ],
     providers: [
       MatDialog

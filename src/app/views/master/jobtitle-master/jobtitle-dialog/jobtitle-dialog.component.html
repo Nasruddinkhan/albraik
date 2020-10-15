@@ -1,25 +1,36 @@
-<div class="input-group">
-    <mat-form-field class="example-full-width">
-        <mat-label>عنوان وظيفي</mat-label>
-        <input type="text" matInput>
-    </mat-form-field>
-    <div class="input-group-append example-button-container">
-            <button 
-                mat-mini-fab 
-                color="accent" 
-                aria-label="Example icon button with a plus one icon">
-                <mat-icon>add</mat-icon>
-            </button>
+<!-- <form [formGroup]="jobtitleForm">
+    <div class="input-group" *ngFor="let item of jobtitleNames.controls; let pointIndex = index">
+        <mat-form-field *ngIf="pointIndex === 0" class="example-full-width">
+            <mat-label>عنوان وظيفي</mat-label>
+            <input type="text" matInput>
+        </mat-form-field>
+        <div class="input-group-append example-button-container">
+                <button 
+                    mat-mini-fab 
+                    color="accent" 
+                    aria-label="Example icon button with a plus one icon">
+                    <mat-icon>add</mat-icon>
+                </button>
+        </div>
     </div>
-</div>
-<div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button mat-dialog-close>Submit</button>
-</div>
+</form> -->
 
-<!-- <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <span class="input-group-text" id="basic-addon2">@example.com</span>
-    </div>
-</div> -->
+<mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let jobTitle of jobTitles" [selectable]="selectable"
+               [removable]="removable" (removed)="remove(jobTitle)">
+        {{ jobTitle.name }}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="عنوان وظيفي"
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+</mat-form-field>
+
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close> أغلق </button>
+    <button mat-button (click)="onSubmit()" mat-dialog-close> إرسال </button>
+</div>
