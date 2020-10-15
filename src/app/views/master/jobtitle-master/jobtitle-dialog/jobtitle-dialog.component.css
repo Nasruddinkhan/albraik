@@ -1,0 +1,15 @@
+.example-full-width {
+    width: 80%;
+    font-size: 25px;
+}
+
+.example-button-container button {
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    position: absolute;
+    top: 34px;
+    right: 152px;
+}

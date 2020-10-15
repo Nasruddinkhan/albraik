@@ -1,40 +1,73 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
 
 <div class="card">
-    <div class="card-header">
-        <i class="fa fa-black-tie"></i> أضف الوظيفة / Add Job 
+    <div class="card-header main-border-left main-border-right main-border-top">
+        <i class="fa fa-black-tie"></i> أضف الوظيفة 
+        <hr>
     </div>
+
     <form [formGroup]="jobTitileForm"  (ngSubmit)="onSubmit()" onkeydown="return event.key != 'Enter';">
 
-    <div class="card-body">
+    <div class="card-body main-border-left main-border-right">
+        <div id="icons" class="form-group row mr-3">
+            <button type="button" class="btn btn-md"><div class="plus_bold" mat-button (click)="openDialog()"> + </div></button> 
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-md"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
+    
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-md"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
+           
+        </div>
+        <!-- <mat-form-field class="example-full-width">
+            <mat-label>عنوان وظيفي</mat-label>
+            <input matInput placeholder="Add job title...">
+        </mat-form-field> -->
             <div formArrayName="jobtittle_names">
-                <label for="jobTitle">عنوان وظيفي / Job title</label>
+                <!-- <label for="jobTitle">عنوان وظيفي / Job title</label> -->
+                <!-- <label for="jobTitle" style="font-size: 18px;">عنوان وظيفي </label> -->
                 <div class="row" *ngFor="let item of jobTitleNames.controls; let pointIndex=index"
                     [formGroupName]="pointIndex">
                     <div class="form-group col-sm-3">
                         <div class="input-group mb-2">
                             <div class="input-group">
-                                <input 
+                                <!-- <input 
                                     *ngIf="pointIndex === 0"
                                     type="text" 
                                     id="jobTitle"
                                     class="form-control" 
                                     formControlName="jobtittle"
                                     (keydown.enter)="addJobTitle()"
-                                    required>
-                                <input 
+                                    required> -->
+
+                                <!-- <mat-form-field *ngIf="pointIndex === 0" class="example-full-width">
+                                    <mat-label>عنوان وظيفي</mat-label>
+                                    <input formControlName="jobtittle" type="text" matInput>
+                                </mat-form-field> -->
+
+                                <!-- <input 
                                     *ngIf="pointIndex !== 0"
                                     type="text"
                                     class="form-control"
                                     [value]="jobTitleNames.controls[pointIndex].value.jobtittle"
-                                    disabled>
-                                <div class="input-group-append">
+                                    disabled> -->
+
+                                <!-- <div *ngIf="pointIndex === 0" class="example-button-container">
+                                    <button 
+                                        mat-mini-fab 
+                                        color="accent" 
+                                        aria-label="Example icon button with a plus one icon"
+                                        (click)="addJobTitle()">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                </div> -->
+
+                                <!-- <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" (click)="addJobTitle()" *ngIf="pointIndex === 0"
-                                        class="btn btn-success btn-sm" type="button"><i class="fa fa-plus" aria-hidden="true"></i>
+                                        class="btn btn-success btn-sm z-index" type="button"><i class="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                     <button class="btn btn-outline-secondary" (click)="deleteaddJobTitle(pointIndex)" *ngIf="pointIndex !== 0"
                                         class="btn btn-danger btn-sm" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div *ngIf="checkValidity && this.jobTitileForm.invalid && pointIndex === 0" style="color: red">
@@ -58,8 +91,26 @@
     <!-- <div class="card-header">
         <i class="fa fa-black-tie"></i> تفاصيل المسمى الوظيفي / Job Title Details
     </div> -->
-    <div >
-        <table class="table table-striped table-sm">
+    <div class="main-border-left main-border-right main-border-bottom">
+
+        <table style="width: 98%; margin-left: auto; margin-right: auto; margin-top: -50px; box-shadow: none;" mat-table [dataSource]="jobs" class="mat-elevation-z8">
+            <ng-container matColumnDef="position">
+              <th class="text-center" mat-header-cell *matHeaderCellDef> رقم سري </th>
+              <td mat-cell *matCellDef="let job"> {{ job.srNo }} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th class="text-center" mat-header-cell *matHeaderCellDef> عنوان وظيفي </th>
+                <td mat-cell *matCellDef="let job"> {{ job.name }} </td>
+              </ng-container>
+            <!-- <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let job"> {{ job.name }} </td>
+            </ng-container> -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let job; columns: displayedColumns;"></tr>
+          </table>
+
+        <!-- <table class="table table-striped table-sm">
             <thead>
               <tr>
                   <th width="5"> SR</th>
@@ -86,7 +137,7 @@
                     </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
 
           <div class="row">
             <div class="col-xs-12 col-12">

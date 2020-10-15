@@ -11,7 +11,7 @@
        // url('../assets/fonts/pacifico-latin-regular.svg#Pacifico') format('svg'); /* Legacy iOS */
 }
 :root {
-   --first-color:  #563d7c;
+   --first-color:  white;
    --second-color: #ffff8c;
  } 
 .main .container-fluid {
@@ -69,8 +69,9 @@ td, th{
 
 .card {
    margin-bottom: 0rem !important;
+   border: 5rem solid rgba(224, 28, 28, 0.1);
   /*  border-radius: unset !important; */
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 /* .card-header:first-child {
    border-radius: unset !important;
@@ -80,8 +81,9 @@ td, th{
   background-color:var(--first-color); 
   // background-color: #ffc107 !important;
    border-bottom: unset !important;
-   color:white;
+   color:black;
    font-weight: bold;
+   font-size: 30px;
 }
 label{
    font-weight: bold;
@@ -99,7 +101,8 @@ th{
 }
 body{
    font-size: 14px !important;
-   font-family: 'NotoKufiArabic';  
+   // font-family: 'NotoKufiArabic';
+   font-family: 'sakkal majalla';  
    color: #000000;    
    background-color: #f7f9f8;    
    -webkit-font-smoothing: antialiased !important;    
@@ -179,14 +182,14 @@ transition: all 0.3s;
 
 .card {
    border: 1px solid #BBB !important;
-   box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+   // box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
 }
 
 .card-footer {
    padding: 0.75rem 1.25rem;
    background-color: #f0f3f5 !important;
    border: 1px solid #c8ced3 !important;
-   box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+   // box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
 }
 .sidebar-minimized .sidebar .sidebar-minimizer {
 

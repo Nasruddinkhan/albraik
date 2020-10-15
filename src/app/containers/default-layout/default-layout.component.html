@@ -1,4 +1,4 @@
-<app-header
+<!-- <app-header
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/brand/Logo.png', width: 50, height: 50, alt: 'LLB'}"
@@ -48,18 +48,67 @@
       </div>
     </li>
   </ul> 
-</app-header>
+</app-header> -->
+
+<div class="my-navbar">
+<mat-toolbar class="mat-toolbar-row" color="warn">
+  <!-- <span class="icon" (click)="toggleSidebar()"><i class="fa fa-bars"></i></span> -->
+  <button class="mat-app-background"
+    mat-icon-button 
+    class="example-icon" 
+    aria-label="Example icon-button with menu icon"
+    (click)="toggleSidebar()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span> Albraik Law Management</span>
+  <span class="example-spacer" ></span>
+  <img src="./../../../assets/img/brand/Logo.png" alt="law icon">
+</mat-toolbar>
+</div>
+
+<!-- <mat-toolbar class="example-spacer" color="warn">
+  <span>My Application</span>
+</mat-toolbar> -->
+
 <div class="app-body">
-  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+  <!-- <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
-  </app-sidebar>
+  </app-sidebar> -->
+
+  <div class="side-bar">
+    <ul>
+      <li id="dashboard" class="pl-3 pt-3"><a routerLink="/dashboard" routerLinkActive="active"><i class="icon-speedometer"></i> لوحة القيادة</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/company" routerLinkActive="active"><i class="fa fa-building"></i> الشركة</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/department" routerLinkActive="active"><i class="fa fa-sitemap"></i> الإدراة</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/jobtitle" routerLinkActive="active"><i class="fa fa-black-tie"></i> المسمى الوظيفي</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/role" routerLinkActive="active"><i class="fa fa-stumbleupon"></i> الأدوار</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/court" routerLinkActive="active"><i class="fa fa-university"></i> جهة نظر القضية</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/user" routerLinkActive="active"><i class="fa fa-user"></i> المستعمل</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/project" routerLinkActive="active"><i class="fa fa-suitcase"></i> نوع المشروع</a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/contact" routerLinkActive="active"><i class="fa fa-address-book"></i> إدارة الاتصال</a></li><hr>
+    </ul>
+  </div>
+
+  <!-- <div class="side-bar-icon">
+    <ul>
+      <li id="dashboard" class="pl-3 pt-3"><a routerLink="/dashboard"><i class="icon-speedometer"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/company"><i class="fa fa-building"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/department"><i class="fa fa-sitemap"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/jobtitle"><i class="fa fa-black-tie"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/role"><i class="fa fa-stumbleupon"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/court"><i class="fa fa-university"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/user"><i class="fa fa-user"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/master/project"><i class="fa fa-suitcase"></i></a></li><hr>
+      <li class="pl-3 pt-3"><a routerLink="/contact"><i class="fa fa-address-book"></i></a></li><hr>
+    </ul>
+  </div> -->
+
   <!-- Main content -->
-  <main class="main" style="margin-top: 1.8%;">
-    
+  <main class="main" style="margin-top: 1.5%; margin-right: 15.57%;">
     <div class="container-fluid">
       <router-outlet></router-outlet>
-    </div><!-- /.container-fluid -->
+    </div><!-- container-fluid -->
   </main>
   <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
     <tabset>

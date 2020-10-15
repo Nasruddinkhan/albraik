@@ -6,6 +6,8 @@ import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { JobMaster } from '../../modal/jobtitle-master';
 import { checkNullEmpty } from '../../service/must-match.service';
 import { Router } from '@angular/router';
+import { JobtitleDialogComponent } from './jobtitle-dialog/jobtitle-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-jobtitle-master',
@@ -20,7 +22,8 @@ export class JobtitleMasterComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastService: ToasterMsgService,
-    private jobService: JobService) { }
+    private jobService: JobService,
+    public dialog: MatDialog) { }
   userID: string;
   companyId : string;
   jobs:JobTitleModel[];
@@ -30,6 +33,9 @@ export class JobtitleMasterComponent implements OnInit {
   maxSize: number = 5;
   checkValidity = false;
   checkedJobs: number[] = [];
+  displayedColumns: string[] = ['position', 'name'];
+  srNo:number = 0;
+
   ngOnInit() {
     this.userID  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
@@ -45,6 +51,10 @@ export class JobtitleMasterComponent implements OnInit {
     this.loading = true;
     this.jobService.findAllJobTitles( this.userID).subscribe((res:JobTitleModel[])=>{
       this.jobs = res;
+      // Appending srNo property to every jobs for displaying incremented sr no in the table
+      this.jobs.forEach(job => {
+        job['srNo'] = ++this.srNo;
+      });
       this.loading = false;
       this.bigTotalItems = res.length;
     },err=>{
@@ -64,9 +74,11 @@ export class JobtitleMasterComponent implements OnInit {
     }
     this.checkValidity = false;
 
-    this.jobTitleNames.insert(1, this.fb.group({ jobtittle: this.jobTitleNames.controls[0].value.jobtittle }));
+    console.log(this.jobTitleNames.controls[0].value.jobtittle);
+    this.jobTitleNames.push(this.fb.group({ jobtittle: this.jobTitleNames.controls[0].value.jobtittle }));
     this.jobTitleNames.insert(0, this.fb.group({ jobtittle: '' }));
     this.jobTitleNames.removeAt(1);
+    this.onSubmit();
   }
 
   deleteaddJobTitle(index) {
@@ -106,7 +118,8 @@ export class JobtitleMasterComponent implements OnInit {
         jobtittle_names: this.fb.array([this.fb.group({jobtittle:''})])
       });
       this.checkValidity = false;
-      this.toastService.susessMessage('Department created successfully');
+      this.toastService.susessMessage('Job title created successfully');
+      this.srNo = 0;
       this.findAllJobs();
     },err=>{
       this.loading = false;
@@ -114,4 +127,9 @@ export class JobtitleMasterComponent implements OnInit {
       this.findAllJobs();
     });
   }
+
+  openDialog() {
+    this.dialog.open(JobtitleDialogComponent);
+  }
+
 }

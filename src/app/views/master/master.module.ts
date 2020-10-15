@@ -3,8 +3,7 @@ import { MasterRoutingModule } from './master-routing.module';
 import { SharedModule } from '../../share.module';
 import { JobtitleMasterComponent } from './jobtitle-master/jobtitle-master.component';
 import { DepartmentMasterComponent } from './department-master/department-master.component';
-import {CompanyMasterComponent} from './company-master/company-master.component'
-import { from } from 'rxjs';
+import {CompanyMasterComponent} from './company-master/company-master.component';
 import { CompanyDetailsComponent } from './company-master/company-details.component';
 import { CompanyFormsComponent } from './company-master/company-forms.component';
 import { UserComponent } from './user/user.component';
@@ -22,18 +21,36 @@ import { InheritenceComponent } from './project/inheritence/inheritence.componen
 import { ProjectDtlComponent } from './project/project-dtl/project-dtl.component';
 import { CourtComponent } from './court/court.component';
 import { DeptDetailsComponent } from './department-master/dept-details/dept-details.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { JobtitleDialogComponent } from './jobtitle-master/jobtitle-dialog/jobtitle-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
     declarations: [ CompanyFormsComponent,
                    CompanyMasterComponent, 
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, JobtitleDialogComponent],
+    entryComponents: [
+      JobtitleDialogComponent
+    ],
     imports: [
       MasterRoutingModule,
       SharedModule,
       ShareComponentModule,
-      ApplicationPipeModule
+      ApplicationPipeModule,
+      MatInputModule,
+      MatIconModule,
+      MatTableModule,
+      MatDialogModule,
+      MatButtonModule
+    ],
+    providers: [
+      MatDialog
     ]
   })
 export class MasterModule{}

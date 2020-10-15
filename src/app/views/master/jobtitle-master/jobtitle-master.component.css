@@ -3,6 +3,7 @@
     font-family: "Lucida Grande", tahoma, arial, sans-serif;
     font-size: 12px;
 }
+
 .btn-circle.btn-md { 
     width: 25px; 
     height: 25px; 
@@ -12,8 +13,59 @@
     text-align: center; 
 } 
 
+.z-index {
+    z-index: 0;
+}
+
 td, th {
     text-align: center;
     font-size: 15px !important;
     vertical-align: middle  !important;
+}
+
+.example-full-width {
+    width: 80%;
+    font-size: 25px;
+}
+
+#icons .btn {
+    color: white;
+    background-color: black;
+}
+
+.plus_bold {
+    font-weight: 900;
+    font-family: "Lucida Grande", tahoma, arial, sans-serif;
+    font-size: 20px;
+}
+
+.example-button-container button {
+    /* display: flex;
+    justify-content: center;
+    width: 120px; */
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    /* padding-top: 5px; */
+    box-shadow: none;
+    position: absolute;
+    top: 34px;
+    right: 199px;
+}
+
+.main-border-left {
+    border-left: 5px solid rgba(0, 0, 0, 0.1);
+}
+
+.main-border-right {
+    border-right: 5px solid rgba(156, 97, 97, 0.1);
+}
+
+.main-border-top {
+    border-top: 5px solid rgb(0, 0, 0, 0.1);
+}
+
+.main-border-bottom {
+    border-bottom: 5px solid rgb(0, 0, 0, 0.1);
 }

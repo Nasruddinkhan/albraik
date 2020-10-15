@@ -1,0 +1,126 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-icon {
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    padding-top: 8px;
+}
+
+.mat-toolbar-row {
+    background-color: black;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    font-size: 20px !important;
+    color: white !important;
+}
+  
+.fa-bars {
+    color: black;
+    background-color: white;
+}
+
+.my-navbar img {
+    height: 75%;
+    width: 4%;
+    border-radius: 200px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.example-container {
+    width: 400px;
+    height: 200px;
+    margin: 12px;
+    border: 1px solid #555;
+  }
+  
+mat-drawer-content {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main {
+    transition: margin-right 0.75s;
+    transition-timing-function: linear;
+}
+
+.my-navbar {
+    position: -webkit-sticky; 
+    z-index: 1; 
+    position: sticky; 
+    top: 0;
+}
+
+.side-bar {
+    position: fixed;
+    width: 16%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.05);
+    border-left: 0.01px solid rgb(0, 0, 0, 0.01);
+    animation-name: sidebar_animation;
+    animation-duration: 2s;
+    transition: width 0.75s;
+    transition-timing-function: linear;
+}
+
+.side-bar hr {
+    margin-top: 1px;
+    margin-bottom: -5px;
+}
+
+.side-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.side-bar ul li i, .side-bar ul li{
+    color: black;
+    font-size: 25px;
+}
+
+.side-bar a {
+    color: rgb(0, 0, 0, 0.7);
+}
+
+.active {
+    background-color: white;
+    padding-top: 16px;
+    padding-bottom: 6px;
+    padding-right: 10px;
+    padding-left: 21px;
+    border-radius: 5px;
+}
+
+@keyframes sidebar_animation {
+    50% {
+        background-color: rgb(0, 0, 0, 0.35);
+    }
+    100% {
+        background-color: white;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    /* .side-bar {
+        display: none;
+        /* margin-top: -50px; 
+    } */
+    .main {
+        margin-top: -50px;
+        margin-right: 0px; 
+        z-index: 1;
+    }
+    .side-bar ul li {
+        padding-left: 10px;
+    }
+    .app-body {
+        margin-top: 0px;
+    }
+}

@@ -24,6 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectService } from '../views/service/project.service';
 import { ContactSearchService } from '../views/service/contact.service';
 import { CourtService } from '../views/service/court.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 
   const APP_CONTAINERS = [
     DefaultLayoutComponent
@@ -43,6 +46,9 @@ import { CourtService } from '../views/service/court.service';
     AppHeaderModule,
     AppFooterModule,
     AppSidebarModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
     TabsModule.forRoot(),
     BrowserModule, BrowserAnimationsModule,HttpClientModule
   ],
