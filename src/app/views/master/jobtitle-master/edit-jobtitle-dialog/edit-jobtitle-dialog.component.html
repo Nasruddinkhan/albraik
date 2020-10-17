@@ -1,0 +1,10 @@
+<form [formGroup]="updateForm">
+    <mat-form-field class="example-chip-list">
+        <mat-label> عنوان وظيفي </mat-label>
+        <input formControlName="updatedJobtitle" matInput [value]="oldJobtitle">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close> أغلق </button>
+        <button mat-button (click)="updateJobtitle()" mat-dialog-close> update </button>
+    </div>
+</form>

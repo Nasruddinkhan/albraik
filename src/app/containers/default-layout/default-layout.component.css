@@ -22,8 +22,8 @@
 }
 
 .my-navbar img {
-    height: 75%;
-    width: 4%;
+    height: 50px;
+    width: 50px;
     border-radius: 200px;
 }
 
@@ -46,6 +46,8 @@ mat-drawer-content {
 }
 
 .main {
+    margin-top: 1.5%; 
+    margin-right: 15.57%;
     transition: margin-right 0.3s;
     transition-timing-function: linear;
 }
@@ -68,6 +70,7 @@ mat-drawer-content {
     animation-duration: 2s;
     transition: width 0.3s;
     transition-timing-function: linear;
+    overflow: auto;
 }
 
 .side-bar hr {
@@ -109,17 +112,11 @@ mat-drawer-content {
 }
 
 @media screen and (max-width: 992px) {
-    /* .side-bar {
+    .side-bar {
         display: none;
-        /* margin-top: -50px; 
-    } */
-    .main {
-        margin-top: -50px;
-        margin-right: 0px; 
-        z-index: 1;
     }
-    .side-bar ul li {
-        padding-left: 10px;
+    .main {
+        margin-right: 0px;
     }
     .app-body {
         margin-top: 0px;

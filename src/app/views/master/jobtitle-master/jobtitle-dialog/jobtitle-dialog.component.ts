@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { JobMaster } from '../../../modal/jobtitle-master';
 import { JobTitleModel } from './../../../modal/jobtitle';
 import { JobService } from './../../../service/job.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DialogSubmissionService } from '../../../service/dialog-submission.service';
+import { SnackbarService } from '../../../service/snackbar.service';
 
 @Component({
   selector: 'app-jobtitle-dialog',
   templateUrl: './jobtitle-dialog.component.html',
   styleUrls: ['./jobtitle-dialog.component.css']
 })
+
 export class JobtitleDialogComponent implements OnInit {
   jobMsr: JobMaster;
   userId: string;
@@ -19,23 +21,25 @@ export class JobtitleDialogComponent implements OnInit {
   jobTitles = [];
   removable = true;
   addOnBlur = true;
+  subscription: Subscription;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  constructor(private jobService: JobService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(private jobService: JobService, 
+    private snackbarService: SnackbarService, 
+    private dialogSubmitted: DialogSubmissionService) { }
 
   ngOnInit(): void { 
     this.userId  = sessionStorage.getItem("userId");
     this.companyId =  sessionStorage.getItem("companyId");
+    this.dialogSubmitted.setDialogSubmitted(false);
   }
 
   add(event: MatChipInputEvent): void {
     let input = event.input;
     let value = event.value;
-
     if ((value || '').trim()) {
       this.jobTitles.push({name: value.trim()});
     }
-    // Reset the input value
     if (input) {
       input.value = '';
     }
@@ -43,7 +47,6 @@ export class JobtitleDialogComponent implements OnInit {
 
   remove(jobtitle) {
     let index = this.jobTitles.indexOf(jobtitle);
-
     if (index >= 0) {
       this.jobTitles.splice(index, 1);
     }
@@ -56,18 +59,11 @@ export class JobtitleDialogComponent implements OnInit {
     });
     this.jobMsr = new JobMaster(this.userId,  this.companyId, jobNames);
     this.jobService.createJobTitle( this.jobMsr).subscribe((res:JobTitleModel[])=>{
-      this._snackBar.open(".Job Title added successfully", '', {
-        duration: 2000,
-        panelClass: "success"
-      });
-      this.router.navigate(['/master/jobtitle']);
+      this.snackbarService.success(".Jobtitle added successfully");
+      this.dialogSubmitted.setDialogSubmitted(true);
     },err=>{
-      this._snackBar.open("!!!Something went wrong", '', {
-        duration: 2000,
-        panelClass: "failure"
-      });
-    });
-    
+      this.snackbarService.failure("!!!Something went wrong");
+    }); 
   }
 
 }

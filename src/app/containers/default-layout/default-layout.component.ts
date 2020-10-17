@@ -9,7 +9,10 @@ import { ColorEvent } from 'ngx-color';
 })
 export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
+  public mobileSidebarMinimized = true;
   public navItems = navItems;
+  public mobileResized = false;
+  public desktopResized = false;
   isCollapsed = true;
   sidebarLink: Element[] = [];
   ngOnInit(){
@@ -19,7 +22,51 @@ export class DefaultLayoutComponent implements OnInit {
     //  delete navItems[1]
     }
     //  delete navItems[2];
-
+    window.addEventListener("resize", () => {
+      if (window.matchMedia("(max-width: 992px)").matches) {
+        if (!this.mobileResized) {
+          let sidebar = document.getElementsByClassName("side-bar")[0];
+          let mainContent = document.getElementsByClassName("main")[0];
+          let sidebarUL = document.querySelector(".side-bar ul").children;
+          try {
+            let temp = sidebarUL[0].querySelector("span");
+            console.log(temp);
+            if (temp) {
+              this.sidebarLink = [];
+              for (let i = 0; i < sidebarUL.length; i += 2) {
+                this.sidebarLink.push(sidebarUL[i].querySelector("span"));
+                sidebarUL[i].querySelector("span").remove();
+                sidebarUL[i].querySelector("i").style.marginRight = "-5px";
+                sidebarUL[i].querySelector("i").style.marginBottom = "15px";
+              }
+            }
+          } catch (e) { console.log("error"); }
+          sidebar['style']['width'] = "0px";
+          mainContent['style']['margin-right'] = "0px";
+          this.mobileResized = true;
+          this.sidebarMinimized = true;
+          this.desktopResized = false;
+          this.mobileSidebarMinimized = true;
+        }
+      } else {
+        this.mobileResized = false;
+        if (!this.desktopResized) {
+          let sidebar = document.getElementsByClassName("side-bar")[0];
+          let mainContent = document.getElementsByClassName("main")[0];
+          let sidebarUL = document.querySelector(".side-bar ul").children;
+          sidebar['style']['width'] = "15.57%";
+          mainContent['style']['margin-right'] = "15.2%";
+          if (this.sidebarLink.length !== 0) {
+            for (let i = 0; i < sidebarUL.length; i += 2) {
+              sidebarUL[i].querySelector("a").appendChild(this.sidebarLink[i/2]);
+              sidebarUL[i].querySelector("i").style.marginRight = "0px";
+            }
+          }
+          this.desktopResized = true;
+          this.sidebarMinimized = false;
+        }
+      }
+    });
   }
  constructor(private elementRef: ElementRef, private renderer: Renderer2){
 
@@ -36,6 +83,32 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   toggleSidebar() {
+    if (window.matchMedia("(max-width: 992px)").matches) {
+      console.log("matches.");
+      let sidebar = document.getElementsByClassName("side-bar")[0];
+      let mainContent = document.getElementsByClassName("main")[0];
+      let sidebarUL = document.querySelector(".side-bar ul").children;
+      if (this.sidebarLink.length === 0) {
+        for (let i = 0; i < sidebarUL.length; i += 2) {
+          this.sidebarLink.push(sidebarUL[i].querySelector("span"));
+          sidebarUL[i].querySelector("span").remove();
+          sidebarUL[i].querySelector("i").style.marginRight = "-5px";
+          sidebarUL[i].querySelector("i").style.marginBottom = "15px";
+        }
+      }
+      if (this.mobileSidebarMinimized) {
+        sidebar['style']['display'] = "block";
+        mainContent['style']['margin-right'] = "40px";
+        sidebar['style'].width = "40px";
+        this.mobileSidebarMinimized = false;
+        console.log(this.sidebarLink);
+      } else {
+        mainContent['style']['margin-right'] = "0px";
+        sidebar['style'].width = "0px";
+        this.mobileSidebarMinimized = true;
+      }
+      return;
+    }
     let sidebar = document.getElementsByClassName("side-bar")[0];
     let mainContent = document.getElementsByClassName("main")[0];
     // To add or delete sider-bar text(beside each sidebar logo) on toggle button
@@ -48,6 +121,7 @@ export class DefaultLayoutComponent implements OnInit {
         sidebarUL[i].querySelector("i").style.marginRight = "0px";
       }
       this.sidebarMinimized = false;
+      this.sidebarLink = [];
     } else {
       sidebar['style'].width = "3.5%";
       mainContent['style']['margin-right'] = "3.5%";
@@ -60,6 +134,7 @@ export class DefaultLayoutComponent implements OnInit {
       }, 300);
       this.sidebarMinimized = true;
     }
+    console.log(this.sidebarMinimized);
   }
 
 }
