@@ -11,6 +11,7 @@ import { TokenInterceptorService } from './views/service/token-interceptor.servi
 import { ChangePasswordComponent } from './views/change-password/change-password.component';
 import { SharedModule } from './share.module';
 import { CoreModule } from './containers/core.module';
+import { ProfileComponent } from './views/profile/profile.component';
 @NgModule({
   imports: [
     AppRoutingModule,
@@ -24,7 +25,8 @@ import { CoreModule } from './containers/core.module';
     AppComponent,
     LoginComponent,
     ChangePasswordComponent,
-    RegisterComponent  ],
+    RegisterComponent,
+    ProfileComponent  ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy

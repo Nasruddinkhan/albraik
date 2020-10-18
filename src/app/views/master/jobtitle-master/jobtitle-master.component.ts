@@ -6,6 +6,7 @@ import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { JobMaster } from '../../modal/jobtitle-master';
 import { checkNullEmpty } from '../../service/must-match.service';
 import { Router } from '@angular/router';
+import { DepartmentModel } from '../../modal/department';
 
 @Component({
   selector: 'app-jobtitle-master',

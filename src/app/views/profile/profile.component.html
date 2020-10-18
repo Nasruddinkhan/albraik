@@ -1,0 +1,151 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<div class="card">
+    <div class="card-header">
+        المعلومات الرئيسية / Key Information <i class="icon-people"></i>
+    </div>
+    <form [formGroup]="userProfile" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label for="Email">Email <span style="color:red">*</span></label>
+                    <input type="text" class="form-control" formControlName="email" >
+
+                </div>
+                <div class="form-group col-sm-4">
+                    <label> First Name * </label>
+                    <input type="text" class="form-control" formControlName="firstName"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.firstName.errors }">
+                    <div *ngIf="f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required"><b>First Name is required</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>اسم الأب / *Father Name</label>
+                    <input type="text" class="form-control" formControlName="fatherName"
+                        [ngClass]="{ 'is-invalid red-border-class':   isSubmitted &&  f.fatherName.errors }">
+                    <div *ngIf="f.fatherName.errors" class="invalid-feedback">
+                        <div *ngIf="f.fatherName.errors.required"><b>father Name is required</b></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+               
+                <div class="form-group col-sm-4">
+                    <label>اسم الأب / *Grand Father Name</label>
+                    <input type="text" class="form-control" formControlName="grandFatherName"
+                        [ngClass]="{ 'is-invalid red-border-class':   isSubmitted &&  f.grandFatherName.errors }">
+                    <div *ngIf="f.grandFatherName.errors" class="invalid-feedback">
+                        <div *ngIf="f.grandFatherName.errors.required"><b>grand father Name is required</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>اسم الأب / * Family Name</label>
+                    <input type="text" class="form-control" formControlName="familyName"
+                        [ngClass]="{ 'is-invalid red-border-class':   isSubmitted &&  f.familyName.errors }">
+                    <div *ngIf="f.familyName.errors" class="invalid-feedback">
+                        <div *ngIf="f.familyName.errors.required"><b>grand father Name is required</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>Date of Birth</label>
+
+                   
+                    <input type="text" class="form-control" formControlName="dateOfBirth" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'  }"
+                    bsDatepicker #dp="bsDatepicker"
+                        [ngClass]="{ 'is-invalid red-border-class':   isSubmitted &&  f.dateOfBirth.errors }">
+                    <div *ngIf="f.dateOfBirth.errors" class="invalid-feedback">
+                        <div *ngIf="f.dateOfBirth.errors.required"><b>Date of birth is required</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+               
+                <div class="form-group col-sm-4">
+                    <label>اسم الأب / *Place Of Birth</label>
+                    <input type="text" class="form-control" formControlName="placeOfBirth"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.placeOfBirth.errors }">
+                    <div *ngIf="f.placeOfBirth.errors" class="invalid-feedback">
+                        <div *ngIf="f.placeOfBirth.errors.required"><b>Place of is required</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>اسم الأب / * Phone Number</label>
+                    <input type="text" class="form-control" formControlName="phoneNumber"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.phoneNumber.errors }">
+                    <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.phoneNumber.errors.required"><b>Phone number is required</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>Mobile Number </label>
+                    <input type="text" class="form-control" formControlName="mobileNumber"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.mobileNumber.errors }">
+                    <div *ngIf="f.mobileNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.mobileNumber.errors.required"><b>Mobile Number is required</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="role === 'USER'">
+                <div class="form-group col-sm-4">  
+                   
+                    <label for="Project Type">Job title  </label>
+                    <select  class="form-control" formControlName="jobId">
+                      <option selected>Choose...</option>
+                      <option *ngFor="let s of jobtitle" [value]="s.id"> {{s.name }}</option>
+                    </select>
+                    
+                    
+                  </div> 
+                  <div class="form-group col-sm-4">
+                    <label for="Project Type">Role </label>
+                    <select  class="form-control" formControlName="roleId">
+                      <option selected>Choose...</option>
+                      <option *ngFor="let s of roles" [value]="s.id"> {{s.name }}</option>
+                    </select>
+                   
+                  </div> 
+                  <div class="form-group col-sm-4">
+                    <label for="Project Type">Department </label>
+                    <select  class="form-control" formControlName="deptId">
+                      <option selected>Choose...</option>
+                      <option *ngFor="let s of depts" [value]="s.id"> {{s.name }}</option>
+                    </select>
+                   
+                  </div> 
+            </div>
+            <div class="row">
+               
+                <div class="form-group col-sm-4">
+                    <label>Education</label>
+                    
+                    <textarea type="text" rows="2" class="form-control_textarea" formControlName="education"></textarea>
+                  
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>Experience</label>
+                    <textarea type="text" rows="2" class="form-control_textarea" formControlName="experience"></textarea>
+                  
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>Skills</label>
+                    <textarea type="text" rows="2" class="form-control_textarea" formControlName="skills"></textarea>
+                  
+                </div>
+            </div>
+           <!--  <div class="form-group col-sm-6">
+                <label> Consultant Engagement Text</label>
+                <textarea type="text" rows="2" class="form-control_textarea" required [(ngModel)]="casemodel.caseConsultantEngagementText"
+                  name="caseConsultantEngagementText"></textarea>
+              </div> -->
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-md btn-success"> Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -8,9 +8,9 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import {ContactComponent} from  './views/users/contact/contact.component';
 import { AuthGuardService } from './views/service/auth-guard.service';
 import { ChangePasswordComponent } from './views/change-password/change-password.component';
+import { ProfileComponent } from './views/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -62,6 +62,14 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'profile/:userID',
+    component: ProfileComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      title: 'User Profile'
+    }
+  },
+  {
     path: '',
     component: DefaultLayoutComponent,
     data: {
@@ -72,12 +80,6 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
-        canActivate: [AuthGuardService]
-      },
-   
-      {
-        path: 'users',
-        loadChildren: () => import('./views/users/users.module').then(u => u.UserModule),
         canActivate: [AuthGuardService]
       },
       {

@@ -14,8 +14,8 @@ export class LoginComponent {
   password: string;
   loading = false;
   constructor(private router: Router,
-             private loginService: LoginService,
-             private toastService: ToasterMsgService) { }
+    private loginService: LoginService,
+    private toastService: ToasterMsgService) { }
 
 
   onRegisterCompany() {
@@ -28,23 +28,25 @@ export class LoginComponent {
     if (loginForm.invalid) {
       return
     }
-    let userObj={username:loginForm.value.username,password:loginForm.value.password}
+    let userObj = { username: loginForm.value.username, password: loginForm.value.password }
     console.table(userObj);
     this.loading = true;
-    this.loginService.loginUser(userObj).then((loginUser:any)=>{
-      sessionStorage.setItem('token',loginUser.token); 
+    this.loginService.loginUser(userObj).then((loginUser: any) => {
+      sessionStorage.setItem('token', loginUser.token);
       sessionStorage.setItem('role', loginUser.role);
       sessionStorage.setItem('userId', loginUser.id)
       sessionStorage.setItem('companyId', loginUser.companyId)
-
       this.toastService.susessMessage('successfull login')
-      this.loading =   false;
-      if(!loginUser.isFtl)
-          this.router.navigate([`/dashboard`]);
-      if(loginUser.isFtl)
-           this.router.navigate([`/changepassword/${loginUser.id}`]);
-    },err=>{
-      this.loading =   false;
+      this.loading = false;
+
+      if (loginUser.isFtl)
+        this.router.navigate([`/changepassword/${loginUser.id}`]);
+      else if (!loginUser.isFtl && checkNullEmpty(loginUser.firstName))
+        this.router.navigate([`/profile/${loginUser.id}`]);
+      else if (!loginUser.isFtl && !checkNullEmpty(loginUser.firstName))
+        this.router.navigate([`/dashboard`]);
+    }, err => {
+      this.loading = false;
       this.toastService.errorMessage(err.error.message);
     });
   }

@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { JobTitleModel } from '../modal/jobtitle';
 import { JobMaster } from '../modal/jobtitle-master';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,11 @@ export class JobService {
 
   public createJobTitle(jobs : JobMaster): Observable<JobTitleModel[]>  {
     return this.http.post<JobTitleModel[]>(this.baseURL +`/api/save/jobtitles`, jobs);
+  }
+  public findAllCompany(companyID : String) : Observable<any[]>  {
+    let jobTitle = this.http.get(this.baseURL +`/api/get/${companyID}/jobtitle`);
+    let depts = this.http.get(this.baseURL +`/api/get/${companyID}/depts`);
+    let roles = this.http.get(this.baseURL +`/api/get/${companyID}/companyroles`);
+    return forkJoin([jobTitle, depts, roles]);
   }
 }

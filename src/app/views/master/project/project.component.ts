@@ -30,7 +30,6 @@ export class ProjectComponent implements OnInit {
   }
   createCase() {
     this.router.navigate([`/master/createcase`]);
-  
   }
   pageChanged(event: any): void {
     this.pageNo = event.page;
