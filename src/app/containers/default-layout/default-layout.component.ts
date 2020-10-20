@@ -99,12 +99,12 @@ export class DefaultLayoutComponent implements OnInit {
       if (this.mobileSidebarMinimized) {
         sidebar['style']['display'] = "block";
         mainContent['style']['margin-right'] = "40px";
-        sidebar['style'].width = "40px";
+        sidebar['style']['width'] = "40px";
         this.mobileSidebarMinimized = false;
         console.log(this.sidebarLink);
       } else {
         mainContent['style']['margin-right'] = "0px";
-        sidebar['style'].width = "0px";
+        sidebar['style']['width'] = "0px";
         this.mobileSidebarMinimized = true;
       }
       return;

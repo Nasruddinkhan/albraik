@@ -24,7 +24,7 @@ import { DeptDetailsComponent } from './department-master/dept-details/dept-deta
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { JobtitleDialogComponent } from './jobtitle-master/jobtitle-dialog/jobtitle-dialog.component';
+import { AddJobtitleDialogComponent } from './jobtitle-master/add-jobtitle-dialog/add-jobtitle-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -34,6 +34,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { EditJobtitleDialogComponent } from './jobtitle-master/edit-jobtitle-dialog/edit-jobtitle-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddDepartmentDialogComponent } from './department-master/add-department-dialog/add-department-department-dialog.component';
+import { EditDepartmentDialogComponent } from './department-master/edit-department-dialog/edit-department-dialog.component';
+import { AddCourtDialogComponent } from './court/add-court-dialog/add-court-dialog.component';
+import { EditCourtDialogComponent } from './court/edit-court-dialog/edit-court-dialog.component';
 
 @NgModule({
     declarations: [ CompanyFormsComponent,
@@ -41,10 +45,14 @@ import { ReactiveFormsModule } from '@angular/forms';
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, JobtitleDialogComponent, EditJobtitleDialogComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent],
     entryComponents: [
-      JobtitleDialogComponent,
-      EditJobtitleDialogComponent
+      AddJobtitleDialogComponent,
+      EditJobtitleDialogComponent,
+      AddDepartmentDialogComponent,
+      EditDepartmentDialogComponent,
+      AddCourtDialogComponent,
+      EditCourtDialogComponent
     ],
     imports: [
       MasterRoutingModule,

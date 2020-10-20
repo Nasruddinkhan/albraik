@@ -1,0 +1,19 @@
+<mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let dept of depts" [selectable]="selectable"
+               [removable]="removable" (removed)="remove(dept)">
+        {{ dept.name }}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="قسم"
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+</mat-form-field>
+
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close> أغلق </button>
+    <button mat-button (click)="onSubmit()" mat-dialog-close> إرسال </button>
+</div>

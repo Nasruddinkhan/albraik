@@ -2,11 +2,22 @@
 
 <div class="card">
     <div class="card-header">
-        <i class="fa fa-user-plus"></i> المعلومات الرئيسية / Add User 
+        <i class="fa fa-user-plus"></i> المعلومات الرئيسية <hr>
     </div>
     <form [formGroup]="userForm" (ngSubmit)="registerUser()">
 
-        <div class="card-body">
+        <div class="card-body main-border-left main-border-right">
+            <div id="icons" class="form-group row mr-3">
+                <button type="button" class="btn btn-md" (click)="openAddDialog()"><div class="plus_bold"> + </div></button> 
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-md" [disabled]="editDisabled" (click)="openEditDialog()"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
+        
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-md" [disabled]="deleteDisabled" (click)="deleteUser()"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
+               
+            </div>
+
+        <!-- <div class="card-body">
 
             <div class="row">
 
@@ -82,8 +93,8 @@
                 </div>
 
             </div> 
-<!--             <p>{{userForm.value | json}}</p>
- -->        </div>
+            <p>{{userForm.value | json}}</p> -->
+        </div>
     <!-- <div class="card-footer">
         <div class="row">
             <div class="col text-center">
@@ -95,10 +106,40 @@
 
 
 <div  *ngIf="users?.length > 0">
+
+    <div class="main-border-left main-border-right main-border-bottom">
+
+        <table mat-table [dataSource]="users" class="mat-elevation-z8">
+            <ng-container matColumnDef="position">
+              <th class="text-center" mat-header-cell *matHeaderCellDef> رقم سري </th>
+              <td mat-cell *matCellDef="let user"> {{ user.srNo }} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+                <td mat-cell *matCellDef="let user"> {{ user.name }} </td>
+            </ng-container>
+            <ng-container matColumnDef="joining_date">
+                <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+                <td mat-cell *matCellDef="let user"> {{ user.joiningDate }} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+                <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <th class="text-center" mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let user">
+                    <mat-checkbox (change)="onCheckboxChange($event, user.id)"></mat-checkbox>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
+        </table>
+    </div>
     <!-- <div class="card-header">
         <i class="fa fa-user"></i>  بيانات المستخدم / User Details 
     </div> -->
-    <div >
+    <!-- <div >
         <table class="table table-striped table-sm">
             <thead>
               <tr>
@@ -122,6 +163,6 @@
             <div class="col-xs-12 col-12">
             
            </div> 
-    </div>
+    </div> -->
 </div>
 </div>

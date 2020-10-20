@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { JobTitleModel } from '../modal/jobtitle';
 import { JobMaster } from '../modal/jobtitle-master';
 import { Observable } from 'rxjs';
@@ -21,4 +21,16 @@ export class CourtService {
   public createCourt(courtList : Array<CourtMaster>): Observable<CourtModel[]>  {
     return this.http.post<CourtModel[]>(this.baseURL +`/api/court`, courtList);
   }
+
+  public updateCourtName(name: string, id: number): Observable<CourtModel[]> {
+    return this.http.put<CourtModel[]>(this.baseURL +`/api/court/${id}`, { "name": name });
+  }
+
+  public deleteCourt(idArray : string[]): Observable<CourtModel[]> {
+    const params = new HttpParams({ 
+      fromObject: { 'id': idArray } 
+    });
+    return this.http.delete<CourtModel[]>(this.baseURL +`/api/court`, { params });
+  }
+
 }

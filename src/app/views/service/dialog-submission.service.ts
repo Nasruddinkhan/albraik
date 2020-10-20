@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 })
 export class DialogSubmissionService {
   private dialogSubmitted: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  private data: BehaviorSubject<string> = new BehaviorSubject('');
+  private data: BehaviorSubject<Object> = new BehaviorSubject(undefined);
 
   constructor() { }
 
@@ -14,11 +14,11 @@ export class DialogSubmissionService {
     this.dialogSubmitted.next(value);
   }
 
-  setData(value: string): void {
+  setData(value: Object): void {
     this.data.next(value);
   }
 
-  getData(): Observable<string> {
+  getData(): Observable<Object> {
     return this.data.asObservable();
   }
 

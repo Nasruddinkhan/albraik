@@ -2,31 +2,30 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { JobMaster } from '../../../modal/jobtitle-master';
-import { JobTitleModel } from './../../../modal/jobtitle';
-import { JobService } from './../../../service/job.service';
+import { JobTitleModel } from '../../../modal/jobtitle';
+import { JobService } from '../../../service/job.service';
 import { Subscription } from 'rxjs';
 import { DialogSubmissionService } from '../../../service/dialog-submission.service';
 import { SnackbarService } from '../../../service/snackbar.service';
 
 @Component({
-  selector: 'app-jobtitle-dialog',
-  templateUrl: './jobtitle-dialog.component.html',
-  styleUrls: ['./jobtitle-dialog.component.css']
+  selector: 'app-add-jobtitle-dialog',
+  templateUrl: './add-jobtitle-dialog.component.html',
+  styleUrls: ['./add-jobtitle-dialog.component.css']
 })
 
-export class JobtitleDialogComponent implements OnInit {
+export class AddJobtitleDialogComponent implements OnInit {
   jobMsr: JobMaster;
   userId: string;
   companyId: string;
   jobTitles = [];
   removable = true;
   addOnBlur = true;
-  subscription: Subscription;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(private jobService: JobService, 
-    private snackbarService: SnackbarService, 
-    private dialogSubmitted: DialogSubmissionService) { }
+              private snackbarService: SnackbarService, 
+              private dialogSubmitted: DialogSubmissionService) { }
 
   ngOnInit(): void { 
     this.userId  = sessionStorage.getItem("userId");

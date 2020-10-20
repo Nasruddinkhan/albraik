@@ -28,6 +28,6 @@ export class JobService {
   }
 
   public updateJobTitle(name: string, id: number): Observable<JobTitleModel[]> {
-    return this.http.put<JobTitleModel[]>(this.baseURL +`/api/jobtitle/${id}`, JSON.stringify({ name: name }));
+    return this.http.put<JobTitleModel[]>(this.baseURL +`/api/jobtitle/${id}`, { "name": name });
   }
 }

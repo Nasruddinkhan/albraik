@@ -13,6 +13,7 @@ import { UserMaster } from '../../modal/user-master';
 import { UserService } from '../../service/user.service';
 import { checkNullEmpty } from '../../service/must-match.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -32,6 +33,14 @@ export class UserComponent implements OnInit {
   loading = false;
   isSubmitted = false;
   userForm:FormGroup;
+  displayedColumns: string[] = ['position', 'name', 'joining_date', 'email', 'delete'];
+  srNo: number = 0;
+  checkedUser = [];
+  deleteDisabled = true;
+  editDisabled = true;
+  firstCheckedUser: Event;
+  subscription: Subscription;
+  
   constructor(private fb: FormBuilder,
               private roleService: RoleService,
               private deptService: DeptService,
@@ -115,6 +124,10 @@ export class UserComponent implements OnInit {
     this.loading = false
     this.userService.findAllUsers( ).subscribe((res:UserMaster[])=>{
       this.users = res;
+      this.srNo = 0;
+      this.users.forEach(dept => {
+        dept['srNo'] = ++this.srNo;
+      });
       this.loading = false;
     },err=>{
      this.loading = false;
@@ -138,4 +151,39 @@ export class UserComponent implements OnInit {
      }
      ) 
   }
+
+  onCheckboxChange(e, jobId: number) {
+    if (e.checked) {
+      this.checkedUser.push({ id: jobId, checkbox: e });
+    } else {
+      for (let i = 0; i < this.checkedUser.length; ++i) {
+        if (this.checkedUser[i]['id'] === jobId) {
+          this.checkedUser.splice(i, 1);
+          break;
+        }
+      }
+    }
+    this.handleDeleteButton();
+    this.handleEditButton();
+    if (this.checkedUser.length === 1) {
+      this.firstCheckedUser = this.checkedUser[0]['checkbox'];
+    }
+  }
+
+  handleEditButton() {
+    if (this.checkedUser.length === 1) {
+      this.editDisabled = false;
+    } else {
+      this.editDisabled = true;
+    }
+  }
+
+  handleDeleteButton() {
+    if (this.checkedUser.length > 0) {
+      this.deleteDisabled = false;
+    } else {
+      this.deleteDisabled = true;
+    }
+  }
+
 }

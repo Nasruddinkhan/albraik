@@ -219,6 +219,30 @@ transition: all 0.3s;
 
 }
 
+#icons .btn {
+   color: white;
+   background-color: black;
+}
+
+
+.plus_bold {
+   font-weight: 900;
+   font-family: "Lucida Grande", tahoma, arial, sans-serif;
+   font-size: 20px;
+}
+
+table {
+   width: 98%; 
+   margin-left: auto; 
+   margin-right: auto; 
+   box-shadow: none !important;
+}
+
+table th {
+   font-weight: bold !important;
+   font-size: 20px !important;
+}
+
 .success {
    color: white !important;
    .mat-simple-snackbar-action {

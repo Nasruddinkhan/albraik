@@ -13,19 +13,19 @@
 
 <div class="card">
     <div class="card-header">
-        <i class="fa fa-stumbleupon"></i> الأدوار / Roles 
+        <i class="fa fa-stumbleupon"></i> الأدوار / Roles <hr>
 
     </div>
     <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()">
 
     <div class="card-body">
-        <div id="icons" class="form-group row">
-            <button type="button" class="btn btn-success btn-circle btn-md" (click)="displayAddRoleField()"><div class="plus_bold" > + </div></button> 
+        <div id="icons" class="form-group row mr-3">
+            <button type="button" class="btn btn-md" (click)="displayAddRoleField()"><div class="plus_bold" > + </div></button> 
             &nbsp;&nbsp;
-            <button type="button" class="btn btn-info btn-circle btn-md"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
+            <button type="button" class="btn btn-md"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
    
             &nbsp;&nbsp;
-            <button type="button" class="btn btn-danger btn-circle btn-md"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
+            <button type="button" class="btn btn-md"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
            
         </div>
             <div id="addRoleField" style="display: none;" formArrayName="role_names">

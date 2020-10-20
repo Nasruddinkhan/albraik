@@ -1,0 +1,10 @@
+<form [formGroup]="updateForm">
+    <mat-form-field class="example-chip-list">
+        <mat-label> قسم </mat-label>
+        <input formControlName="updatedDeptName" matInput [value]="oldDeptName">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close> أغلق </button>
+        <button mat-button (click)="updateDeptName()" mat-dialog-close> تحديث </button>
+    </div>
+</form>

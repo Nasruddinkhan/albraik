@@ -1,43 +1,16 @@
-.plus_bold {
-    font-weight: 900;
-    font-family: "Lucida Grande", tahoma, arial, sans-serif;
-    font-size: 12px;
-}
-
-.btn-circle.btn-md { 
-    width: 25px; 
-    height: 25px; 
-    padding: 0.1px 2px; 
-    border-radius: 25px; 
-    font-size: 10px; 
-    text-align: center; 
-} 
-
 .z-index {
     z-index: 0;
 }
 
-td, th {
+/* td, th {
     text-align: center;
     font-size: 15px !important;
     vertical-align: middle  !important;
-}
+} */
 
 .example-full-width {
     width: 80%;
     font-size: 25px;
-}
-
-#icons .btn {
-    color: white;
-    background-color: black;
-}
-
-
-.plus_bold {
-    font-weight: 900;
-    font-family: "Lucida Grande", tahoma, arial, sans-serif;
-    font-size: 20px;
 }
 
 .example-button-container button {

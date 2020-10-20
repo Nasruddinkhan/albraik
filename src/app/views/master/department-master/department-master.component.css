@@ -1,4 +1,4 @@
-.btn-circle.btn-sm { 
+/* .btn-circle.btn-sm { 
     width: 30px; 
     height: 30px; 
     padding: 6px 0px; 
@@ -27,5 +27,20 @@
     font-weight: 900;
     font-family: "Lucida Grande", tahoma, arial, sans-serif;
     font-size: 20px;
+} */
+
+.main-border-left {
+    border-left: 5px solid rgba(0, 0, 0, 0.1);
 }
 
+.main-border-right {
+    border-right: 5px solid rgba(156, 97, 97, 0.1);
+}
+
+.main-border-top {
+    border-top: 5px solid rgb(0, 0, 0, 0.1);
+}
+
+.main-border-bottom {
+    border-bottom: 5px solid rgb(0, 0, 0, 0.1);
+}

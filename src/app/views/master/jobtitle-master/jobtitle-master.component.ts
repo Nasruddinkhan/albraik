@@ -6,7 +6,7 @@ import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { JobMaster } from '../../modal/jobtitle-master';
 import { checkNullEmpty } from '../../service/must-match.service';
 import { Router } from '@angular/router';
-import { JobtitleDialogComponent } from './jobtitle-dialog/jobtitle-dialog.component';
+import { AddJobtitleDialogComponent } from './add-jobtitle-dialog/add-jobtitle-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSubmissionService } from '../../service/dialog-submission.service';
 import { Subscription } from 'rxjs';
@@ -70,6 +70,7 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     this.subscription = this.dialogSubmissionService.getDialogSubmitted().subscribe(dialogSubmitted => {
       if (dialogSubmitted) {
         this.findAllJobs();
+        this.checkedJobs = [];
       }
     });
   }
@@ -142,7 +143,8 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     console.log(typeof(checkedJobsString[0]) +"\n"+ typeof(this.checkedJobs[0]));
     this.jobService.deleteJobTitle(checkedJobsString).subscribe(res => {
       this.findAllJobs();
-      this.snackbarService.success("."+this.checkedJobs.length+" job title deleted successfully.");
+      this.handleDeleteButton();
+      this.snackbarService.success("."+this.checkedJobs.length+" job title(s) deleted successfully.");
     }, err=> {
       this.snackbarService.failure("!!!Something went wrong.");
     });
@@ -192,7 +194,7 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
   }
 
   openAddDialog() {
-    this.dialog.open(JobtitleDialogComponent);
+    this.dialog.open(AddJobtitleDialogComponent);
   }
 
   openEditDialog() {
@@ -202,14 +204,10 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
         oldJobtitle = this.jobs[i]['name'];
       }
     }
-    this.checkedJobs = [];
-    this.firstCheckedJob['source']['_checked'] = false;
+    this.dialogSubmissionService.setData({ oldJobtitle: oldJobtitle, id: this.checkedJobs[0]['id']});
     this.handleDeleteButton();
     this.handleEditButton();
-    this.dialogSubmissionService.setData(oldJobtitle);
     this.dialog.open(EditJobtitleDialogComponent);
   }
-
-
 
 }
