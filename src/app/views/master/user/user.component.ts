@@ -14,6 +14,10 @@ import { UserService } from '../../service/user.service';
 import { checkNullEmpty } from '../../service/must-match.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
+import { DialogSubmissionService } from '../../service/dialog-submission.service';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -48,7 +52,9 @@ export class UserComponent implements OnInit {
               private localeService: BsLocaleService,
               private userService: UserService,
               private toastService: ToasterMsgService,
-              private router: Router
+              private router: Router,
+              private dialog: MatDialog,
+              private dialogSubmitted: DialogSubmissionService
               ) { 
              this.localeService.use(this.locale);
              
@@ -83,7 +89,11 @@ export class UserComponent implements OnInit {
     this.userForm.get('companyId').setValue(this.companyId);
     this.userForm.get('createdBy').setValue(this.userID);
 
-
+    this.subscription = this.dialogSubmitted.getDialogSubmitted().subscribe(dialogSubmitted => {
+      if (dialogSubmitted) {
+        this.findAllUsers();
+      }
+    });
   }
 
   get f() { return this.userForm.controls; }
@@ -128,6 +138,7 @@ export class UserComponent implements OnInit {
       this.users.forEach(dept => {
         dept['srNo'] = ++this.srNo;
       });
+      console.log(this.users);
       this.loading = false;
     },err=>{
      this.loading = false;
@@ -152,22 +163,20 @@ export class UserComponent implements OnInit {
      ) 
   }
 
-  onCheckboxChange(e, jobId: number) {
+  onCheckboxChange(e, user: UserMaster) {
     if (e.checked) {
-      this.checkedUser.push({ id: jobId, checkbox: e });
+      this.checkedUser.push(user);
     } else {
-      for (let i = 0; i < this.checkedUser.length; ++i) {
-        if (this.checkedUser[i]['id'] === jobId) {
-          this.checkedUser.splice(i, 1);
-          break;
-        }
-      }
+      this.checkedUser = this.checkedUser.filter(ur => {
+        return ur !== user;
+      });
     }
     this.handleDeleteButton();
     this.handleEditButton();
     if (this.checkedUser.length === 1) {
       this.firstCheckedUser = this.checkedUser[0]['checkbox'];
     }
+    console.log(this.checkedUser);
   }
 
   handleEditButton() {
@@ -184,6 +193,32 @@ export class UserComponent implements OnInit {
     } else {
       this.deleteDisabled = true;
     }
+  }
+
+  // deleteUser() {
+  //   let checkedUserString = this.checkedDepartment.map(checkedDept => {
+  //     return checkedDept['id'].toString();
+  //   });
+  //   console.log(typeof(checkedDeptsString[0]) +"\n"+ typeof(this.checkedDepartment[0]));
+  //   this.deptService.deleteDept(checkedDeptsString).subscribe(res => {
+  //     this.findAlldepartments();
+  //     this.handleDeleteButton();
+  //     this.snackService.success("."+this.checkedDepartment.length+" department(s) deleted successfully.");
+  //   }, err=> {
+  //     this.snackService.failure("!!!Something went wrong.");
+  //   });
+  // }
+
+  openAddDialog() {
+    this.dialog.open(AddUserDialogComponent);
+  }
+
+  openEditDialog() {
+    let oldUser: UserMaster = this.checkedUser[0];
+    this.dialogSubmitted.setData(oldUser);
+    this.handleDeleteButton();
+    this.handleEditButton();
+    this.dialog.open(EditUserDialogComponent);
   }
 
 }

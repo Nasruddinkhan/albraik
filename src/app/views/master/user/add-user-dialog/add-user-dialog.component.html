@@ -1,0 +1,74 @@
+<div class="text-center">
+    <b>User Information</b>
+</div>
+<form [formGroup]="userForm" class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Ex. pat@example.com">
+        <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+            Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="email.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Joining Date</mat-label>
+        <input 
+            matInput 
+            formControlName="joiningDate" 
+            [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+            bsDatepicker #dp="bsDatepicker">
+        <mat-error *ngIf="joiningDate.hasError('required')">
+            Joining date is required
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber">
+        <mat-error *ngIf="phoneNumber.hasError('pattern') && !phoneNumber.hasError('required')">
+            Please enter a valid phone number
+        </mat-error>
+        <mat-error *ngIf="phoneNumber.hasError('minLength') && !phoneNumber.hasError('required')">
+            Phone number should be minimum 12 digits
+        </mat-error>
+        <mat-error *ngIf="phoneNumber.hasError('required')">
+          Phone number is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="mr-3" appearance="fill">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="roleId" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let role of roles" [value]="role.id">
+            {{ role.name }}
+        </mat-option>
+        </mat-select>
+        <mat-error *ngIf="roleId.hasError('required')">Please choose a role</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mr-3" appearance="fill">
+        <mat-label>Department</mat-label>
+        <mat-select formControlName="departmentId" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let department of depts" [value]="department.id">
+            {{ department.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="departmentId.hasError('required')">Please choose a department</mat-error>
+    </mat-form-field>
+    <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Job</mat-label>
+        <mat-select formControlName="jobTitleId" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let job of jobs" [value]="job.id">
+            {{ job.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="jobTitleId.hasError('required')">Please choose a job</mat-error>
+    </mat-form-field>
+</form>
+
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="onSubmit()" mat-dialog-close [disabled]="userForm.invalid"> إرسال </button>
+</div>

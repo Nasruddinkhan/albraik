@@ -23,7 +23,10 @@ export class ProjectComponent implements OnInit {
   numPages: number = 0;
   maxSize: number = 5;
   userid:string;
-   projectList=[]; 
+  projectList = []; 
+  displayedColumns: string[] = ['position', 'name', 'delete'];
+  srNo: number = 0;
+
   ngOnInit(): void {
     this.userid = sessionStorage.getItem("userId");
     this.findAllTask();
@@ -41,6 +44,10 @@ export class ProjectComponent implements OnInit {
     this.projectService.findAllTask(this.userid,this.pageNo).subscribe((res:any)=>{
       console.log(res);
       this.projectList=res.content;
+      this.srNo = 0;
+      this.projectList.forEach(project => {
+        project['srNo'] = ++this.srNo;
+      });
       console.log(this.projectList);
      this.bigTotalItems = res.totalElements;
     });

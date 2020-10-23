@@ -129,7 +129,7 @@
             <ng-container matColumnDef="delete">
                 <th class="text-center" mat-header-cell *matHeaderCellDef>  </th>
                 <td mat-cell *matCellDef="let user">
-                    <mat-checkbox (change)="onCheckboxChange($event, user.id)"></mat-checkbox>
+                    <mat-checkbox (change)="onCheckboxChange($event, user)"></mat-checkbox>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

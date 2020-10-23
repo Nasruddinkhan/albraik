@@ -231,6 +231,11 @@ transition: all 0.3s;
    font-size: 20px;
 }
 
+.dialog-button {
+   display: flex;
+   justify-content: center;
+}
+
 table {
    width: 98%; 
    margin-left: auto; 

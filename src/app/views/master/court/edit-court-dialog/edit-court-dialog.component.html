@@ -3,8 +3,8 @@
         <mat-label> محكمة </mat-label>
         <input formControlName="updatedCourtName" matInput [value]="oldCourtName">
     </mat-form-field>
-    <div mat-dialog-actions>
-        <button mat-button mat-dialog-close> أغلق </button>
-        <button mat-button (click)="updateCourtName()" mat-dialog-close> تحديث </button>
-    </div>
 </form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="updateCourtName()" mat-dialog-close> تحديث </button>
+</div>

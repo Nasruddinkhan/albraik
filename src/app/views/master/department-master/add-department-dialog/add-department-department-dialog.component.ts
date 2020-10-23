@@ -1,7 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Subscription } from 'rxjs';
 import { DepartmentMaster } from '../../../modal/department-master';
 import { DeptService } from '../../../service/dept.service';
 import { DialogSubmissionService } from '../../../service/dialog-submission.service';
@@ -18,7 +17,6 @@ export class AddDepartmentDialogComponent implements OnInit {
   companyId: string;
   removable = true;
   addOnBlur = true;
-  subscription: Subscription;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   departments = [];
 

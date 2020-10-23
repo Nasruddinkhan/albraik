@@ -12,23 +12,23 @@
 </div> -->
 
 <div class="card">
-    <div class="card-header">
+    <div class="card-header main-border-left main-border-right main-border-top">
         <i class="fa fa-stumbleupon"></i> الأدوار / Roles <hr>
 
     </div>
     <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()">
 
-    <div class="card-body">
+    <div class="card-body main-border-left main-border-right">
         <div id="icons" class="form-group row mr-3">
-            <button type="button" class="btn btn-md" (click)="displayAddRoleField()"><div class="plus_bold" > + </div></button> 
+            <button type="button" class="btn btn-md" (click)="openAddDialog()"><div class="plus_bold"> + </div></button> 
             &nbsp;&nbsp;
-            <button type="button" class="btn btn-md"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
-   
+            <button type="button" class="btn btn-md" [disabled]="editDisabled" (click)="openEditDialog()"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
+    
             &nbsp;&nbsp;
-            <button type="button" class="btn btn-md"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
+            <button type="button" class="btn btn-md" [disabled]="deleteDisabled" (click)="deleteDepartment()"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
            
         </div>
-            <div id="addRoleField" style="display: none;" formArrayName="role_names">
+            <!-- <div id="addRoleField" style="display: none;" formArrayName="role_names">
                 
                 <label>الأدوار / Roles</label>
                 <div class="row" *ngFor="let item of roleNames.controls; let pointIndex=index"
@@ -54,15 +54,15 @@
                                         type="button">
                                             <i class="fa fa-minus" aria-hidden="true"></i>
                                     </button>
-                                    <!-- <button class="btn btn-outline-secondary" (click)="deleteRole(pointIndex)" *ngIf="pointIndex !== 0"
+                                    <button class="btn btn-outline-secondary" (click)="deleteRole(pointIndex)" *ngIf="pointIndex !== 0"
                                         class="btn btn-danger btn-sm" type="button"><i class="fa fa-minus" aria-hidden="true"></i>
-                                    </button> -->
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
        
     </div>
     <!-- <div class="card-footer">
@@ -73,5 +73,30 @@
         </div>
     </div> -->
 </form>
-<app-role-det [rolemst]="roles"></app-role-det>
+<div class="main-border-left main-border-right main-border-bottom">
+
+    <table mat-table [dataSource]="roles" class="mat-elevation-z8">
+        <ng-container matColumnDef="position">
+          <th class="text-center" style="width: 10%;" mat-header-cell *matHeaderCellDef> رقم سري </th>
+          <td mat-cell *matCellDef="let role"> {{ role.srNo }} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+            <td mat-cell *matCellDef="let role"> {{ role.name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="privilages">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> Privilages </th>
+            <td mat-cell *matCellDef="let role"> {{ role.privilage }} </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th class="text-center" style="width: 10%;" mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let role">
+                <mat-checkbox (change)="onCheckboxChange($event, role.id)"></mat-checkbox>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let role; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<!-- <app-role-det [rolemst]="roles"></app-role-det> -->
 </div>

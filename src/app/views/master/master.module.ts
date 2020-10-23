@@ -31,6 +31,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackbarService } from '../service/snackbar.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { EditJobtitleDialogComponent } from './jobtitle-master/edit-jobtitle-dialog/edit-jobtitle-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +39,9 @@ import { AddDepartmentDialogComponent } from './department-master/add-department
 import { EditDepartmentDialogComponent } from './department-master/edit-department-dialog/edit-department-dialog.component';
 import { AddCourtDialogComponent } from './court/add-court-dialog/add-court-dialog.component';
 import { EditCourtDialogComponent } from './court/edit-court-dialog/edit-court-dialog.component';
+import { AddUserDialogComponent } from './user/add-user-dialog/add-user-dialog.component';
+import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialog.component';
+import { AddRoleDialogComponent } from './role-master/add-role-dialog/add-role-dialog.component';
 
 @NgModule({
     declarations: [ CompanyFormsComponent,
@@ -45,14 +49,16 @@ import { EditCourtDialogComponent } from './court/edit-court-dialog/edit-court-d
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent],
     entryComponents: [
       AddJobtitleDialogComponent,
       EditJobtitleDialogComponent,
       AddDepartmentDialogComponent,
       EditDepartmentDialogComponent,
       AddCourtDialogComponent,
-      EditCourtDialogComponent
+      EditCourtDialogComponent,
+      AddUserDialogComponent,
+      AddRoleDialogComponent
     ],
     imports: [
       MasterRoutingModule,
@@ -68,7 +74,8 @@ import { EditCourtDialogComponent } from './court/edit-court-dialog/edit-court-d
       MatChipsModule,
       MatSnackBarModule,
       MatCheckboxModule,
-      MatPaginatorModule
+      MatPaginatorModule,
+      MatSelectModule
     ],
     providers: [
       MatDialog,
