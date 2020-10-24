@@ -46,6 +46,7 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   deleteDisabled = true;
   editDisabled = true;
+  addDisabled = false;
   firstCheckedJob: Event;
   length = 100;
   pageSize = 10;
@@ -71,6 +72,9 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
       if (dialogSubmitted) {
         this.findAllJobs();
         this.checkedJobs = [];
+        this.handleEditButton();
+        this.handleDeleteButton();
+        this.handleAddButton();
       }
     });
   }
@@ -131,6 +135,7 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     }
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     if (this.checkedJobs.length === 1) {
       this.firstCheckedJob = this.checkedJobs[0]['checkbox'];
     }
@@ -143,8 +148,11 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     console.log(typeof(checkedJobsString[0]) +"\n"+ typeof(this.checkedJobs[0]));
     this.jobService.deleteJobTitle(checkedJobsString).subscribe(res => {
       this.findAllJobs();
-      this.handleDeleteButton();
       this.snackbarService.success("."+this.checkedJobs.length+" job title(s) deleted successfully.");
+      this.checkedJobs = [];
+      this.handleDeleteButton();
+      this.handleEditButton();
+      this.handleAddButton();
     }, err=> {
       this.snackbarService.failure("!!!Something went wrong.");
     });
@@ -193,6 +201,14 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     }
   }
 
+  handleAddButton() {
+    if (this.checkedJobs.length === 0) {
+      this.addDisabled = false;
+    } else {
+      this.addDisabled = true;
+    }
+  }
+
   openAddDialog() {
     this.dialog.open(AddJobtitleDialogComponent);
   }
@@ -207,6 +223,7 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     this.dialogSubmissionService.setData({ oldJobtitle: oldJobtitle, id: this.checkedJobs[0]['id']});
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     this.dialog.open(EditJobtitleDialogComponent);
   }
 

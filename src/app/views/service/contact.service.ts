@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //import { MasterPages } from '../modal/master-page';
 import { ContactType } from '../modal/contact-type';
@@ -34,6 +34,17 @@ export class ContactSearchService {
   }
   public getContactType(contactType: Number) : Observable<Contact[]>  {
     return this.http.get<Contact[]>(this.baseURL +`/api/contact?contactTypeId=${contactType}`);
+  }
+
+  public updateContact(id: number, valuesToBeChanged: Object): Observable<Contact[]> {
+    return this.http.put<Contact[]>(this.baseURL + `/api/contact/${id}`, valuesToBeChanged);
+  }
+
+  public deleteContact(idArray: string[]): Observable<Contact[]> {
+    const params = new HttpParams({ 
+      fromObject: { 'id': idArray } 
+    });
+    return this.http.delete<Contact[]>(this.baseURL +`/api/contact`, { params });
   }
   
 }

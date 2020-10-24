@@ -42,6 +42,7 @@ export class UserComponent implements OnInit {
   checkedUser = [];
   deleteDisabled = true;
   editDisabled = true;
+  addDisabled = false;
   firstCheckedUser: Event;
   subscription: Subscription;
   
@@ -92,6 +93,10 @@ export class UserComponent implements OnInit {
     this.subscription = this.dialogSubmitted.getDialogSubmitted().subscribe(dialogSubmitted => {
       if (dialogSubmitted) {
         this.findAllUsers();
+        this.checkedUser = [];
+        this.handleEditButton();
+        this.handleDeleteButton();
+        this.handleAddButton();
       }
     });
   }
@@ -173,6 +178,7 @@ export class UserComponent implements OnInit {
     }
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     if (this.checkedUser.length === 1) {
       this.firstCheckedUser = this.checkedUser[0]['checkbox'];
     }
@@ -192,6 +198,14 @@ export class UserComponent implements OnInit {
       this.deleteDisabled = false;
     } else {
       this.deleteDisabled = true;
+    }
+  }
+
+  handleAddButton() {
+    if (this.checkedUser.length === 0) {
+      this.addDisabled = false;
+    } else {
+      this.addDisabled = true;
     }
   }
 
@@ -218,6 +232,7 @@ export class UserComponent implements OnInit {
     this.dialogSubmitted.setData(oldUser);
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     this.dialog.open(EditUserDialogComponent);
   }
 

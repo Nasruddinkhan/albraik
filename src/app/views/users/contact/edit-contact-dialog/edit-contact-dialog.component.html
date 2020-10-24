@@ -1,0 +1,84 @@
+<div class="text-center">
+    <b>إضافة جهة الإتصال</b>
+</div>
+<form [formGroup]="updateContactForm" class="example-form">
+    <div class="row">
+        <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>الاسم</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="name.hasError('required')">
+                Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>رقم الهاتف</mat-label>
+                <input matInput formControlName="phoneNumber">
+                <mat-error *ngIf="phoneNumber.hasError('required')">
+                Phone number is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="phoneNumber.hasError('minLength')">
+                    Phone number should be of minimum 12 digits
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width mt-2">
+                <mat-label>رقم الجوال</mat-label>
+                <input matInput formControlName="mobileNumber">
+                <mat-error *ngIf="mobileNumber.hasError('required')">
+                Mobile number is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="mobileNumber.hasError('minLength')">
+                    Mobile number should be of minimum 12 digits
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>البريد الإلكتروني</mat-label>
+                <input matInput formControlName="email" placeholder="Ex. pat@example.com">
+                <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="email.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>رقم الفاكس</mat-label>
+                <input matInput formControlName="faxNumber">
+                <mat-error *ngIf="faxNumber.hasError('required')">
+                  Fax number is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="faxNumber.hasError('minLength')">
+                    Fax number should be of minimum 12 digits
+                </mat-error>
+                <mat-error *ngIf="faxNumber.hasError('pattern')">
+                    Please enter a valid fax number
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>فئة جهة الإتصال</mat-label>
+                <mat-select formControlName="contactTypeId" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let contact of contactType" [value]="contact.id">
+                    {{ contact.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="contactTypeId.hasError('required')">Please choose a contact type</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <mat-form-field class="example-full-width">
+        <mat-label>العنوان</mat-label>
+        <textarea matInput formControlName="address"></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>الملاحظات</mat-label>
+        <textarea matInput formControlName="comment"></textarea>
+    </mat-form-field>
+    
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="onSubmit()" mat-dialog-close [disabled]="updateContactForm.invalid"> إرسال </button>
+</div>

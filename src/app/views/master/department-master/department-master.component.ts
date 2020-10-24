@@ -31,6 +31,7 @@ export class DepartmentMasterComponent implements OnInit {
   srNo:number = 0;
   deleteDisabled = true;
   editDisabled = true;
+  addDisabled = false;
   firstCheckedDepartment: Event;
   subscription: Subscription;
   constructor(private fb: FormBuilder,
@@ -61,6 +62,9 @@ export class DepartmentMasterComponent implements OnInit {
       if (dialogSubmitted) {
         this.findAlldepartments();
         this.checkedDepartment = [];
+        this.handleEditButton();
+        this.handleDeleteButton();
+        this.handleAddButton();
       }
     });
   }
@@ -97,6 +101,7 @@ export class DepartmentMasterComponent implements OnInit {
     }
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     if (this.checkedDepartment.length === 1) {
       this.firstCheckedDepartment = this.checkedDepartment[0]['checkbox'];
     }
@@ -115,6 +120,14 @@ export class DepartmentMasterComponent implements OnInit {
       this.deleteDisabled = false;
     } else {
       this.deleteDisabled = true;
+    }
+  }
+
+  handleAddButton() {
+    if (this.checkedDepartment.length === 0) {
+      this.addDisabled = false;
+    } else {
+      this.addDisabled = true;
     }
   }
 
@@ -172,8 +185,11 @@ export class DepartmentMasterComponent implements OnInit {
     console.log(typeof(checkedDeptsString[0]) +"\n"+ typeof(this.checkedDepartment[0]));
     this.deptService.deleteDept(checkedDeptsString).subscribe(res => {
       this.findAlldepartments();
-      this.handleDeleteButton();
       this.snackService.success("."+this.checkedDepartment.length+" department(s) deleted successfully.");
+      this.checkedDepartment = [];
+      this.handleDeleteButton();
+      this.handleEditButton();
+      this.handleAddButton();
     }, err=> {
       this.snackService.failure("!!!Something went wrong.");
     });
@@ -193,6 +209,7 @@ export class DepartmentMasterComponent implements OnInit {
     this.dialogSubmissionService.setData({ "oldDeptName": oldDeptName, "id": this.checkedDepartment[0]['id']});
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     this.dialog.open(EditDepartmentDialogComponent);
   }
 

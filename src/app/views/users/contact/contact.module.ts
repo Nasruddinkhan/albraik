@@ -17,11 +17,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SnackbarService } from '../../service/snackbar.service';
+import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
 
 
 
 @NgModule({
-  declarations: [ ContactComponent, AddContactDialogComponent],
+  declarations: [ ContactComponent, AddContactDialogComponent, EditContactDialogComponent],
   imports: [
     CommonModule,
     ContactRoutingModule,
@@ -43,7 +44,8 @@ import { SnackbarService } from '../../service/snackbar.service';
     MatSelectModule
   ],
   entryComponents: [
-    AddContactDialogComponent
+    AddContactDialogComponent,
+    EditContactDialogComponent
   ],
   providers: [
     SnackbarService

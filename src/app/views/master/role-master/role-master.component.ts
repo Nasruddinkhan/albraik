@@ -38,6 +38,7 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
   checkedRole = [];
   deleteDisabled = true;
   editDisabled = true;
+  addDisabled = false;
   firstcheckedRole: Event;
   subscription: Subscription;
 
@@ -55,6 +56,9 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
       if (dialogSubmitted) {
         this.findAllRoles();
         this.checkedRole = [];
+        this.handleEditButton();
+        this.handleDeleteButton();
+        this.handleAddButton();
       }
     });
   }
@@ -140,6 +144,7 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
     }
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     if (this.checkedRole.length === 1) {
       this.firstcheckedRole = this.checkedRole[0]['checkbox'];
     }
@@ -158,6 +163,14 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
       this.deleteDisabled = false;
     } else {
       this.deleteDisabled = true;
+    }
+  }
+
+  handleAddButton() {
+    if (this.checkedRole.length === 0) {
+      this.addDisabled = false;
+    } else {
+      this.addDisabled = true;
     }
   }
 

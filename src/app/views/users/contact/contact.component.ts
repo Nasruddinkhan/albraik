@@ -6,8 +6,10 @@ import { Contact } from '../../modal/contact';
 import { ContactType } from '../../modal/contact-type';
 import { ContactSearchService } from '../../service/contact.service';
 import { DialogSubmissionService } from '../../service/dialog-submission.service';
+import { SnackbarService } from '../../service/snackbar.service';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dialog.component';
+import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
 
 @Component({
   selector: 'app-contact',
@@ -25,23 +27,29 @@ export class ContactComponent implements OnInit {
     private subscription: Subscription;
     private contactSubscription: Subscription;
     displayedColumns: string[] = ['position', 'name', 'email', 'mobileNo', 'delete'];
-    checkedUser = [];
+    checkedContact = [];
     srNo: number = 0;
     deleteDisabled = true;
     editDisabled = true;
-    firstcheckedUser: Event;
+    addDisabled = false;
+    firstcheckedContact: Event;
     dialogSubscription: Subscription;
 
     constructor(private contactSearch : ContactSearchService,
                private fb:FormBuilder,
                private dialogSubmitted: DialogSubmissionService,
                private toastService: ToasterMsgService,
+               private snackService: SnackbarService,
                private dialog: MatDialog){}
     ngOnInit() {
       this.role = sessionStorage.getItem("role");
       this.dialogSubscription = this.dialogSubmitted.getDialogSubmitted().subscribe(dialogSubmitted => {
         if (dialogSubmitted) {
           this.onLoads();
+          this.checkedContact = [];
+          this.handleEditButton();
+          this.handleDeleteButton();
+          this.handleAddButton();
         }
       });
       this.createContactForm = this.fb.group({
@@ -103,26 +111,27 @@ export class ContactComponent implements OnInit {
       console.log('destroy component');
     }
 
-    onCheckboxChange(e, jobId: number) {
+    onCheckboxChange(e, contactId: number) {
       if (e.checked) {
-        this.checkedUser.push({ id: jobId, checkbox: e });
+        this.checkedContact.push({ id: contactId, checkbox: e });
       } else {
-        for (let i = 0; i < this.checkedUser.length; ++i) {
-          if (this.checkedUser[i]['id'] === jobId) {
-            this.checkedUser.splice(i, 1);
+        for (let i = 0; i < this.checkedContact.length; ++i) {
+          if (this.checkedContact[i]['id'] === contactId) {
+            this.checkedContact.splice(i, 1);
             break;
           }
         }
       }
       this.handleDeleteButton();
       this.handleEditButton();
-      if (this.checkedUser.length === 1) {
-        this.firstcheckedUser = this.checkedUser[0]['checkbox'];
+      this.handleAddButton();
+      if (this.checkedContact.length === 1) {
+        this.firstcheckedContact = this.checkedContact[0]['checkbox'];
       }
     }
   
     handleEditButton() {
-      if (this.checkedUser.length === 1) {
+      if (this.checkedContact.length === 1) {
         this.editDisabled = false;
       } else {
         this.editDisabled = true;
@@ -130,15 +139,54 @@ export class ContactComponent implements OnInit {
     }
   
     handleDeleteButton() {
-      if (this.checkedUser.length > 0) {
+      if (this.checkedContact.length > 0) {
         this.deleteDisabled = false;
       } else {
         this.deleteDisabled = true;
       }
     }
 
+    handleAddButton() {
+      if (this.checkedContact.length === 0) {
+        this.addDisabled = false;
+      } else {
+        this.addDisabled = true;
+      }
+    }
+
+    deleteContact() {
+      let checkedContactsString = this.checkedContact.map(checkedCont => {
+        return checkedCont['id'].toString();
+      });
+      console.log(typeof(checkedContactsString[0]) +"\n"+ typeof(this.checkedContact[0]));
+      this.contactSearch.deleteContact(checkedContactsString).subscribe(res => {
+        this.onLoads();
+        this.snackService.success(this.checkedContact.length + " .contact(s) deleted successfully");
+        this.checkedContact = [];
+        this.handleDeleteButton();
+        this.handleEditButton();
+        this.handleAddButton();
+      }, err=> {
+        this.snackService.failure("!!!Something went wrong.");
+      });
+    }
+
     openAddDialog() {
       this.dialog.open(AddContactDialogComponent);
+    }
+
+    openEditDialog() {
+      let oldContact: Contact;
+      for (let i = 0; i < this.contactList.length; ++i) {
+        if (this.contactList[i]['id'] === this.checkedContact[0]['id']) {
+          oldContact = this.contactList[i];
+        }
+      }
+      this.dialogSubmitted.setData(oldContact);
+      this.handleDeleteButton();
+      this.handleEditButton();
+      this.handleAddButton();
+      this.dialog.open(EditContactDialogComponent);
     }
 
 }

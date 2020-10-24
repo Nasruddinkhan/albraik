@@ -11,14 +11,14 @@ export class SnackbarService {
   public success(message: string) {
     this._snackbar.open(message, '', {
       duration: 4000,
-      panelClass: "success"
+      panelClass: ["success"]
     });
   }
 
   public failure(message: string) {
     this._snackbar.open(message, '', {
       duration: 4000,
-      panelClass: "failure"
+      panelClass: ["failure"]
     });
   }
 }

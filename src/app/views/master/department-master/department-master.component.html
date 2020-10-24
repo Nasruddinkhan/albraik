@@ -8,7 +8,7 @@
 
         <div class="card-body main-border-left main-border-right">
             <div id="icons" class="form-group row mr-3">
-                <button type="button" class="btn btn-md" (click)="openAddDialog()"><div class="plus_bold"> + </div></button> 
+                <button type="button" class="btn btn-md" [disabled]="addDisabled" (click)="openAddDialog()"><div class="plus_bold"> + </div></button> 
                 &nbsp;&nbsp;
                 <button type="button" class="btn btn-md" [disabled]="editDisabled" (click)="openEditDialog()"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
         

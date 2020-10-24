@@ -30,7 +30,7 @@ export class AddContactDialogComponent implements OnInit, OnDestroy {
       phoneNumber: ['', [Validators.required,  Validators.minLength(12)]],
       mobileNumber: ['', [Validators.required,  Validators.minLength(12) ]],
       email: ['', [Validators.required, Validators.email]],
-      faxNumber: ['', [  Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
+      faxNumber: ['', [ Validators.required, Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
       address: [''],
       comment: ['']
     });

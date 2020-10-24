@@ -44,6 +44,7 @@ export class CourtComponent implements OnInit {
   subscription: Subscription;
   deleteDisabled = true;
   editDisabled = true;
+  addDisabled = false;
   firstCheckedCourt: Event;
 
   ngOnInit() {
@@ -60,6 +61,9 @@ export class CourtComponent implements OnInit {
       if (dialogSubmitted) {
         this.findAllCourt();
         this.checkedCourts = [];
+        this.handleEditButton();
+        this.handleDeleteButton();
+        this.handleAddButton();
       }
     });
   }
@@ -128,6 +132,7 @@ export class CourtComponent implements OnInit {
     }
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     if (this.checkedCourts.length === 1) {
       this.firstCheckedCourt = this.checkedCourts[0]['checkbox'];
     }
@@ -149,6 +154,14 @@ export class CourtComponent implements OnInit {
     }
   }
 
+  handleAddButton() {
+    if (this.checkedCourts.length === 0) {
+      this.addDisabled = false;
+    } else {
+      this.addDisabled = true;
+    }
+  }
+
   deleteCourt() {
     let checkedCourtsString = this.checkedCourts.map(checkedJob => {
       return checkedJob['id'].toString();
@@ -156,8 +169,11 @@ export class CourtComponent implements OnInit {
     console.log(typeof(checkedCourtsString[0]) +"\n"+ typeof(this.checkedCourts[0]));
     this.courtService.deleteCourt(checkedCourtsString).subscribe(res => {
       this.findAllCourt();
-      this.handleDeleteButton();
       this.snackbarService.success("."+this.checkedCourts.length+" court(s) deleted successfully.");
+      this.checkedCourts = [];
+      this.handleDeleteButton();
+      this.handleEditButton();
+      this.handleAddButton();
     }, err=> {
       this.snackbarService.failure("!!!Something went wrong.");
     });
@@ -177,6 +193,7 @@ export class CourtComponent implements OnInit {
     this.dialogSubmissionService.setData({ "oldCourtName": oldCourtName, "id": this.checkedCourts[0]['id']});
     this.handleDeleteButton();
     this.handleEditButton();
+    this.handleAddButton();
     this.dialog.open(EditCourtDialogComponent);
   }
 
