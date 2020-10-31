@@ -87,7 +87,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   toggleSidebar() {
     if (window.matchMedia("(max-width: 992px)").matches) {
-      console.log("matches.");
+      // console.log("matches.");
       let sidebar = document.getElementsByClassName("side-bar")[0];
       let mainContent = document.getElementsByClassName("main")[0];
       let sidebarUL = document.querySelector(".side-bar ul").children;
@@ -104,7 +104,7 @@ export class DefaultLayoutComponent implements OnInit {
         mainContent['style']['margin-right'] = "40px";
         sidebar['style']['width'] = "40px";
         this.mobileSidebarMinimized = false;
-        console.log(this.sidebarLink);
+        // console.log(this.sidebarLink);
       } else {
         mainContent['style']['margin-right'] = "0px";
         sidebar['style']['width'] = "0px";

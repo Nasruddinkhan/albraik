@@ -2,11 +2,22 @@
 
 <div class="card">
     <div class="card-header">
-        <i class="fa fa-building"></i> أضف شركة / Add Company 
+        <i class="fa fa-building"></i> أضف شركة <hr>
       </div>
     <div class="card-body">
      
         <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" >
+        <!-- <div class="card-body main-border-left main-border-right">
+            <div id="icons" class="form-group row mr-3">
+                <button type="button" class="btn btn-md" [disabled]="addDisabled" (click)="openAddDialog()"><div class="plus_bold"> + </div></button> 
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-md" [disabled]="editDisabled" (click)="openEditDialog()"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
+        
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-md" [disabled]="deleteDisabled" (click)="deleteDepartment()"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
+                
+            </div>
+        </div> -->
         <div class="row">
           
             <div class="form-group col-sm-3">

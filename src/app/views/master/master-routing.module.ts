@@ -15,6 +15,7 @@ import { DeedOwnershipComponent } from './project/deed-ownership/deed-ownership.
 import { CompanyEstablishmentComponent } from './project/company-establishment/company-establishment.component';
 import { InheritenceComponent } from './project/inheritence/inheritence.component';
 import { CourtComponent } from './court/court.component';
+import { CompanyMasterComponent } from './company-master/company-master.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
       data: {
         title: 'Comapany'
       },
-      component: CompanyFormsComponent,
+      component: CompanyMasterComponent,
       canActivate: [AuthGuardService]
     },
     {

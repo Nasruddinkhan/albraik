@@ -43,6 +43,7 @@ import { AddUserDialogComponent } from './user/add-user-dialog/add-user-dialog.c
 import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialog.component';
 import { AddRoleDialogComponent } from './role-master/add-role-dialog/add-role-dialog.component';
 import { AddProjectDialogComponent } from './project/add-project-dialog/add-project-dialog.component';
+import { AddCompanyDialogComponent } from './company-master/add-company-dialog/add-company-dialog.component';
 
 @NgModule({
     declarations: [ CompanyFormsComponent,
@@ -50,7 +51,7 @@ import { AddProjectDialogComponent } from './project/add-project-dialog/add-proj
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent],
     entryComponents: [
       AddJobtitleDialogComponent,
       EditJobtitleDialogComponent,
@@ -60,7 +61,8 @@ import { AddProjectDialogComponent } from './project/add-project-dialog/add-proj
       EditCourtDialogComponent,
       AddUserDialogComponent,
       AddRoleDialogComponent,
-      AddProjectDialogComponent
+      AddProjectDialogComponent,
+      AddCompanyDialogComponent
     ],
     imports: [
       MasterRoutingModule,

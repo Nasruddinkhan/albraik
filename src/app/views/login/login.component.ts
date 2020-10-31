@@ -38,7 +38,7 @@ export class LoginComponent {
       sessionStorage.setItem('role', loginUser.role);
       sessionStorage.setItem('userId', loginUser.id)
       sessionStorage.setItem('companyId', loginUser.companyId)
-      this.snackbarService.success("Successfull login.");
+      this.snackbarService.success(".Successful login");
       // this.toastService.susessMessage('successfull login');
       this.loading =   false;
       console.log(loginUser.id);

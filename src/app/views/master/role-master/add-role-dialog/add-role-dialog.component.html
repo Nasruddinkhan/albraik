@@ -1,9 +1,9 @@
 <div class="text-center">
-    <b>Create Role</b>
+    <b>إنشاء دور</b>
 </div>
 <form class="form" [formGroup]="addRoleForm">
     <mat-form-field class="example-full-width">
-        <mat-label>Role</mat-label>
+        <mat-label>الأدوار</mat-label>
         <input matInput formControlName="name">
         <mat-error *ngIf="addRoleForm.invalid">Role name is required.</mat-error>
     </mat-form-field>

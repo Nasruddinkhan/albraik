@@ -4,11 +4,21 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CompanyRegistrationService } from '../../service/company-registration.service';
 import { CompanyMaster } from '../../modal/company-master';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-company-forms',
   templateUrl: './company-forms.component.html'
 })
 export class CompanyFormsComponent implements OnInit {
+  displayedColumns: string[] = ['position', 'name', 'delete'];
+  checkedDepartment = [];
+  srNo:number = 0;
+  deleteDisabled = true;
+  editDisabled = true;
+  addDisabled = false;
+  firstCheckedDepartment: Event;
+  subscription: Subscription;
+
   loading = false;
   comapnyObj :CompanyMaster;
   companyForm: FormGroup;

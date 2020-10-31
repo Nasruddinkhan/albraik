@@ -1,0 +1,52 @@
+<div class="text-center">
+    <b>معلومات الشركة</b>
+</div>
+<form [formGroup]="companyForm" class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>اسم المكتب / الشركة</mat-label>
+        <input type="input" matInput formControlName="companyName">
+        <mat-error *ngIf="companyName.hasError('required')">
+            Company Name is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>رقم الهاتف</mat-label>
+        <input type="text" matInput formControlName="phoneNumber">
+        <mat-error *ngIf="phoneNumber.hasError('required')">
+          Phone number is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>رقم الفاكس</mat-label>
+        <input type="text" matInput formControlName="faxNumber">
+        <mat-error *ngIf="faxNumber.hasError('required')">
+          Fax number is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>العنوان</mat-label>
+        <input type="text" matInput formControlName="address">
+        <mat-error *ngIf="address.hasError('required')">
+          Address is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <label>
+        <input type="file"  formControlName="logo" name="image" (change)="fileProgress($event)" >
+        <div class="form-group col-sm-3">
+            <div *ngIf="fileUploadProgress">
+                Upload progress: {{ fileUploadProgress }}
+            </div>
+            <div  *ngIf="previewUrl">
+                <img [src]="previewUrl" height="200" />                 
+            </div>
+            <div class="col-sm-3" *ngIf="uploadedFilePath">
+                {{uploadedFilePath}}
+            </div>
+         </div>
+    </label>
+</form>
+
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="onSubmit()" mat-dialog-close [disabled]="companyForm.invalid"> إرسال </button>
+</div>
