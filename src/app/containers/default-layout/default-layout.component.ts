@@ -1,6 +1,7 @@
 import {Component, ElementRef, Renderer2, OnInit} from '@angular/core';
 import { navItems } from '../../_nav';
 import { ColorEvent } from 'ngx-color';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +16,8 @@ export class DefaultLayoutComponent implements OnInit {
   public desktopResized = false;
   isCollapsed = true;
   sidebarLink: Element[] = [];
+  profileMinimized = true;
+
   ngOnInit(){
     let role  = sessionStorage.getItem("role");
     console.log(navItems);
@@ -68,7 +71,7 @@ export class DefaultLayoutComponent implements OnInit {
       }
     });
   }
- constructor(private elementRef: ElementRef, private renderer: Renderer2){
+ constructor(private elementRef: ElementRef, private renderer: Renderer2, private router: Router){
 
  }
   toggleMinimize(e) {
@@ -135,6 +138,22 @@ export class DefaultLayoutComponent implements OnInit {
       this.sidebarMinimized = true;
     }
     console.log(this.sidebarMinimized);
+  }
+
+  profile() {
+    let profileDiv = document.getElementsByClassName("profile")[0];
+    if (this.profileMinimized) {
+      profileDiv['style']['display'] = "block";
+      this.profileMinimized = false;
+    } else {
+      profileDiv['style']['display'] = "none";
+      this.profileMinimized = true;
+    }
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['logout']);
   }
 
 }

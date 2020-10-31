@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../service/login.service';
 import { ToasterMsgService } from '../service/toaster-msg.service';
 import { checkNullEmpty } from '../service/must-match.service';
+import { SnackbarService } from '../service/snackbar.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'login.component.html',
@@ -15,7 +16,8 @@ export class LoginComponent {
   loading = false;
   constructor(private router: Router,
              private loginService: LoginService,
-             private toastService: ToasterMsgService) { }
+             private toastService: ToasterMsgService,
+             private snackbarService: SnackbarService) { }
 
 
   onRegisterCompany() {
@@ -36,16 +38,24 @@ export class LoginComponent {
       sessionStorage.setItem('role', loginUser.role);
       sessionStorage.setItem('userId', loginUser.id)
       sessionStorage.setItem('companyId', loginUser.companyId)
-
-      this.toastService.susessMessage('successfull login')
+      this.snackbarService.success("Successfull login.");
+      // this.toastService.susessMessage('successfull login');
       this.loading =   false;
-      if(!loginUser.isFtl)
-          this.router.navigate([`/dashboard`]);
-      if(loginUser.isFtl)
-           this.router.navigate([`/changepassword/${loginUser.id}`]);
+      console.log(loginUser.id);
+      if (loginUser.isFtl)
+        this.router.navigate([`/changepassword/${loginUser.id}`]);
+      else if (!loginUser.isFtl && checkNullEmpty(loginUser.firstName))
+        this.router.navigate([`/profile/${loginUser.id}`]);
+      else if (!loginUser.isFtl && !checkNullEmpty(loginUser.firstName))
+        this.router.navigate([`/dashboard`]);
+      // if(!loginUser.isFtl)
+      //     this.router.navigate([`/dashboard`]);
+      // if(loginUser.isFtl)
+      //      this.router.navigate([`/changepassword/${loginUser.id}`]);
     },err=>{
       this.loading =   false;
-      this.toastService.errorMessage(err.error.message);
+      // this.toastService.errorMessage(err.error.message);
+      this.snackbarService.failure(err.error.message);
     });
   }
 }

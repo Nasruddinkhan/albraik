@@ -161,7 +161,7 @@ export class ContactComponent implements OnInit {
       console.log(typeof(checkedContactsString[0]) +"\n"+ typeof(this.checkedContact[0]));
       this.contactSearch.deleteContact(checkedContactsString).subscribe(res => {
         this.onLoads();
-        this.snackService.success(this.checkedContact.length + " .contact(s) deleted successfully");
+        this.snackService.success("." + this.checkedContact.length + "contact(s) deleted successfully");
         this.checkedContact = [];
         this.handleDeleteButton();
         this.handleEditButton();

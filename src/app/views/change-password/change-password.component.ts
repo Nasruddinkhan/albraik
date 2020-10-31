@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AdminRegistrationService } from '../service/admin-registration.service';
 import { ToasterMsgService } from '../service/toaster-msg.service';
 import { MustMatch } from '../service/must-match.service';
+import { SnackbarComponent, SnackbarService } from '../service/snackbar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,8 @@ export class ChangePasswordComponent implements OnInit {
               private fb:FormBuilder,
               private activeRoute: ActivatedRoute,
               private registerService : AdminRegistrationService,
-              private toastService: ToasterMsgService){} 
+              private toastService: ToasterMsgService,
+              private snackService: SnackbarService){} 
 
   ngOnInit() {
 
@@ -43,7 +45,16 @@ export class ChangePasswordComponent implements OnInit {
     this.changeForm.get('id').setValue(userID);
   });
   }
-  get f() { return this.changeForm.controls; }
+
+  get password() {
+    return this.changeForm.get("password");
+  }
+
+  get confpassword() {
+    return this.changeForm.get("confpassword");
+  }
+
+  // get f() { return this.changeForm.controls; }
   changePassword(){
     this.isSubmitted = true;
     if (this.changeForm.invalid) {
@@ -52,11 +63,11 @@ export class ChangePasswordComponent implements OnInit {
     console.log(JSON.stringify(this.changeForm.value));
     this.loading = true;
     this.registerService.changePassword(JSON.stringify(this.changeForm.value)).subscribe((res:any)=>{
-     this.toastService.susessMessage('change password successfully');
+     this.snackService.success('password changed successfully');
      this.router.navigate([`login`]);
      this.loading = false;
     },err=>{
-      this.toastService.errorMessage('INTerNAL ERROR');
+      this.snackService.failure('INTERNAL ERROR');
       this.loading = false;
     })
   }

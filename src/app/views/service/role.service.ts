@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { RoleMaster } from '../modal/role-master';
 import { RoleModel } from '../modal/role';
 import { Observable } from 'rxjs';
+import { PrivilegeModel } from '../modal/Privilege-model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,12 @@ export class RoleService {
     return this.http.get<RoleModel[]>(this.baseURL +`/api/get/${userId}/roles`);
   }
 
-  public createRole(role : RoleMaster): Observable<RoleModel[]>  {
-    return this.http.post<RoleModel[]>(this.baseURL +`/api/save/roles`, role);
+  public createRole(name: string, privilegeIdList: string[]): Observable<RoleModel[]>  {
+    return this.http.post<RoleModel[]>(this.baseURL +`/api/role`, { "name": name, "privilegeIdList": privilegeIdList });
   }
+
+  public getAllPrivilages(): Observable<PrivilegeModel[]> {
+    return this.http.get<PrivilegeModel[]>(this.baseURL +`/api/role/privilege`);
+  }
+
 }

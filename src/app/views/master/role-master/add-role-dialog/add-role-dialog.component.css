@@ -11,3 +11,7 @@
 .row {
     font-size: 13px;
 }
+
+.example-full-width {
+    width: 100%;
+}

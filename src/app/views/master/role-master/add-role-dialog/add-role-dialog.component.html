@@ -1,33 +1,21 @@
 <div class="text-center">
     <b>Create Role</b>
 </div>
-<form class="form">
-    <mat-form-field class="example-chip-list">
-        <mat-chip-list #chipList aria-label="Role selection">
-        <mat-chip *ngFor="let role of roles" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(role)">
-            {{ role.name }}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="وظيفة"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)">
-        </mat-chip-list>
+<form class="form" [formGroup]="addRoleForm">
+    <mat-form-field class="example-full-width">
+        <mat-label>Role</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="addRoleForm.invalid">Role name is required.</mat-error>
     </mat-form-field>
     <div class="row">
-        <div class="col-sm-6" *ngFor="let privilage of privilages1">
-            <mat-checkbox (change)="onCheckboxChange($event, privilage)">{{ privilage }}</mat-checkbox>
-        </div>
-        <div class="col-sm-6" *ngFor="let privilage of privilages2">
-            <mat-checkbox (change)="onCheckboxChange($event, privilage)">{{ privilage }}</mat-checkbox>
+        <div class="col-sm-6" *ngFor="let privilege of privileges">
+            <mat-checkbox (change)="onCheckboxChange($event, privilege.id)">{{ privilege.name }}</mat-checkbox>
         </div>
     </div>
-    <mat-checkbox style="font-size: 13px;">"Adding a new court appointment (who is being assigned to a task in a Project with the type of "Cases</mat-checkbox>
+    <mat-checkbox style="font-size: 13px;" (change)="onCheckboxChange($event, largePrivilege.id)">{{ largePrivilege.name }}</mat-checkbox>
 </form>
 
 <div class="dialog-button" mat-dialog-actions>
     <button mat-raised-button mat-dialog-close> أغلق </button>
-    <button mat-raised-button (click)="onSubmit()" [disabled]="roles.length === 0 || checkedPrivilages.length === 0" mat-dialog-close> إرسال </button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="addRoleForm.invalid || checkedPrivilegesList.length === 0" mat-dialog-close> إرسال </button>
 </div>

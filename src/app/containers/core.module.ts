@@ -27,6 +27,7 @@ import { CourtService } from '../views/service/court.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
   const APP_CONTAINERS = [
     DefaultLayoutComponent
@@ -49,6 +50,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
+    MatMenuModule,
     TabsModule.forRoot(),
     BrowserModule, BrowserAnimationsModule,HttpClientModule
   ],

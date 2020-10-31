@@ -148,7 +148,7 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     console.log(typeof(checkedJobsString[0]) +"\n"+ typeof(this.checkedJobs[0]));
     this.jobService.deleteJobTitle(checkedJobsString).subscribe(res => {
       this.findAllJobs();
-      this.snackbarService.success("."+this.checkedJobs.length+" job title(s) deleted successfully.");
+      this.snackbarService.success("."+this.checkedJobs.length+"job title(s) deleted successfully.");
       this.checkedJobs = [];
       this.handleDeleteButton();
       this.handleEditButton();

@@ -11,6 +11,7 @@ import { RegisterComponent } from './views/register/register.component';
 import {ContactComponent} from  './views/users/contact/contact.component';
 import { AuthGuardService } from './views/service/auth-guard.service';
 import { ChangePasswordComponent } from './views/change-password/change-password.component';
+import { ProfileComponent } from './views/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,14 @@ export const routes: Routes = [
     data: {
       title: 'Register Page'
     }
+  },
+  {
+    path: 'profile/:userID',
+    data: {
+      title: 'user profile'
+    },
+    component: ProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: '',

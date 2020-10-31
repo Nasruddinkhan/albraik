@@ -1,9 +1,11 @@
 import { Component, OnInit,TemplateRef  } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ProjectModel } from '../../modal/project-model';
 import { ProjectService } from '../../service/project.service';
+import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
 
 @Component({
   selector: 'app-project',
@@ -13,7 +15,8 @@ import { ProjectService } from '../../service/project.service';
 export class ProjectComponent implements OnInit {
   caseList:ProjectModel[];
   constructor(private router: Router,
-              private projectService: ProjectService) {
+              private projectService: ProjectService,
+              private dialog: MatDialog) {
              
                }
   searchText: string;
@@ -26,6 +29,11 @@ export class ProjectComponent implements OnInit {
   projectList = []; 
   displayedColumns: string[] = ['position', 'name', 'delete'];
   srNo: number = 0;
+  addDisabled = false;
+  editDisabled = true;
+  deleteDisabled = true;
+  checkedProject = [];
+  firstCheckedProject: Event;
 
   ngOnInit(): void {
     this.userid = sessionStorage.getItem("userId");
@@ -53,20 +61,68 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  onCheckboxChange(e) {
-    if (e.target.checked) {
-      this.projects.push(e.target.value);
+  // onCheckboxChange(e) {
+  //   if (e.target.checked) {
+  //     this.projects.push(e.target.value);
+  //   } else {
+  //     this.projects.filter(item =>{
+  //       console.log(e.target.value === item);
+  //       if(e.target.value === item){
+  //           const index: number = this.projects.indexOf(item);
+  //           if (index !== -1) {
+  //             this.projects.splice(index, 1);
+  //            }      
+  //       } 
+  //     });
+  //   }
+  //   this.projects = Array.from(new Set(this.projects));
+  // }
+
+  onCheckboxChange(e, jobId: number) {
+    if (e.checked) {
+      this.checkedProject.push({ id: jobId, checkbox: e });
     } else {
-      this.projects.filter(item =>{
-        console.log(e.target.value === item);
-        if(e.target.value === item){
-            const index: number = this.projects.indexOf(item);
-            if (index !== -1) {
-              this.projects.splice(index, 1);
-             }      
-        } 
-      });
+      for (let i = 0; i < this.checkedProject.length; ++i) {
+        if (this.checkedProject[i]['id'] === jobId) {
+          this.checkedProject.splice(i, 1);
+          break;
+        }
+      }
     }
-    this.projects = Array.from(new Set(this.projects));
+    this.handleDeleteButton();
+    this.handleEditButton();
+    this.handleAddButton();
+    if (this.checkedProject.length === 1) {
+      this.firstCheckedProject = this.checkedProject[0]['checkbox'];
+    }
   }
+
+  handleEditButton() {
+    if (this.checkedProject.length === 1) {
+      this.editDisabled = false;
+    } else {
+      this.editDisabled = true;
+    }
+  }
+
+  handleDeleteButton() {
+    if (this.checkedProject.length > 0) {
+      this.deleteDisabled = false;
+    } else {
+      this.deleteDisabled = true;
+    }
+  }
+
+  handleAddButton() {
+    if (this.checkedProject.length === 0) {
+      this.addDisabled = false;
+    } else {
+      this.addDisabled = true;
+    }
+  }
+
+  openAddDialog() {
+    this.dialog.open(AddProjectDialogComponent);
+  }
+
 }

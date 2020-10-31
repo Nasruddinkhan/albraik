@@ -185,7 +185,7 @@ export class DepartmentMasterComponent implements OnInit {
     console.log(typeof(checkedDeptsString[0]) +"\n"+ typeof(this.checkedDepartment[0]));
     this.deptService.deleteDept(checkedDeptsString).subscribe(res => {
       this.findAlldepartments();
-      this.snackService.success("."+this.checkedDepartment.length+" department(s) deleted successfully.");
+      this.snackService.success("." + this.checkedDepartment.length + "Department(s) deleted successfully");
       this.checkedDepartment = [];
       this.handleDeleteButton();
       this.handleEditButton();

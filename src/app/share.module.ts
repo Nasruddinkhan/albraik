@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -59,7 +59,8 @@ import { TranslateModule } from '@ngx-translate/core';
         PaginationModule,
         TabsModule,
         TooltipModule
-        ]
+        ],
+        providers: [ DatePipe ]
 
    })
 

@@ -62,7 +62,16 @@
     </button>
     <span> Albraik Law Management</span>
     <span class="example-spacer" ></span>
-    <img src="./../../../assets/img/brand/Logo.png" alt="law icon">
+    <img [matMenuTriggerFor]="menu" style="cursor: pointer;" src="./../../../assets/img/brand/Logo.png" alt="law icon">
+    <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
+    <mat-menu #menu="matMenu">
+      <button (click)="logout()" mat-menu-item>Log out</button>
+    </mat-menu>
+    <!-- <div class="profile">
+      <ul>
+        <li (click)="logout()">Log out</li>
+      </ul>
+    </div> -->
   </mat-toolbar>
 </div>
 

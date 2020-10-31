@@ -42,6 +42,7 @@ import { EditCourtDialogComponent } from './court/edit-court-dialog/edit-court-d
 import { AddUserDialogComponent } from './user/add-user-dialog/add-user-dialog.component';
 import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialog.component';
 import { AddRoleDialogComponent } from './role-master/add-role-dialog/add-role-dialog.component';
+import { AddProjectDialogComponent } from './project/add-project-dialog/add-project-dialog.component';
 
 @NgModule({
     declarations: [ CompanyFormsComponent,
@@ -49,7 +50,7 @@ import { AddRoleDialogComponent } from './role-master/add-role-dialog/add-role-d
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent],
     entryComponents: [
       AddJobtitleDialogComponent,
       EditJobtitleDialogComponent,
@@ -58,7 +59,8 @@ import { AddRoleDialogComponent } from './role-master/add-role-dialog/add-role-d
       AddCourtDialogComponent,
       EditCourtDialogComponent,
       AddUserDialogComponent,
-      AddRoleDialogComponent
+      AddRoleDialogComponent,
+      AddProjectDialogComponent
     ],
     imports: [
       MasterRoutingModule,

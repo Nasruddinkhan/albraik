@@ -1,0 +1,162 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<div class="card">
+    <div class="card-header text-center">
+        Key Information
+    </div>
+    <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Email *</mat-label>
+                        <input type="email" matInput formControlName="email">
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>First Name *</mat-label>
+                        <input type="text" matInput formControlName="firstName">
+                        <mat-error *ngIf="firstName.hasError('required')">
+                            First Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Father Name *</mat-label>
+                        <input type="text" matInput formControlName="fatherName">
+                        <mat-error *ngIf="fatherName.hasError('required')">
+                            Father Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Grand Father Name *</mat-label>
+                        <input type="text" matInput formControlName="grandFatherName">
+                        <mat-error *ngIf="grandFatherName.hasError('required')">
+                            Grand Father Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Family Name *</mat-label>
+                        <input type="text" matInput formControlName="familyName">
+                        <mat-error *ngIf="familyName.hasError('required')">
+                            Family Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Date of Birth *</mat-label>
+                        <input 
+                            matInput 
+                            formControlName="dateOfBirth"
+                            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                            bsDatepicker #dp="bsDatepicker">
+                        <mat-error *ngIf="dateOfBirth.hasError('required')">
+                            Date of Birth is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="row mb-4">
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Place of Birth *</mat-label>
+                        <input 
+                            type="text" 
+                            matInput 
+                            formControlName="placeOfBirth" 
+                            required>
+                        <mat-error *ngIf="placeOfBirth.hasError('required')">
+                            Place of Birth is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Phone Number *</mat-label>
+                        <input type="text" matInput formControlName="phoneNumber" required>
+                        <mat-error *ngIf="phoneNumber.hasError('required')">
+                            Phone Number is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Mobile Number *</mat-label>
+                        <input matInput formControlName="mobileNumber">
+                        <mat-error *ngIf="mobileNumber.hasError('required')">
+                            Mobile Number is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div *ngIf="role === 'USER'" class="row mb-4">
+                <div class="form-group col-sm-4">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label>Job Title</mat-label>
+                        <mat-select formControlName="jobId" required>
+                          <mat-option>--</mat-option>
+                          <mat-option *ngFor="let job of jobTitles" [value]="job.id">
+                            {{ job.name }}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label>Role </mat-label>
+                        <mat-select formControlName="roleId" required>
+                          <mat-option>--</mat-option>
+                          <mat-option *ngFor="let role of roles" [value]="role.id">
+                            {{ role.name }}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label>Department</mat-label>
+                        <mat-select formControlName="deptId" required>
+                          <mat-option>--</mat-option>
+                          <mat-option *ngFor="let dept of depts" [value]="dept.id">
+                            {{ dept.name }}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Education</mat-label>
+                        <textarea matInput formControlName="education"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Experience</mat-label>
+                        <textarea matInput formControlName="experience"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Skills</mat-label>
+                        <textarea matInput formControlName="skills"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mb-4">
+            <button mat-stroked-button type="submit">Submit</button>
+        </div>
+    </form>
+</div>

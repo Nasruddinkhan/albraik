@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
@@ -11,6 +11,13 @@ import { TokenInterceptorService } from './views/service/token-interceptor.servi
 import { ChangePasswordComponent } from './views/change-password/change-password.component';
 import { SharedModule } from './share.module';
 import { CoreModule } from './containers/core.module';
+import { SnackbarComponent } from './views/service/snackbar.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ProfileComponent } from './views/profile/profile.component';
+import { MatSelectModule } from '@angular/material/select';
+
 @NgModule({
   imports: [
     AppRoutingModule,
@@ -18,22 +25,33 @@ import { CoreModule } from './containers/core.module';
     ShareComponentModule,
     SharedModule,
     CoreModule,
-    BrowserModule
+    BrowserModule,
+    MatSnackBarModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule
+  ],
+  entryComponents: [
+    SnackbarComponent
   ],
   declarations: [
     AppComponent,
     LoginComponent,
     ChangePasswordComponent,
-    RegisterComponent  ],
+    RegisterComponent,
+    SnackbarComponent,
+    ProfileComponent
+  ],
   providers: [{
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
+    useClass: HashLocationStrategy,
   },
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  }
+  },
+  MatSnackBar
 ],
   bootstrap: [ AppComponent ]
 })
