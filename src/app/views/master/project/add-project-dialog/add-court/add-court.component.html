@@ -1,0 +1,144 @@
+<form [formGroup]="courtForm">
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>قيد المحكمة / Case number in court</mat-label>
+                <input type="text" matInput formControlName="caseNumber">
+                <mat-error *ngIf="caseNumber.hasError('required')">
+                    Case Number in court is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>المستشار المتابع / Consultant</mat-label>
+                <mat-select formControlName="consultant" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let user of users" [value]="user.id">
+                    {{ user.email }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="consultant.hasError('required')">Consultant is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>القاضي / Judge Name</mat-label>
+                <mat-select formControlName="judgeName" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let contact of contactList" [value]="contact.id">
+                    {{ contact.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="judgeName.hasError('required')">Judge Name is required</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>الدائرة / Office</mat-label>
+                <input type="text" matInput formControlName="office">
+                <mat-error *ngIf="office.hasError('required')">
+                    Office is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>جهة نظر القضية / Court Name</mat-label>
+                <input type="text" matInput formControlName="courtName">
+                <mat-error *ngIf="courtName.hasError('required')">
+                    Court Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>تاريخ استلامه لها / Consultant Engagement Date</mat-label>
+                <input 
+                    matInput 
+                    formControlName="consultantEngDate" 
+                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                    bsDatepicker #dp="bsDatepicker">
+                <mat-error *ngIf="consultantEngDate.hasError('required')">
+                    Consultant Engagement Date is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>موكلنا / Client</mat-label>
+                <mat-select formControlName="client" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let c of clientList" [value]="c.id">
+                    {{ c.email }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="client.hasError('required')">Client is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <label>صفة الموكل في الدعوى / Client Position in court
+                <mat-radio-group 
+                    aria-label="صفة الموكل في الدعوى / Client Position in court"
+                    formControlName="clientPosition">
+                    <mat-radio-button style="font-size: 0.8rem; font-weight: 10;" value="respondent">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
+                    <mat-radio-button value="prosecutor">مدعي / Prosecutor</mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="clientPosition.touched && clientPosition.hasError('required')">Client Position is required</mat-error>
+            </label>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>ملخص القضية / Consultant Engagement Text</mat-label>
+                <textarea type="text" matInput formControlName="consultantEngText"></textarea>
+                <mat-error *ngIf="consultantEngText.hasError('required')">Consultant Engagement Text is required</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>الخصم / Opposing</mat-label>
+                <mat-select formControlName="opposing" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let oppos of opposingList" [value]="oppos.id">
+                    {{ oppos.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="opposing.hasError('required')">Opposing is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <label>صفة الخصم في الدعوى / Opposing Position in court
+                <mat-radio-group 
+                    class="font-size"
+                    aria-label="صفة الخصم في الدعوى / Opposing Position in court"
+                    formControlName="opposingPosition">
+                    <mat-radio-button value="respondent">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
+                    <mat-radio-button value="prosecutor">مدعي / Prosecutor</mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="opposingPosition.touched && opposingPosition.hasError('required')">Opposing Position is required</mat-error>
+            </label>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>الحاضر عنه في الدعوى / Opposing Representator</mat-label>
+                <mat-select formControlName="opposingRepresentator" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let oppos of opposingRepList" [value]="oppos.id">
+                    {{ oppos.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="opposingRepresentator.hasError('required')">Opposing Representator is required</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="onSubmit()" mat-dialog-close [disabled]="courtForm.invalid"> إرسال </button>
+</div>

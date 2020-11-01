@@ -33,6 +33,7 @@ import { SnackbarService } from '../service/snackbar.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
 import { EditJobtitleDialogComponent } from './jobtitle-master/edit-jobtitle-dialog/edit-jobtitle-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddDepartmentDialogComponent } from './department-master/add-department-dialog/add-department-department-dialog.component';
@@ -44,6 +45,7 @@ import { EditUserDialogComponent } from './user/edit-user-dialog/edit-user-dialo
 import { AddRoleDialogComponent } from './role-master/add-role-dialog/add-role-dialog.component';
 import { AddProjectDialogComponent } from './project/add-project-dialog/add-project-dialog.component';
 import { AddCompanyDialogComponent } from './company-master/add-company-dialog/add-company-dialog.component';
+import { AddCourtComponent } from './project/add-project-dialog/add-court/add-court.component';
 
 @NgModule({
     declarations: [ CompanyFormsComponent,
@@ -51,7 +53,7 @@ import { AddCompanyDialogComponent } from './company-master/add-company-dialog/a
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent, AddCourtComponent],
     entryComponents: [
       AddJobtitleDialogComponent,
       EditJobtitleDialogComponent,
@@ -79,7 +81,8 @@ import { AddCompanyDialogComponent } from './company-master/add-company-dialog/a
       MatSnackBarModule,
       MatCheckboxModule,
       MatPaginatorModule,
-      MatSelectModule
+      MatSelectModule,
+      MatRadioModule
     ],
     providers: [
       MatDialog,

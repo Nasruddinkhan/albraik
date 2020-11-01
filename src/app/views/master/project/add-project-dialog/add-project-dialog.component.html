@@ -1,1 +1,93 @@
-<p>add-project-dialog works!</p>
+<div class="text-center">
+    <b>أضف المشروع</b>
+</div>
+<form [formGroup]="addProjectForm">
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>نوع المشروع / Project Type</mat-label>
+                <mat-select formControlName="projectType" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let pType of subType" [value]="pType.id">
+                    {{ pType.name }} - {{ pType.english_name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="projectType.hasError('required')">Project Type is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>الأهمية / Priority</mat-label>
+                <mat-select formControlName="priority" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let priority of priorityList" [value]="priority.key">
+                    {{ priority.value }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="priority.hasError('required')">Priority is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>المدير الموجـِّه / Manager</mat-label>
+                <mat-select formControlName="manager" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let user of users" [value]="user.key">
+                    {{ user.name }} - {{ user.email }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="manager.hasError('required')">Manager is required.</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>الاسم / Name</mat-label>
+                <input type="text" matInput formControlName="name">
+                <mat-error *ngIf="name.hasError('required')">
+                    Project Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>تاريخ فتح الإجراء / Start Date</mat-label>
+                <input 
+                    matInput 
+                    formControlName="startDate" 
+                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                    bsDatepicker #dp="bsDatepicker">
+                <mat-error *ngIf="startDate.hasError('required')">
+                    start date is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>رقم الدرج / Drawer Number</mat-label>
+                <input type="text" matInput formControlName="drawerNumber">
+                <mat-error *ngIf="drawerNumber.hasError('required')">
+                Drawer Number is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>الهدف الرئيسي / Objective</mat-label>
+                <textarea type="text" matInput formControlName="objective"></textarea>
+                <mat-error *ngIf="objective.hasError('required')">Objective is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>ملاحظات / Comment</mat-label>
+                <textarea type="text" matInput formControlName="comment"></textarea>
+                <mat-error *ngIf="comment.hasError('required')">Comment is required.</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
+<app-add-court [projectBasicData]="addProjectForm"></app-add-court>
