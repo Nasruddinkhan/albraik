@@ -209,6 +209,10 @@ export class UserComponent implements OnInit {
     }
   }
 
+  deleteUser() {
+    
+  }
+
   // deleteUser() {
   //   let checkedUserString = this.checkedDepartment.map(checkedDept => {
   //     return checkedDept['id'].toString();

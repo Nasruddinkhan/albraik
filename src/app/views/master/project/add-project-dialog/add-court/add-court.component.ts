@@ -28,7 +28,7 @@ export class AddCourtComponent implements OnInit {
   clientList: Contact[];
   opposingList: Contact[];
   users : UserMaster[];
-  oppsingRepList: Contact[];
+  opposingRepList: Contact[];
   companyId: string;
 
   constructor(private fb: FormBuilder,
@@ -126,9 +126,9 @@ export class AddCourtComponent implements OnInit {
   }
   findoppRepName() {
     this.contactService.getContactType(6).subscribe((res: Contact[]) => {
-      this.oppsingRepList = res;
+      this.opposingRepList = res;
     }, err => {
-      this.oppsingRepList = [];
+      this.opposingRepList = [];
     });
   }
   findoppsingName() {
