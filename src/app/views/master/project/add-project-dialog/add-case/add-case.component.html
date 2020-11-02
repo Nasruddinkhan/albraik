@@ -1,4 +1,4 @@
-<form [formGroup]="courtForm">
+<form [formGroup]="caseForm">
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
@@ -45,12 +45,15 @@
             </mat-form-field>
         </div>
         <div class="col-sm-4">
-            <mat-form-field class="example-full-width">
-                <mat-label>جهة نظر القضية / Court Name</mat-label>
-                <input type="text" matInput formControlName="courtName">
-                <mat-error *ngIf="courtName.hasError('required')">
-                    Court Name is <strong>required</strong>
-                </mat-error>
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>القاضي / Court Name</mat-label>
+                <mat-select formControlName="courtname" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let court of courtList" [value]="court.id">
+                    {{ court.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="courtName.hasError('required')">Court Name is required</mat-error>
             </mat-form-field>
         </div>
         <div class="col-sm-4">
@@ -85,8 +88,8 @@
                 <mat-radio-group 
                     aria-label="صفة الموكل في الدعوى / Client Position in court"
                     formControlName="clientPosition">
-                    <mat-radio-button style="font-size: 0.8rem; font-weight: 10;" value="respondent">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
-                    <mat-radio-button value="prosecutor">مدعي / Prosecutor</mat-radio-button>
+                    <mat-radio-button style="font-size: 0.8rem; font-weight: 10;" value="R">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
+                    <mat-radio-button value="P">مدعي / Prosecutor</mat-radio-button>
                 </mat-radio-group>
                 <mat-error *ngIf="clientPosition.touched && clientPosition.hasError('required')">Client Position is required</mat-error>
             </label>
@@ -118,8 +121,8 @@
                     class="font-size"
                     aria-label="صفة الخصم في الدعوى / Opposing Position in court"
                     formControlName="opposingPosition">
-                    <mat-radio-button value="respondent">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
-                    <mat-radio-button value="prosecutor">مدعي / Prosecutor</mat-radio-button>
+                    <mat-radio-button value="R">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
+                    <mat-radio-button value="P">مدعي / Prosecutor</mat-radio-button>
                 </mat-radio-group>
                 <mat-error *ngIf="opposingPosition.touched && opposingPosition.hasError('required')">Opposing Position is required</mat-error>
             </label>
@@ -140,5 +143,5 @@
 </form>
 <div class="dialog-button" mat-dialog-actions>
     <button mat-raised-button mat-dialog-close> أغلق </button>
-    <button mat-raised-button mat-dialog-close [disabled]="courtForm.invalid"> إرسال </button>
+    <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="caseForm.invalid"> إرسال </button>
 </div>

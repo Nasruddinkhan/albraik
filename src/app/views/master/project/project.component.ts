@@ -1,9 +1,11 @@
-import { Component, OnInit,TemplateRef  } from '@angular/core';
+import { Component, OnDestroy, OnInit,TemplateRef  } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ColorSketchModule } from 'ngx-color/sketch';
+import { Subscription } from 'rxjs';
 import { ProjectModel } from '../../modal/project-model';
+import { DialogSubmissionService } from '../../service/dialog-submission.service';
 import { ProjectService } from '../../service/project.service';
 import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
 
@@ -12,11 +14,12 @@ import { AddProjectDialogComponent } from './add-project-dialog/add-project-dial
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit, OnDestroy {
   caseList:ProjectModel[];
   constructor(private router: Router,
               private projectService: ProjectService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private dialogSubmissionService: DialogSubmissionService) {
              
                }
   searchText: string;
@@ -34,11 +37,26 @@ export class ProjectComponent implements OnInit {
   deleteDisabled = true;
   checkedProject = [];
   firstCheckedProject: Event;
+  subscription: Subscription;
 
   ngOnInit(): void {
     this.userid = sessionStorage.getItem("userId");
     this.findAllTask();
+    this.subscription = this.dialogSubmissionService.getDialogSubmitted().subscribe(dialogSubmitted => {
+      if (dialogSubmitted) {
+        this.findAllTask();
+        this.checkedProject = [];
+        this.handleDeleteButton();
+        this.handleEditButton();
+        this.handleAddButton();
+      }
+    });
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   createCase() {
     this.router.navigate([`/master/createcase`]);
   

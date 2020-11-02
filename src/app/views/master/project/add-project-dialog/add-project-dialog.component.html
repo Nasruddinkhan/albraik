@@ -6,7 +6,7 @@
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
                 <mat-label>نوع المشروع / Project Type</mat-label>
-                <mat-select formControlName="projectType" required>
+                <mat-select formControlName="projectType" (selectionChange)="changeProjectType()" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let pType of subType" [value]="pType.id">
                     {{ pType.name }} - {{ pType.english_name }}
@@ -32,7 +32,7 @@
                 <mat-label>المدير الموجـِّه / Manager</mat-label>
                 <mat-select formControlName="manager" required>
                   <mat-option>--</mat-option>
-                  <mat-option *ngFor="let user of users" [value]="user.key">
+                  <mat-option *ngFor="let user of users" [value]="user.id">
                     {{ user.name }} - {{ user.email }}
                   </mat-option>
                 </mat-select>
@@ -89,5 +89,14 @@
             </mat-form-field>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <mat-checkbox formControlName="hiddenProject" value="true">إجراء مخفي؟ / Hidden Project</mat-checkbox>
+        </div>
+    </div>
 </form>
-<app-add-court [projectBasicData]="addProjectForm"></app-add-court>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close *ngIf="type === null" (click)="onSubmit()" [disabled]="addProjectForm.invalid"> إرسال </button>
+    <button mat-raised-button mat-dialog-close *ngIf="type !== null" (click)="next()" [disabled]="addProjectForm.invalid"> Next </button>
+</div>

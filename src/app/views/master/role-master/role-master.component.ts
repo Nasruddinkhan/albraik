@@ -178,4 +178,18 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
     this.dialog.open(AddRoleDialogComponent);
   }
 
+  // openEditDialog() {
+  //   let oldDeptName: string;
+  //   for (let i = 0; i < this.depts.length; ++i) {
+  //     if (this.depts[i]['id'] === this.checkedDepartment[0]['id']) {
+  //       oldDeptName = this.depts[i]['name'];
+  //     }
+  //   }
+  //   this.dialogSubmitted.setData({ "oldDeptName": oldDeptName, "id": this.checkedDepartment[0]['id']});
+  //   this.handleDeleteButton();
+  //   this.handleEditButton();
+  //   this.handleAddButton();
+  //   this.dialog.open(EditDepartmentDialogComponent);
+  // }
+
 }
