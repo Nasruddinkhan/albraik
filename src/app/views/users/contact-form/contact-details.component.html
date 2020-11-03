@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-suitcase"></i> Contact Details
+  </div>
+  <div class="card-body">
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-success btn-circle btn-md" [disabled]="contactID?.length>0"
+          (click)="addContact()">
+          <div class="plus_bold"> + </div>
+        </button>
+        &nbsp;&nbsp;
+        <button type="button" (click)="editContact()" class="btn btn-info btn-circle btn-md"
+          [disabled]="contactID?.length>1 || contactID?.length === 0">
+          <div class="plus_bold"> <i class="icon-pencil"></i> </div>
+        </button>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-danger btn-circle btn-md" (click)="deleteContact()"
+          [disabled]="contactID?.length === 0 || contactID?.length>1">
+          <div class="plus_bold"> <i class="icon-trash"></i> </div>
+        </button>
+      </div>
+      <div class="col-sm-3">
+        <div class=" form-group ">
+          <select #categortyId class="form-control" >
+              <option [value]="null" >Choose...</option>
+              <option *ngFor="let master of masterList" [value]="master.id"> {{master.name}} -
+                  {{master.english_name}}
+              </option>
+          </select>
+      </div>
+      </div>
+      <div class="col-sm-3">
+      <div class=" form-group">
+        <input  #categortyName type="text" class="form-control" >
+      </div>
+    </div><!-- 
+    (click)="openModal(template)" -->
+      <div class="col-sm-2">
+        <button type="button" class="btn btn-dark btn-circle btn-md" (click)="contactFilter(categortyId, categortyName)"
+          [disabled]="contactID?.length>0">
+          <div class="plus_bold"><i class="fa fa-search-plus "></i> </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card" *ngIf="contactList?.length>0">
+  <div class="card-header card-border">
+    <i class="fa fa-address-book"></i> بحث جهة الاتصال / Search Contact {{size}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="card-body">
+        <app-contact [contact]="contactList" (someEvent)="onCheckboxChange($event)"></app-contact>
+        <div class="row">
+          <div class="col-xs-12 col-12">
+            <pagination [totalItems]="bigTotalItems" class="pagination-sm" (pageChanged)="pageChanged($event)"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [boundaryLinks]="true"
+              [rotate]="false" (numPages)="numPages = $event"></pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <ng-template #template>
+  <app-contact-filter></app-contact-filter>
+</ng-template> -->

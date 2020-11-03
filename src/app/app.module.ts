@@ -26,7 +26,7 @@ import { ProfileComponent } from './views/profile/profile.component';
     LoginComponent,
     ChangePasswordComponent,
     RegisterComponent,
-    ProfileComponent  ],
+    ProfileComponent],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy

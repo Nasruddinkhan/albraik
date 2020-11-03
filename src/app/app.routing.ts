@@ -76,7 +76,6 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
-     
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
@@ -87,12 +86,9 @@ export const routes: Routes = [
         loadChildren: () => import('./views/master/master.module').then(u => u.MasterModule),
         canActivate: [AuthGuardService]
       },
-      
       {
-     
-
         path: 'contact',
-        loadChildren: () => import('./views/users/contact/contact.module').then(u => u.ContactModule),
+        loadChildren: () => import('./views/users/contact.module').then(u => u.ContactModule),
         canActivate: [AuthGuardService]
       },
     ]

@@ -1,0 +1,114 @@
+<div class="card">
+    <div class="card-header card-border">
+        <i class="fa fa-address-book"></i> {{action}}
+    </div>
+    <form [formGroup]="createContactForm" >
+
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>الاسم الأول / *Name </label>
+                    <input type="text" class="form-control" formControlName="name"
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.name.errors }">
+                    <div *ngIf="f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required"><b>Name is required</b></div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label for="sel1"> فئة جهة الإتصال / *Contact Type</label>
+                    <select #mySelect class="form-control"
+                        formControlName="contactTypeId"
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.contactTypeId.errors }">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let master of masterList" [value]="master.id"> {{master.name}} -
+                            {{master.english_name}}
+                        </option>
+                    </select>
+                    <div *ngIf="f.contactTypeId.errors" class="invalid-feedback">
+                        <div *ngIf="f.contactTypeId.errors.required"><b>Contact is required</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>رقم الهاتف / Phone number</label>
+                    <input type="text" class="form-control" formControlName="phoneNumber" maxlength="12"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.phoneNumber.errors }">
+                    <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.phoneNumber.errors.required"><b>رقم الهاتف مطلوب</b></div>
+                        <div *ngIf="f.phoneNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div>
+                        <div *ngIf="f.phoneNumber.errors.pattern">الرقم العربي مطلوب </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>رقم الجوال / *Mobile number</label>
+                    <input type="text" class="form-control" formControlName="mobileNumber" maxlength="12"
+                        [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.mobileNumber.errors }">
+                    <div *ngIf="f.mobileNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.mobileNumber.errors.required"><b>رقم الهاتف مطلوب</b></div>
+                        <div *ngIf="f.mobileNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div>
+                        <div *ngIf="f.mobileNumber.errors.pattern">الرقم العربي مطلوب </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>البريد الإلكتروني / *Email</label>
+                    <input type="email" class="form-control" formControlName="email"
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.email.errors }">
+                    <div *ngIf="f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required"><b>البريد الالكتروني مطلوب</b></div>
+                        <div *ngIf="f.email.errors.email"><b>الرجاء إدخال بريد إلكتروني صحيح</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>رقم الفاكس / Fax Number</label>
+                    <input type="text" class="form-control" formControlName="faxNumber"
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.faxNumber.errors }">
+                    <div *ngIf="f.faxNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.faxNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div>
+                        <div *ngIf="f.faxNumber.errors.pattern">الرقم العربي مطلوب </div>
+                    </div>
+                </div>
+            </div>
+       
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>العنوان / Address</label>
+                        <textarea rows="2" class="form-control_textarea" formControlName="address"></textarea>
+                        <div class="invalid-feedback">
+                            <div><b>اسم الشركة مطلوب</b></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>الملاحظات / Comment</label>
+                        <textarea rows="2" class="form-control_textarea" formControlName="comment"></textarea>
+                        <div class="invalid-feedback">
+                            <div><b>اسم الشركة مطلوب</b></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="form-group col-sm-4">
+                    <div>
+                        <button type="button"  *ngIf="!isUpdate"  (click)="createContact()" class="btn btn-md btn-success">إضافة جهة
+                            الإتصال ADD</button>
+                            <button type="button" *ngIf="isUpdate"  (click)="updateContact()" class="btn btn-md btn-success">إضافة جهة
+                                Update</button>
+                    </div>
+
+                </div>
+            
+            <!-- </form> -->
+         <!--    <p>{{createContactForm.value | json}}</p> -->
+        </div>
+    </form>
+</div>

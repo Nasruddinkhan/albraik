@@ -29,7 +29,7 @@ export class LoginComponent {
       return
     }
     let userObj = { username: loginForm.value.username, password: loginForm.value.password }
-    console.table(userObj);
+   // console.table(userObj);
     this.loading = true;
     this.loginService.loginUser(userObj).then((loginUser: any) => {
       sessionStorage.setItem('token', loginUser.token);
