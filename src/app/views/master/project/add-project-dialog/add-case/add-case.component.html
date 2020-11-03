@@ -47,9 +47,9 @@
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
                 <mat-label>القاضي / Court Name</mat-label>
-                <mat-select formControlName="courtname" required>
+                <mat-select formControlName="courtName" required>
                   <mat-option>--</mat-option>
-                  <mat-option *ngFor="let court of courtList" [value]="court.id">
+                  <mat-option *ngFor="let court of courts" [value]="court.id">
                     {{ court.name }}
                   </mat-option>
                 </mat-select>

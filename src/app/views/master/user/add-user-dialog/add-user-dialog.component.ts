@@ -11,6 +11,7 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { UserService } from '../../../service/user.service';
 import { UserMaster } from '../../../modal/user-master';
 import { DialogSubmissionService } from '../../../service/dialog-submission.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -47,6 +48,7 @@ export class AddUserDialogComponent implements OnInit {
       jobTitleId: ['', Validators.required],
       phoneNumber: ['', [ Validators.required, Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
       joiningDate: ['', Validators.required],
+      role: ['USER'],
       isActive: [true],
       isFtl: [true],
       companyId: [this.companyId],
@@ -106,7 +108,19 @@ export class AddUserDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.userForm.value);
+    // let user = {
+    //   email: this.email.value,
+    //   jobTitleId: this.jobTitleId.value,
+    //   roleId: this.roleId.value,
+    //   departmentId: this.departmentId.value,
+    //   phoneNumber: this.phoneNumber.value,
+    //   joiningDate: this.joiningDate.value,
+    //   companyId: this.companyId,
+    //   isActive: true,
+    //   isFtl: true,
+    //   createdBy: this.userId
+    // };
+    console.log(JSON.stringify(this.userForm.value));
     if (this.userForm.invalid) {
       return;
     }

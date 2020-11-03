@@ -10,14 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './company-forms.component.html'
 })
 export class CompanyFormsComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'delete'];
-  checkedDepartment = [];
-  srNo:number = 0;
-  deleteDisabled = true;
-  editDisabled = true;
-  addDisabled = false;
-  firstCheckedDepartment: Event;
-  subscription: Subscription;
+  
 
   loading = false;
   comapnyObj :CompanyMaster;

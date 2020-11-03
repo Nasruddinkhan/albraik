@@ -1,0 +1,20 @@
+<form [formGroup]="inheritanceForm">
+    <div class="row">
+        <div class="col-sm-12">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>اسم صاحب التركة / Inheritance Owner Name</mat-label>
+                <mat-select formControlName="ownerName" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let contact of inheritContact" [value]="contact.id">
+                    {{ contact.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="ownerName.hasError('required')">Inheritance Owner Name is required.</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="inheritanceForm.invalid"> إرسال </button>
+</div>

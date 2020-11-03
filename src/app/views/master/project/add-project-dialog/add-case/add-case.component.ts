@@ -183,6 +183,7 @@ export class AddCaseComponent implements OnInit, OnDestroy {
     this.casemodel.caseOpposingPosition = this.opposingPosition.value;
     this.casemodel.caseOpposingRepresenterId = this.opposingRepresentator.value;
     this.casemodel.caseConsultantEngagementText = this.consultantEngText.value;
+    console.log(JSON.stringify(this.casemodel));
     this.projectService.addProjectCase(this.casemodel).subscribe((res: CaseModel) => {
       this.dialogSubmissionService.setDialogSubmitted(true);
       this.snackbar.success('.Case added successfully');

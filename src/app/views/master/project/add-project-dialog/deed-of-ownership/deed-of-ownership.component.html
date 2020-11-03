@@ -1,0 +1,62 @@
+<form [formGroup]="deedOfOwnershipForm">
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>المكتب القضائي المحالة إليه / Office Reference</mat-label>
+                <input type="text" matInput formControlName="officeRef">
+                <mat-error *ngIf="officeRef.hasError('required')">
+                    Office Reference is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>المحكمة المختصة / Court Name</mat-label>
+                <mat-select formControlName="courtName" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let court of courts" [value]="court.id">
+                    {{ court.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="courtName.hasError('required')">Court Name is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>اسم ناظر القضية / Name of case observer</mat-label>
+                <input type="text" matInput formControlName="caseObserver">
+                <mat-error *ngIf="caseObserver.hasError('required')">
+                    Name of case observer is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>رقم القيد لدى المحكمة / Case Number</mat-label>
+                <input type="text" matInput formControlName="caseNumber">
+                <mat-error *ngIf="caseNumber.hasError('required')">
+                    Case Number is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>تاريخ القيد لدى المحكمة / Referent date in court</mat-label>
+                <input 
+                    matInput 
+                    formControlName="refDate" 
+                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                    bsDatepicker #dp="bsDatepicker">
+                <mat-error *ngIf="refDate.hasError('required')">
+                    Referent date is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="deedOfOwnershipForm.invalid"> إرسال </button>
+</div>

@@ -10,8 +10,11 @@ import { DialogSubmissionService } from '../../../service/dialog-submission.serv
 import { ProjectService } from '../../../service/project.service';
 import { SnackbarService } from '../../../service/snackbar.service';
 import { UserService } from '../../../service/user.service';
+import { AddExecutedCaseComponent } from './add-executed-case/add-executed-case.component';
+import { DeedOfOwnershipComponent } from './deed-of-ownership/deed-of-ownership.component';
 import { AddCaseComponent } from './add-case/add-case.component';
 import { EstablishCompanyComponent } from './establish-company/establish-company.component';
+import { InheritanceComponent } from './inheritance/inheritance.component';
 
 @Component({
   selector: 'app-add-project-dialog',
@@ -153,6 +156,13 @@ export class AddProjectDialogComponent implements OnInit {
       case "company-establishment": 
         this.dialog.open(EstablishCompanyComponent);
         break;
+      case "deed-ownership":
+        this.dialog.open(DeedOfOwnershipComponent);
+        break;
+      case "executed-case":
+        this.dialog.open(AddExecutedCaseComponent);
+      case "inherit":
+        this.dialog.open(InheritanceComponent);
     }
   }
 

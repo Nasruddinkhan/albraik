@@ -48,6 +48,9 @@ import { AddCompanyDialogComponent } from './company-master/add-company-dialog/a
 import { AddCaseComponent } from './project/add-project-dialog/add-case/add-case.component';
 import { EditRoleDialogComponent } from './role-master/edit-role-dialog/edit-role-dialog.component';
 import { EstablishCompanyComponent } from './project/add-project-dialog/establish-company/establish-company.component';
+import { DeedOfOwnershipComponent } from './project/add-project-dialog/deed-of-ownership/deed-of-ownership.component';
+import { AddExecutedCaseComponent } from './project/add-project-dialog/add-executed-case/add-executed-case.component';
+import { InheritanceComponent } from './project/add-project-dialog/inheritance/inheritance.component';
 
 @NgModule({
     declarations: [ CompanyFormsComponent,
@@ -55,7 +58,7 @@ import { EstablishCompanyComponent } from './project/add-project-dialog/establis
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent, AddCaseComponent, EditRoleDialogComponent, EstablishCompanyComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent, AddCaseComponent, EditRoleDialogComponent, EstablishCompanyComponent, DeedOfOwnershipComponent, AddExecutedCaseComponent, InheritanceComponent],
     entryComponents: [
       AddJobtitleDialogComponent,
       EditJobtitleDialogComponent,
@@ -68,7 +71,10 @@ import { EstablishCompanyComponent } from './project/add-project-dialog/establis
       AddProjectDialogComponent,
       AddCompanyDialogComponent,
       AddCaseComponent,
-      EstablishCompanyComponent
+      EstablishCompanyComponent,
+      DeedOfOwnershipComponent,
+      AddExecutedCaseComponent,
+      InheritanceComponent
     ],
     imports: [
       MasterRoutingModule,

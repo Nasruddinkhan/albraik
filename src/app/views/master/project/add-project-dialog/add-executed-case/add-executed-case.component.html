@@ -1,0 +1,72 @@
+<form [formGroup]="executedCaseForm">
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field style="width: 100%;" appearance="fill">
+                <mat-label>القضية الجاري تنفيذ حكمها / Executed case</mat-label>
+                <mat-select formControlName="executedCase" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let case of cases" [value]="case.projectId">
+                    {{ case.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="executedCase.hasError('required')">Executed Case is required.</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>رقم الحكم / Verdict Number</mat-label>
+                <input type="text" matInput formControlName="verdictNumber">
+                <mat-error *ngIf="verdictNumber.hasError('required')">
+                    Verdict Number is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>التاريخ / Date</mat-label>
+                <input 
+                    matInput 
+                    formControlName="date" 
+                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                    bsDatepicker #dp="bsDatepicker">
+                <mat-error *ngIf="date.hasError('required')">
+                    Date is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>نوع الحكم / Verdict Type
+                <mat-radio-group 
+                    class="font-size"
+                    aria-label="نوع الحكم / Verdict Type"
+                    formControlName="verdictType">
+                    <mat-radio-button value="R">Verified / ((مصدق)) </mat-radio-button> &nbsp;&nbsp;
+                    <mat-radio-button value="P">Included in Work ((مشمول بالتقاء العمل))</mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="verdictType.touched && verdictType.hasError('required')">Verdict Type is required</mat-error>
+            </label>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>تاريخ إلحاق الصيغة التنفيذية / Verdict Decision Date</mat-label>
+                <input 
+                    matInput 
+                    formControlName="verdictDecisionDate" 
+                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                    bsDatepicker #dp="bsDatepicker">
+                <mat-error *ngIf="verdictDecisionDate.hasError('required')">
+                    Verdict Decision Date is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div *ngIf="executedCaseForm.invalid" class="col-sm-4">
+            Invalid
+        </div>
+    </div>
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="executedCaseForm.invalid"> إرسال </button>
+</div>
