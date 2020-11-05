@@ -77,7 +77,7 @@
                 <mat-select formControlName="client" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let c of clientList" [value]="c.id">
-                    {{ c.email }}
+                    {{ c.name }}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="client.hasError('required')">Client is required</mat-error>

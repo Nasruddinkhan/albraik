@@ -74,7 +74,8 @@ import { InheritanceComponent } from './project/add-project-dialog/inheritance/i
       EstablishCompanyComponent,
       DeedOfOwnershipComponent,
       AddExecutedCaseComponent,
-      InheritanceComponent
+      InheritanceComponent,
+      EditRoleDialogComponent
     ],
     imports: [
       MasterRoutingModule,

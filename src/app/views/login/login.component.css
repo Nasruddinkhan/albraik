@@ -68,3 +68,9 @@ a:hover {
   color: white;
   background-color: rgb(58, 57, 57);
 }
+
+@media screen and (max-width: 992px) {
+  .app-body {
+    margin-top: 0px;
+  }
+}

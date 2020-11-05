@@ -1,1 +1,21 @@
-<p>edit-role-dialog works!</p>
+<div class="text-center">
+    <b>إنشاء دور</b>
+</div>
+<form class="form" [formGroup]="editRoleForm">
+    <mat-form-field class="example-full-width">
+        <mat-label>الأدوار</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="name.hasError('required')">Role name is required.</mat-error>
+    </mat-form-field>
+    <div class="row">
+        <div class="col-sm-6" *ngFor="let privilege of privileges">
+            <mat-checkbox [checked]="checked(privilege.id)" (change)="onCheckboxChange($event, privilege.id)">{{ privilege.name }}</mat-checkbox>
+        </div>
+    </div>
+    <mat-checkbox *ngIf="largePrivilege" style="font-size: 13px;" [checked]="checked(largePrivilege.id)" (change)="onCheckboxChange($event, largePrivilege.id)">{{ largePrivilege.name }}</mat-checkbox>
+</form>
+
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="editRoleForm.invalid || checkedPrivilegesList.length === 0" mat-dialog-close> إرسال </button>
+</div>

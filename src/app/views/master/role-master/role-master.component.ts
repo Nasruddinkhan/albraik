@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { AddRoleDialogComponent } from './add-role-dialog/add-role-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSubmissionService } from '../../service/dialog-submission.service';
+import { EditRoleDialogComponent } from './edit-role-dialog/edit-role-dialog.component';
 @Component({
   selector: 'app-role-master',
   templateUrl: './role-master.component.html',
@@ -28,7 +29,7 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
               private dialogSubmitted: DialogSubmissionService) { }
   userID: string;
   companyId : string;
-  roles:RoleModel[];
+  roles: RoleModel[];
   pageNo = 1;
   bigTotalItems: number;
   numPages: number = 0;
@@ -69,12 +70,13 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
 
   findAllRoles(){
     this.loading = true
-    this.roleService.findAllRoles( this.userID).subscribe((res:RoleModel[])=>{
+    this.roleService.findAllRoles(this.companyId).subscribe((res: RoleModel[])=>{
       this.roles = res;
       this.srNo = 0;
       this.roles.forEach(role => {
         role['srNo'] = ++this.srNo;
-      })
+      });
+      console.log(this.roles);
       this.loading = false;
       this.bigTotalItems = res.length;
     },err=>{
@@ -93,20 +95,6 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
 
   deleteRole(index) {
     this.roleNames.removeAt(index);
-  }
-
-  displayAddRoleField() {
-    let icons = document.getElementById("icons");
-    icons.style.display = "none";
-    let addRoleField = document.getElementById("addRoleField");
-    addRoleField.style.display = "block";
-  }
-
-  displayIcons() {
-    let addRoleField = document.getElementById("addRoleField");
-    addRoleField.style.display = "none";
-    let icons = document.getElementById("icons");
-    icons.style.display = "block";
   }
 
   onSubmit(){
@@ -178,18 +166,18 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
     this.dialog.open(AddRoleDialogComponent);
   }
 
-  // openEditDialog() {
-  //   let oldDeptName: string;
-  //   for (let i = 0; i < this.depts.length; ++i) {
-  //     if (this.depts[i]['id'] === this.checkedDepartment[0]['id']) {
-  //       oldDeptName = this.depts[i]['name'];
-  //     }
-  //   }
-  //   this.dialogSubmitted.setData({ "oldDeptName": oldDeptName, "id": this.checkedDepartment[0]['id']});
-  //   this.handleDeleteButton();
-  //   this.handleEditButton();
-  //   this.handleAddButton();
-  //   this.dialog.open(EditDepartmentDialogComponent);
-  // }
+  openEditDialog() {
+    let oldRole: RoleModel;
+    for (let i = 0; i < this.roles.length; ++i) {
+      if (this.roles[i]['id'] === this.checkedRole[0]['id']) {
+        oldRole = this.roles[i];
+      }
+    }
+    this.dialogSubmitted.setData(oldRole);
+    this.handleDeleteButton();
+    this.handleEditButton();
+    this.handleAddButton();
+    this.dialog.open(EditRoleDialogComponent);
+  }
 
 }

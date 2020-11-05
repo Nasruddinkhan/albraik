@@ -170,7 +170,7 @@ export class AddProjectDialogComponent implements OnInit {
     this.project.projectId = null;
     this.project.projectTypeId = this.projectType.value;
     this.project.name =  this.name.value;
-    this.project.startDate = this.startDate.value;
+    this.project.startDate = this.startDate.value.toISOString();
     this.project.comment =  this.comment.value;
     this.project.drawerNumber = this.drawerNumber.value;
     this.project.hiddinProject = this.hiddenProject.value ? this.hiddenProject.value : false;

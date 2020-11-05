@@ -13,10 +13,14 @@ export class RoleService {
 
   private baseURL = environment.baseUrl + 'infra';
   constructor(private http: HttpClient) { }
-  
-  public findAllRoles(userId : String) : Observable<RoleModel[]>  {
-    return this.http.get<RoleModel[]>(this.baseURL +`/api/get/${userId}/roles`);
+
+  public findAllRoles(companyId: string): Observable<RoleModel[]> {
+    return this.http.get<RoleModel[]>(this.baseURL + `/api/get/${companyId}/companyroles`);
   }
+  
+  // public findAllRoles(userId : String) : Observable<RoleModel[]>  {
+  //   return this.http.get<RoleModel[]>(this.baseURL +`/api/get/${userId}/roles`);
+  // }
 
   public createRole(name: string, privilegeIdList: string[]): Observable<RoleModel[]>  {
     return this.http.post<RoleModel[]>(this.baseURL +`/api/role`, { "name": name, "privilegeIdList": privilegeIdList });
@@ -24,6 +28,10 @@ export class RoleService {
 
   public getAllPrivilages(): Observable<PrivilegeModel[]> {
     return this.http.get<PrivilegeModel[]>(this.baseURL +`/api/role/privilege`);
+  }
+
+  public updateRole(id: number, name: string, privilegeIdList: string[]): Observable<RoleModel[]> {
+    return this.http.put<RoleModel[]>(this.baseURL + `/api/role/${id}`, { "name": name, "privilegeIdList": privilegeIdList });
   }
 
 }
