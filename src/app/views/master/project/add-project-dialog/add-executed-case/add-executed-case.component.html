@@ -37,6 +37,15 @@
     </div>
     <div class="row">
         <div class="col-sm-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>المصدر / Source</mat-label>
+                <input type="text" matInput formControlName="source">
+                <mat-error *ngIf="source.hasError('required')">
+                    Source is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
             <label>نوع الحكم / Verdict Type
                 <mat-radio-group 
                     class="font-size"
@@ -60,9 +69,6 @@
                     Verdict Decision Date is required
                 </mat-error>
             </mat-form-field>
-        </div>
-        <div *ngIf="executedCaseForm.invalid" class="col-sm-4">
-            Invalid
         </div>
     </div>
 </form>

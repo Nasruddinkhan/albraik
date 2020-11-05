@@ -55,7 +55,7 @@ export class LoginComponent {
     },err=>{
       this.loading =   false;
       // this.toastService.errorMessage(err.error.message);
-      this.snackbarService.failure(err.error.message);
+      this.snackbarService.failure("UNAUTHORIZED");
     });
   }
 }

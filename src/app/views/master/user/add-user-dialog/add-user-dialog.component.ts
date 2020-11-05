@@ -60,7 +60,7 @@ export class AddUserDialogComponent implements OnInit {
   }
 
   findAllRoles(){
-    this.roleService.findAllRoles(this.userId).subscribe((res: RoleModel[]) => {
+    this.roleService.findAllRoles(this.companyId).subscribe((res: RoleModel[]) => {
       this.roles = res;
     }, err => {
       this.snackService.failure("Failed to load available roles." + err);

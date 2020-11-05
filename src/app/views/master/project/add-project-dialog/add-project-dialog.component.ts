@@ -161,8 +161,10 @@ export class AddProjectDialogComponent implements OnInit {
         break;
       case "executed-case":
         this.dialog.open(AddExecutedCaseComponent);
+        break;
       case "inherit":
         this.dialog.open(InheritanceComponent);
+        break;
     }
   }
 
