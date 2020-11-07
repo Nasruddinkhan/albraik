@@ -50,30 +50,31 @@
     cursor: pointer;
 }
 
-.example-container {
+/* .example-container {
     width: 400px;
     height: 200px;
     margin: 12px;
     border: 1px solid #555;
-  }
+  } */
   
-mat-drawer-content {
+/* mat-drawer-content {
     padding: 12px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
+} */
 
 .main {
     margin-top: 1.5%; 
-    margin-right: 15.57%;
+    /* margin-right: 15.57%; */
+    z-index: 1;
     transition: margin-right 0.3s;
     transition-timing-function: linear;
 }
 
 .my-navbar {
     position: -webkit-sticky; 
-    z-index: 1; 
+    z-index: 2; 
     box-shadow: -5px 3px 10px rgb(141, 138, 138);
     position: sticky; 
     top: 0;
@@ -114,11 +115,51 @@ mat-drawer-content {
 
 .active {
     background-color: white;
-    padding-top: 16px;
-    padding-bottom: 6px;
-    padding-right: 10px;
-    padding-left: 21px;
-    border-radius: 5px;
+    /* padding-top: 16px; */
+    /* padding-bottom: 6px; */
+    /* padding-right: 10px; */
+    /* padding-left: 2px; */
+    /* border-radius: 5px; */
+    border-bottom: 1px solid black;
+}
+
+.example-container {
+    /* position: fixed; */
+    width: 100%;
+    overflow: auto;
+    /* background-color: transparent; */
+    /* border: 1px solid rgba(0, 0, 0, 0.5); */
+}
+
+/* .example-container ul {
+    list-style: none;
+} */
+
+/* .example-container ul li {
+    padding: 0rem;
+} */
+
+.example-container ul li a {
+    color: black;
+    font-size: 23px;
+}
+
+.example-sidenav {
+    position: fixed;
+    top: 60px;
+    z-index: 2;
+    width: 200px;
+    font-size: larger;
+    padding: 1.2rem 0.3rem;
+    /* background-color: rgb(214, 214, 214); */
+    background-color: rgb(0, 0, 0, 0.05);
+}
+
+app-footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 2;
 }
 
 @keyframes sidebar_animation {

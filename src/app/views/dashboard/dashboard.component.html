@@ -23,3 +23,48 @@
       
         </div>
 </div> -->
+<div class="card">
+  <div class="card-header">
+    التوجيه / Task <hr>
+  </div>
+  <div class="card-body">
+    <div>
+      <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+          <ng-container matColumnDef="projectNumber">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> الرقم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <ng-container matColumnDef="projectName">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> الرقم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <ng-container matColumnDef="task">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <ng-container matColumnDef="duration">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <ng-container matColumnDef="assignee">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <ng-container matColumnDef="priority">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <ng-container matColumnDef="quickResponse">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
+            <td mat-cell *matCellDef="let task">  </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let task; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

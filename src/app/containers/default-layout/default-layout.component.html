@@ -57,7 +57,7 @@
       mat-icon-button 
       class="example-icon" 
       aria-label="Example icon-button with menu icon"
-      (click)="toggleSidebar()">
+      (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span style="font-size: 25px;"> البريك للمحاماة</span>
@@ -85,7 +85,91 @@
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar> -->
 
-  <div class="side-bar">
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+            <i class="icon-speedometer"></i> لوحة القيادة 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/master/company" routerLinkActive="active">
+            <i class="fa fa-building"></i> الشركة 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/master/department" routerLinkActive="active">
+            <i class="fa fa-sitemap"></i> الإدراة
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/master/jobtitle" routerLinkActive="active">
+            <i class="fa fa-black-tie"></i> المسمى الوظيفي 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/master/role" routerLinkActive="active">
+            <i class="fa fa-stumbleupon"></i> الأدوار 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/master/court" routerLinkActive="active">
+            <i class="fa fa-university"></i> جهة نظر القضية 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/master/user" routerLinkActive="active">
+            <i class="fa fa-user"></i> المستعمل 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/master/project" routerLinkActive="active">
+            <i class="fa fa-suitcase"></i> نوع المشروع 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+            <i class="fa fa-address-book"></i> إدارة الاتصال 
+          </a>
+        </li>
+      </ul>
+    </mat-drawer>
+    <main class="main">
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div><!-- container-fluid -->
+    </main>
+    <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
+      <tabset>
+        <tab>
+          <ng-template tabHeading><i class="icon-list"></i></ng-template>
+          <div class="list-group list-group-accent">
+            <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
+              <color-sketch (onChange)="handleChange($event)"></color-sketch>
+            </div>
+         
+          </div>
+        </tab>
+        <tab>
+          <ng-template tabHeading><i class="icon-speech"></i></ng-template>
+       
+        </tab>
+        <tab>
+          <ng-template tabHeading><i class="icon-settings"></i></ng-template>
+          
+        </tab>
+      </tabset>
+    </app-aside> 
+    <app-footer>
+      <span> &copy; Albraik Law Management</span>
+      <span class="ml-auto text-center">Powered by AWS Software Solutions<a style="visibility: hidden;">UI for Albraik Law Management</a></span>
+    </app-footer>
+  </mat-drawer-container>
+</div>
+
+
+  <!-- <div class="side-bar">
     <ul>
       <li class="pl-3 pt-3">
         <a routerLink="/dashboard" routerLinkActive="active">
@@ -133,7 +217,7 @@
         </a>
       </li><hr>
     </ul>
-  </div>
+  </div> -->
 
   <!-- <div class="side-bar-icon">
     <ul>
@@ -150,10 +234,10 @@
   </div> -->
 
   <!-- Main content -->
-  <main class="main">
+  <!-- <main class="main">
     <div class="container-fluid">
       <router-outlet></router-outlet>
-    </div><!-- container-fluid -->
+    </div>
   </main>
   <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
     <tabset>
@@ -180,4 +264,4 @@
 <app-footer>
   <span> &copy; Albraik Law Management</span>
   <span class="ml-auto text-center">Powered by AWS Software Solutions<a style="visibility: hidden;">UI for Albraik Law Management</a></span>
-</app-footer>
+</app-footer> -->

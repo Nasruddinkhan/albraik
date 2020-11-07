@@ -8,8 +8,9 @@ import { ColorEvent } from 'ngx-color';
   styleUrls: ['dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  displayedColumns: string[] = ['projectNumber', 'projectName', 'task', 'date', 'duration', 'assignee', 'priority', 'quickResponse'];
+  tasks = [];
 
-  
   ngOnInit(): void {
     // generate random values for mainChart
     
