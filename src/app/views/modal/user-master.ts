@@ -3,5 +3,4 @@ export class UserMaster{
     name:string
     joiningDate: Date;
     id:number
-    
 }

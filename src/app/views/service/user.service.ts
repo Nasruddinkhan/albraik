@@ -31,4 +31,12 @@ export class UserService {
   updateUser(profile:string) : Observable<UserModel>{
     return this.http.post<UserModel>(this.baseURL +`/api/profile`, profile);
   }
+  updateUserProfile(update:string) : Observable<UserMaster>{
+    return this.http.post<UserMaster>(this.baseURL +`/api/user/update`, update);
+  }
+
+  deleteUser(userId : string) : Observable<any>{
+    return this.http.get<any>(this.baseURL +`/api/user/${userId}/delete`);
+
+  }
 }

@@ -22,13 +22,15 @@ import { InheritenceComponent } from './project/inheritence/inheritence.componen
 import { ProjectDtlComponent } from './project/project-dtl/project-dtl.component';
 import { CourtComponent } from './court/court.component';
 import { DeptDetailsComponent } from './department-master/dept-details/dept-details.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
+import { UserFormButtonComponent } from './user/user-form-button/user-form-button.component';
 @NgModule({
     declarations: [ CompanyFormsComponent,
                    CompanyMasterComponent, 
                    CompanyDetailsComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, UserFormComponent, UserFormButtonComponent],
     imports: [
       MasterRoutingModule,
       SharedModule,

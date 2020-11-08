@@ -1,0 +1,16 @@
+<div class="card" >
+    <div class="card-header">
+      <i class="fa fa-suitcase"></i> User Details
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+          <button type="button" class="btn btn-success btn-circle btn-md"  [disabled]="userList?.length>0"   (click)="addUser()"><div class="plus_bold" > + </div></button> 
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-info btn-circle btn-md"   (click)="editUser()" [disabled]="userList?.length>1 || userList?.length === 0"  ><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-danger btn-circle btn-md"  (click)="deleteUser()" [disabled]="userList?.length>1 || userList?.length === 0" ><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-dark btn-circle btn-md"  ><div class="plus_bold" ><i class="fa fa-search-plus "></i> </div></button> 
+        </div>
+    </div>
+</div>

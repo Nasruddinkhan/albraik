@@ -15,6 +15,7 @@ import { DeedOwnershipComponent } from './project/deed-ownership/deed-ownership.
 import { CompanyEstablishmentComponent } from './project/company-establishment/company-establishment.component';
 import { InheritenceComponent } from './project/inheritence/inheritence.component';
 import { CourtComponent } from './court/court.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
 
 const routes: Routes = [
   {
@@ -64,7 +65,7 @@ const routes: Routes = [
         title: 'User'
       },
       component: UserComponent,
-      canActivate: [AuthGuardService]
+      canActivate: [AuthGuardService],
     }
     ,
     {
@@ -137,8 +138,24 @@ const routes: Routes = [
       },
       component: CourtComponent,
       canActivate: [AuthGuardService]
+    },
+    {
+      path:'adduser',
+      data: {
+        title: 'Add User'
+      },
+      component: UserFormComponent,
+      canActivate: [AuthGuardService]
     }
-   
+    ,
+    {
+      path:'edituser/:userId',
+      data: {
+        title: 'Edit User'
+      },
+      component: UserFormComponent,
+      canActivate: [AuthGuardService]
+    }
     ]
   }
 ];

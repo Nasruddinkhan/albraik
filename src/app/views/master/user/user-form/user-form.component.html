@@ -1,0 +1,101 @@
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-user-plus"></i> {{action}} 
+    </div>
+    <form [formGroup]="userForm" >
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="form-group col-sm-6">
+                    <label>البريد الإلكتروني / Email </label>
+                    <input type="text" class="form-control" formControlName="email"
+                        oninput="this.value=this.value.toLowerCase()" 
+                        [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.email.errors }">
+                    <div *ngIf="f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required"><b>البريد الالكتروني مطلوب</b></div>
+                        <div *ngIf="f.email.errors.email"><b>الرجاء إدخال بريد إلكتروني صحيح</b></div>
+                    </div>
+
+                </div>
+               <div class="form-group col-sm-6">
+                    <label>الأدوار / Role</label>
+                    <select #mySelect class="form-control" formControlName="roleId"
+                    [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.roleId.errors }">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let role of roles" [value]="role.id"> {{role.name}}</option>
+                    </select>
+                    <div *ngIf="f.roleId.errors" class="invalid-feedback">
+                        <div *ngIf="f.roleId.errors.required"><b>Role Id is required</b></div>
+                    </div>
+                </div>
+      
+               
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>الإدراة / Departments</label>
+                    <select #mySelect class="form-control" formControlName="departmentId" 
+                    [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.departmentId.errors }">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let d of dept" [value]="d.id"> {{d.name}}</option>
+                    </select>
+                    <div *ngIf="f.departmentId.errors" class="invalid-feedback">
+                        <div *ngIf="f.departmentId.errors.required"><b>Department Id is required</b></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>مهنة / Job </label>
+                    <select #mySelect class="form-control"  formControlName="jobTitleId"
+                    [ngClass]="{ 'is-invalid red-border-class': isSubmitted &&  f.jobTitleId.errors }">
+                        <option selected>Choose...</option>
+                        <option *ngFor="let j of jobs" [value]="j.id"> {{j.name}}</option>
+                    </select>   
+                    <div *ngIf="f.jobTitleId.errors" class="invalid-feedback">
+                        <div *ngIf="f.jobTitleId.errors.required"><b>Job Id is required</b></div>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+           
+                <div class="form-group col-sm-6">
+                    <label>رقم الهاتف / Phone Number</label>
+                    <input type="text" 
+                    class="form-control" 
+                    formControlName="phoneNumber" 
+                    maxlength="12"
+                    [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.phoneNumber.errors }">
+                <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                  <div *ngIf="f.phoneNumber.errors.required"><b>رقم الهاتف مطلوب</b></div>
+                   <div *ngIf="f.phoneNumber.errors.minlength"><b>يجب أن يتكون رقم الهاتف من ١٢ رقمًا</b></div> 
+                 <!--   <div *ngIf="f.phoneNumber.errors.pattern">الرقم العربي مطلوب </div> -->
+              </div>
+
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>تاريخ مباشرة بالعمل / Joining Date </label>
+                    <input type="text"  formControlName="joiningDate"   class="form-control"  [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'  }"
+                    bsDatepicker #dp="bsDatepicker"
+                    [ngClass]="{ 'is-invalid red-border-class':  isSubmitted &&  f.joiningDate.errors }">
+                    <div *ngIf="f.joiningDate.errors" class="invalid-feedback">
+                        <div *ngIf="f.joiningDate.errors.required"><b>Date cant not be empty</b></div>
+                    </div>
+                </div>
+
+            </div> 
+<!--             <p>{{userForm.value | json}}</p>
+ -->        </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit"  *ngIf="!isUpdate" (click)="registerUser()" class="btn btn-md btn-success">إنشاء شركة</button>
+                <button type="submit"  *ngIf="isUpdate" (click)="updateUser()" class="btn btn-md btn-success">Update User</button>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+</div>

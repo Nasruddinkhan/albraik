@@ -27,4 +27,5 @@ export class UserModel{
     jobId : string;
     roleId : string;
     deptId :string;
+    joiningDate: Date;
 }
