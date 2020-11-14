@@ -68,13 +68,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   findAllTask(){
     this.projectService.findAllTask(this.userid,this.pageNo).subscribe((res:any)=>{
-      console.log(res);
       this.projectList=res.content;
       this.srNo = 0;
       this.projectList.forEach(project => {
         project['srNo'] = ++this.srNo;
       });
-      console.log(this.projectList);
      this.bigTotalItems = res.totalElements;
     });
   }

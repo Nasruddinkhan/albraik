@@ -120,7 +120,6 @@ export class AddUserDialogComponent implements OnInit {
     //   isFtl: true,
     //   createdBy: this.userId
     // };
-    console.log(JSON.stringify(this.userForm.value));
     if (this.userForm.invalid) {
       return;
     }

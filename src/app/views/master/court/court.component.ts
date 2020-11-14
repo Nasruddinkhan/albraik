@@ -101,7 +101,6 @@ export class CourtComponent implements OnInit {
     this.courtNames.removeAt(index);
   }
   onSubmit(){
-    console.log('jobtitle onSubmit');
     this.courtList = new Array<CourtMaster>();
     this.addCourtForm.value['court_names'].map(item => {
       this.courtList.push(new CourtMaster(item.addCourt));
@@ -166,7 +165,6 @@ export class CourtComponent implements OnInit {
     let checkedCourtsString = this.checkedCourts.map(checkedJob => {
       return checkedJob['id'].toString();
     });
-    console.log(typeof(checkedCourtsString[0]) +"\n"+ typeof(this.checkedCourts[0]));
     this.courtService.deleteCourt(checkedCourtsString).subscribe(res => {
       this.findAllCourt();
       this.snackbarService.success("."+this.checkedCourts.length+" court(s) deleted successfully.");

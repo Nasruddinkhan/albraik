@@ -1,0 +1,84 @@
+<form class="content" [formGroup]="addTaskForm">
+    <div class="row">
+        <div class="col-sm-6">
+            <mat-form-field style="width: 100%;">
+                <mat-label>التوجيه</mat-label>
+                <textarea matInput formControlName="task" rows="13" cols="10"></textarea>
+                <mat-error *ngIf="task.hasError('required')">Task is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>المكلف</mat-label>
+                    <mat-select formControlName="assignee" required>
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let user of users" [value]="user.id">
+                        {{ user.name }} - {{ user.email }}
+                    </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="assignee.hasError('required')">Please choose an assignee</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>الأهمية</mat-label>
+                    <mat-select formControlName="priority" required>
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let priority of priorityList" [value]="priority.key">
+                        {{ priority.value }}
+                    </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="priority.hasError('required')">Please choose a priority</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <!-- <mat-form-field class="example-full-width">
+                    <mat-label>تاريخ مباشرة بالعمل</mat-label>
+                    <input 
+                        (bsValueChange)="setDuration(dp)"
+                        matInput 
+                        formControlName="dueDate" 
+                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                        bsDatepicker #dp="bsDatepicker">
+                    <mat-error *ngIf="dueDate.hasError('required')">
+                        Joining date is required
+                    </mat-error>
+                </mat-form-field> -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Different locale</mat-label>
+                    <input matInput [matDatepicker]="dp">
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <mat-label>المدة</mat-label>
+                    <input type="text" formControlName="duration" matInput>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-checkbox formControlName="hiddenTask" value="true">إجراء مخفي؟ / Hidden Task</mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <label>
+        <input type="file"  formControlName="attachement" name="attachement" (change)="fileProgress($event)" >
+        <div class="form-group col-sm-3">
+            <div *ngIf="fileUploadProgress">
+                Upload progress: {{ fileUploadProgress }}
+            </div>
+            <div  *ngIf="previewUrl">
+                <img [src]="previewUrl" height="200" />                 
+            </div>
+            <div class="col-sm-3" *ngIf="uploadedFilePath">
+                {{uploadedFilePath}}
+            </div>
+         </div>
+    </label>
+</form>
+<div class="dialog-button" style="clear: both;" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close [disabled]="addTaskForm.invalid"> إرسال </button>
+</div>

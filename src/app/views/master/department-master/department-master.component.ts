@@ -43,14 +43,13 @@ export class DepartmentMasterComponent implements OnInit {
     private snackService: SnackbarService) { }
   submitted = false;
   ngOnInit() {
-    let role = sessionStorage.getItem('role')
+    // let role = sessionStorage.getItem('role')
 
-    if (!checkUserRole(role)) {
-      this.router.navigate([`/master/unathurise`]);
-    }
+    // if (!checkUserRole(role)) {
+    //   this.router.navigate([`/master/unathurise`]);
+    // }
     this.userID = sessionStorage.getItem("userId");
     this.companyId = sessionStorage.getItem("companyId");
-    console.log(this.companyId);
     if (checkNullEmpty(this.companyId)) {
       this.router.navigate([`/master/company`]);
     }
@@ -182,7 +181,6 @@ export class DepartmentMasterComponent implements OnInit {
     let checkedDeptsString = this.checkedDepartment.map(checkedDept => {
       return checkedDept['id'].toString();
     });
-    console.log(typeof(checkedDeptsString[0]) +"\n"+ typeof(this.checkedDepartment[0]));
     this.deptService.deleteDept(checkedDeptsString).subscribe(res => {
       this.findAlldepartments();
       this.snackService.success("." + this.checkedDepartment.length + "Department(s) deleted successfully");

@@ -1,3 +1,4 @@
+import { OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,30 +11,37 @@ import { SnackbarService } from '../../service/snackbar.service';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dialog.component';
 import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
+import { SearchContactDialogComponent } from './search-contact-dialog/search-contact-dialog.component';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
     loading = false;
     isSubmitted = false;
     createContactForm:FormGroup;
+    contactSearchForm: FormGroup;
     role: string;
     pageName : string;
     masterList : ContactType[];
     contactList : Contact[];
+    filteredContactList: Contact[];
+    contactTypeList: ContactType[] = [];
     private subscription: Subscription;
     private contactSubscription: Subscription;
-    displayedColumns: string[] = ['position', 'name', 'email', 'mobileNo', 'delete'];
+    displayedColumns: string[] = ['position', 'name', 'contactTypeName', 'email', 'mobileNo', 'delete'];
     checkedContact = [];
     srNo: number = 0;
     deleteDisabled = true;
     editDisabled = true;
     addDisabled = false;
+    contactFiltered = false;
+    noRecordsFound = false;
     firstcheckedContact: Event;
     dialogSubscription: Subscription;
+    searchSubscription: Subscription;
 
     constructor(private contactSearch : ContactSearchService,
                private fb:FormBuilder,
@@ -50,6 +58,11 @@ export class ContactComponent implements OnInit {
           this.handleEditButton();
           this.handleDeleteButton();
           this.handleAddButton();
+        }
+      });
+      this.searchSubscription = this.dialogSubmitted.getData().subscribe(formValue => {
+        if (formValue) {
+          this.search(formValue['searchName'], formValue['contactTypeId']);
         }
       });
       this.createContactForm = this.fb.group({
@@ -86,20 +99,18 @@ export class ContactComponent implements OnInit {
     onLoads(){
       this.subscription = this.contactSearch.getContactTypePages().subscribe((res:ContactType[])=>{
         this.masterList = res;
-
       });
-
+      this.contactSearch.getContactTypeList().subscribe((res: ContactType[]) => {
+        this.contactTypeList = res;
+      });
       this.contactSubscription = this.contactSearch.getContactList().subscribe((res:Contact[])=>{
         this.contactList = res;
-        this.srNo = 0;
-        this.contactList.forEach(contact => {
-          contact['srNo'] = ++this.srNo;
-        });
+        this.assignSrNumberAndType(this.contactList);
       });
     }
 
     changed(e: string){
-      console.log(e);
+      // console.log(e);
       this.pageName = e;
     }
 
@@ -108,7 +119,8 @@ export class ContactComponent implements OnInit {
       this.contactList=[];
       this.subscription.unsubscribe();
       this.dialogSubscription.unsubscribe();
-      console.log('destroy component');
+      this.searchSubscription.unsubscribe();
+      // console.log('destroy component');
     }
 
     onCheckboxChange(e, contactId: number) {
@@ -158,7 +170,6 @@ export class ContactComponent implements OnInit {
       let checkedContactsString = this.checkedContact.map(checkedCont => {
         return checkedCont['id'].toString();
       });
-      console.log(typeof(checkedContactsString[0]) +"\n"+ typeof(this.checkedContact[0]));
       this.contactSearch.deleteContact(checkedContactsString).subscribe(res => {
         this.onLoads();
         this.snackService.success("." + this.checkedContact.length + "contact(s) deleted successfully");
@@ -187,6 +198,66 @@ export class ContactComponent implements OnInit {
       this.handleEditButton();
       this.handleAddButton();
       this.dialog.open(EditContactDialogComponent);
+    }
+
+    openSearchDialog() {
+      this.dialog.open(SearchContactDialogComponent);
+    }
+
+    search(name?: string, contactTypeId?: number) {
+      if (contactTypeId) {
+        this.contactSearch.getContactType(contactTypeId).subscribe(contactTypeListById => {
+          this.filteredContactList = contactTypeListById;
+          if (name) {
+            this.filteredContactList = this.filteredContactList.filter(contact => {
+              return contact.name === name;
+            });
+          }
+          this.handleNoRecords();
+          this.assignSrNumberAndType(this.filteredContactList);
+        });
+      } else if (name) {
+        this.contactSearch.getContactList().subscribe((contactList: Contact[]) => {
+          this.filteredContactList = contactList.filter(contact => {
+            return contact.name === name;
+          });
+          this.handleNoRecords();
+          this.assignSrNumberAndType(this.filteredContactList);
+        });
+      }
+      this.contactFiltered = true;
+    }
+
+    assignSrNumberAndType(contactList: Contact[]) {
+      if (contactList) {
+        this.srNo = 0;
+        contactList.forEach(contact => {
+          contact['srNo'] = ++this.srNo;
+          for (let i = 0; i < this.contactTypeList.length; ++i) {
+            if (this.contactTypeList[i].id === contact.contact_type_id) {
+              contact.contactTypeName = this.contactTypeList[i].name;
+              break;
+            }
+          }
+        });
+      }
+    }
+
+    handleNoRecords() {
+      if (this.filteredContactList && this.filteredContactList.length !== 0) {
+        this.noRecordsFound = false;
+      } else {
+        this.noRecordsFound = true;
+      }
+    }
+    
+    refreshTable() {
+      this.contactSubscription = this.contactSearch.getContactList().subscribe((res:Contact[])=>{
+        this.contactList = res;
+        this.assignSrNumberAndType(this.contactList);
+      });
+      this.contactFiltered = false;
+      this.noRecordsFound = false;
     }
 
 }

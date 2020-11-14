@@ -41,7 +41,7 @@ export class ChangePasswordComponent implements OnInit {
         return;
     }
     const userID = paramMap.get('userID');
-    console.log('read ',userID);
+    // console.log('read ',userID);
     this.changeForm.get('id').setValue(userID);
   });
   }
@@ -60,7 +60,7 @@ export class ChangePasswordComponent implements OnInit {
     if (this.changeForm.invalid) {
       return;
     }
-    console.log(JSON.stringify(this.changeForm.value));
+    // console.log(JSON.stringify(this.changeForm.value));
     this.loading = true;
     this.registerService.changePassword(JSON.stringify(this.changeForm.value)).subscribe((res:any)=>{
      this.snackService.success('password changed successfully');

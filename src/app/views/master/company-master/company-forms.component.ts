@@ -54,7 +54,7 @@ export class CompanyFormsComponent implements OnInit {
     formData.append('address', this.companyForm.value['address']);
     formData.append('name', this.companyForm.value['companyName']);
 
-    console.log(formData);
+    // console.log(formData);
     this.loading= true;
     this.compService.createCompany(formData,   this.userID).subscribe((res:CompanyMaster)=>{
       this.comapnyObj = res;
@@ -77,7 +77,6 @@ export class CompanyFormsComponent implements OnInit {
     this.comapnyObj = res;
     }, err=>{
       this.loading = false;
-      console.log(err.error.message);
     });
 
   }

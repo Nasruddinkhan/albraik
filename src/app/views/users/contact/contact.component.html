@@ -13,8 +13,13 @@
                 <button type="button" class="btn btn-md" [disabled]="editDisabled" (click)="openEditDialog()"><div class="plus_bold" > <i class="icon-pencil"></i> </div></button> 
         
                 &nbsp;&nbsp;
-                <button type="button" class="btn btn-md" [disabled]="deleteDisabled" (click)="deleteContact()"><div class="plus_bold" > <i class="icon-trash"></i> </div></button> 
-               
+                <button type="button" class="btn btn-md" [disabled]="deleteDisabled" (click)="deleteContact()"><div class="plus_bold" > <i class="icon-trash"></i> </div></button>
+                
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-md" (click)="openSearchDialog()"><div class="plus_bold" > <i class="fa fa-search" aria-hidden="true"></i> </div></button>
+                
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-md" (click)="refreshTable()"><div class="plus_bold" > <i class="fa fa-refresh" aria-hidden="true"></i> </div></button>
             </div>
 
         <!-- <div class="card-body">
@@ -114,7 +119,7 @@
     <div >
         <div class="main-border-left main-border-right main-border-bottom">
 
-            <table mat-table [dataSource]="contactList" class="mat-elevation-z8">
+            <table mat-table [dataSource]="contactFiltered ? filteredContactList : contactList" class="mat-elevation-z8" style="margin-bottom: 1.5rem;">
                 <ng-container matColumnDef="position">
                   <th class="text-center" style="width: 10%;" mat-header-cell *matHeaderCellDef> رقم سري </th>
                   <td mat-cell *matCellDef="let contact"> {{ contact.srNo }} </td>
@@ -122,6 +127,10 @@
                 <ng-container matColumnDef="name">
                     <th class="text-center" mat-header-cell *matHeaderCellDef> الاسم </th>
                     <td mat-cell *matCellDef="let contact"> {{ contact.name }} </td>
+                </ng-container>
+                <ng-container matColumnDef="contactTypeName">
+                    <th class="text-center" mat-header-cell *matHeaderCellDef> اسم نوع جهة الاتصال </th>
+                    <td mat-cell *matCellDef="let contact"> {{ contact.contactTypeName }} </td>
                 </ng-container>
                 <ng-container matColumnDef="email">
                     <th class="text-center" mat-header-cell *matHeaderCellDef> البريد الإلكتروني </th>
@@ -140,6 +149,9 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let contact; columns: displayedColumns;"></tr>
             </table>
+            <div class="text-center" *ngIf="noRecordsFound">
+                <h3>No Records Found</h3>
+            </div>
         </div>
         <!-- <div class="card-header card-border">
         <i class="fa fa-address-book"></i> بحث جهة الاتصال / Search Contact 

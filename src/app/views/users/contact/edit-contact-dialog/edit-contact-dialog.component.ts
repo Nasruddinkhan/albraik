@@ -42,7 +42,6 @@ export class EditContactDialogComponent implements OnInit {
     this.subscription = this.contactSearch.getContactTypePages().subscribe((res:ContactType[])=>{
       this.contactType = res;
     });
-    console.log(this.contactType);
   }
 
   ngOnDestroy() {

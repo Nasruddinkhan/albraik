@@ -55,7 +55,6 @@ export class CompanyMasterComponent {
       this.loading = false;
       let temp: CompanyMaster[] = [];
       temp.push(res);
-      console.log(res);
       this.companyObj = temp;
       this.srNo = 0;
       this.companyObj.forEach(company => {
@@ -63,7 +62,6 @@ export class CompanyMasterComponent {
       })
     }, err=>{
       this.loading = false;
-      console.log(err.error.message);
     });
   }
 

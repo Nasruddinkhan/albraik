@@ -8,6 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class ContactDetailsComponent implements OnInit{
 
     ngOnInit(){
-        console.log('after click');
+        // console.log('after click');
     }
 }

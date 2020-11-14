@@ -33,7 +33,6 @@ export class CompanyEstablishmentComponent implements OnInit {
 
   onSubmit(form: NgForm){
     this.establisment.companyName = form.value.companyName;
-    console.log(JSON.stringify( this.establisment));
     this.sucription = this.projectService.addEstiblishmentCompanyCase( this.establisment).subscribe((res:Establisement)=>{
     this.router.navigate([`/master/project`])
       this.toster.susessMessage('Add case successfully');
@@ -43,6 +42,6 @@ export class CompanyEstablishmentComponent implements OnInit {
     });
   }
   changed(value : string){
-    console.log(value);
+    // console.log(value);
   }
 }

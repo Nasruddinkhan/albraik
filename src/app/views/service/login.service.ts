@@ -18,7 +18,7 @@ export class LoginService {
   }
 
   getToken() {
-    console.log("token ::::::::: "+sessionStorage.getItem('token'));
+    // console.log("token ::::::::: "+sessionStorage.getItem('token'));
     return sessionStorage.getItem('token')
   }
 }

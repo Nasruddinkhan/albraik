@@ -1,0 +1,19 @@
+<form [formGroup]="contactSearchForm">
+    <mat-form-field style="width: 100%;">
+        <mat-label>Contact Name</mat-label>
+        <input type="search" matInput formControlName="searchName" (change)="handleSearchButton()" (keydown)="handleSearchButton()">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Contact Type</mat-label>
+        <mat-select formControlName="contactTypeId" (selectionChange)="handleSearchButton()">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let contactType of contactTypeList" [value]="contactType.id">
+            {{ contactType.name }}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="search()" [disabled]="closeDisabled" mat-dialog-close> بحث </button>
+</div>

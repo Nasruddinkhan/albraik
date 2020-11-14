@@ -59,17 +59,16 @@ export class ExecutedCaseComponent implements OnInit {
       return;
     }
     this.verditcurrentlyChecked = targetType;
-     console.log(this.verditcurrentlyChecked);
   }
   onSubmit(form: NgForm){
-   console.log(JSON.stringify(form.value));
+  //  console.log(JSON.stringify(form.value));
    this.verdit.projectDetailsId=null;
    this.verdit.verdictExecutedCaseId= form.value.verdictExecutedCaseId;
    this.verdit.verdictNumber = form.value.verdictNumber;
    this.verdit.verdictDate =form.value.verdictDate;
    this.verdit.verdictDecisionDate = form.value.verdictDecisionDate;
    this.verdit.verdictType = this.verditcurrentlyChecked?'V':'I';
-   console.log(JSON.stringify(this.verdit));
+  //  console.log(JSON.stringify(this.verdit));
    this.sucription = this.projectService.addVerditCase(  this.verdit).subscribe((res:VerditModel)=>{
     this.router.navigate([`/master/project`])
       this.toster.susessMessage('Add case successfully');
@@ -79,7 +78,7 @@ export class ExecutedCaseComponent implements OnInit {
     });
   }
   changed(value : string){
-    console.log(value);
+    // console.log(value);
   }
 
 }

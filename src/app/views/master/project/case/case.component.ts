@@ -56,7 +56,7 @@ export class CaseComponent implements OnInit , OnDestroy, OnChanges{
     
   }
   ngOnChanges(changes: SimpleChanges): void {
-  console.log(changes);
+  // console.log(changes);
   }
   ngOnDestroy(): void {
 
@@ -78,7 +78,7 @@ export class CaseComponent implements OnInit , OnDestroy, OnChanges{
     this.locale  = null;
     this.project=null;
     this.courts=null;
-    console.log('clear all activity');
+    // console.log('clear all activity');
     this.contactService = null;
     this.courtService=null;
     this.projectService=null;
@@ -149,7 +149,7 @@ export class CaseComponent implements OnInit , OnDestroy, OnChanges{
     });
   }
   onSubmit(form: NgForm) {
-    console.log(JSON.stringify(form.value));
+    // console.log(JSON.stringify(form.value));
     this.casemodel.projectDetailsId = null;
     this.casemodel.caseNumber = form.value.caseNumber;
     this.casemodel.caseCourtId = form.value.caseCourtId;
@@ -163,7 +163,6 @@ export class CaseComponent implements OnInit , OnDestroy, OnChanges{
     this.casemodel.caseOpposingPosition = this.oppcurrentlyChecked ? 'R' : 'P';
     this.casemodel.caseOpposingRepresenterId = form.value.caseOpposingRepresenterId;
     this.casemodel.caseConsultantEngagementText = form.value.caseConsultantEngagementText;
-    console.log(JSON.stringify(this.casemodel));
     this.sucription = this.projectService.addProjectCase(this.casemodel).subscribe((res: CaseModel) => {
       this.router.navigate([`/master/project`])
       this.toster.susessMessage('Add case successfully');
@@ -173,7 +172,7 @@ export class CaseComponent implements OnInit , OnDestroy, OnChanges{
     });
   }
   changed(value: string) {
-    console.log(value);
+    // console.log(value);
   }
   selectCheckBox(targetType: ClientPositionType) {
     if (this.currentlyChecked === targetType) {
@@ -182,7 +181,6 @@ export class CaseComponent implements OnInit , OnDestroy, OnChanges{
     }
 
     this.currentlyChecked = targetType;
-    console.log(this.currentlyChecked);
   }
 
   selectOpositionCheckBox(targetType: OpositionPositionType) {
@@ -191,6 +189,5 @@ export class CaseComponent implements OnInit , OnDestroy, OnChanges{
       return;
     }
     this.oppcurrentlyChecked = targetType;
-    console.log(this.oppcurrentlyChecked);
   }
 }

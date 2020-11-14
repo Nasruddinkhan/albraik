@@ -36,6 +36,10 @@ export class ContactSearchService {
     return this.http.get<Contact[]>(this.baseURL +`/api/contact?contactTypeId=${contactType}`);
   }
 
+  public getContactTypeList(): Observable<ContactType[]> {
+    return this.http.get<ContactType[]>(this.baseURL + `/api/contact/type`);
+  }
+
   public updateContact(id: number, valuesToBeChanged: Object): Observable<Contact[]> {
     return this.http.put<Contact[]>(this.baseURL + `/api/contact/${id}`, valuesToBeChanged);
   }

@@ -83,7 +83,7 @@ export class AddCompanyDialogComponent implements OnInit {
     formData.append('address', this.address.value);
     formData.append('name', this.companyName.value);
 
-    console.log(formData);
+    // console.log(formData);
     this.compService.createCompany(formData, this.userId).subscribe((res:CompanyMaster)=>{
       this.dialogSubmissionService.setDialogSubmitted(true);
       this.previewUrl = null;

@@ -52,7 +52,6 @@ export class ProfileComponent implements OnInit {
         return;
       }
       const userId = paramMap.get('userID');
-      console.log(userId);
       this.getUserProfile(userId);
       this.userProfileForm = this.fb.group({
         id: [],
@@ -92,7 +91,6 @@ export class ProfileComponent implements OnInit {
     this.loading = true;
     this.userService.getUserDetails(userId).subscribe((res: UserModel) => {
       this.user = res;
-      console.log(this.user);
       this.loading = false;
       this.userProfileForm.setValue({
         email: this.user.email,
@@ -113,7 +111,6 @@ export class ProfileComponent implements OnInit {
         roleId: this.user.roleId,
         deptId: this.user.deptId
       });
-      console.log(this.phoneNumber);
     }, err => {
       this.loading =false;
     });
@@ -155,7 +152,6 @@ export class ProfileComponent implements OnInit {
     if (this.userProfileForm.invalid) {
       return;
     }
-    console.log(this.userProfileForm.value);
     this.userService.updateUser(JSON.stringify(this.userProfileForm.value)).subscribe((res: UserModel) => {
       this.snackService.success("User details updated successfully.");
       this.router.navigate(['/dashboard']);

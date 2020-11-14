@@ -53,7 +53,6 @@ export class AddCourtDialogComponent implements OnInit {
     this.courts.map(court => {
       courtList.push(new CourtMaster(court.name));
     });
-    console.log(courtList);
     this.courtService.createCourt(courtList).subscribe((res:CourtModel[]) => {
       this.snackService.success(".Court(s) added successfully");
       this.dialogSubmitted.setDialogSubmitted(true);

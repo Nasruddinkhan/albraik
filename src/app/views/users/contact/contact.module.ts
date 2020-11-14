@@ -18,11 +18,12 @@ import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dial
 import { ReactiveFormsModule } from '@angular/forms';
 import { SnackbarService } from '../../service/snackbar.service';
 import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
+import { SearchContactDialogComponent } from './search-contact-dialog/search-contact-dialog.component';
 
 
 
 @NgModule({
-  declarations: [ ContactComponent, AddContactDialogComponent, EditContactDialogComponent],
+  declarations: [ ContactComponent, AddContactDialogComponent, EditContactDialogComponent, SearchContactDialogComponent],
   imports: [
     CommonModule,
     ContactRoutingModule,
@@ -45,7 +46,8 @@ import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-d
   ],
   entryComponents: [
     AddContactDialogComponent,
-    EditContactDialogComponent
+    EditContactDialogComponent,
+    SearchContactDialogComponent
   ],
   providers: [
     SnackbarService

@@ -12,13 +12,13 @@
 </div> -->
 
 <div class="card">
-    <div class="card-header main-border-left main-border-right main-border-top">
+    <div class="card-header">
         <i class="fa fa-stumbleupon"></i> الأدوار <hr>
 
     </div>
     <form [formGroup]="roleForm"  (ngSubmit)="onSubmit()">
 
-    <div class="card-body main-border-left main-border-right">
+    <div class="card-body">
         <div id="icons" class="form-group row mr-3">
             <button type="button" class="btn btn-md" [disabled]="addDisabled" (click)="openAddDialog()"><div class="plus_bold"> + </div></button> 
             &nbsp;&nbsp;
@@ -73,7 +73,7 @@
         </div>
     </div> -->
 </form>
-<div class="main-border-left main-border-right main-border-bottom">
+<div>
 
     <table mat-table [dataSource]="roles" class="mat-elevation-z8">
         <ng-container matColumnDef="position">

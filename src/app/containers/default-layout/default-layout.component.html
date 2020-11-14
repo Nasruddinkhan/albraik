@@ -1,55 +1,3 @@
-<!-- <app-header
-  [navbarBrandRouterLink]="['/dashboard']"
-  [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/Logo.png', width: 50, height: 50, alt: 'LLB'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/Logo.png', width: 30, height: 30, alt: 'LLB'}"
-  [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
-<ul class="nav navbar-nav d-md-down-none">
-    <li class="nav-item px-3">
-      <a class="nav-link">Dashboard</a>
-    </li>
-    <li class="nav-item px-3">
-      <a class="nav-link">Users</a>
-    </li>
-    <li class="nav-item px-3">
-      <a class="nav-link">Settings</a>
-    </li>
-    
-  </ul>
-  <ul class="nav navbar-nav ml-auto" style="margin-right: 51%!important;">
-    <li class="nav-item d-md-down-none">
-      <a class="nav-link"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
-    </li>
-    <li class="nav-item d-md-down-none">
-      <a class="nav-link"><i class="icon-list"></i></a>
-    </li>
-    <li class="nav-item d-md-down-none">
-      <a class="nav-link"><i class="icon-location-pin"></i></a>
-    </li>
-    <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown"  (click)="isCollapsed = !isCollapsed" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle >
-        <img src="assets/img/brand/Logo.png" class="img-avatar " alt="admin@bootstrapmaster.com"/>
-      </a>
-  <div class="dropdown-menu dropdown-menu-right"  [collapse]="isCollapsed"    >
-        <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span class="badge badge-warning">42</span></a>
-        <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-dark">42</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
-        <div class="divider"></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock account</a>
-        <a class="dropdown-item" routerLink="/logout" ><i class="fa fa-lock"></i> Logout</a>
-      </div>
-    </li>
-  </ul> 
-</app-header> -->
-
 <div class="my-navbar">
   <mat-toolbar class="mat-toolbar-row" color="warn">
     <!-- <span class="icon" (click)="toggleSidebar()"><i class="fa fa-bars"></i></span> -->
@@ -67,68 +15,54 @@
     <mat-menu #menu="matMenu">
       <button (click)="logout()" mat-menu-item>Log out</button>
     </mat-menu>
-    <!-- <div class="profile">
-      <ul>
-        <li (click)="logout()">Log out</li>
-      </ul>
-    </div> -->
   </mat-toolbar>
 </div>
 
-<!-- <mat-toolbar class="example-spacer" color="warn">
-  <span>My Application</span>
-</mat-toolbar> -->
-
 <div class="app-body">
-  <!-- <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
-    <app-sidebar-minimizer></app-sidebar-minimizer>
-  </app-sidebar> -->
-
   <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
       <ul class="nav flex-column">
-        <li class="nav-item">
+        <li class="nav-item" id="dashboard">
           <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
             <i class="icon-speedometer"></i> لوحة القيادة 
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="company">
           <a class="nav-link" routerLink="/master/company" routerLinkActive="active">
             <i class="fa fa-building"></i> الشركة 
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="department">
           <a class="nav-link" routerLink="/master/department" routerLinkActive="active">
             <i class="fa fa-sitemap"></i> الإدراة
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="jobTitle">
           <a class="nav-link" routerLink="/master/jobtitle" routerLinkActive="active">
             <i class="fa fa-black-tie"></i> المسمى الوظيفي 
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="role">
           <a class="nav-link" routerLink="/master/role" routerLinkActive="active">
             <i class="fa fa-stumbleupon"></i> الأدوار 
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="court">
           <a class="nav-link" routerLink="/master/court" routerLinkActive="active">
             <i class="fa fa-university"></i> جهة نظر القضية 
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="user">
           <a class="nav-link" routerLink="/master/user" routerLinkActive="active">
             <i class="fa fa-user"></i> المستعمل 
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="project">
           <a class="nav-link" routerLink="/master/project" routerLinkActive="active">
             <i class="fa fa-suitcase"></i> نوع المشروع 
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="contact">
           <a class="nav-link" routerLink="/contact" routerLinkActive="active">
             <i class="fa fa-address-book"></i> إدارة الاتصال 
           </a>
@@ -138,7 +72,7 @@
     <main class="main">
       <div class="container-fluid">
         <router-outlet></router-outlet>
-      </div><!-- container-fluid -->
+      </div>
     </main>
     <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
       <tabset>
@@ -167,101 +101,3 @@
     </app-footer>
   </mat-drawer-container>
 </div>
-
-
-  <!-- <div class="side-bar">
-    <ul>
-      <li class="pl-3 pt-3">
-        <a routerLink="/dashboard" routerLinkActive="active">
-          <i class="icon-speedometer"></i><span> لوحة القيادة </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/master/company" routerLinkActive="active">
-          <i class="fa fa-building"></i><span> الشركة </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/master/department" routerLinkActive="active">
-          <i class="fa fa-sitemap"></i><span> الإدراة </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/master/jobtitle" routerLinkActive="active">
-          <i class="fa fa-black-tie"></i><span> المسمى الوظيفي </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/master/role" routerLinkActive="active">
-          <i class="fa fa-stumbleupon"></i><span> الأدوار </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/master/court" routerLinkActive="active">
-          <i class="fa fa-university"></i><span> جهة نظر القضية </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/master/user" routerLinkActive="active">
-          <i class="fa fa-user"></i><span> المستعمل </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/master/project" routerLinkActive="active">
-          <i class="fa fa-suitcase"></i><span> نوع المشروع </span>
-        </a>
-      </li><hr>
-      <li class="pl-3 pt-3">
-        <a routerLink="/contact" routerLinkActive="active">
-          <i class="fa fa-address-book"></i><span> إدارة الاتصال </span>
-        </a>
-      </li><hr>
-    </ul>
-  </div> -->
-
-  <!-- <div class="side-bar-icon">
-    <ul>
-      <li id="dashboard" class="pl-3 pt-3"><a routerLink="/dashboard"><i class="icon-speedometer"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/master/company"><i class="fa fa-building"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/master/department"><i class="fa fa-sitemap"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/master/jobtitle"><i class="fa fa-black-tie"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/master/role"><i class="fa fa-stumbleupon"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/master/court"><i class="fa fa-university"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/master/user"><i class="fa fa-user"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/master/project"><i class="fa fa-suitcase"></i></a></li><hr>
-      <li class="pl-3 pt-3"><a routerLink="/contact"><i class="fa fa-address-book"></i></a></li><hr>
-    </ul>
-  </div> -->
-
-  <!-- Main content -->
-  <!-- <main class="main">
-    <div class="container-fluid">
-      <router-outlet></router-outlet>
-    </div>
-  </main>
-  <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
-    <tabset>
-      <tab>
-        <ng-template tabHeading><i class="icon-list"></i></ng-template>
-        <div class="list-group list-group-accent">
-          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
-            <color-sketch (onChange)="handleChange($event)"></color-sketch>
-          </div>
-       
-        </div>
-      </tab>
-      <tab>
-        <ng-template tabHeading><i class="icon-speech"></i></ng-template>
-     
-      </tab>
-      <tab>
-        <ng-template tabHeading><i class="icon-settings"></i></ng-template>
-        
-      </tab>
-    </tabset>
-  </app-aside> 
-</div>
-<app-footer>
-  <span> &copy; Albraik Law Management</span>
-  <span class="ml-auto text-center">Powered by AWS Software Solutions<a style="visibility: hidden;">UI for Albraik Law Management</a></span>
-</app-footer> -->

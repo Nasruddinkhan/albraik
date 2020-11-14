@@ -109,7 +109,6 @@ export class AddProjectDialogComponent implements OnInit {
   getProjectType(){
     this.subscription = this.projectService.getProjectType().subscribe((res: SubjectType[])=>{
         this.subType = res;
-        console.log(this.subType);
     });
   }
   
@@ -137,7 +136,6 @@ export class AddProjectDialogComponent implements OnInit {
 
   onSubmit() {
     this.setProjectValues();
-    console.log(this.project);
     this.projectService.addProjectTask(this.project).subscribe((res: ProjectModel)=>{
       this.dialogSubmissionService.setDialogSubmitted(true);
       this.snackbar.success('.Task added successfully');

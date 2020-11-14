@@ -1,10 +1,10 @@
 <div class="text-center">
-    <b>User Information</b>
+    <b>إضافة المستخدم</b>
 </div>
 <form [formGroup]="userForm" class="example-form">
     <mat-form-field class="example-full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="Ex. pat@example.com">
+        <mat-label>البريد الإلكتروني</mat-label>
+        <input matInput formControlName="email">
         <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
             Please enter a valid email address
         </mat-error>
@@ -13,7 +13,7 @@
         </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-        <mat-label>Joining Date</mat-label>
+        <mat-label>تاريخ مباشرة بالعمل</mat-label>
         <input 
             matInput 
             formControlName="joiningDate" 
@@ -24,7 +24,7 @@
         </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-        <mat-label>Phone Number</mat-label>
+        <mat-label>رقم الهاتف</mat-label>
         <input matInput formControlName="phoneNumber">
         <mat-error *ngIf="phoneNumber.hasError('pattern') && !phoneNumber.hasError('required')">
             Please enter a valid phone number
@@ -37,7 +37,7 @@
         </mat-error>
     </mat-form-field>
     <mat-form-field class="mr-3" appearance="fill">
-        <mat-label>Role</mat-label>
+        <mat-label>وظيفة</mat-label>
         <mat-select formControlName="roleId" required>
           <mat-option>--</mat-option>
           <mat-option *ngFor="let role of roles" [value]="role.id">
@@ -47,7 +47,7 @@
         <mat-error *ngIf="roleId.hasError('required')">Please choose a role</mat-error>
     </mat-form-field>
     <mat-form-field class="mr-3" appearance="fill">
-        <mat-label>Department</mat-label>
+        <mat-label>الإدراة</mat-label>
         <mat-select formControlName="departmentId" required>
           <mat-option>--</mat-option>
           <mat-option *ngFor="let department of depts" [value]="department.id">
@@ -57,7 +57,7 @@
         <mat-error *ngIf="departmentId.hasError('required')">Please choose a department</mat-error>
     </mat-form-field>
     <mat-form-field class="mr-2" appearance="fill">
-        <mat-label>Job</mat-label>
+        <mat-label>المسمى الوظيفي</mat-label>
         <mat-select formControlName="jobTitleId" required>
           <mat-option>--</mat-option>
           <mat-option *ngFor="let job of jobs" [value]="job.id">

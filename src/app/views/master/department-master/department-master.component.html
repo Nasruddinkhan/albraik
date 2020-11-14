@@ -1,12 +1,12 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 
 <div class="card">
-    <div class="card-header main-border-left main-border-right main-border-top">
+    <div class="card-header">
         <i class="fa fa-sitemap"></i> الإدراة <hr>
     </div>
     <form [formGroup]="departmentForm">
 
-        <div class="card-body main-border-left main-border-right">
+        <div class="card-body">
             <div id="icons" class="form-group row mr-3">
                 <button type="button" class="btn btn-md" [disabled]="addDisabled" (click)="openAddDialog()"><div class="plus_bold"> + </div></button> 
                 &nbsp;&nbsp;
@@ -63,7 +63,7 @@
         <!-- <app-dept-details [depts]="depts"></app-dept-details> -->
     </form>
     <div>
-        <div class="main-border-left main-border-right main-border-bottom">
+        <div>
 
             <table mat-table [dataSource]="depts" class="mat-elevation-z8">
                 <ng-container matColumnDef="position">

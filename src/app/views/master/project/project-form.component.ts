@@ -51,7 +51,6 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
      this.toster = null;
      this.userService = null;
      this.localeService = null;
-     console.log('clear all refrence data');
 
   }
   ngOnInit(): void {
@@ -96,10 +95,8 @@ export class ProjectFormComponent implements OnInit, OnDestroy {
     },err=>{
       this.toster.errorMessage(err.error.message);
     });
-    console.log(this.userId);
   }
   changedProjectType(value:string){
-    console.log(value);
     switch(value){
       case "a2bd22d5-2703-444d-9628-b2fb040df14d":
         this.type =  "case";

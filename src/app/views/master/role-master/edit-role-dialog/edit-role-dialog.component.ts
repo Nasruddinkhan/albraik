@@ -49,7 +49,6 @@ export class EditRoleDialogComponent implements OnInit {
           pos = i;
         }
       }
-      console.log(this.largePrivilege);
       this.privileges.splice(pos, 1);
     });
   }

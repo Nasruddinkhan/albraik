@@ -68,7 +68,6 @@ export class AddRoleDialogComponent implements OnInit {
           pos = i;
         }
       }
-      console.log(this.largePrivilege);
       this.privileges.splice(pos, 1);
     });
     this.addRoleForm = this.fb.group({
@@ -108,7 +107,6 @@ export class AddRoleDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.name);
     // this.roleMst = new RoleMaster(this.userId, this.companyId, roleNames);
     this.roleService.createRole(this.name, this.checkedPrivilegesList).subscribe((res: RoleModel[]) => {
       this.snackbarService.success(".Role created successfully");

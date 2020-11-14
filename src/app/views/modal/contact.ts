@@ -19,6 +19,7 @@ export class Contact{
     id:number;
     name:string;
     contact_type_id: number;
+    contactTypeName: string;
     phone_number: string;
     mobile_number: string;
     email: string;

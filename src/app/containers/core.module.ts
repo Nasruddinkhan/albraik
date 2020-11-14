@@ -28,6 +28,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
   const APP_CONTAINERS = [
     DefaultLayoutComponent
@@ -51,6 +52,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSidenavModule,
     MatIconModule,
     MatMenuModule,
+    MatListModule,
     TabsModule.forRoot(),
     BrowserModule, BrowserAnimationsModule,HttpClientModule
   ],

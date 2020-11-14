@@ -38,7 +38,6 @@ export class EditJobtitleDialogComponent implements OnInit, OnDestroy {
   }
 
   updateJobtitle() {
-    console.log(this.updatedJobtitle);
     this.jobService.updateJobTitle(this.updatedJobtitle, this.id).subscribe(res => {
       this.snackService.success("." + this.oldJobtitle + "successfully updated to " + this.updatedJobtitle);
       this.dialogSubmissionService.setDialogSubmitted(true);

@@ -39,7 +39,6 @@ export class EditCourtDialogComponent implements OnInit {
   }
 
   updateCourtName() {
-    console.log(this.updatedCourtName);
     this.courtService.updateCourtName(this.updatedCourtName, this.id).subscribe(res => {
       this.snackService.success("." + this.oldCourtName + " successfully updated to " + this.updatedCourtName);
       this.dialogSubmissionService.setDialogSubmitted(true);

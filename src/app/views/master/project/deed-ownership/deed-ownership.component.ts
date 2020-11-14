@@ -43,14 +43,14 @@ export class DeedOwnershipComponent implements OnInit {
   }
  
   onSubmit(form: NgForm){
-   console.log(JSON.stringify(form.value));
+  //  console.log(JSON.stringify(form.value));
    this.deedModel.projectDetailsId = null;
    this.deedModel.dooOfficeReference = form.value.dooOfficeReference;
    this.deedModel.dooCaseNumber = form.value.dooCaseNumber;
    this.deedModel.dooCaseObserverName = form.value.dooCaseObserverName;
    this.deedModel.dooCourtId =  form.value.dooCourtId;
    this.deedModel.dooReferentDate = form.value.dooReferentDate;
-   console.log(JSON.stringify(this.deedModel));
+  //  console.log(JSON.stringify(this.deedModel));
    this.sucription = this.projectService.addDeedCase( this.deedModel).subscribe((res:DeedModel)=>{
     this.router.navigate([`/master/project`])
       this.toster.susessMessage('Add deed successfully');
@@ -60,7 +60,7 @@ export class DeedOwnershipComponent implements OnInit {
     });
   }
   changed(value : string){
-    console.log(value);
+    // console.log(value);
   }
 
   findAllCourt() {

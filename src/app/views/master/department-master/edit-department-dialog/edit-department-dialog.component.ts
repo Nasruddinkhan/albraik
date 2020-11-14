@@ -39,7 +39,6 @@ export class EditDepartmentDialogComponent implements OnInit {
   }
 
   updateDeptName() {
-    console.log(this.updatedDeptName);
     this.deptService.updateDeptName(this.updatedDeptName, this.id).subscribe(res => {
       this.snackService.success("." + this.oldDeptName + "successfully updated to " + this.updatedDeptName);
       this.dialogSubmissionService.setDialogSubmitted(true);

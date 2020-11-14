@@ -143,7 +143,6 @@ export class UserComponent implements OnInit {
       this.users.forEach(dept => {
         dept['srNo'] = ++this.srNo;
       });
-      console.log(this.users);
       this.loading = false;
     },err=>{
      this.loading = false;
@@ -182,7 +181,6 @@ export class UserComponent implements OnInit {
     if (this.checkedUser.length === 1) {
       this.firstCheckedUser = this.checkedUser[0]['checkbox'];
     }
-    console.log(this.checkedUser);
   }
 
   handleEditButton() {

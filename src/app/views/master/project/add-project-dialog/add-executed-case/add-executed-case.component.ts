@@ -93,7 +93,6 @@ export class AddExecutedCaseComponent implements OnInit, OnDestroy {
     this.verdict.verdictNumber = this.verdictNumber.value;
     this.verdict.verdictSource = this.source.value;
     this.verdict.verdictType = this.verdictType.value;
-    console.log(this.verdict);
     this.projectService.addVerditCase(  this.verdict).subscribe((res: VerditModel) => {
       this.dialogSubmissionService.setDialogSubmitted(true);
       this.snackbar.success('.Case added successfully');

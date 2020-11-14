@@ -55,7 +55,6 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
 
   changePageSize(e) {
     this.pageSize = e.pageSize;
-    console.log(e);
   }
 
   ngOnInit() {
@@ -111,7 +110,6 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     }
     this.checkValidity = false;
 
-    console.log(this.jobTitleNames.controls[0].value.jobtittle);
     this.jobTitleNames.push(this.fb.group({ jobtittle: this.jobTitleNames.controls[0].value.jobtittle }));
     this.jobTitleNames.insert(0, this.fb.group({ jobtittle: '' }));
     this.jobTitleNames.removeAt(1);
@@ -145,7 +143,6 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     let checkedJobsString = this.checkedJobs.map(checkedJob => {
       return checkedJob['id'].toString();
     });
-    console.log(typeof(checkedJobsString[0]) +"\n"+ typeof(this.checkedJobs[0]));
     this.jobService.deleteJobTitle(checkedJobsString).subscribe(res => {
       this.findAllJobs();
       this.snackbarService.success("."+this.checkedJobs.length+"job title(s) deleted successfully.");

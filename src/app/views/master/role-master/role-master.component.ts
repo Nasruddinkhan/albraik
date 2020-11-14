@@ -76,7 +76,6 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
       this.roles.forEach(role => {
         role['srNo'] = ++this.srNo;
       });
-      console.log(this.roles);
       this.loading = false;
       this.bigTotalItems = res.length;
     },err=>{
@@ -99,7 +98,6 @@ export class RoleMasterComponent implements OnInit, OnDestroy {
 
   onSubmit(){
     this.roleNames.push(this.fb.group({role: this.roleNames.controls[0].value.role}));
-    console.log(this.roleNames.controls[1].value.role);
     // console.log('jobtitle onSubmit');
     // this.name = new Array<String>();
     // this.roleForm.value['role_names'].map(item => {
