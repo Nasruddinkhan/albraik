@@ -4,8 +4,6 @@ import { SharedModule } from '../../share.module';
 import { JobtitleMasterComponent } from './jobtitle-master/jobtitle-master.component';
 import { DepartmentMasterComponent } from './department-master/department-master.component';
 import { CompanyMasterComponent } from './company-master/company-master.component';
-import { CompanyDetailsComponent } from './company-master/company-details.component';
-import { CompanyFormsComponent } from './company-master/company-forms.component';
 import { UserComponent } from './user/user.component';
 import { RoleMasterComponent } from './role-master/role-master.component';
 import { ApplicationPipeModule } from '../../app.pipes.module';
@@ -53,9 +51,8 @@ import { AddExecutedCaseComponent } from './project/add-project-dialog/add-execu
 import { InheritanceComponent } from './project/add-project-dialog/inheritance/inheritance.component';
 
 @NgModule({
-    declarations: [ CompanyFormsComponent,
-                   CompanyMasterComponent, 
-                   CompanyDetailsComponent,
+    declarations: [ 
+                   CompanyMasterComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
         JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent, AddCaseComponent, EditRoleDialogComponent, EstablishCompanyComponent, DeedOfOwnershipComponent, AddExecutedCaseComponent, InheritanceComponent],

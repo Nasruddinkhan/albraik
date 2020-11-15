@@ -94,60 +94,6 @@ export class DefaultLayoutComponent implements OnInit {
      this.renderer.setStyle(this.elementRef.nativeElement, 'background-color',  $event.color.hex);
   }
 
-  toggleSidebar() {
-    if (window.matchMedia("(max-width: 992px)").matches) {
-      // console.log("matches.");
-      let sidebar = document.getElementsByClassName("side-bar")[0];
-      let mainContent = document.getElementsByClassName("main")[0];
-      let sidebarUL = document.querySelector(".side-bar ul").children;
-      if (this.sidebarLink.length === 0) {
-        for (let i = 0; i < sidebarUL.length; i += 2) {
-          this.sidebarLink.push(sidebarUL[i].querySelector("span"));
-          sidebarUL[i].querySelector("span").remove();
-          sidebarUL[i].querySelector("i").style.marginRight = "-5px";
-          sidebarUL[i].querySelector("i").style.marginBottom = "15px";
-        }
-      }
-      if (this.mobileSidebarMinimized) {
-        sidebar['style']['display'] = "block";
-        mainContent['style']['margin-right'] = "40px";
-        sidebar['style']['width'] = "40px";
-        this.mobileSidebarMinimized = false;
-        // console.log(this.sidebarLink);
-      } else {
-        mainContent['style']['margin-right'] = "0px";
-        sidebar['style']['width'] = "0px";
-        this.mobileSidebarMinimized = true;
-      }
-      return;
-    }
-    let sidebar = document.getElementsByClassName("side-bar")[0];
-    let mainContent = document.getElementsByClassName("main")[0];
-    // To add or delete sider-bar text(beside each sidebar logo) on toggle button
-    let sidebarUL = document.querySelector(".side-bar ul").children;
-    if (this.sidebarMinimized) {
-      mainContent['style']['margin-right'] = "15.57%";
-      sidebar['style'].width = "16%";
-      for (let i = 0; i < sidebarUL.length; i += 2) {
-        sidebarUL[i].querySelector("a").appendChild(this.sidebarLink[i/2]);
-        sidebarUL[i].querySelector("i").style.marginRight = "0px";
-      }
-      this.sidebarMinimized = false;
-      this.sidebarLink = [];
-    } else {
-      sidebar['style'].width = "3.5%";
-      mainContent['style']['margin-right'] = "3.5%";
-      setTimeout(() => {
-        for (let i = 0; i < sidebarUL.length; i += 2) {
-          this.sidebarLink.push(sidebarUL[i].querySelector("span"));
-          sidebarUL[i].querySelector("span").remove();
-          sidebarUL[i].querySelector("i").style.marginRight = "-5px";
-        }
-      }, 300);
-      this.sidebarMinimized = true;
-    }
-  }
-
   profile() {
     let profileDiv = document.getElementsByClassName("profile")[0];
     if (this.profileMinimized) {

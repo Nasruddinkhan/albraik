@@ -133,10 +133,11 @@ export class UserComponent implements OnInit {
       this.loading = false;
     },err=>{
      // this.toastService.errorMessage(err.error.message);
+     this.loading = false;
     });
   }
   findAllUsers(){
-    this.loading = false
+    this.loading = true;
     this.userService.findAllUsers( ).subscribe((res:UserMaster[])=>{
       this.users = res;
       this.srNo = 0;
@@ -149,23 +150,23 @@ export class UserComponent implements OnInit {
      this.users = [];
     });
   }
-  registerUser(){
-    this.isSubmitted = true;
-    if (this.userForm.invalid) {
-       return;
-     }
-     this.userService.createUsers(JSON.stringify( this.userForm.value)).subscribe((res:UserMaster)=>{
-      this.toastService.susessMessage('User add successfully');
-      this.loading = false;
-      this.findAllUsers();
-     }, err=>{
-      this.toastService.errorMessage(err.error.message);
-      this.loading = false;
-      this.findAllUsers();
+  // registerUser(){
+  //   this.isSubmitted = true;
+  //   if (this.userForm.invalid) {
+  //      return;
+  //    }
+  //    this.userService.createUsers(JSON.stringify( this.userForm.value)).subscribe((res:UserMaster)=>{
+  //     this.toastService.susessMessage('User add successfully');
+  //     this.loading = false;
+  //     this.findAllUsers();
+  //    }, err=>{
+  //     this.toastService.errorMessage(err.error.message);
+  //     this.loading = false;
+  //     this.findAllUsers();
 
-     }
-     ) 
-  }
+  //    }
+  //    ) 
+  // }
 
   onCheckboxChange(e, user: UserMaster) {
     if (e.checked) {

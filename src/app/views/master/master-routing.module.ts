@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CompanyFormsComponent } from './company-master/company-forms.component';
 import { AuthGuardService } from '../service/auth-guard.service';
 import { DepartmentMasterComponent } from './department-master/department-master.component';
 import { JobtitleMasterComponent } from './jobtitle-master/jobtitle-master.component';

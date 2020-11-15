@@ -1,7 +1,7 @@
 <form [formGroup]="contactSearchForm">
     <mat-form-field style="width: 100%;">
         <mat-label>Contact Name</mat-label>
-        <input type="search" matInput formControlName="searchName" (change)="handleSearchButton()" (keydown)="handleSearchButton()">
+        <input type="search" matInput formControlName="searchName" (change)="handleSearchButton()" (keyup)="handleSearchButton()">
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Contact Type</mat-label>

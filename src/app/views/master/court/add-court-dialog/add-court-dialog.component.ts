@@ -18,6 +18,7 @@ export class AddCourtDialogComponent implements OnInit {
   companyId: string;
   removable = true;
   addOnBlur = true;
+  submitDisabled = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(private dialogSubmitted: DialogSubmissionService,
@@ -45,6 +46,14 @@ export class AddCourtDialogComponent implements OnInit {
     let index = this.courts.indexOf(court);
     if (index >= 0) {
       this.courts.splice(index, 1);
+    }
+  }
+
+  handleSubmitButton() {
+    if (document.getElementById("addField")['value']) {
+      this.submitDisabled = false;
+    } else {
+      this.submitDisabled = true;
     }
   }
 

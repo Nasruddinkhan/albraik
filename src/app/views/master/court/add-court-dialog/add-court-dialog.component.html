@@ -5,15 +5,17 @@
         {{ court.name }}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
-      <input placeholder="محكمة"
+      <input id="addField"
+             placeholder="محكمة"
              [matChipInputFor]="chipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="add($event)">
+             (matChipInputTokenEnd)="add($event)"
+             (keyup)="handleSubmitButton()">
     </mat-chip-list>
 </mat-form-field>
 
 <div class="dialog-button" mat-dialog-actions>
     <button mat-raised-button mat-dialog-close> أغلق </button>
-    <button mat-raised-button (click)="onSubmit()" mat-dialog-close> إرسال </button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="submitDisabled" mat-dialog-close> إرسال </button>
 </div>

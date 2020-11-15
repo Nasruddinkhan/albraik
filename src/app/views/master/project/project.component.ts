@@ -15,6 +15,7 @@ import { AddProjectDialogComponent } from './add-project-dialog/add-project-dial
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit, OnDestroy {
+  loading = false;
   caseList:ProjectModel[];
   constructor(private router: Router,
               private projectService: ProjectService,
@@ -67,12 +68,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   findAllTask(){
+    this.loading = true;
     this.projectService.findAllTask(this.userid,this.pageNo).subscribe((res:any)=>{
       this.projectList=res.content;
       this.srNo = 0;
       this.projectList.forEach(project => {
         project['srNo'] = ++this.srNo;
       });
+      this.loading = false;
      this.bigTotalItems = res.totalElements;
     });
   }
