@@ -1,6 +1,5 @@
-import { OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PrivilegeList } from '../../../privilegeList';
@@ -9,7 +8,6 @@ import { ContactType } from '../../modal/contact-type';
 import { ContactSearchService } from '../../service/contact.service';
 import { DialogSubmissionService } from '../../service/dialog-submission.service';
 import { SnackbarService } from '../../service/snackbar.service';
-import { ToasterMsgService } from '../../service/toaster-msg.service';
 import { AddContactDialogComponent } from './add-contact-dialog/add-contact-dialog.component';
 import { EditContactDialogComponent } from './edit-contact-dialog/edit-contact-dialog.component';
 import { SearchContactDialogComponent } from './search-contact-dialog/search-contact-dialog.component';
@@ -48,7 +46,8 @@ export class ContactComponent implements OnInit, OnDestroy {
     constructor(private contactSearch : ContactSearchService,
                private dialogSubmitted: DialogSubmissionService,
                private snackService: SnackbarService,
-               private dialog: MatDialog){}
+               private dialog: MatDialog,
+               private changeDetectorRefs: ChangeDetectorRef){}
     ngOnInit() {
       if (sessionStorage.getItem('privilegeList') !== null) {
         let userPrivileges = JSON.parse(sessionStorage.getItem('privilegeList'));
@@ -226,6 +225,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
     assignSrNumberAndType(contactList: Contact[]) {
       if (contactList) {
+        this.loading = true;
         this.srNo = 0;
         contactList.forEach(contact => {
           contact['srNo'] = ++this.srNo;
@@ -236,6 +236,8 @@ export class ContactComponent implements OnInit, OnDestroy {
             }
           }
         });
+        this.changeDetectorRefs.detectChanges();
+        this.loading = false;
       }
     }
 

@@ -17,6 +17,7 @@ export class AddDepartmentDialogComponent implements OnInit {
   companyId: string;
   removable = true;
   addOnBlur = true;
+  submitDisabled = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   departments = [];
 
@@ -45,6 +46,14 @@ export class AddDepartmentDialogComponent implements OnInit {
     let index = this.departments.indexOf(dept);
     if (index >= 0) {
       this.departments.splice(index, 1);
+    }
+  }
+
+  handleSubmitButton() {
+    if (document.getElementById("addDepartmentField")['value']) {
+      this.submitDisabled = false;
+    } else {
+      this.submitDisabled = true;
     }
   }
 

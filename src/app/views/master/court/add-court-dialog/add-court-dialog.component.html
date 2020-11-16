@@ -11,7 +11,8 @@
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              [matChipInputAddOnBlur]="addOnBlur"
              (matChipInputTokenEnd)="add($event)"
-             (keyup)="handleSubmitButton()">
+             (keyup)="handleSubmitButton()"
+             (change)="handleSubmitButton()">
     </mat-chip-list>
 </mat-form-field>
 

@@ -23,6 +23,7 @@ export class CompanyMasterComponent {
   srNo:number = 0;
   editDisabled = true;
   addDisabled = false;
+  addCompanyDisabled = false;
   firstCheckedCompany: Event;
   subscription: Subscription;
 
@@ -56,6 +57,10 @@ export class CompanyMasterComponent {
       let temp: CompanyMaster[] = [];
       temp.push(res);
       this.companyObj = temp;
+      if (this.companyObj.length === 1) {
+        this.addCompanyDisabled = true;
+        this.addDisabled = true;
+      }
       this.srNo = 0;
       this.companyObj.forEach(company => {
         company['srNo'] = ++this.srNo;
@@ -92,10 +97,12 @@ export class CompanyMasterComponent {
   }
 
   handleAddButton() {
-    if (this.checkedCompany.length === 0) {
-      this.addDisabled = false;
-    } else {
-      this.addDisabled = true;
+    if (!this.addCompanyDisabled) {
+      if (this.checkedCompany.length === 0) {
+        this.addDisabled = false;
+      } else {
+        this.addDisabled = true;
+      }
     }
   }
 

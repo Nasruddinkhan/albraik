@@ -21,6 +21,7 @@ export class AddJobtitleDialogComponent implements OnInit {
   jobTitles = [];
   removable = true;
   addOnBlur = true;
+  submitDisabled = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(private jobService: JobService, 
@@ -48,6 +49,14 @@ export class AddJobtitleDialogComponent implements OnInit {
     let index = this.jobTitles.indexOf(jobtitle);
     if (index >= 0) {
       this.jobTitles.splice(index, 1);
+    }
+  }
+
+  handleSubmitButton() {
+    if (document.getElementById("addJobtitleField")['value']) {
+      this.submitDisabled = false;
+    } else {
+      this.submitDisabled = true;
     }
   }
 
