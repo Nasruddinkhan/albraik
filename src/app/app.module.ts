@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProfileComponent } from './views/profile/profile.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ForgetPasswordComponent } from './views/forget-password/forget-password.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { MatSelectModule } from '@angular/material/select';
     ChangePasswordComponent,
     RegisterComponent,
     SnackbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    ForgetPasswordComponent
   ],
   providers: [{
     provide: LocationStrategy,

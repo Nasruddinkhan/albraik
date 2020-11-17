@@ -16,6 +16,9 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import {  arLocale } from 'ngx-bootstrap/locale';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
+import { DeleteConfirmationDialogComponent } from './views/delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
  defineLocale('ar', arLocale);
 
@@ -41,8 +44,12 @@ import { TranslateModule } from '@ngx-translate/core';
           PaginationModule.forRoot(),
           BsDropdownModule.forRoot(),
           TabsModule.forRoot(),
+          MatDialogModule,
+          MatButtonModule
         ],
-
+    entryComponents: [
+        DeleteConfirmationDialogComponent
+    ],
     exports:[  
         CommonModule, 
         TranslateModule,
@@ -60,7 +67,8 @@ import { TranslateModule } from '@ngx-translate/core';
         TabsModule,
         TooltipModule
         ],
-        providers: [ DatePipe ]
+        providers: [ DatePipe ],
+        declarations: [DeleteConfirmationDialogComponent]
 
    })
 

@@ -65,4 +65,9 @@ export class LoginComponent {
       this.snackbarService.failure("UNAUTHORIZED");
     });
   }
+
+  forgetPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
 }

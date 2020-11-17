@@ -1,17 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DeleteConfirmationDialogComponent } from '../../delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { CourtModel } from '../../modal/court';
 import { CourtMaster } from '../../modal/court-master';
 import { CourtService } from '../../service/court.service';
 import { DialogSubmissionService } from '../../service/dialog-submission.service';
-import { JobService } from '../../service/job.service';
 import { checkNullEmpty } from '../../service/must-match.service';
 import { SnackbarService } from '../../service/snackbar.service';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
-import { EditJobtitleDialogComponent } from '../jobtitle-master/edit-jobtitle-dialog/edit-jobtitle-dialog.component';
 import { AddCourtDialogComponent } from './add-court-dialog/add-court-dialog.component';
 import { EditCourtDialogComponent } from './edit-court-dialog/edit-court-dialog.component';
 
@@ -42,6 +41,7 @@ export class CourtComponent implements OnInit {
   srNo: number = 0;
   checkedCourts = [];
   subscription: Subscription;
+  deleteSubscription: Subscription;
   deleteDisabled = true;
   editDisabled = true;
   addDisabled = false;
@@ -70,6 +70,8 @@ export class CourtComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    if (this.deleteSubscription)
+      this.deleteSubscription.unsubscribe();
   }
 
   findAllCourt(){
@@ -165,15 +167,22 @@ export class CourtComponent implements OnInit {
     let checkedCourtsString = this.checkedCourts.map(checkedJob => {
       return checkedJob['id'].toString();
     });
-    this.courtService.deleteCourt(checkedCourtsString).subscribe(res => {
-      this.findAllCourt();
-      this.snackbarService.success("."+this.checkedCourts.length+" court(s) deleted successfully.");
-      this.checkedCourts = [];
-      this.handleDeleteButton();
-      this.handleEditButton();
-      this.handleAddButton();
-    }, err=> {
-      this.snackbarService.failure("!!!Something went wrong.");
+    let dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      data: {name: 'court(S)', length: this.checkedCourts.length}
+    });
+    this.deleteSubscription = dialogRef.componentInstance.confirmClicked.subscribe(confirm => {
+      if (confirm) {
+        this.courtService.deleteCourt(checkedCourtsString).subscribe(res => {
+          this.findAllCourt();
+          this.snackbarService.success("."+this.checkedCourts.length+" court(s) deleted successfully.");
+          this.checkedCourts = [];
+          this.handleDeleteButton();
+          this.handleEditButton();
+          this.handleAddButton();
+        }, err=> {
+          this.snackbarService.failure("!!!Something went wrong.");
+        });
+      }
     });
   }
 

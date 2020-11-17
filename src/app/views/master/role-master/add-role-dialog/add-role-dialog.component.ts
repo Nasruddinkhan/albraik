@@ -22,31 +22,12 @@ export class AddRoleDialogComponent implements OnInit {
   roles = [];
   checkedPrivilegesList: string[] = [];
   roleMst: RoleMaster;
+  roleList: RoleModel[];
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   privileges: PrivilegeModel[];
   largePrivilege: PrivilegeModel;
-  // privilages1: string[] = [  
-  //   "Add & Edit & Close Projects",
-  //   "Assign a Task to a User",
-  //   "Respond to given Tasks",
-  //   "Viewing all Projects",
-  //   "Add & Edit & Disable Users",
-  //   "Viewing their own Tasks",
-  //   "Add new Contacts",
-  //   "Edit or Disable Contacts"
-  // ];
-  // privilages2: string[] = [
-  //   "Add & Edit & Remove Department",
-  //   "Add & Edit & Remove Job Title",
-  //   "Add & Edit & Remove Role",
-  //   "Add & Edit & Remove Court",
-  //   "Add & Edit Company Information",
-  //   "Login & Request new password",
-  //   "Assign a Lawyer to attend a court appointment",
-  //   "Edit & Delete court appointment"
-  // ];
 
   constructor(private dialogSubmitted: DialogSubmissionService,
               private roleService: RoleService,
@@ -70,6 +51,9 @@ export class AddRoleDialogComponent implements OnInit {
       }
       this.privileges.splice(pos, 1);
     });
+    this.roleService.findAllRoles(this.companyId).subscribe((roles: RoleModel[]) => {
+      this.roleList = roles;
+    });
     this.addRoleForm = this.fb.group({
       name: ['', Validators.required]
     });
@@ -79,41 +63,34 @@ export class AddRoleDialogComponent implements OnInit {
     return this.addRoleForm.get('name').value;
   }
 
-  // add(event: MatChipInputEvent): void {
-  //   let input = event.input;
-  //   let value = event.value;
-  //   console.log(value);
-  //   if ((value || '').trim()) {
-  //     this.roles.push({name: value.trim()});
-  //   }
-  //   if (input) {
-  //     input.value = '';
-  //   }
-  // }
-
-  // remove(role) {
-  //   let index = this.roles.indexOf(role);
-  //   if (index >= 0) {
-  //     this.roles.splice(index, 1);
-  //   }
-  // }
-
-  onCheckboxChange(e, privilageId: string) {
+  onCheckboxChange(e, privilegeId: string) {
     if (e.checked) {
-      this.checkedPrivilegesList.push(privilageId);
+      this.checkedPrivilegesList.push(privilegeId);
     } else {
-      this.checkedPrivilegesList.splice(this.checkedPrivilegesList.indexOf(privilageId), 1);
+      this.checkedPrivilegesList.splice(this.checkedPrivilegesList.indexOf(privilegeId), 1);
     }
   }
 
   onSubmit() {
-    // this.roleMst = new RoleMaster(this.userId, this.companyId, roleNames);
-    this.roleService.createRole(this.name, this.checkedPrivilegesList).subscribe((res: RoleModel[]) => {
-      this.snackbarService.success(".Role created successfully");
-      this.dialogSubmitted.setDialogSubmitted(true);
-    }, err => {
-      this.snackbarService.failure("!!!Something went wrong");
-    });
+    if (!this.doesExist(this.name)) {
+      this.roleService.createRole(this.name, this.checkedPrivilegesList).subscribe((res: RoleModel[]) => {
+        this.snackbarService.success(".Role created successfully");
+        this.dialogSubmitted.setDialogSubmitted(true);
+      }, err => {
+        this.snackbarService.failure("!!!Something went wrong");
+      });
+    } else {
+      this.snackbarService.failure(".Role Name already exists");
+    }
+  }
+
+  doesExist(roleName: string) {
+    for (let i = 0; i < this.roleList.length; ++i) {
+      if (this.roleList[i].name === roleName) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

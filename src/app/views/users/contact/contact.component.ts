@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PrivilegeList } from '../../../privilegeList';
+import { DeleteConfirmationDialogComponent } from '../../delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { Contact } from '../../modal/contact';
 import { ContactType } from '../../modal/contact-type';
 import { ContactSearchService } from '../../service/contact.service';
@@ -42,6 +43,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     firstcheckedContact: Event;
     dialogSubscription: Subscription;
     searchSubscription: Subscription;
+    deleteSubscription: Subscription;
 
     constructor(private contactSearch : ContactSearchService,
                private dialogSubmitted: DialogSubmissionService,
@@ -107,6 +109,8 @@ export class ContactComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
       this.dialogSubscription.unsubscribe();
       this.searchSubscription.unsubscribe();
+      if (this.deleteSubscription)
+        this.deleteSubscription.unsubscribe();
       // console.log('destroy component');
     }
 
@@ -163,16 +167,23 @@ export class ContactComponent implements OnInit, OnDestroy {
       let checkedContactsString = this.checkedContact.map(checkedCont => {
         return checkedCont['id'].toString();
       });
-      this.contactSearch.deleteContact(checkedContactsString).subscribe(res => {
-        this.onLoads();
-        this.snackService.success("." + this.checkedContact.length + "contact(s) deleted successfully");
-        this.checkedContact = [];
-        this.handleDeleteButton();
-        this.handleEditButton();
-        this.handleAddButton();
-      }, err=> {
-        this.snackService.failure("!!!Something went wrong.");
+      let dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+        data: {name: 'contact(s)', length: this.checkedContact.length}
       });
+      this.deleteSubscription = dialogRef.componentInstance.confirmClicked.subscribe(confirm => {
+        if (confirm) {
+          this.contactSearch.deleteContact(checkedContactsString).subscribe(res => {
+            this.onLoads();
+            this.snackService.success("." + this.checkedContact.length + "contact(s) deleted successfully");
+            this.checkedContact = [];
+            this.handleDeleteButton();
+            this.handleEditButton();
+            this.handleAddButton();
+          }, err=> {
+            this.snackService.failure("!!!Something went wrong.");
+          });
+        }
+      })
     }
 
     openAddDialog() {

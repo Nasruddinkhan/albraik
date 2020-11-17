@@ -12,6 +12,7 @@ import {ContactComponent} from  './views/users/contact/contact.component';
 import { AuthGuardService } from './views/service/auth-guard.service';
 import { ChangePasswordComponent } from './views/change-password/change-password.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { ForgetPasswordComponent } from './views/forget-password/forget-password.component';
 
 export const routes: Routes = [
   {
@@ -69,6 +70,13 @@ export const routes: Routes = [
     },
     component: ProfileComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'forgot-password',
+    component: ForgetPasswordComponent,
+    data: {
+      title: 'Forgot Password'
+    }
   },
   {
     path: '',

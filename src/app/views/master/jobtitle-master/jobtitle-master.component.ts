@@ -14,6 +14,7 @@ import { OnDestroy } from '@angular/core';
 import { SnackbarService } from '../../service/snackbar.service';
 import { EditJobtitleDialogComponent } from './edit-jobtitle-dialog/edit-jobtitle-dialog.component';
 import { PageEvent } from '@angular/material/paginator';
+import { DeleteConfirmationDialogComponent } from '../../delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-jobtitle-master',
@@ -44,6 +45,7 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['position', 'name', 'delete'];
   srNo:number = 0;
   subscription: Subscription;
+  deleteSubscription: Subscription;
   deleteDisabled = true;
   editDisabled = true;
   addDisabled = false;
@@ -80,6 +82,8 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    if (this.deleteSubscription)
+      this.deleteSubscription.unsubscribe();
   }
 
   findAllJobs(){
@@ -143,16 +147,23 @@ export class JobtitleMasterComponent implements OnInit, OnDestroy {
     let checkedJobsString = this.checkedJobs.map(checkedJob => {
       return checkedJob['id'].toString();
     });
-    this.jobService.deleteJobTitle(checkedJobsString).subscribe(res => {
-      this.findAllJobs();
-      this.snackbarService.success("."+this.checkedJobs.length+"job title(s) deleted successfully.");
-      this.checkedJobs = [];
-      this.handleDeleteButton();
-      this.handleEditButton();
-      this.handleAddButton();
-    }, err=> {
-      this.snackbarService.failure("!!!Something went wrong.");
+    let dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      data: {name: 'job title(s)', length: this.checkedJobs.length}
     });
+    this.deleteSubscription = dialogRef.componentInstance.confirmClicked.subscribe(confirm => {
+      if (confirm) {
+        this.jobService.deleteJobTitle(checkedJobsString).subscribe(res => {
+          this.findAllJobs();
+          this.snackbarService.success("."+this.checkedJobs.length+"job title(s) deleted successfully.");
+          this.checkedJobs = [];
+          this.handleDeleteButton();
+          this.handleEditButton();
+          this.handleAddButton();
+        }, err=> {
+          this.snackbarService.failure("!!!Something went wrong.");
+        });
+      }
+    })
   }
 
   // onSubmit(){

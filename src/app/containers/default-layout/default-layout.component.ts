@@ -51,7 +51,7 @@ export class DefaultLayoutComponent implements OnInit {
       let allLinks = ['dashboard', 'company', 'department', 'jobTitle', 'role', 'court', 'user', 'project', 'contact'];
       let authorizedLinks: string[] = [];
       let userPrivileges: string[] = JSON.parse(sessionStorage.getItem('privilegeList'));
-      if (userPrivileges.includes(PrivilegeList.ASSIGN_A_TASK_TO_A_USER) || userPrivileges.includes(PrivilegeList.VIEWING_THEIR_OWN_TASKS)) {
+      if (userPrivileges.includes(PrivilegeList.ASSIGN_A_TASK_TO_A_USER) || userPrivileges.includes(PrivilegeList.VIEWING_THEIR_OWN_TASKS) || userPrivileges.includes(PrivilegeList.RESPOND_TO_GIVEN_TASKS)) {
         authorizedLinks.push("dashboard");
       }
       if (userPrivileges.includes(PrivilegeList.ADD_EDIT_COMPANY_INFORMATION)) {

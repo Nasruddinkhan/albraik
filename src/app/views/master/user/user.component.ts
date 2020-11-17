@@ -1,4 +1,4 @@
-import { Component, OnInit ,  LOCALE_ID, Inject} from '@angular/core';
+import { Component, OnInit ,  LOCALE_ID, Inject, OnDestroy} from '@angular/core';
 import { RoleService } from '../../service/role.service';
 import { RoleModel } from '../../modal/role';
 import { ToasterMsgService } from '../../service/toaster-msg.service';
@@ -18,13 +18,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 import { DialogSubmissionService } from '../../service/dialog-submission.service';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../../delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   todayNumber: number = Date.now();
   locale = 'ar';
   locales = listLocales();
@@ -37,7 +38,7 @@ export class UserComponent implements OnInit {
   loading = false;
   isSubmitted = false;
   userForm:FormGroup;
-  displayedColumns: string[] = ['position', 'name', 'joining_date', 'email', 'delete'];
+  displayedColumns: string[] = ['position', 'name', 'joining_date', 'email', 'id', 'delete'];
   srNo: number = 0;
   checkedUser = [];
   deleteDisabled = true;
@@ -101,6 +102,10 @@ export class UserComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   get f() { return this.userForm.controls; }
 
   findAllDepartments(){
@@ -144,6 +149,7 @@ export class UserComponent implements OnInit {
       this.users.forEach(dept => {
         dept['srNo'] = ++this.srNo;
       });
+      console.log(this.users);
       this.loading = false;
     },err=>{
      this.loading = false;
@@ -209,6 +215,9 @@ export class UserComponent implements OnInit {
   }
 
   deleteUser() {
+    let dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      data: {name: 'user(s)', length: this.checkedUser.length}
+    });
     
   }
 

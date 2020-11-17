@@ -12,6 +12,7 @@ import { DialogSubmissionService } from '../../service/dialog-submission.service
 import { EditDepartmentDialogComponent } from './edit-department-dialog/edit-department-dialog.component';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from '../../service/snackbar.service';
+import { DeleteConfirmationDialogComponent } from '../../delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-department-master',
@@ -34,6 +35,8 @@ export class DepartmentMasterComponent implements OnInit {
   addDisabled = false;
   firstCheckedDepartment: Event;
   subscription: Subscription;
+  deleteSubscription: Subscription;
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastService: ToasterMsgService,
@@ -70,6 +73,8 @@ export class DepartmentMasterComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    if (this.deleteSubscription)
+      this.deleteSubscription.unsubscribe();
   }
 
   get departmentNames() {
@@ -130,10 +135,10 @@ export class DepartmentMasterComponent implements OnInit {
     }
   }
 
-  deleteDept() {
-    if (this.departmentNames.length > 1)
-      this.departmentNames.removeAt(this.departmentNames.length - 1);
-  }
+  // deleteDept() {
+  //   if (this.departmentNames.length > 1)
+  //     this.departmentNames.removeAt(this.departmentNames.length - 1);
+  // }
   findAlldepartments() {
     this.loading = true;
     this.deptService.findAlldepartments(this.userID).subscribe((res: DepartmentModel[]) => {
@@ -181,15 +186,22 @@ export class DepartmentMasterComponent implements OnInit {
     let checkedDeptsString = this.checkedDepartment.map(checkedDept => {
       return checkedDept['id'].toString();
     });
-    this.deptService.deleteDept(checkedDeptsString).subscribe(res => {
-      this.findAlldepartments();
-      this.snackService.success("." + this.checkedDepartment.length + "Department(s) deleted successfully");
-      this.checkedDepartment = [];
-      this.handleDeleteButton();
-      this.handleEditButton();
-      this.handleAddButton();
-    }, err=> {
-      this.snackService.failure("!!!Something went wrong.");
+    let dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      data: {name: 'department(s)', length: this.checkedDepartment.length}
+    }); 
+    this.deleteSubscription = dialogRef.componentInstance.confirmClicked.subscribe(confirm => {
+      if (confirm) {
+        this.deptService.deleteDept(checkedDeptsString).subscribe(res => {
+          this.findAlldepartments();
+          this.snackService.success("." + this.checkedDepartment.length + "Department(s) deleted successfully");
+          this.checkedDepartment = [];
+          this.handleDeleteButton();
+          this.handleEditButton();
+          this.handleAddButton();
+        }, err=> {
+          this.snackService.failure("!!!Something went wrong.");
+        });
+      }
     });
   }
 

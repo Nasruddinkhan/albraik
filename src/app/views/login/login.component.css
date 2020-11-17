@@ -60,13 +60,30 @@ a:hover {
 }
 
 .buttons {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
 
 .buttons button {
+  color: black;
+  background-color:white;
+}
+
+.buttons button:hover {
   color: white;
   background-color: rgb(58, 57, 57);
+}
+
+.buttons a {
+  margin-top: 10px;
+  color: blue;
+  background-color: white;
+  cursor: pointer;
+}
+
+.buttons a:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 992px) {
