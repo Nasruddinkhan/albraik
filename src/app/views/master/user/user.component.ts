@@ -149,7 +149,6 @@ export class UserComponent implements OnInit, OnDestroy {
       this.users.forEach(dept => {
         dept['srNo'] = ++this.srNo;
       });
-      console.log(this.users);
       this.loading = false;
     },err=>{
      this.loading = false;
@@ -245,7 +244,9 @@ export class UserComponent implements OnInit, OnDestroy {
     this.handleDeleteButton();
     this.handleEditButton();
     this.handleAddButton();
-    this.dialog.open(EditUserDialogComponent);
+    let dialogRef = this.dialog.open(EditUserDialogComponent, {
+      data: oldUser
+    });
   }
 
 }

@@ -1,16 +1,18 @@
 export class ProjectModel{
-    projectId:number;
-    projectTypeId: string;
+    project_id:number;
+    project_type_id: string;
     name: string;
-    startDate: Date;
+    start_date: Date;
     priority: string;
-    drawerNumber: string;
+    drawer_number: string;
+    case_logo: string;
     objective: string;
     comment: string;
-    hiddinProject: boolean;  
-    managerId:string;
-    createdBy:string;
-    companyId:string;
+    hiddin_project: boolean;  
+    manager_id:string;
+    created_by:string;
+    company_id:string;
+    is_active: boolean;
     constructor( projectTypeId: string,
         name: string,
         startDate: Date,
@@ -20,13 +22,13 @@ export class ProjectModel{
         comment: string,
         companyId: string,
         hiddinProject: boolean){
-        this.projectTypeId =projectTypeId;
+        this.project_type_id =projectTypeId;
         this.name =       name;
-        this.startDate =  startDate;
+        this.start_date =  startDate;
         this.priority =   priority;
-        this.drawerNumber = drawerName;
+        this.drawer_number = drawerName;
         this.objective =  objective;
         this.comment =    comment;
-        this.hiddinProject = hiddinProject;
+        this.hiddin_project = hiddinProject;
     }
 }

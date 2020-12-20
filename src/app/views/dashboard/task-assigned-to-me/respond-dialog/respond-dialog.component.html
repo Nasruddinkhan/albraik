@@ -1,0 +1,11 @@
+<form [formGroup]="respondForm">
+    <mat-form-field style="width: 100%;">
+        <mat-label>التوجيه</mat-label>
+        <textarea matInput formControlName="description" rows="15" cols="50"></textarea>
+        <mat-error *ngIf="description.hasError('required')">Description is required</mat-error>
+    </mat-form-field>
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="respondForm.invalid"> إرسال </button>
+</div>

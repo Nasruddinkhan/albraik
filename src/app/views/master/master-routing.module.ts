@@ -7,7 +7,7 @@ import { RoleMasterComponent } from './role-master/role-master.component';
 import { UserComponent } from './user/user.component';
 import { ProjectComponent } from './project/project.component';
 import { P404Component } from '../error/404.component';
-import { ProjectFormComponent } from './project/project-form.component';
+// import { ProjectFormComponent } from './project/project-form.component';
 import { CaseComponent } from './project/case/case.component';
 import { ExecutedCaseComponent } from './project/executed-case/executed-case.component';
 import { DeedOwnershipComponent } from './project/deed-ownership/deed-ownership.component';
@@ -81,15 +81,16 @@ const routes: Routes = [
       },
       component: P404Component,
       canActivate: [AuthGuardService]
-    }
-    ,{
-      path:'createcase',
-      data: {
-        title: 'Project'
-      },
-      component: ProjectFormComponent,
-      canActivate: [AuthGuardService]
-    } ,{
+    },
+    // {
+    //   path:'createcase',
+    //   data: {
+    //     title: 'Project'
+    //   },
+    //   component: ProjectFormComponent,
+    //   canActivate: [AuthGuardService]
+    // },
+    {
       path:'case',
       data: {
         title: 'Case'

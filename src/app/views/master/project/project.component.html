@@ -1,7 +1,7 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <div class="card" >
     <div class="card-header">
-      <i class="fa fa-suitcase"></i> نوع المشروع 
+      <i class="fa fa-suitcase"></i> نوع المشروع <hr>
     </div>
     <div class="card-body main-border-left main-border-right">
       <div id="icons" class="form-group row mr-3">
@@ -76,5 +76,12 @@
              </div>
          </div> -->
  
+    </div>
+    <div class="paginator">
+      <mat-paginator [length]="pageLength"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageChanged($event)">
+      </mat-paginator>
     </div>
 </div>

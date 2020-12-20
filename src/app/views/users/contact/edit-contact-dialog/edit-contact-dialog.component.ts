@@ -31,7 +31,7 @@ export class EditContactDialogComponent implements OnInit {
     });
     this.updateContactForm = this.fb.group({
       name: [this.oldContact.name, Validators.required],
-      contactTypeId: [this.oldContact.contact_type_id, Validators.required],
+      contactTypeId: [this.oldContact.contact_type.id, Validators.required],
       phoneNumber: [this.oldContact.phone_number, [Validators.required,  Validators.minLength(12)]],
       mobileNumber: [this.oldContact.mobile_number, [Validators.required,  Validators.minLength(12) ]],
       email: [this.oldContact.email, [Validators.required, Validators.email]],

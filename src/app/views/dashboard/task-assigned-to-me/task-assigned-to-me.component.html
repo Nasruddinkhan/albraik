@@ -1,0 +1,54 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<div>
+    <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+        <ng-container matColumnDef="projectNumber">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> الرقم </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.project_id }} </td>
+        </ng-container>
+        <ng-container matColumnDef="projectName">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> اسم المشروع </th>
+            <td mat-cell *matCellDef="let task">
+                <a [style.color]="task.link_color" [routerLink]="['project-task-list', task.project_id]">
+                    {{ task.project_name }} 
+                </a>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="taskDescription">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> التوجيه </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.description }} </td>
+        </ng-container>
+        <ng-container matColumnDef="taskResponse">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> وصف الإجراء </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.response_text }} </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> تاريخ </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.due_date }} </td>
+        </ng-container>
+        <ng-container matColumnDef="duration">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> المدة </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.duration }} </td>
+        </ng-container>
+        <ng-container matColumnDef="assignee">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> المكلف </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.assignee_name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="priority">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> الأهمية </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.priority }} </td>
+        </ng-container>
+        <ng-container matColumnDef="quickResponse">
+            <th class="text-center" style="width: 10%" mat-header-cell *matHeaderCellDef>  </th>
+            <td [class]="task.color" style="padding-bottom: 8px;" mat-cell *matCellDef="let task">
+                <button *ngIf="task.display_respond_button" tooltip="Respond" class="btn btn-primary" (click)="openReplyDialog(task.id, task.is_hidden)">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                </button> 
+                <button *ngIf="!task.display_respond_button" tooltip="Edit" class="btn btn-primary" (click)="openEditReplyDialog(task.id, task.task_reply.id, task.is_hidden, task.task_reply.description)">
+                    <i class="icon-pencil"></i>
+                </button> 
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let task; columns: displayedColumns;" [class]="task.background_color"></tr>
+    </table>
+</div>

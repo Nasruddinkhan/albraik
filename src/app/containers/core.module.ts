@@ -29,6 +29,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatRippleModule } from '@angular/material/core';
+import { MatBadgeModule } from '@angular/material/badge';
 
   const APP_CONTAINERS = [
     DefaultLayoutComponent
@@ -53,6 +56,9 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatMenuModule,
     MatListModule,
+    MatInputModule,
+    MatRippleModule,
+    MatBadgeModule,
     TabsModule.forRoot(),
     BrowserModule, BrowserAnimationsModule,HttpClientModule
   ],

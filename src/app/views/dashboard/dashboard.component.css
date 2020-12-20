@@ -6,3 +6,11 @@
   .temp{
     background-color:var(--first-color);
   }
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+/* .mat-tab-label-active {
+  padding: 0px 20px;
+} */

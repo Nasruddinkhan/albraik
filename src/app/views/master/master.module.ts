@@ -9,7 +9,7 @@ import { RoleMasterComponent } from './role-master/role-master.component';
 import { ApplicationPipeModule } from '../../app.pipes.module';
 import { RoleDetailsComponent } from './role-master/role-details.component';
 import { ProjectComponent } from './project/project.component';
-import { ProjectFormComponent } from './project/project-form.component';
+// import { ProjectFormComponent } from './project/project-form.component';
 import { ShareComponentModule } from '../../share.component';
 import { CaseComponent } from './project/case/case.component';
 import { ExecutedCaseComponent } from './project/executed-case/executed-case.component';
@@ -55,7 +55,7 @@ import { InheritanceComponent } from './project/add-project-dialog/inheritance/i
                    CompanyMasterComponent,
                    RoleDetailsComponent,
                    DepartmentMasterComponent,
-        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, ProjectFormComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent, AddCaseComponent, EditRoleDialogComponent, EstablishCompanyComponent, DeedOfOwnershipComponent, AddExecutedCaseComponent, InheritanceComponent],
+        JobtitleMasterComponent, UserComponent, RoleMasterComponent, ProjectComponent, CaseComponent, ExecutedCaseComponent, DeedOwnershipComponent, CompanyEstablishmentComponent, InheritenceComponent, ProjectDtlComponent, CourtComponent, DeptDetailsComponent, AddJobtitleDialogComponent, EditJobtitleDialogComponent, AddDepartmentDialogComponent, EditDepartmentDialogComponent, AddCourtDialogComponent, EditCourtDialogComponent, AddUserDialogComponent, EditUserDialogComponent, AddRoleDialogComponent, AddProjectDialogComponent, AddCompanyDialogComponent, AddCaseComponent, EditRoleDialogComponent, EstablishCompanyComponent, DeedOfOwnershipComponent, AddExecutedCaseComponent, InheritanceComponent],
     entryComponents: [
       AddJobtitleDialogComponent,
       EditJobtitleDialogComponent,
@@ -72,7 +72,8 @@ import { InheritanceComponent } from './project/add-project-dialog/inheritance/i
       DeedOfOwnershipComponent,
       AddExecutedCaseComponent,
       InheritanceComponent,
-      EditRoleDialogComponent
+      EditRoleDialogComponent,
+      EditUserDialogComponent
     ],
     imports: [
       MasterRoutingModule,

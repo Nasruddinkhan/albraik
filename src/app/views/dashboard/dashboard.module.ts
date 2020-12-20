@@ -13,6 +13,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatTabsModule } from '@angular/material/tabs';
+import { TaskAssignedToMeComponent } from './task-assigned-to-me/task-assigned-to-me.component';
+import { TaskAssignedByMeComponent } from './task-assigned-by-me/task-assigned-by-me.component';
+import { ProjectTaskListComponent } from './project-task-list/project-task-list.component';
+import { RespondDialogComponent } from './task-assigned-to-me/respond-dialog/respond-dialog.component';
 
 @NgModule({
   imports: [
@@ -25,12 +30,14 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAda
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   entryComponents: [
-    AddTaskDialogComponent
+    AddTaskDialogComponent,
+    RespondDialogComponent
   ],
-  declarations: [ DashboardComponent, AddTaskDialogComponent ],
+  declarations: [ DashboardComponent, AddTaskDialogComponent, TaskAssignedToMeComponent, TaskAssignedByMeComponent, ProjectTaskListComponent, RespondDialogComponent ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
     {

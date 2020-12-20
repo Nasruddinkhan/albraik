@@ -1,7 +1,7 @@
-<!-- <div class="text-center">
+<div class="text-center">
     <b>User Information</b>
 </div>
-<form [formGroup]="userForm" class="example-form">
+<form [formGroup]="userEditForm" class="example-form">
     <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" placeholder="Ex. pat@example.com">
@@ -38,37 +38,37 @@
     </mat-form-field>
     <mat-form-field class="mr-3" appearance="fill">
         <mat-label>Role</mat-label>
-        <mat-select formControlName="roleId" required>
+        <mat-select formControlName="role" required>
           <mat-option>--</mat-option>
-          <mat-option *ngFor="let role of roles" [value]="role.id">
-            {{ role.name }}
-        </mat-option>
+          <mat-option *ngFor="let r of roles" [value]="r.id">
+            {{ r.name }}
+          </mat-option>
         </mat-select>
-        <mat-error *ngIf="roleId.hasError('required')">Please choose a role</mat-error>
+        <mat-error *ngIf="role.hasError('required')">Please choose a role</mat-error>
     </mat-form-field>
     <mat-form-field class="mr-3" appearance="fill">
         <mat-label>Department</mat-label>
-        <mat-select formControlName="departmentId" required>
+        <mat-select formControlName="department" required>
           <mat-option>--</mat-option>
-          <mat-option *ngFor="let department of depts" [value]="department.id">
-            {{ department.name }}
+          <mat-option *ngFor="let d of depts" [value]="d.id">
+            {{ d.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="departmentId.hasError('required')">Please choose a department</mat-error>
+        <mat-error *ngIf="department.hasError('required')">Please choose a department</mat-error>
     </mat-form-field>
     <mat-form-field class="mr-2" appearance="fill">
         <mat-label>Job</mat-label>
-        <mat-select formControlName="jobTitleId" required>
+        <mat-select formControlName="jobTitle" required>
           <mat-option>--</mat-option>
           <mat-option *ngFor="let job of jobs" [value]="job.id">
             {{ job.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="jobTitleId.hasError('required')">Please choose a job</mat-error>
+        <mat-error *ngIf="jobTitle.hasError('required')">Please choose a job</mat-error>
     </mat-form-field>
 </form>
 
 <div class="dialog-button" mat-dialog-actions>
     <button mat-raised-button mat-dialog-close> أغلق </button>
-    <button mat-raised-button (click)="onSubmit()" mat-dialog-close [disabled]="userForm.invalid"> إرسال </button>
-</div> -->
+    <button mat-raised-button (click)="onSubmit()" mat-dialog-close [disabled]="userEditForm.invalid"> إرسال </button>
+</div>

@@ -38,7 +38,7 @@
                 </ng-container>
                 <ng-container matColumnDef="contactTypeName">
                     <th class="text-center" mat-header-cell *matHeaderCellDef> اسم نوع جهة الاتصال </th>
-                    <td mat-cell *matCellDef="let contact"> {{ contact.contactTypeName }} </td>
+                    <td mat-cell *matCellDef="let contact"> {{ contact.contact_type.name }} </td>
                 </ng-container>
                 <ng-container matColumnDef="email">
                     <th class="text-center" mat-header-cell *matHeaderCellDef> البريد الإلكتروني </th>

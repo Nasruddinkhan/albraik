@@ -2,7 +2,7 @@ import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { PrivilegeList } from '../../../privilegeList';
+import { PrivilegeList } from '../../../enum/privilegeList';
 import { DeleteConfirmationDialogComponent } from '../../delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { Contact } from '../../modal/contact';
 import { ContactType } from '../../modal/contact-type';
@@ -26,7 +26,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     masterList : ContactType[];
     contactList : Contact[];
     filteredContactList: Contact[];
-    contactTypeList: ContactType[] = [];
+    // contactTypeList: ContactType[] = [];
     private subscription: Subscription;
     private contactSubscription: Subscription;
     displayedColumns: string[] = ['position', 'name', 'contactTypeName', 'email', 'mobileNo', 'delete'];
@@ -88,9 +88,9 @@ export class ContactComponent implements OnInit, OnDestroy {
       this.subscription = this.contactSearch.getContactTypePages().subscribe((res:ContactType[])=>{
         this.masterList = res;
       });
-      this.contactSearch.getContactTypeList().subscribe((res: ContactType[]) => {
-        this.contactTypeList = res;
-      });
+      // this.contactSearch.getContactTypeList().subscribe((res: ContactType[]) => {
+      //   this.contactTypeList = res;
+      // });
       this.contactSubscription = this.contactSearch.getContactList().subscribe((res:Contact[])=>{
         this.contactList = res;
         this.assignSrNumberAndType(this.contactList);
@@ -221,6 +221,7 @@ export class ContactComponent implements OnInit, OnDestroy {
           }
           this.handleNoRecords();
           this.assignSrNumberAndType(this.filteredContactList);
+          this.contactFiltered = true;
         });
       } else if (name) {
         this.contactSearch.getContactList().subscribe((contactList: Contact[]) => {
@@ -229,9 +230,9 @@ export class ContactComponent implements OnInit, OnDestroy {
           });
           this.handleNoRecords();
           this.assignSrNumberAndType(this.filteredContactList);
+          this.contactFiltered = true;
         });
       }
-      this.contactFiltered = true;
     }
 
     assignSrNumberAndType(contactList: Contact[]) {
@@ -240,12 +241,6 @@ export class ContactComponent implements OnInit, OnDestroy {
         this.srNo = 0;
         contactList.forEach(contact => {
           contact['srNo'] = ++this.srNo;
-          for (let i = 0; i < this.contactTypeList.length; ++i) {
-            if (this.contactTypeList[i].id === contact.contact_type_id) {
-              contact.contactTypeName = this.contactTypeList[i].name;
-              break;
-            }
-          }
         });
         this.changeDetectorRefs.detectChanges();
         this.loading = false;
@@ -262,17 +257,17 @@ export class ContactComponent implements OnInit, OnDestroy {
     
     refreshTable() {
       this.loading = true;
-      this.contactSubscription = this.contactSearch.getContactList().subscribe((res:Contact[])=>{
+      this.contactSubscription = this.contactSearch.getContactList().subscribe((res: Contact[])=>{
         this.contactList = res;
         this.assignSrNumberAndType(this.contactList);
         this.loading = false;
+        this.contactFiltered = false;
+        this.noRecordsFound = false;
       });
       this.checkedContact = [];
       this.handleAddButton();
       this.handleEditButton();
       this.handleDeleteButton();
-      this.contactFiltered = false;
-      this.noRecordsFound = false;
     }
 
 }

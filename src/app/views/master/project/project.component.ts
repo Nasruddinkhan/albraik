@@ -37,6 +37,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
   editDisabled = true;
   deleteDisabled = true;
   checkedProject = [];
+  pageLength: number;
+  pageSize: number;
+  pageSizeOptions: number[] = [10];
   firstCheckedProject: Event;
   subscription: Subscription;
 
@@ -63,14 +66,16 @@ export class ProjectComponent implements OnInit, OnDestroy {
   
   }
   pageChanged(event: any): void {
-    this.pageNo = event.page;
+    this.pageNo = event.pageIndex + 1;
     this.findAllTask();
   }
 
   findAllTask(){
     this.loading = true;
-    this.projectService.findAllTask(this.userid,this.pageNo).subscribe((res:any)=>{
-      this.projectList=res.content;
+    this.projectService.findAllProject(this.userid,this.pageNo).subscribe((res:any)=>{
+      this.projectList = res.content;
+      this.pageSize = res.size;
+      this.pageLength = res.totalElements;
       this.srNo = 0;
       this.projectList.forEach(project => {
         project['srNo'] = ++this.srNo;

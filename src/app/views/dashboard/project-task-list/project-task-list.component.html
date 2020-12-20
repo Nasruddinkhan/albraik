@@ -1,0 +1,27 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<div>
+    <table mat-table [dataSource]="projectTasks" class="mat-elevation-z8">
+        <ng-container matColumnDef="assignerName">
+          <th class="text-center" mat-header-cell *matHeaderCellDef> تعيين </th>
+          <td mat-cell *matCellDef="let task"> {{ task.assigner_name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="taskDescription">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> التوجيه </th>
+            <td mat-cell *matCellDef="let task"> {{ task.description }} </td>
+        </ng-container>
+        <ng-container matColumnDef="gap">
+            <th class="text-center" style="width: 10%;" mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let task">  </td>
+        </ng-container>
+        <ng-container matColumnDef="assigneeName">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> المحال إليه </th>
+            <td mat-cell *matCellDef="let task"> {{ task.assignee_name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="taskResponse">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> استجابة </th>
+            <td mat-cell *matCellDef="let task"> {{ task.response_text }} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let task; columns: displayedColumns;"></tr>
+      </table>
+</div>

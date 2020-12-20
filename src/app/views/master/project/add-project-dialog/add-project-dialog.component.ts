@@ -167,18 +167,18 @@ export class AddProjectDialogComponent implements OnInit {
   }
 
   setProjectValues() {
-    this.project.projectId = null;
-    this.project.projectTypeId = this.projectType.value;
+    this.project.project_id = null;
+    this.project.project_type_id = this.projectType.value;
     this.project.name =  this.name.value;
-    this.project.startDate = this.startDate.value.toISOString();
+    this.project.start_date = this.startDate.value.toISOString();
     this.project.comment =  this.comment.value;
-    this.project.drawerNumber = this.drawerNumber.value;
-    this.project.hiddinProject = this.hiddenProject.value ? this.hiddenProject.value : false;
+    this.project.drawer_number = this.drawerNumber.value;
+    this.project.hiddin_project = this.hiddenProject.value ? this.hiddenProject.value : false;
     this.project.priority = this.priority.value;
-    this.project.managerId = this.manager.value;
+    this.project.manager_id = this.manager.value;
     this.project.objective = this.objective.value;
-    this.project.createdBy = this.userId;
-    this.project.companyId = this.companyId;
+    this.project.created_by = this.userId;
+    this.project.company_id = this.companyId;
   }
 
 }

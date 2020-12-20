@@ -1,14 +1,33 @@
 <div class="my-navbar">
   <mat-toolbar class="mat-toolbar-row" color="warn">
     <button class="mat-app-background"
-      mat-icon-button 
+      mat-icon-button
+      matRipple 
+      matRippleColor="white"
       class="example-icon" 
       aria-label="Example icon-button with menu icon"
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span style="font-size: 25px;"> البريك للمحاماة</span>
+    <span style="font-size: 25px;" class="ml-3"> البريك للمحاماة</span>
+    <div class="text-center">
+      <input class="default-search" type="search" name="defaultSearch" placeholder="ابحث هنا">
+    </div>
     <span class="example-spacer" ></span>
+    <!-- <a class="mr-3 fa fa-exclamation-triangle">
+      <span class="fa fa-comment"></span>
+      <span class="num">4</span>
+    </a> -->
+    <mat-icon class="mr-3" matBadge="4" matBadgePosition="before" matBadgeColor="warn">warning</mat-icon>
+    <!-- <a class="mr-3 fa fa-bell">
+      <span class="fa fa-comment"></span>
+      <span class="num">4</span>
+    </a> -->
+    <mat-icon class="mr-3" matBadge="7" matBadgePosition="before" matBadgeColor="warn">notifications</mat-icon>
+    <!-- <span class="mr-3"><i class="fa fa-envelope" aria-hidden="true"></i></span> -->
+    <mat-icon class="mr-3" matBadge="3" matBadgePosition="before" matBadgeColor="warn">mail</mat-icon>
+    <mat-icon class="mr-3" matBadge="10" matBadgePosition="before" matBadgeColor="warn">account_balance</mat-icon>
+
     <img [matMenuTriggerFor]="menu" style="cursor: pointer;" src="./../../../assets/img/brand/Logo.png" alt="law icon">
     <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
     <mat-menu #menu="matMenu">

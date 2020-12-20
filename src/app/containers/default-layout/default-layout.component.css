@@ -9,16 +9,60 @@
     padding-top: 8px;
 }
 
+.example-icon:focus, .my-navbar img:focus+mat-menu button{
+    outline: none;
+}
+
 .mat-toolbar-row {
     background-color: black;
     font-family: Roboto,Helvetica Neue,sans-serif;
     font-size: 20px !important;
     color: white !important;
 }
+
+.mat-toolbar-row button {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+mat-toolbar div {
+    width: 100%;
+}
+
+.default-search {
+    width: 80%;
+    height: 45px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+    padding: 5px 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
   
 .fa-bars {
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: black;
+}
+
+.fa-university, .fa-bell, .fa-exclamation-triangle {
+    position: relative;
+}
+
+span.fa-comment {
+    position: absolute;
+    font-size: 1em;
+    top: -7px;
+    color: red;
+    right: -5px;
+}
+
+span.num {
+    position: absolute;
+    font-size: 0.65em;
+    top: -4px;
+    color: #fff;
+    right: 0.5px;
 }
 
 .my-navbar img {
@@ -176,6 +220,11 @@ app-footer {
     .main {
         margin-right: 0px;
     }
+    /* .default-search {
+        margin-right: 5px;
+        margin-left: 5px;
+        width: 66%;
+    } */
     .app-body {
         margin-top: 0px;
     }

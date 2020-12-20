@@ -26,7 +26,7 @@ export class ProjectService {
   }
    
   
-  public findAllTask(userId:string, pageNo:number):Observable<any>{
+  public findAllProject(userId:string, pageNo:number):Observable<any>{
     return this.http.get(this.baseURL+`/api/task/${userId}/${pageNo}/allrecord`);
   }
   public addProjectCase(projectCase: CaseModel):Observable<CaseModel> {

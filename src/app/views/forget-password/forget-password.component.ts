@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
+  isSubmit = false;
+  username: string;
 
   constructor() { }
 
@@ -13,7 +15,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   async onSubmit(forgotPasswordForm) {
-    console.log(forgotPasswordForm);
+    console.log(forgotPasswordForm.value);
   }
 
 }

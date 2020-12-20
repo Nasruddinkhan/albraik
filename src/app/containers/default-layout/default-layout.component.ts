@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ViewChild } from '@angular/core';
-import { PrivilegeList } from './../../privilegeList';
+import { PrivilegeList } from './../../enum/privilegeList';
 
 @Component({
   selector: 'app-dashboard',
