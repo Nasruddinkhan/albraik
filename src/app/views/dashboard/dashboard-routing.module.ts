@@ -14,7 +14,7 @@ const routes: Routes = [
     }
     },
   {
-    path: 'project-task-list/:projectId',
+    path: 'project-task-list/:projectIdAndName',
     data: {
       title: 'Project Task List'
     },

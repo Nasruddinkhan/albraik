@@ -1,0 +1,136 @@
+.header .mat-card-header-text {
+    margin: 0px;
+}
+
+.header {
+    margin-top: 2rem;
+    margin-bottom: -1rem;
+}
+
+.header .mat-card-header {
+    margin-top: 1rem;
+}
+
+.header .mat-card-header .mat-card-title {
+    margin-bottom: 0px;
+    /* width: 385%;
+    text-align: center; */
+}
+
+.pending-tasks div{
+    display: inline-block;
+    padding: 0px 12.5px 40px 7px;
+    font-size: 1.8rem;
+}
+
+.circle {
+    height: 30px;
+    width: 40px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+mat-card-header .set-margin {
+    margin-right: -1rem !important;
+    margin-left: 1rem !important;
+}
+
+.header .title {
+    width: 100%;
+    margin-right: -2rem;
+}
+
+.header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.row mat-card {
+    padding: 16px 0px 0.2px 0px;
+    border-radius: 4px 4px 10px 10px;
+    margin-top: 1rem;
+}
+
+.col-sm-6 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* mat-card-content {
+    position: relative;
+} */
+
+mat-icon {
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.button-with-mat-icon {
+    padding: 3.5px 0px 0px 0px;
+}
+
+.copy-description {
+    padding: 0px; 
+    margin-top: -0.3rem; 
+    margin-right: -0.7rem;
+}
+
+#upper-left-corner {
+    height: 10px;
+    width: 20px;
+    position: absolute;
+    top: -0.6rem;
+    left: 0rem;
+    z-index: 0;
+}
+
+#upper-left-corner-1 {
+    background-color: white;
+    height: 30px;
+    width: 20px;
+    position: absolute;
+    top: -1.8755rem;
+    border-radius: 0px 0px 0px 10px;
+    left: 0rem;
+    z-index: 1;
+}
+
+#upper-right-corner {
+    height: 10px;
+    width: 20px;
+    position: absolute;
+    top: -0.6rem;
+    right: 0rem;
+    z-index: 0;
+}
+
+#upper-right-corner-1 {
+    background-color: white;
+    height: 30px;
+    width: 20px;
+    position: absolute;
+    top: -1.8755rem;
+    border-radius: 0px 0px 10px 0px;
+    right: 0rem;
+    z-index: 1;
+}
+
+#footer {
+    margin-top: -0.383rem;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
+    border-radius: 0px 0px 10px 10px;
+    padding: 0.5rem 1rem;
+    position: relative;
+}
+
+#footer p {
+    margin-bottom: 0px;
+}
+
+/* mat-icon {
+    margin-top: -0.45rem;
+} */
+
+.separator {
+    height: 10rem;
+}

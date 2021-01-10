@@ -1,0 +1,10 @@
+<form [formGroup]="projectNotesForm">
+    <mat-form-field style="width: 100%;">
+        <mat-label>ملاحظات</mat-label>
+        <textarea matInput formControlName="notes" rows="15" cols="10"></textarea>
+    </mat-form-field>
+</form>
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close (click)="onSubmit()"> إرسال </button>
+</div>

@@ -18,6 +18,8 @@ import { TaskModel } from '../../modal/task/task-model';
 import { DashboardComponent } from '../dashboard.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskAssignedByMeComponent } from '../task-assigned-by-me/task-assigned-by-me.component';
+import { AddTaskDialogType } from '../../../enum/AddTaskDialogType';
+import { TaskStatus } from '../../../enum/TaskStatus';
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -26,8 +28,12 @@ import { TaskAssignedByMeComponent } from '../task-assigned-by-me/task-assigned-
 })
 export class AddTaskDialogComponent implements OnInit {
   @Output() onSubmitClicked = new EventEmitter<any>();
-  quickTaskAddDialog = false;
   addTaskForm: FormGroup;
+  projectSelectionEnabled = true;
+  assigneeSelectionEnabled = true;
+  greenTaskCount: number = 0;
+  yellowTaskCount: number = 0;
+  redTaskCount: number = 0;
   users: UserMaster[];
   priorityList: any[];
   projectList: ProjectModel[] = [];
@@ -40,6 +46,7 @@ export class AddTaskDialogComponent implements OnInit {
   uploadedFilePath: string = null;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
+                type: AddTaskDialogType,
                 projectId: number, 
                 projectName: string, 
                 assigneeId: number, 
@@ -68,11 +75,15 @@ export class AddTaskDialogComponent implements OnInit {
       priority: ['', Validators.required],
       attachement: ['']
     });
-    //If this dialog is opened from quick task add button then setting default values
-    if (this.data){
-      this.quickTaskAddDialog = true;
+    //If this dialog is opened from quick task add button OR project page OR dashboard page
+    if (this.data.type === AddTaskDialogType.QUICK) {
+      this.projectSelectionEnabled = false;
+      this.assigneeSelectionEnabled = false;
       this.project_id.setValue(this.data.projectId);
       this.assignee_id.setValue(this.data.assigneeId);
+    } else if (this.data.type === AddTaskDialogType.PROJECT) {
+      this.projectSelectionEnabled = false;
+      this.project_id.setValue(this.data.projectId);
     }
     this.userService.findAllUsers().subscribe((res: UserMaster[]) => {
       this.users = res;
@@ -153,15 +164,51 @@ export class AddTaskDialogComponent implements OnInit {
     }
   }
 
+  showPendingTaskCount() {
+    let selectedUserId = this.assignee_id.value;
+    this.taskService.getTaskAssignedToMe().subscribe((tasksAssignedToMe: TaskModel[]) => {
+      this.greenTaskCount = 0;
+      this.yellowTaskCount = 0;
+      this.redTaskCount = 0;
+      tasksAssignedToMe.forEach(task => {
+        if (task.status === TaskStatus.IN_PROGRESS) {
+          let today = this.getDateInMilli(new Date());
+          let dueDate = this.getDateInMilli(new Date(task.due_date));
+          let dueDays = (dueDate - today) / 86400000;
+          if (dueDays > 2) 
+            ++this.greenTaskCount;
+          else if (dueDays > 0)
+            ++this.yellowTaskCount;
+          else  
+            ++this.redTaskCount;
+        }
+      });
+    });
+  }
+
+  getDateInMilli(date: Date) {
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    return Date.parse(month.toString()+" "+day.toString()+" "+year.toString());
+  }
+
   onSubmit() {
     let dueDateInMilli = Date.parse((this.due_date.value.getMonth()+1)+" "+this.due_date.value.getDate()+" "+this.due_date.value.getFullYear());
     this.due_date.setValue(dueDateInMilli);
-    if (this.quickTaskAddDialog) {
-      this.addTaskForm.value['project_name'] = this.data.projectName;
-      this.addTaskForm.value['assignee_name'] = this.data.assigneeName;
+    // if (this.quickAddTaskDialog) {
+    //   this.addTaskForm.value['project_name'] = this.data.projectName;
+    //   this.addTaskForm.value['assignee_name'] = this.data.assigneeName;
+    // } else {
+    //   this.assignProjectName();
+    //   this.assignAssigneeName();
+    // }
+    if (this.data.type === AddTaskDialogType.ALL) {
+      this.allTypeSubmissionHelper();
+    } else if (this.data.type === AddTaskDialogType.QUICK) {
+      this.quickTypeSubmissionHelper();
     } else {
-      this.assignProjectName();
-      this.assignAssigneeName();
+      this.projectTypeSubmissionHelper();
     }
     delete this.addTaskForm.value['attachement'];
     console.log(this.addTaskForm.value);
@@ -173,6 +220,21 @@ export class AddTaskDialogComponent implements OnInit {
       console.log(err);
       this.snackService.failure("!!!Something went wrong")
     });
+  }
+
+  allTypeSubmissionHelper() {
+    this.assignProjectName();
+    this.assignAssigneeName();
+  }
+
+  quickTypeSubmissionHelper() {
+    this.addTaskForm.value['project_name'] = this.data.projectName;
+    this.addTaskForm.value['assignee_name'] = this.data.assigneeName;
+  }
+
+  projectTypeSubmissionHelper() {
+    this.addTaskForm.value['project_name'] = this.data.projectName;
+    this.assignAssigneeName();
   }
 
   assignProjectName() {

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { AddTaskDialogType } from '../../../enum/AddTaskDialogType';
 import { TaskStatus } from '../../../enum/TaskStatus';
 import { TaskModel } from '../../modal/task/task-model';
 import { TaskService } from '../../service/task/task.service';
@@ -55,8 +56,10 @@ export class TaskAssignedByMeComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.taskService.getTaskAssignedByMe().subscribe((taskList: TaskModel[]) => {
       this.tasks = taskList;
-      if (this.tasks)
+      if (this.tasks) {
         this.assignDurationAndColor();
+        this.sortByColor();
+      }
       this.loading = false;
     });
   }
@@ -104,9 +107,35 @@ export class TaskAssignedByMeComponent implements OnInit, OnDestroy {
     });
   }
 
+  sortByColor() {
+    let grayTasks: TaskModel[] = [];
+    let tempTasks: TaskModel[] = [];
+    this.tasks.forEach(task => {
+      if (task.status === TaskStatus.COMPLETED || task.status === TaskStatus.LATE_COMPLETED) {
+        grayTasks.push(task);
+      } else {
+        tempTasks.push(task);
+      }
+    });
+    tempTasks.sort((a, b) => {
+      return a.task_reply ? -1: 1;
+    });
+    grayTasks.sort((a, b) => {
+      return a.updated_time < b.updated_time ? -1 : 1;
+    });
+    this.tasks = grayTasks.concat(tempTasks);
+    // this.tasks.sort((a, b) => {
+    //   return a['background_color'] === 'bg-light' ? -1 : 1; 
+    // });
+    // this.tasks.sort((a, b) => {
+    //   return a.task_reply ? -1 : 1;
+    // });
+  }
+
   openQuickTaskAddDialog(task: TaskModel) {
     let dialogRef = this.dialog.open(AddTaskDialogComponent, {
       data: {
+        type: AddTaskDialogType.QUICK,
         projectId: task.project_id,
         projectName: task.project_name,
         assigneeId: task.assignee_id,

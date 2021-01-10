@@ -18,6 +18,10 @@ import { TaskAssignedToMeComponent } from './task-assigned-to-me/task-assigned-t
 import { TaskAssignedByMeComponent } from './task-assigned-by-me/task-assigned-by-me.component';
 import { ProjectTaskListComponent } from './project-task-list/project-task-list.component';
 import { RespondDialogComponent } from './task-assigned-to-me/respond-dialog/respond-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ProjectNotesDialogComponent } from './project-task-list/project-notes-dialog/project-notes-dialog.component';
 
 @NgModule({
   imports: [
@@ -31,13 +35,17 @@ import { RespondDialogComponent } from './task-assigned-to-me/respond-dialog/res
     MatButtonModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule,
+    MatCardModule,
+    ClipboardModule
   ],
   entryComponents: [
     AddTaskDialogComponent,
-    RespondDialogComponent
+    RespondDialogComponent,
+    ProjectNotesDialogComponent
   ],
-  declarations: [ DashboardComponent, AddTaskDialogComponent, TaskAssignedToMeComponent, TaskAssignedByMeComponent, ProjectTaskListComponent, RespondDialogComponent ],
+  declarations: [ DashboardComponent, AddTaskDialogComponent, TaskAssignedToMeComponent, TaskAssignedByMeComponent, ProjectTaskListComponent, RespondDialogComponent, ProjectNotesDialogComponent ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
     {

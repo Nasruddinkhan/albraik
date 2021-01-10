@@ -8,7 +8,7 @@
         <ng-container matColumnDef="projectName">
             <th class="text-center" mat-header-cell *matHeaderCellDef> اسم المشروع </th>
             <td mat-cell *matCellDef="let task"> 
-                <a [style.color]="task.link_color" [routerLink]="['project-task-list', task.project_id]">
+                <a [style.color]="task.link_color" [routerLink]="['project-task-list', task.project_id+'-'+task.project_name]">
                     {{ task.project_name }} 
                 </a>
             </td>

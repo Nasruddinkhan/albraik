@@ -6,6 +6,7 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { Subscription } from 'rxjs';
 import { TaskAssignedByMeComponent } from './task-assigned-by-me/task-assigned-by-me.component';
 import { TaskAssignedToMeComponent } from './task-assigned-to-me/task-assigned-to-me.component';
+import { AddTaskDialogType } from '../../enum/AddTaskDialogType';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -26,8 +27,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // generate random values for mainChart
     this.tabGroup.selectedIndex = 2;
-    if (sessionStorage.getItem("privilegeList") !== null) {
-      let userPrivileges = sessionStorage.getItem('privilegeList');
+    let userPrivileges = sessionStorage.getItem('privilegeList');
+    if (userPrivileges) {
       if (!userPrivileges.includes(PrivilegeList.ASSIGN_A_TASK_TO_A_USER)) {
         this.addTaskDisabled = true;
         this.taskAssignedByMeTabDisabled = true;
@@ -82,10 +83,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   openAddDialog() {
-    let dialogRef = this.dialog.open(AddTaskDialogComponent);
+    let dialogRef = this.dialog.open(AddTaskDialogComponent, {
+      data: {
+        type: AddTaskDialogType.ALL
+      }
+    });
     this.addTaskSubscription = dialogRef.componentInstance.onSubmitClicked.subscribe((closed: boolean) => {
       if (closed) {
-        
+        this.taskAssignedByMeComponent.loadTasks();
       }
     });
   }

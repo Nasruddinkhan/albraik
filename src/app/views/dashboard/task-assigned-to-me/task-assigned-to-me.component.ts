@@ -48,8 +48,10 @@ export class TaskAssignedToMeComponent implements OnInit {
     this.loading = true;
     this.taskService.getTaskAssignedToMe().subscribe((taskAssignedToMe: TaskModel[]) => {
       this.tasks = taskAssignedToMe;
-      if (this.tasks)
+      if (this.tasks) {
         this.assignDurationAndColor();
+        this.sortByColor();
+      }
       this.loading = false;
     });
   }
@@ -86,6 +88,12 @@ export class TaskAssignedToMeComponent implements OnInit {
         }
       }
       task.due_date = new Date(task.due_date).toLocaleDateString();
+    });
+  }
+
+  sortByColor() {
+    this.tasks.sort((a, b) => {
+      return a['background_color'] === 'bg-light' ? -1 : 1; 
     });
   }
 
