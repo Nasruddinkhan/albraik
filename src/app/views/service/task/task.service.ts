@@ -35,4 +35,12 @@ export class TaskService {
   updateTaskReply(taskId: number, replyId: number, updateDetails: Object): Observable<TaskModel> {
     return this.http.put<TaskModel>(this.baseUrl+`/api/project/task/${taskId}/reply/${replyId}`, updateDetails);
   }
+
+  likeTaskReply(taskId: number, replyId: number): Observable<TaskModel> {
+    return this.http.put<TaskModel>(this.baseUrl+`/api/project/task/${taskId}/reply/${replyId}/like`, {});
+  }
+
+  dislikeTaskReply(taskId: number, replyId: number): Observable<TaskModel> {
+    return this.http.put<TaskModel>(this.baseUrl+`/api/project/task/${taskId}/reply/${replyId}/dislike`, {});
+  }
 }

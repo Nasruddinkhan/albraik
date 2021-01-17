@@ -1,3 +1,4 @@
+import { TaskIke } from '../../../enum/TaskIke';
 import { TaskPriority } from '../../../enum/TaskPriority';
 import { TaskStatus } from '../../../enum/TaskStatus';
 import { TaskType } from '../../../enum/TaskType';
@@ -19,5 +20,6 @@ export class TaskModel {
     created_time: any;
     updated_time: any;
     is_hidden: boolean;
+    ike: TaskIke;
     attachmentList: Object[];
 }

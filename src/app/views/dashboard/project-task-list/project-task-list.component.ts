@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AddTaskDialogType } from '../../../enum/AddTaskDialogType';
 import { PrivilegeList } from '../../../enum/privilegeList';
+import { TaskIke } from '../../../enum/TaskIke';
 import { TaskStatus } from '../../../enum/TaskStatus';
 import { TaskModel } from '../../modal/task/task-model';
 import { TaskService } from '../../service/task/task.service';
@@ -27,10 +28,13 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
   redTaskCount: number = 0;
   projectTasks: TaskModel[];
   subscription: Subscription;
+  displayedColumns: string[] = ['assignerName', 'taskDescription', 'gap', 'assigneeName', 'taskResponse', 'isHidden'];
+
   taskInProgress = TaskStatus.IN_PROGRESS;
   taskCompleted = TaskStatus.COMPLETED;
   taskLateCompleted = TaskStatus.LATE_COMPLETED;
-  displayedColumns: string[] = ['assignerName', 'taskDescription', 'gap', 'assigneeName', 'taskResponse', 'isHidden'];
+  taskLiked = TaskIke.LIKE;
+  taskDisliked = TaskIke.DISLIKE;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -87,7 +91,7 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
       //   task['background_color'] = 'bg-danger';
       // }
       if (task.status === TaskStatus.IN_PROGRESS) {
-        task['response_text'] = "-";
+        task['response_text'] = "NO RESPONSE";
         task['response_time'] = "-";
         task['dueDays'] = (dueDate - today) / 86400000;
       } else {
@@ -139,6 +143,48 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
     return Date.parse(month.toString()+" "+day.toString()+" "+year.toString());
+  }
+
+  likeTaskReply(task: TaskModel) {
+    let alreadyReacted = false;
+    let reaction;
+    if (task.task_reply.ike) {
+      alreadyReacted = true;
+      reaction = task.task_reply.ike;
+    }
+    task.task_reply['ike'] = this.taskLiked;
+    this.taskService.likeTaskReply(task.id, task.task_reply.id).subscribe((res: TaskModel) => {
+      if (!(res.ike && res.ike === this.taskLiked)) {
+        this.handleReactionError(alreadyReacted, reaction, task);
+      }
+    }, err => {
+      this.handleReactionError(alreadyReacted, reaction, task);
+    });
+  }
+
+  dislikeTaskReply(task: TaskModel) {
+    let alreadyReacted = false;
+    let reaction;
+    if (task.task_reply.ike) {
+      alreadyReacted = true;
+      reaction = task.task_reply.ike;
+    }
+    task.task_reply['ike'] = this.taskDisliked;
+    this.taskService.dislikeTaskReply(task.id, task.task_reply.id).subscribe((res: TaskModel) => {
+      if (!(res.ike && res.ike === this.taskDisliked)) {
+        this.handleReactionError(alreadyReacted, reaction, task);
+      }
+    }, err => {
+      this.handleReactionError(alreadyReacted, reaction, task);
+    });
+  }
+
+  handleReactionError(alreadyReacted: boolean, reaction, task: TaskModel) {
+    if (alreadyReacted) {
+      task.task_reply.ike = reaction;
+    } else {
+      delete task.task_reply['ike'];
+    }
   }
 
   openNotesDialog() {

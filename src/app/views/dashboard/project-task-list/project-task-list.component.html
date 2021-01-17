@@ -76,9 +76,19 @@
                 </mat-card-header>
                 <mat-card-content>
                     <p class="pl-3">{{ task.response_text }}</p>
-                    <div class="pl-3">
-                        <mat-icon>sentiment_very_satisfied</mat-icon>
-                        <mat-icon>sentiment_very_dissatisfied</mat-icon>
+                    <div *ngIf="task.assigner_id === userId && task.task_reply" class="pl-3">
+                        <mat-icon
+                            tooltip="Like" 
+                            [class.flip-icon-color]="task.task_reply.ike === taskLiked"
+                            (click)="likeTaskReply(task)">
+                            sentiment_very_satisfied
+                        </mat-icon>
+                        <mat-icon 
+                            tooltip="Dislike" 
+                            [class.flip-icon-color]="task.task_reply.ike === taskDisliked"
+                            (click)="dislikeTaskReply(task)">
+                            sentiment_very_dissatisfied
+                        </mat-icon>
                     </div>
                     <hr>
                     <div id="footer" [class]="[task.background_color]">

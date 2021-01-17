@@ -65,6 +65,24 @@ mat-icon {
     cursor: pointer;
 }
 
+.flip-icon-color {
+    color: white;
+    background-color: black;
+    padding: 1.2px 1px 1px 1px;
+    border-radius: 11px;
+    transition: height 0.4s, width 0.4s;
+    animation: 0.4s linear enlarge;
+}
+
+@keyframes enlarge {
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(0.5);
+    }
+}
+
 .button-with-mat-icon {
     padding: 3.5px 0px 0px 0px;
 }
