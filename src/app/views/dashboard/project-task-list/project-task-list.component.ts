@@ -7,7 +7,9 @@ import { PrivilegeList } from '../../../enum/privilegeList';
 import { TaskIke } from '../../../enum/TaskIke';
 import { TaskStatus } from '../../../enum/TaskStatus';
 import { TaskModel } from '../../modal/task/task-model';
+import { UserMaster } from '../../modal/user-master';
 import { TaskService } from '../../service/task/task.service';
+import { UserService } from '../../service/user.service';
 import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component';
 import { RespondDialogComponent } from '../task-assigned-to-me/respond-dialog/respond-dialog.component';
 import { ProjectNotesDialogComponent } from './project-notes-dialog/project-notes-dialog.component';
@@ -26,6 +28,8 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
   greenTaskCount: number = 0;
   yellowTaskCount: number = 0;
   redTaskCount: number = 0;
+  involvedUserId: Set<number>;
+  involvedUsers: UserMaster[];
   projectTasks: TaskModel[];
   subscription: Subscription;
   displayedColumns: string[] = ['assignerName', 'taskDescription', 'gap', 'assigneeName', 'taskResponse', 'isHidden'];
@@ -38,11 +42,13 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private userService: UserService,
               private taskService: TaskService,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userId = +sessionStorage.getItem('userId');
+    this.involvedUserId = new Set();
     let userPrivileges = sessionStorage.getItem('privilegeList');
     if (userPrivileges) {
       if (!userPrivileges.includes(PrivilegeList.ASSIGN_A_TASK_TO_A_USER)) 
@@ -67,6 +73,7 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
       this.projectTasks = taskList;
       if (this.projectTasks) {
         this.processTasks();
+        this.getinvolvedUserDetails();
         if (!this.authorized()) {
           alert("You are not allowed to view this page.");
           history.back();
@@ -76,20 +83,27 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
     });
   }
 
+  getinvolvedUserDetails() {
+    let involvedUserIdSting: string[] = [];
+    this.involvedUserId.forEach(id => {
+      involvedUserIdSting.push(id.toString());
+    });
+    this.loading = true;
+    this.userService.getUsers(involvedUserIdSting).subscribe((res: UserMaster[]) => {
+      this.involvedUsers = res;
+      this.loading = false;
+    });
+  }
+
   processTasks() {
     this.projectTasks.forEach(task => {
+      this.involvedUserId.add(task.assignee_id);
+      this.involvedUserId.add(task.assigner_id);
       let dueDate = this.getDateInMilli(new Date(task.due_date)); 
       let today = this.getDateInMilli(new Date());
       task.created_time = this.getDateTimeString(task.created_time);
       let createdDate = this.getDateInMilli(new Date(task.created_time));
       task['duration'] = (dueDate - createdDate) / 86400000;
-      // if (task['duration'] > 2) {
-      //   task['background_color'] = 'bg-success';
-      // } else if (task['duration'] > 0) {
-      //   task['background_color'] = 'bg-warning';
-      // } else {
-      //   task['background_color'] = 'bg-danger';
-      // }
       if (task.status === TaskStatus.IN_PROGRESS) {
         task['response_text'] = "NO RESPONSE";
         task['response_time'] = "-";
@@ -120,7 +134,6 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
           task['background_color'] = 'bg-danger';
         }
       }
-      
     });
   }
 
@@ -143,6 +156,19 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
     return Date.parse(month.toString()+" "+day.toString()+" "+year.toString());
+  }
+
+  getProfilePicture(id: number): string {
+    let n = this.involvedUsers.length;
+    for (let i = 0; i < n; ++i) {
+      if (this.involvedUsers[i].id === id) {
+        if (this.involvedUsers[i].profilePicture)
+          return this.involvedUsers[i].profilePicture;
+        else
+          return "..\\..\\..\\..\\assets\\img\\brand\\Logo.png";
+      }
+    } 
+    return "..\\..\\..\\..\\assets\\img\\brand\\Logo.png";
   }
 
   likeTaskReply(task: TaskModel) {

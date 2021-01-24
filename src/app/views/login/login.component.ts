@@ -45,6 +45,7 @@ export class LoginComponent {
         });
         sessionStorage.setItem('privilegeList', JSON.stringify(loginUser.rolePrivilegeDetails.privilegeList));
       }
+      sessionStorage.setItem('profilePicture', loginUser.profilePicture);
       this.snackbarService.success(".Successful login");
       // this.toastService.susessMessage('successfull login');
       this.loading =   false;

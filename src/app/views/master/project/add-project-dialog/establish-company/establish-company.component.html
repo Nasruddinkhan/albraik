@@ -1,7 +1,7 @@
 <form [formGroup]="companyForm">
     <div>
         <mat-form-field class="example-full-width">
-            <mat-label>اسم الشركة \ المؤسسة / Company Name</mat-label>
+            <mat-label>اسم الشركة \ المؤسسة </mat-label>
             <input type="text" matInput formControlName="name">
             <mat-error *ngIf="name.hasError('required')">
                 Company Name is <strong>required</strong>
@@ -10,6 +10,6 @@
     </div>
 </form>
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="companyForm.invalid"> إرسال </button>
 </div>

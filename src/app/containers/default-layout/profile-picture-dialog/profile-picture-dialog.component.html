@@ -1,0 +1,23 @@
+<div>
+    <input type="file" (change)="fileChangeEvent($event)">
+    <image-cropper
+        *ngIf="imageCropperEnabled"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1 / 1"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+    <div>
+        <img *ngIf="profilePictureEnabled" [src]="profilePictureUrl" alt="profile picture" height="300" width="300">
+    </div>
+    <div class="text-center">
+        <button *ngIf="!profilePictureEnabled" (click)="cropImage()" mat-raised-button>Ok</button>
+    </div>
+</div>
+
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="!submitAllowed"> إرسال </button>
+</div>

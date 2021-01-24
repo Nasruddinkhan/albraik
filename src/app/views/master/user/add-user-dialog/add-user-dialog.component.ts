@@ -46,7 +46,7 @@ export class AddUserDialogComponent implements OnInit {
       roleId: ['', Validators.required],
       departmentId: ['', Validators.required],
       jobTitleId: ['', Validators.required],
-      phoneNumber: ['', [ Validators.required, Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
+      phoneNumber: ['', [ Validators.required, Validators.minLength(10) ]],
       joiningDate: ['', Validators.required],
       role: ['USER'],
       isActive: [true],

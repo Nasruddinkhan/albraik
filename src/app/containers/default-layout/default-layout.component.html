@@ -2,8 +2,6 @@
   <mat-toolbar class="mat-toolbar-row" color="warn">
     <button class="mat-app-background"
       mat-icon-button
-      matRipple 
-      matRippleColor="white"
       class="example-icon" 
       aria-label="Example icon-button with menu icon"
       (click)="drawer.toggle()">
@@ -28,10 +26,15 @@
     <mat-icon class="mr-3" matBadge="3" matBadgePosition="before" matBadgeColor="warn">mail</mat-icon>
     <mat-icon class="mr-3" matBadge="10" matBadgePosition="before" matBadgeColor="warn">account_balance</mat-icon>
 
-    <img [matMenuTriggerFor]="menu" style="cursor: pointer;" src="./../../../assets/img/brand/Logo.png" alt="law icon">
+    <img [matMenuTriggerFor]="menu" style="cursor: pointer;" [src]="profilePictureUrl" alt="profile picture">
     <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
     <mat-menu #menu="matMenu">
-      <button (click)="logout()" mat-menu-item>Log out</button>
+      <button (click)="uploadProfilePic()" mat-menu-item>
+        <div class="text-center">Profile</div>
+      </button>
+      <button (click)="logout()" mat-menu-item>
+        <div class="text-center">Log out</div>
+      </button>
     </mat-menu>
   </mat-toolbar>
 </div>
@@ -67,22 +70,22 @@
         </li>
         <li class="nav-item" id="court">
           <a class="nav-link" routerLink="/master/court" routerLinkActive="active">
-            <i class="fa fa-university"></i> جهة نظر القضية 
+            <i class="fa fa-university"></i> المحاكم
           </a>
         </li>
         <li class="nav-item" id="user">
           <a class="nav-link" routerLink="/master/user" routerLinkActive="active">
-            <i class="fa fa-user"></i> المستعمل 
+            <i class="fa fa-user"></i> المستخدمين 
           </a>
         </li>
         <li class="nav-item" id="project">
           <a class="nav-link" routerLink="/master/project" routerLinkActive="active">
-            <i class="fa fa-suitcase"></i> نوع المشروع 
+            <i class="fa fa-suitcase"></i> قائمة المشاريع
           </a>
         </li>
         <li class="nav-item" id="contact">
           <a class="nav-link" routerLink="/contact" routerLinkActive="active">
-            <i class="fa fa-address-book"></i> إدارة الاتصال 
+            <i class="fa fa-address-book"></i> جهات الإتصال 
           </a>
         </li>
       </ul>

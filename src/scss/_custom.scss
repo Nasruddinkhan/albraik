@@ -39,6 +39,10 @@
    border: 0.5px solid #BBB;
 }
 
+* {
+   font-family: 'sakkal majalla'; 
+}
+
 
 .form-control_textarea {
    border-radius: 4px !important;
@@ -102,7 +106,7 @@ th{
 body{
    font-size: 14px !important;
    // font-family: 'NotoKufiArabic';
-   font-family: 'sakkal majalla';  
+   font-family: 'sakkal majalla' !important;  
    color: #000000;    
    background-color: #f7f9f8;    
    -webkit-font-smoothing: antialiased !important;    

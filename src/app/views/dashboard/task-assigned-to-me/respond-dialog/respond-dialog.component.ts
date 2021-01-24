@@ -1,9 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { Contact } from '../../../modal/contact';
 import { TaskModel } from '../../../modal/task/task-model';
+import { UserModel } from '../../../modal/user-model';
+import { ContactSearchService } from '../../../service/contact.service';
 import { SnackbarService } from '../../../service/snackbar.service';
 import { TaskService } from '../../../service/task/task.service';
+import { UserService } from '../../../service/user.service';
 import { TaskAssignedToMeComponent } from '../task-assigned-to-me.component';
 
 @Component({
@@ -17,6 +22,9 @@ export class RespondDialogComponent implements OnInit {
   responseId: number;
   isHidden: boolean;
   oldDescription: string;
+  judgeList: Contact[];
+  setCourtMeeting = false;
+  locale = 'ar';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
                 taskId: number, 
@@ -27,7 +35,11 @@ export class RespondDialogComponent implements OnInit {
               public dialog: MatDialogRef<TaskAssignedToMeComponent>,
               private fb: FormBuilder,
               private snackbar: SnackbarService,
-              private taskService: TaskService) { }
+              private taskService: TaskService,
+              private contactSearchService: ContactSearchService,
+              private localeService: BsLocaleService) { 
+                this.localeService.use(this.locale);
+              }
 
   ngOnInit(): void {
     this.taskId = this.data.taskId;
@@ -35,14 +47,43 @@ export class RespondDialogComponent implements OnInit {
     this.isHidden = this.data.isHidden;
     this.oldDescription = this.data.description;
     this.respondForm = this.fb.group({
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      courtMeetingDate: [new Date(), Validators.required],
+      judge: [0, Validators.required]
     });
     if (this.oldDescription) 
       this.description.setValue(this.oldDescription); 
+    this.getAllJudges();
+  }
+
+  getAllJudges() {
+    this.contactSearchService.getContactType(1).subscribe((contactList: Contact[]) => {
+      this.judgeList = contactList;
+    });
   }
 
   get description() {
     return this.respondForm.get('description');
+  }
+
+  get courtMeetingDate() {
+    return this.respondForm.get('courtMeetingDate');
+  }
+
+  get judge() {
+    return this.respondForm.get('judge');
+  }
+
+  checkboxChanged(event) {
+    if (event.checked) {
+      this.setCourtMeeting = true;
+      this.courtMeetingDate.setValue('');
+      this.judge.setValue('');
+    } else {
+      this.setCourtMeeting = false;
+      this.courtMeetingDate.setValue(new Date());
+      this.judge.setValue(0);
+    }
   }
 
   onSubmit() {

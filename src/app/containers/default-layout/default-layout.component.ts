@@ -6,6 +6,12 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ViewChild } from '@angular/core';
 import { PrivilegeList } from './../../enum/privilegeList';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfilePictureDialogComponent } from './profile-picture-dialog/profile-picture-dialog.component';
+import { ProfilePictureService } from '../../views/service/attachment/profile-picture.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../../views/service/user.service';
+import { SnackbarService } from '../../views/service/snackbar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +24,7 @@ export class DefaultLayoutComponent implements OnInit {
   public navItems = navItems;
   public mobileResized = false;
   public desktopResized = false;
+  profilePictureUrl;
   isCollapsed = true;
   sidebarLink: Element[] = [];
   profileMinimized = true;
@@ -40,7 +47,13 @@ export class DefaultLayoutComponent implements OnInit {
   //   this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
   // }
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, private router: Router) {}
+  constructor(private elementRef: ElementRef, 
+              private renderer: Renderer2, 
+              private router: Router,
+              private dialog: MatDialog,
+              private snackbarService: SnackbarService,
+              private profilePictureService: ProfilePictureService,
+              private userService: UserService) {}
 
   ngOnInit() {
     let role  = sessionStorage.getItem("role");
@@ -84,7 +97,15 @@ export class DefaultLayoutComponent implements OnInit {
         }
       });
     }
+    this.setProfilePicture();
+    if (this.profilePictureUrl === 'null')
+      this.profilePictureUrl = '..\\..\\..\\assets\\img\\brand\\Logo.png';
   }
+
+  setProfilePicture() {
+    this.profilePictureUrl = sessionStorage.getItem('profilePicture');
+  }
+
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
@@ -92,6 +113,38 @@ export class DefaultLayoutComponent implements OnInit {
   handleChange($event: ColorEvent) {
      //document.documentElement.style.setProperty('--primary-color', $event.color.hex);
      this.renderer.setStyle(this.elementRef.nativeElement, 'background-color',  $event.color.hex);
+  }
+
+  uploadProfilePic() {
+    let dialogRef = this.dialog.open(ProfilePictureDialogComponent);
+    dialogRef.afterClosed().subscribe(imageFile => {
+      if (imageFile) {
+        this.profilePictureService.getPresignedUrlForProfilePhoto().subscribe(res => {
+          let url = res['attachment_url'];
+          let s3key = res['s3key'];
+          this.uploadProfileToAWSS3(url, s3key, imageFile);
+        });
+      }
+    })
+  }
+
+  uploadProfileToAWSS3(url, s3key, imageFile) {
+    this.profilePictureService.uploadProfilePhoto(url, imageFile).subscribe(res => {
+      if (res.status === 200)
+        this.updateS3keyToDB(s3key);
+    }, err => {
+      this.snackbarService.failure(".Profile photo upload on s3 failed");
+    });
+  }
+
+  updateS3keyToDB(s3key) {
+    this.userService.updateS3ProfilePhotoKey(s3key).subscribe(res => {
+      sessionStorage.setItem('profilePicture', res['url']);
+      this.snackbarService.success('.Profile picture uploaded successfully');
+      this.setProfilePicture();
+    }, err => {
+      this.snackbarService.failure('.Updating s3 key failed');
+    });
   }
 
   profile() {

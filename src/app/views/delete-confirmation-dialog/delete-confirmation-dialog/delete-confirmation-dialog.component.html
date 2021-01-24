@@ -1,8 +1,9 @@
 <h2 style="text-align: center;" mat-dialog-title><i class="icon-trash"></i></h2>
 <mat-dialog-content>
-    ?Are you sure that you want to delete {{ data.length }} {{ data.name }}
+    <!-- ?هل أنت متأكد لحذف عدد {{ data.length }} {{ data.name }} -->
+    ?هل أنت متأكد لحذف عدد {{ data.length }} من العناصر
 </mat-dialog-content>
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
-    <button mat-raised-button (click)="onConfirm()" mat-dialog-close> confirm </button>
+    <button mat-raised-button mat-dialog-close> لا </button>
+    <button mat-raised-button (click)="onConfirm()" mat-dialog-close> نعم </button>
 </div>

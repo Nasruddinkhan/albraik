@@ -34,10 +34,10 @@
           <button type="button" class="btn btn-md" (click)="refreshTable()"><div class="plus_bold" > <i class="fa fa-refresh" aria-hidden="true"></i> </div></button>
       </div>
       <mat-tab-group mat-stretch-tabs mat-align-tabs="start" [selectedIndex]="1" #tabGroup>
-        <mat-tab [disabled]="taskAssignedByMeTabDisabled" label="Task Assigned By Me">
+        <mat-tab [disabled]="taskAssignedByMeTabDisabled" label="المهمة التي كلفني بها">
           <task-assigned-by-me></task-assigned-by-me>
         </mat-tab>
-        <mat-tab label="Task Assigned To Me">
+        <mat-tab label="المهمة الموكلة إلي">
           <task-assigned-to-me></task-assigned-to-me>
         </mat-tab>
       </mat-tab-group>

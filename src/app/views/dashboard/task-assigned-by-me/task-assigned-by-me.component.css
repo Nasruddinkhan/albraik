@@ -1,0 +1,11 @@
+.btn {
+    border: 0.5px solid white;
+}
+
+.white-border {
+    border: 1px solid white;
+}
+
+.black-border {
+    border-bottom: 1px solid black;
+}

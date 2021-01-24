@@ -17,21 +17,32 @@
     text-align: center; */
 }
 
+.pending-tasks {
+    padding: 10px;
+}
+
 .pending-tasks div{
     display: inline-block;
-    padding: 0px 12.5px 40px 7px;
-    font-size: 1.8rem;
+    /* padding: 0px 12.5px 40px 7px;
+    font-size: 1.8rem; */
+    padding: 0px 11.5px 33px 0px;
+    font-size: 1.4rem;
 }
 
 .circle {
-    height: 30px;
-    width: 40px;
+    height: 20px;
+    width: 35px;
     display: inline-block;
     border-radius: 50%;
 }
 
-mat-card-header .set-margin {
+mat-card-header .set-right-card-margin {
     margin-right: -1rem !important;
+    margin-left: 1rem !important;
+}
+
+.set-left-card-margin {
+    margin-right: -2rem !important;
     margin-left: 1rem !important;
 }
 
@@ -49,6 +60,7 @@ mat-card-header .set-margin {
     padding: 16px 0px 0.2px 0px;
     border-radius: 4px 4px 10px 10px;
     margin-top: 1rem;
+    box-shadow: 0px 1px 3px 1px rgb(0, 0, 0, 0.4);
 }
 
 .col-sm-6 {
@@ -61,7 +73,7 @@ mat-card-header .set-margin {
 } */
 
 mat-icon {
-    font-size: 21px;
+    font-size: 15px;
     cursor: pointer;
 }
 
@@ -87,10 +99,14 @@ mat-icon {
     padding: 3.5px 0px 0px 0px;
 }
 
-.copy-description {
+/* .copy-description {
     padding: 0px; 
     margin-top: -0.3rem; 
     margin-right: -0.7rem;
+} */
+
+.reaction mat-icon {
+    font-size: 21px;
 }
 
 #upper-left-corner {

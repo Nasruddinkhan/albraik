@@ -19,7 +19,7 @@ import { CompanyRegistrationService } from '../views/service/company-registratio
 import { LoginService } from '../views/service/login.service';
 import { ToasterMsgService } from '../views/service/toaster-msg.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectService } from '../views/service/project.service';
 import { ContactSearchService } from '../views/service/contact.service';
@@ -32,13 +32,19 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ProfilePictureDialogComponent } from './default-layout/profile-picture-dialog/profile-picture-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { TokenInterceptorService } from '../views/service/token-interceptor.service';
 
   const APP_CONTAINERS = [
     DefaultLayoutComponent
   ];
 @NgModule({
   declarations: [
-    ...APP_CONTAINERS
+    ...APP_CONTAINERS,
+    ProfilePictureDialogComponent
   ],
   imports: [
     SharedModule,
@@ -59,6 +65,9 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatInputModule,
     MatRippleModule,
     MatBadgeModule,
+    MatDialogModule,
+    MatButtonModule,
+    ImageCropperModule,
     TabsModule.forRoot(),
     BrowserModule, BrowserAnimationsModule,HttpClientModule
   ],
@@ -72,11 +81,14 @@ import { MatBadgeModule } from '@angular/material/badge';
     ColorSketchModule,
     TabsModule
   ],
+  entryComponents: [
+    ProfilePictureDialogComponent
+  ],
   providers: [
     AdminRegistrationService, ProjectService,
      AuthGuardService,ContactSearchService,
       CompanyRegistrationService, LoginService, 
-      ToasterMsgService, CourtService
+      ToasterMsgService, CourtService,
   ]
 })
 export class CoreModule {}

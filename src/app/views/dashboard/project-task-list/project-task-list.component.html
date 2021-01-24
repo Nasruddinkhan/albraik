@@ -22,23 +22,38 @@
             </div>
         </div>
     </div>
+    <div *ngIf="involvedUsers">
     <div *ngFor="let task of projectTasks;" class="row ml-0">
         <div class="col-sm-6">
             <mat-card>
                 <mat-card-header class="pl-3">
-                    <div mat-card-avatar class="header-image"></div>
-                    <mat-card-title>{{ task.assigner_name }}</mat-card-title>
-                    <button class="btn copy-description" tooltip="Copy Description" [cdkCopyToClipboard]="task.response_text">
-                        <mat-icon>file_copy</mat-icon>
-                    </button>
+                    <div class="set-left-card-margin d-flex flex-row justify-content-between w-100">
+                        <div>
+                            <!-- <div mat-card-avatar class="header-image"></div>
+                            <mat-card-title>{{ task.assigner_name }}</mat-card-title> -->
+                            <img style="border-radius: 50%;" [src]="getProfilePicture(task.assigner_id)" alt="profile photo" width="40px" height="40px">
+                            <mat-card-title style="display: inline; margin-right: 0.6rem;">
+                                {{ task.assigner_name }}
+                            </mat-card-title>
+                        </div>
+                        <div>
+                            <button *ngIf="task.is_hidden" class="btn button-with-mat-icon" tooltip="Hidden Task">
+                                <mat-icon>visibility_off</mat-icon>
+                            </button>
+                            <button class="btn button-with-mat-icon" tooltip="Copy Description" [cdkCopyToClipboard]="task.response_text">
+                                <mat-icon>file_copy</mat-icon>
+                            </button>
+                        </div>
+                    </div>
                 </mat-card-header>
                 <mat-card-content>
                     <p class="pl-3">{{ task.description }}</p>
-                    <hr>
+                    <p *ngIf="task.assigner_id === userId && task.task_reply" style="margin-bottom: 1.43rem;">&nbsp;&nbsp;</p>
+                    <hr style="margin-right: 20px; margin-left: 20px;">
                     <div style="padding: 0.5rem 1rem; margin-top: -0.383rem;">
                         <div class="d-flex flex-row justify-content-between">
                             <p class="mb-0">{{ task.created_time }}</p>
-                            <p class="mb-0" *ngIf="task.is_hidden"><mat-icon>visibility_off</mat-icon></p>
+                            <!-- <p class="mb-0" *ngIf="task.is_hidden"><mat-icon>visibility_off</mat-icon></p> -->
                             <p class="mb-0">المدة: {{ task.duration }}</p>
                         </div>
                     </div>
@@ -48,10 +63,10 @@
         <div class="col-sm-6">
             <mat-card>
                 <mat-card-header>
-                    <div class="set-margin d-flex flex-row justify-content-between w-100">
+                    <div class="set-right-card-margin d-flex flex-row justify-content-between w-100">
                         <div>
                             <div *ngIf="task.assignee_id === userId" style="display: inline;">
-                                <button *ngIf="task.status === taskInProgress && (task.background_color === 'bg-warning' || task.background_color === 'bg-danger')" tooltip="Extend duration" class="btn btn-primary button-with-mat-icon" (click)="openReplyDialog(task.id, task.is_hidden)">
+                                <button *ngIf="task.status === taskInProgress && (task.background_color === 'bg-warning' || task.background_color === 'bg-danger')" tooltip="Extend duration" class="btn btn-primary button-with-mat-icon">
                                     <mat-icon>add_alarm</mat-icon>
                                 </button> 
                                 <button *ngIf="task.status === taskInProgress" tooltip="Respond" class="btn btn-primary button-with-mat-icon" (click)="openReplyDialog(task.id, task.is_hidden)">
@@ -70,13 +85,13 @@
                                 {{ task.assignee_name }}
                             </mat-card-title>
                             <!-- <div mat-card-avatar class="header-image"></div> -->
-                            <img style="border-radius: 50%;" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="profile photo" width="40px" height="40px">
+                            <img style="border-radius: 50%;" [src]="getProfilePicture(task.assignee_id)" alt="profile photo" width="40px" height="40px">
                         </div>
                     </div>
                 </mat-card-header>
                 <mat-card-content>
                     <p class="pl-3">{{ task.response_text }}</p>
-                    <div *ngIf="task.assigner_id === userId && task.task_reply" class="pl-3">
+                    <div *ngIf="task.assigner_id === userId && task.task_reply" class="pl-3 reaction">
                         <mat-icon
                             tooltip="Like" 
                             [class.flip-icon-color]="task.task_reply.ike === taskLiked"
@@ -106,5 +121,6 @@
             </mat-card>
         </div>
         <div class="separator"></div>
+    </div>
     </div>
 </mat-card>

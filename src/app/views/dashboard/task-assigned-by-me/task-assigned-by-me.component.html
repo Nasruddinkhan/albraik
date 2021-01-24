@@ -58,6 +58,13 @@
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let task; columns: displayedColumns;" [class]="task.background_color"></tr>
+        <tr 
+            mat-row 
+            [class]="task.background_color"
+            [class.black-border]="task.background_color === 'bg-white' || task.background_color === 'bg-light'" 
+            [class.white-border]="task.background_color === 'bg-info'"
+            *matRowDef="let task; columns: displayedColumns;" 
+            >
+        </tr>
     </table>
 </div>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>قيد المحكمة / Case number in court</mat-label>
+                <mat-label>قيد المحكمة</mat-label>
                 <input type="text" matInput formControlName="caseNumber">
                 <mat-error *ngIf="caseNumber.hasError('required')">
                     Case Number in court is <strong>required</strong>
@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>المستشار المتابع / Consultant</mat-label>
+                <mat-label>المستشار المتابع</mat-label>
                 <mat-select formControlName="consultant" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let user of users" [value]="user.id">
@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>القاضي / Judge Name</mat-label>
+                <mat-label>القاضي</mat-label>
                 <mat-select formControlName="judgeName" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let contact of contactList" [value]="contact.id">
@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>الدائرة / Office</mat-label>
+                <mat-label>الدائرة</mat-label>
                 <input type="text" matInput formControlName="office">
                 <mat-error *ngIf="office.hasError('required')">
                     Office is <strong>required</strong>
@@ -46,7 +46,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>القاضي / Court Name</mat-label>
+                <mat-label>القاضي</mat-label>
                 <mat-select formControlName="courtName" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let court of courts" [value]="court.id">
@@ -58,7 +58,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>تاريخ استلامه لها / Consultant Engagement Date</mat-label>
+                <mat-label>تاريخ استلامه لها</mat-label>
                 <input 
                     matInput 
                     formControlName="consultantEngDate" 
@@ -73,7 +73,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>موكلنا / Client</mat-label>
+                <mat-label>موكلنا</mat-label>
                 <mat-select formControlName="client" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let c of clientList" [value]="c.id">
@@ -84,19 +84,21 @@
             </mat-form-field>
         </div>
         <div class="col-sm-4">
-            <label>صفة الموكل في الدعوى / Client Position in court
+            <label>صفة الموكل في الدعوى 
                 <mat-radio-group 
                     aria-label="صفة الموكل في الدعوى / Client Position in court"
                     formControlName="clientPosition">
-                    <mat-radio-button style="font-size: 0.8rem; font-weight: 10;" value="R">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
-                    <mat-radio-button value="P">مدعي / Prosecutor</mat-radio-button>
+                    <div>
+                        <mat-radio-button style="font-size: 0.8rem; font-weight: 10;" value="R">مدعى عليه </mat-radio-button> &nbsp;&nbsp;
+                        <mat-radio-button value="P">مدعي </mat-radio-button>
+                    </div>
                 </mat-radio-group>
                 <mat-error *ngIf="clientPosition.touched && clientPosition.hasError('required')">Client Position is required</mat-error>
             </label>
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>ملخص القضية / Consultant Engagement Text</mat-label>
+                <mat-label>ملخص القضية</mat-label>
                 <textarea type="text" matInput formControlName="consultantEngText"></textarea>
                 <mat-error *ngIf="consultantEngText.hasError('required')">Consultant Engagement Text is required</mat-error>
             </mat-form-field>
@@ -105,7 +107,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>الخصم / Opposing</mat-label>
+                <mat-label>الخصم</mat-label>
                 <mat-select formControlName="opposing" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let oppos of opposingList" [value]="oppos.id">
@@ -116,20 +118,22 @@
             </mat-form-field>
         </div>
         <div class="col-sm-4">
-            <label>صفة الخصم في الدعوى / Opposing Position in court
+            <label>صفة الخصم في الدعوى 
                 <mat-radio-group 
                     class="font-size"
                     aria-label="صفة الخصم في الدعوى / Opposing Position in court"
                     formControlName="opposingPosition">
-                    <mat-radio-button value="R">مدعى عليه / Respondent</mat-radio-button> &nbsp;&nbsp;
-                    <mat-radio-button value="P">مدعي / Prosecutor</mat-radio-button>
+                    <div>
+                        <mat-radio-button value="R">مدعى عليه</mat-radio-button> &nbsp;&nbsp;
+                        <mat-radio-button value="P">مدعي</mat-radio-button>
+                    </div>
                 </mat-radio-group>
                 <mat-error *ngIf="opposingPosition.touched && opposingPosition.hasError('required')">Opposing Position is required</mat-error>
             </label>
         </div>
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>الحاضر عنه في الدعوى / Opposing Representator</mat-label>
+                <mat-label>الحاضر عنه في الدعوى</mat-label>
                 <mat-select formControlName="opposingRepresentator" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let oppos of opposingRepList" [value]="oppos.id">
@@ -142,6 +146,6 @@
     </div>
 </form>
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="caseForm.invalid"> إرسال </button>
 </div>

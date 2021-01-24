@@ -29,8 +29,8 @@ import { TaskStatus } from '../../../enum/TaskStatus';
 export class AddTaskDialogComponent implements OnInit {
   @Output() onSubmitClicked = new EventEmitter<any>();
   addTaskForm: FormGroup;
-  projectSelectionEnabled = true;
-  assigneeSelectionEnabled = true;
+  // projectSelectionEnabled = true;
+  // assigneeSelectionEnabled = true;
   greenTaskCount: number = 0;
   yellowTaskCount: number = 0;
   redTaskCount: number = 0;
@@ -77,13 +77,16 @@ export class AddTaskDialogComponent implements OnInit {
     });
     //If this dialog is opened from quick task add button OR project page OR dashboard page
     if (this.data.type === AddTaskDialogType.QUICK) {
-      this.projectSelectionEnabled = false;
-      this.assigneeSelectionEnabled = false;
+      // this.projectSelectionEnabled = false;
+      // this.assigneeSelectionEnabled = false;
       this.project_id.setValue(this.data.projectId);
       this.assignee_id.setValue(this.data.assigneeId);
+      this.project_id.disable();
+      this.assignee_id.disable();
     } else if (this.data.type === AddTaskDialogType.PROJECT) {
-      this.projectSelectionEnabled = false;
+      // this.projectSelectionEnabled = false;
       this.project_id.setValue(this.data.projectId);
+      this.project_id.disable();
     }
     this.userService.findAllUsers().subscribe((res: UserMaster[]) => {
       this.users = res;

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>المكتب القضائي المحالة إليه / Office Reference</mat-label>
+                <mat-label>المكتب القضائي المحالة إليه </mat-label>
                 <input type="text" matInput formControlName="officeRef">
                 <mat-error *ngIf="officeRef.hasError('required')">
                     Office Reference is <strong>required</strong>
@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>المحكمة المختصة / Court Name</mat-label>
+                <mat-label>المحكمة المختصة </mat-label>
                 <mat-select formControlName="courtName" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let court of courts" [value]="court.id">
@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>اسم ناظر القضية / Name of case observer</mat-label>
+                <mat-label>اسم ناظر القضية </mat-label>
                 <input type="text" matInput formControlName="caseObserver">
                 <mat-error *ngIf="caseObserver.hasError('required')">
                     Name of case observer is <strong>required</strong>
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>رقم القيد لدى المحكمة / Case Number</mat-label>
+                <mat-label>رقم القيد لدى المحكمة </mat-label>
                 <input type="text" matInput formControlName="caseNumber">
                 <mat-error *ngIf="caseNumber.hasError('required')">
                     Case Number is <strong>required</strong>
@@ -43,7 +43,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>تاريخ القيد لدى المحكمة / Referent date in court</mat-label>
+                <mat-label>تاريخ القيد لدى المحكمة </mat-label>
                 <input 
                     matInput 
                     formControlName="refDate" 
@@ -57,6 +57,6 @@
     </div>
 </form>
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="deedOfOwnershipForm.invalid"> إرسال </button>
 </div>

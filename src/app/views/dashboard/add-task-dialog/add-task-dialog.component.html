@@ -1,20 +1,41 @@
 <form class="content" [formGroup]="addTaskForm">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div>
-                <mat-form-field style="width: 100%;">
-                    <mat-label>التوجيه</mat-label>
-                    <textarea matInput formControlName="description" rows="15" cols="10"></textarea>
-                    <mat-error *ngIf="description.hasError('required')">Description is required</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="mt-2">
-                <mat-checkbox formControlName="is_hidden" value="true">إجراء مخفي؟ / Hidden Task</mat-checkbox>
+                <div>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>التوجيه</mat-label>
+                        <textarea matInput formControlName="description" rows="15" cols="10"></textarea>
+                        <mat-error *ngIf="description.hasError('required')">Description is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>المدة</mat-label>
+                        <input type="text" formControlName="duration" matInput>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <label>
+                        <input type="file"  formControlName="attachement" name="attachement" (change)="fileProgress($event)" >
+                        <div class="form-group col-sm-3">
+                            <div *ngIf="fileUploadProgress">
+                                Upload progress: {{ fileUploadProgress }}
+                            </div>
+                            <div  *ngIf="previewUrl">
+                                <img [src]="previewUrl" height="200" />                 
+                            </div>
+                            <div class="col-sm-3" *ngIf="uploadedFilePath">
+                                {{uploadedFilePath}}
+                            </div>
+                         </div>
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div *ngIf="projectSelectionEnabled">
-                <mat-form-field appearance="fill">
+        <div class="col-sm-6">
+            <div>
+                <mat-form-field class="w-100" appearance="fill">
                     <mat-label>نوع المشروع</mat-label>
                     <mat-select formControlName="project_id" required>
                         <mat-option>--</mat-option>
@@ -27,8 +48,8 @@
                     <mat-error *ngIf="project_id.hasError('required')">Please choose a project</mat-error>
                 </mat-form-field>
             </div>
-            <div *ngIf="assigneeSelectionEnabled">
-                <mat-form-field appearance="fill">
+            <div>
+                <mat-form-field class="w-100" appearance="fill">
                     <mat-label>المكلف</mat-label>
                     <mat-select formControlName="assignee_id" (selectionChange)="showPendingTaskCount()" required>
                         <mat-option>--</mat-option>
@@ -41,8 +62,16 @@
                     <mat-error *ngIf="assignee_id.hasError('required')">Please choose an assignee</mat-error>
                 </mat-form-field>
             </div>
+            <div class="d-flex flex-row justify-content-between" style="margin-bottom: 1.1rem;">
+                <div class="pending-tasks">
+                    <div class="circle bg-success">{{ greenTaskCount }}</div>
+                    <div class="circle bg-warning">{{ yellowTaskCount }}</div>
+                    <div class="circle bg-danger">{{ redTaskCount }}</div>
+                </div>
+                <img style="border-radius: 50%;" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="profile photo" width="40px" height="40px">
+            </div>
             <div>
-                <mat-form-field appearance="fill">
+                <mat-form-field class="w-100" appearance="fill">
                     <mat-label>الأهمية</mat-label>
                     <mat-select formControlName="priority" required>
                         <mat-option>--</mat-option>
@@ -75,37 +104,12 @@
                 </mat-form-field> -->
             </div>
             <div>
-                <mat-form-field class="example-full-width">
-                    <mat-label>المدة</mat-label>
-                    <input type="text" formControlName="duration" matInput>
-                </mat-form-field>
+                <mat-checkbox formControlName="is_hidden" value="true">إجراء مخفي؟</mat-checkbox>
             </div>
-        </div>
-        <div class="col-sm-4 d-flex flex-row justify-content-between">
-            <div class="pending-tasks">
-                <div class="circle bg-success">{{ greenTaskCount }}</div>
-                <div class="circle bg-warning">{{ yellowTaskCount }}</div>
-                <div class="circle bg-danger">{{ redTaskCount }}</div>
-            </div>
-            <img style="border-radius: 50%;" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="profile photo" width="40px" height="40px">
         </div>
     </div>
-    <label>
-        <input type="file"  formControlName="attachement" name="attachement" (change)="fileProgress($event)" >
-        <div class="form-group col-sm-3">
-            <div *ngIf="fileUploadProgress">
-                Upload progress: {{ fileUploadProgress }}
-            </div>
-            <div  *ngIf="previewUrl">
-                <img [src]="previewUrl" height="200" />                 
-            </div>
-            <div class="col-sm-3" *ngIf="uploadedFilePath">
-                {{uploadedFilePath}}
-            </div>
-         </div>
-    </label>
 </form>
 <div class="dialog-button" style="clear: both;" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="addTaskForm.invalid"> إرسال </button>
 </div>

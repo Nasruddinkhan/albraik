@@ -1,11 +1,44 @@
 <form [formGroup]="respondForm">
-    <mat-form-field style="width: 100%;">
-        <mat-label>التوجيه</mat-label>
-        <textarea matInput formControlName="description" rows="15" cols="50"></textarea>
-        <mat-error *ngIf="description.hasError('required')">Description is required</mat-error>
-    </mat-form-field>
+    <div class="row">
+        <div [class.col-sm-6]="setCourtMeeting">
+            <mat-form-field style="width: 100%;">
+                <mat-label>التوجيه</mat-label>
+                <textarea matInput formControlName="description" rows="7" cols="50"></textarea>
+                <mat-error *ngIf="description.hasError('required')">Description is required</mat-error>
+            </mat-form-field>
+            <label>
+                <mat-checkbox (change)="checkboxChanged($event)">تعيين جلسة المحكمة</mat-checkbox>
+            </label>
+        </div>
+        <div *ngIf="setCourtMeeting" class="col-sm-6">
+            <div class="text-center">جلسة المحكمة</div>
+            <mat-form-field class="example-full-width">
+                <mat-label>تاريخ اجتماع المحكمة</mat-label>
+                <input 
+                    matInput
+                    formControlName="courtMeetingDate" 
+                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                    bsDatepicker>
+                <mat-error *ngIf="courtMeetingDate.hasError('required')">
+                    Court Meeting date is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>القاضي</mat-label>
+                <mat-select formControlName="judge" required>
+                    <mat-option>--</mat-option>
+                    <mat-option 
+                        *ngFor="let judge of judgeList" 
+                        [value]="judge.id">
+                        {{ judge.name }} - {{ judge.email }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="judge.hasError('required')">Please select a judge</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
 </form>
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button (click)="onSubmit()" [disabled]="respondForm.invalid"> إرسال </button>
 </div>

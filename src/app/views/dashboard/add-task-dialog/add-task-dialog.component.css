@@ -2,15 +2,21 @@
     width: 100%;
 }
 
+.pending-tasks {
+    padding: 3px;
+}
+
 .pending-tasks div{
     display: inline-block;
-    padding: 0px 14.5px 39px 7px;
-    font-size: 1.8rem;
+    /* padding: 0px 14.5px 39px 7px;
+    font-size: 1.8rem; */
+    padding: 0px 11.5px 33px 0px;
+    font-size: 1.4rem;
 }
 
 .circle {
-    height: 30px;
-    width: 40px;
+    height: 20px;
+    width: 35px;
     display: inline-block;
     border-radius: 50%;
 }

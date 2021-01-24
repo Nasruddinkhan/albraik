@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>القضية الجاري تنفيذ حكمها / Executed case</mat-label>
+                <mat-label>القضية الجاري تنفيذ حكمها</mat-label>
                 <mat-select formControlName="executedCase" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let case of cases" [value]="case.projectId">
@@ -14,7 +14,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>رقم الحكم / Verdict Number</mat-label>
+                <mat-label>رقم الحكم</mat-label>
                 <input type="text" matInput formControlName="verdictNumber">
                 <mat-error *ngIf="verdictNumber.hasError('required')">
                     Verdict Number is <strong>required</strong>
@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>التاريخ / Date</mat-label>
+                <mat-label>التاريخ</mat-label>
                 <input 
                     matInput 
                     formControlName="date" 
@@ -38,7 +38,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>المصدر / Source</mat-label>
+                <mat-label>المصدر</mat-label>
                 <input type="text" matInput formControlName="source">
                 <mat-error *ngIf="source.hasError('required')">
                     Source is <strong>required</strong>
@@ -46,20 +46,22 @@
             </mat-form-field>
         </div>
         <div class="col-sm-4">
-            <label>نوع الحكم / Verdict Type
+            <label>نوع الحكم 
                 <mat-radio-group 
                     class="font-size"
                     aria-label="نوع الحكم / Verdict Type"
                     formControlName="verdictType">
-                    <mat-radio-button value="R">Verified / ((مصدق)) </mat-radio-button> &nbsp;&nbsp;
-                    <mat-radio-button value="P">Included in Work ((مشمول بالتقاء العمل))</mat-radio-button>
+                    <div>
+                        <mat-radio-button value="R">((مصدق)) </mat-radio-button> &nbsp;&nbsp;
+                        <mat-radio-button value="P">((مشمول بالتقاء العمل))</mat-radio-button>
+                    </div>
                 </mat-radio-group>
                 <mat-error *ngIf="verdictType.touched && verdictType.hasError('required')">Verdict Type is required</mat-error>
             </label>
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>تاريخ إلحاق الصيغة التنفيذية / Verdict Decision Date</mat-label>
+                <mat-label>تاريخ إلحاق الصيغة التنفيذية </mat-label>
                 <input 
                     matInput 
                     formControlName="verdictDecisionDate" 
@@ -73,6 +75,6 @@
     </div>
 </form>
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="executedCaseForm.invalid"> إرسال </button>
 </div>

@@ -26,11 +26,8 @@
     <mat-form-field class="example-full-width">
         <mat-label>رقم الهاتف</mat-label>
         <input matInput formControlName="phoneNumber">
-        <mat-error *ngIf="phoneNumber.hasError('pattern') && !phoneNumber.hasError('required')">
-            Please enter a valid phone number
-        </mat-error>
-        <mat-error *ngIf="phoneNumber.hasError('minLength') && !phoneNumber.hasError('required')">
-            Phone number should be minimum 12 digits
+        <mat-error *ngIf="phoneNumber.hasError('minlength') && !phoneNumber.hasError('required')">
+            Phone number should be minimum 10 digits
         </mat-error>
         <mat-error *ngIf="phoneNumber.hasError('required')">
           Phone number is <strong>required</strong>
@@ -69,6 +66,6 @@
 </form>
 
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button (click)="onSubmit()" mat-dialog-close [disabled]="userForm.invalid"> إرسال </button>
 </div>

@@ -27,10 +27,10 @@ export class AddContactDialogComponent implements OnInit, OnDestroy {
     this.createContactForm = this.fb.group({
       name: ['', Validators.required],
       contactTypeId: ['',Validators.required],
-      phoneNumber: ['', [Validators.required,  Validators.minLength(12)]],
-      mobileNumber: ['', [Validators.required,  Validators.minLength(12) ]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10) ]],
+      mobileNumber: ['', [Validators.required, Validators.minLength(10) ]],
       email: ['', [Validators.required, Validators.email]],
-      faxNumber: ['', [ Validators.required, Validators.minLength(12),Validators.pattern("^[\u0621-\u064A\u0660-\u0669 ]+$") ]],
+      faxNumber: ['', [ Validators.required, Validators.minLength(10) ]],
       address: [''],
       comment: ['']
     });

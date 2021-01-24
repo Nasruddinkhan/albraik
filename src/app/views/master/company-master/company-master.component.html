@@ -20,10 +20,10 @@
                 <th class="text-center" mat-header-cell *matHeaderCellDef> الشعار </th>
                 <td style="padding-bottom: 8px;" mat-cell *matCellDef="let company"><img src={{company.companyLogo}} height="40" width="40" style="border-radius: 4px;" /></td>
               </ng-container>
-              <ng-container matColumnDef="position">
+              <!-- <ng-container matColumnDef="position">
                 <th class="text-center" mat-header-cell *matHeaderCellDef> رقم سري </th>
                 <td mat-cell *matCellDef="let company"> {{ company.srNo }} </td>
-              </ng-container>
+              </ng-container> -->
               <ng-container matColumnDef="name">
                   <th class="text-center" mat-header-cell *matHeaderCellDef> قسم </th>
                   <td mat-cell *matCellDef="let company"> {{ company.name }} </td>

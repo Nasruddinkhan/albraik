@@ -2,7 +2,7 @@
 <div class="card" >
     <div class="card-header main-border-left main-border-right main-border-top">
         <!-- <i class="fa fa-university"></i> جهة نظر القضية / Add Court <hr> -->
-        <i class="fa fa-university"></i> جهة نظر القضية <hr>
+        <i class="fa fa-university"></i> المحاكم <hr>
     </div>
 
     <form [formGroup]="addCourtForm"  (ngSubmit)="onSubmit()">
@@ -54,7 +54,7 @@
         <div>
             <table mat-table [dataSource]="courts" class="mat-elevation-z8">
                 <ng-container matColumnDef="position">
-                  <th class="text-center" mat-header-cell *matHeaderCellDef> رقم سري </th>
+                  <th class="text-center" mat-header-cell *matHeaderCellDef> الرقم </th>
                   <td mat-cell *matCellDef="let court"> {{ court.srNo }} </td>
                 </ng-container>
                 <ng-container matColumnDef="name">

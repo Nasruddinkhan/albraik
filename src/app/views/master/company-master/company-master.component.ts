@@ -18,7 +18,7 @@ export class CompanyMasterComponent {
   companyId: string;
   loading = false;
   companyObj: CompanyMaster[];
-  displayedColumns: string[] = ['logo', 'position', 'name', 'phoneNumber', 'faxNumber', 'address', 'delete'];
+  displayedColumns: string[] = ['logo', 'name', 'phoneNumber', 'faxNumber', 'address', 'delete'];
   checkedCompany = [];
   srNo:number = 0;
   editDisabled = true;

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>نوع المشروع / Project Type</mat-label>
+                <mat-label>نوع المشروع </mat-label>
                 <mat-select formControlName="projectType" (selectionChange)="changeProjectType()" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let pType of subType" [value]="pType.id">
@@ -17,7 +17,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>الأهمية / Priority</mat-label>
+                <mat-label>الأهمية</mat-label>
                 <mat-select formControlName="priority" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let priority of priorityList" [value]="priority.key">
@@ -29,7 +29,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>المدير الموجـِّه / Manager</mat-label>
+                <mat-label>المدير الموجـِّه</mat-label>
                 <mat-select formControlName="manager" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let user of users" [value]="user.id">
@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>الاسم / Name</mat-label>
+                <mat-label>الاسم</mat-label>
                 <input type="text" matInput formControlName="name">
                 <mat-error *ngIf="name.hasError('required')">
                     Project Name is <strong>required</strong>
@@ -52,7 +52,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>تاريخ فتح الإجراء / Start Date</mat-label>
+                <mat-label>تاريخ فتح الإجراء</mat-label>
                 <input 
                     matInput 
                     formControlName="startDate" 
@@ -65,7 +65,7 @@
         </div>
         <div class="col-sm-4">
             <mat-form-field class="example-full-width">
-                <mat-label>رقم الدرج / Drawer Number</mat-label>
+                <mat-label>رقم الدرج</mat-label>
                 <input type="text" matInput formControlName="drawerNumber">
                 <mat-error *ngIf="drawerNumber.hasError('required')">
                 Drawer Number is <strong>required</strong>
@@ -76,14 +76,14 @@
     <div class="row">
         <div class="col-sm-6">
             <mat-form-field class="example-full-width">
-                <mat-label>الهدف الرئيسي / Objective</mat-label>
+                <mat-label>الهدف الرئيسي</mat-label>
                 <textarea type="text" matInput formControlName="objective"></textarea>
                 <mat-error *ngIf="objective.hasError('required')">Objective is required.</mat-error>
             </mat-form-field>
         </div>
         <div class="col-sm-6">
             <mat-form-field class="example-full-width">
-                <mat-label>ملاحظات / Comment</mat-label>
+                <mat-label>ملاحظات</mat-label>
                 <textarea type="text" matInput formControlName="comment"></textarea>
                 <mat-error *ngIf="comment.hasError('required')">Comment is required.</mat-error>
             </mat-form-field>
@@ -91,12 +91,12 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <mat-checkbox formControlName="hiddenProject" value="true">إجراء مخفي؟ / Hidden Project</mat-checkbox>
+            <mat-checkbox formControlName="hiddenProject" value="true">إجراء مخفي؟</mat-checkbox>
         </div>
     </div>
 </form>
 <div class="dialog-button" mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close> أغلق </button>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
     <button mat-raised-button mat-dialog-close *ngIf="type === null" (click)="onSubmit()" [disabled]="addProjectForm.invalid"> إرسال </button>
-    <button mat-raised-button mat-dialog-close *ngIf="type !== null" (click)="next()" [disabled]="addProjectForm.invalid"> Next </button>
+    <button mat-raised-button mat-dialog-close *ngIf="type !== null" (click)="next()" [disabled]="addProjectForm.invalid"> التالى </button>
 </div>

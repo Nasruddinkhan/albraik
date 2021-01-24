@@ -9,6 +9,12 @@
 
 .mat-tab-group {
   margin-bottom: 48px;
+  font-style: 'sakkal majalla';
+  font-size: 20px;
+}
+
+.mat-tab-content {
+  font-size: 20px;
 }
 
 /* .mat-tab-label-active {
