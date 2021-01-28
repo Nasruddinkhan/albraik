@@ -3,7 +3,7 @@
         <mat-label>Contact Name</mat-label>
         <input type="search" matInput formControlName="searchName" (change)="handleSearchButton()" (keyup)="handleSearchButton()">
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field class="w-100" appearance="fill">
         <mat-label>Contact Type</mat-label>
         <mat-select formControlName="contactTypeId" (selectionChange)="handleSearchButton()">
           <mat-option>--</mat-option>

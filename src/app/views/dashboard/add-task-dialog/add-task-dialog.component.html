@@ -16,20 +16,25 @@
                     </mat-form-field>
                 </div>
                 <div>
-                    <label>
-                        <input type="file"  formControlName="attachement" name="attachement" (change)="fileProgress($event)" >
-                        <div class="form-group col-sm-3">
-                            <div *ngIf="fileUploadProgress">
-                                Upload progress: {{ fileUploadProgress }}
-                            </div>
-                            <div  *ngIf="previewUrl">
-                                <img [src]="previewUrl" height="200" />                 
-                            </div>
-                            <div class="col-sm-3" *ngIf="uploadedFilePath">
-                                {{uploadedFilePath}}
-                            </div>
-                         </div>
+                    <label class="btn-file">
+                        Choose File<input type="file" name="attachment" (change)="fileChanged($event)" style="display: none;" multiple>
                     </label>
+                    <div *ngIf="showFileIcon">
+                        <div *ngFor="let fileIconObj of fileIconList; let fileIndex = index " class="file-chip">
+                            <div class="row">
+                                <div class="col-sm-2 close-button">
+                                    <mat-icon (click)="removeFile(fileIndex)" style="cursor: pointer;">close</mat-icon>
+                                </div>
+                                <div class="col-sm-2" style="margin-top: 0.45rem; margin-right: 0.4rem; padding-right: 0rem;">
+                                    <i style="font-size: 1.5rem;" [class]="fileIconObj.icon"></i>
+                                </div>
+                                <div class="col-sm-8" style="margin-right: -0.4rem; padding-right: 0rem">
+                                    <div class="text-left">{{ fileIconObj.name }}</div>
+                                    <div class="text-right" style="font-size: 12px;">{{ fileIconObj.size }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,7 +73,7 @@
                     <div class="circle bg-warning">{{ yellowTaskCount }}</div>
                     <div class="circle bg-danger">{{ redTaskCount }}</div>
                 </div>
-                <img style="border-radius: 50%;" src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="profile photo" width="40px" height="40px">
+                <img style="border-radius: 50%;" [src]="assigneeProfilePicture" alt="profile photo" width="40px" height="40px">
             </div>
             <div>
                 <mat-form-field class="w-100" appearance="fill">
@@ -108,8 +113,15 @@
             </div>
         </div>
     </div>
+    <div *ngIf="showProgressBar" class="progress-bar">
+        <p>تحميل المرفق</p>
+        <mat-progress-bar
+          [mode]="determinate"
+          [value]="progressBarValue">
+        </mat-progress-bar>
+    </div>
 </form>
 <div class="dialog-button" style="clear: both;" mat-dialog-actions>
     <button mat-raised-button mat-dialog-close> إغلاق </button>
-    <button mat-raised-button mat-dialog-close (click)="onSubmit()" [disabled]="addTaskForm.invalid"> إرسال </button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="addTaskForm.invalid"> إرسال </button>
 </div>

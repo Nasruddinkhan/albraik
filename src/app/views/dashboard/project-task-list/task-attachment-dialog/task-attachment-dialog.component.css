@@ -1,0 +1,16 @@
+.link {
+    color: blue;
+    cursor: pointer;
+}
+
+.file-chip {
+    background-color: #e0e0e0;
+    border-radius: 50px;
+    margin-bottom: 0.3rem;
+    padding: 0px 5px 0px 15px;
+    width: 200px;
+}
+
+.file-chip:hover {
+    background-color: #d1d1d1;
+}

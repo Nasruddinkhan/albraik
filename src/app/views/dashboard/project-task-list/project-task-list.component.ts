@@ -13,6 +13,7 @@ import { UserService } from '../../service/user.service';
 import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component';
 import { RespondDialogComponent } from '../task-assigned-to-me/respond-dialog/respond-dialog.component';
 import { ProjectNotesDialogComponent } from './project-notes-dialog/project-notes-dialog.component';
+import { TaskAttachmentDialogComponent } from './task-attachment-dialog/task-attachment-dialog.component';
 
 @Component({
   selector: 'app-project-task-list',
@@ -233,6 +234,12 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
       if (closed) {
         this.loadProjectTasks();
       }
+    });
+  }
+
+  openAttachmentDialog(task: TaskModel) {
+    this.dialog.open(TaskAttachmentDialogComponent, {
+      data: task
     });
   }
 

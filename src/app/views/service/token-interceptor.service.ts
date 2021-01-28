@@ -11,7 +11,7 @@ export class TokenInterceptorService  implements HttpInterceptor {
   intercept(req, next) {
     // console.log('interceptor is called');
     const url = req.url;
-    if (url.includes('albraik-user-profile-dev.s3')) {
+    if (url.includes('albraik-user-profile') || url.includes('albraik-project-docs')) {
       // console.log(url, next);
       // req = req.clone({headers: req.headers.set('Content-Type', 'multipart/form-data')});
       return next.handle(req);

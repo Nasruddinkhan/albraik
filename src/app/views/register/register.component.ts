@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from '../service/must-match.service';
 import { AdminRegistrationService } from '../service/admin-registration.service';
 import { ToasterMsgService } from '../service/toaster-msg.service';
+import { SnackbarService } from '../service/snackbar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,8 @@ export class RegisterComponent  implements OnInit{
   constructor(private router:Router,
               private fb:FormBuilder,
               private registerService : AdminRegistrationService,
-              private toastService: ToasterMsgService){} 
+              private toastService: ToasterMsgService,
+              private snackbarService: SnackbarService){} 
              
  registerAdmin(){
    this.isSubmitted = true;
@@ -28,11 +30,13 @@ export class RegisterComponent  implements OnInit{
    this.loading =   true;
    this.registerService.registerAdmin (JSON.stringify(this.registerForm.value)).subscribe((resp:any)=>{
     this.loading =   false;
-    this.toastService.susessMessage('إضافة المستخدم بنجاح');
+    this.snackbarService.success("إضافة المستخدم بنجاح");
+    // this.toastService.susessMessage('إضافة المستخدم بنجاح');
     this.router.navigate(["/register"]);
    },err=>{
     this.loading =   false;
-    this.toastService.errorMessage(err.error.message);
+    this.snackbarService.failure("Error: "+err.error.message);
+    // this.toastService.errorMessage(err.error.message);
    });
    this.registerForm.reset();
    //this.registerForm.markAsPristine();

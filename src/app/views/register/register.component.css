@@ -1,3 +1,16 @@
+* {
+  font-style: 'sakkal majalla' !important;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
 
 .card {
   margin-bottom: 0rem !important;
@@ -26,6 +39,17 @@
   border: 1px solid red;
   box-shadow: 2px 1px 2px 0px red;
 }
+
+.btn {
+  color: black;
+  background-color:white;
+}
+
+.btn:hover {
+  color: white;
+  background-color: rgb(58, 57, 57);
+}
+
 /* 
 a:hover {
   background-color: #8D6E63;
@@ -34,3 +58,9 @@ a:hover {
 a:active {
   background-color: #8D6E63;
 }  */
+
+@media screen and (max-width: 992px) {
+  .app-body {
+    margin-top: 0px;
+  }
+}

@@ -1,8 +1,22 @@
+* {
+    font-style: 'sakkal majalla' !important;
+}
+
 .example-full-width {
     width: 100%;
 }
 
-button {
+/* button {
     color: white;
     background-color:  rgb(58, 57, 57);
+} */
+
+.btn {
+    color: black;
+    background-color:white;
+}
+  
+.btn:hover {
+    color: white;
+    background-color: rgb(58, 57, 57);
 }

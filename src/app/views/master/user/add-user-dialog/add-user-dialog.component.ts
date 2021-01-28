@@ -123,6 +123,7 @@ export class AddUserDialogComponent implements OnInit {
     if (this.userForm.invalid) {
       return;
     }
+    console.log(this.userForm.value);
     this.userService.createUsers(JSON.stringify(this.userForm.value)).subscribe((res:UserMaster) => {
       this.snackService.success(".User added successfully");
       this.dialogSubmissionService.setDialogSubmitted(true);

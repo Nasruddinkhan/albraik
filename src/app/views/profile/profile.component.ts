@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
         fatherName: ['', Validators.required],
         grandFatherName: ['', Validators.required],
         familyName: ['', Validators.required], 
-        phoneNumber: ['', Validators.required], 
+        phoneNumber: ['', [Validators.required, Validators.minLength(10)]], 
         dateOfBirth: ['', Validators.required], 
         placeOfBirth: ['', Validators.required], 
         education: [''],
@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
         skills: [''],
         nationality: [''],
         email: [''],
-        mobileNumber: ['', Validators.required],
+        mobileNumber: ['', [Validators.required, Validators.minLength(10)]],
         jobId: [''],
         roleId: [''],
         deptId: ['']
@@ -156,7 +156,7 @@ export class ProfileComponent implements OnInit {
       this.snackService.success("User details updated successfully.");
       this.router.navigate(['/dashboard']);
     }, err => {
-      this.snackService.failure(err.error.message);
+      this.snackService.failure("Error: "+err.error.message);
     });
   }
 

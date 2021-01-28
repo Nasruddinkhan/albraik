@@ -37,6 +37,13 @@
                             </mat-card-title>
                         </div>
                         <div>
+                            <button
+                                *ngIf="(task.assignee_id === userId || task.assigner_id === userId) && task.attachment_list.length !== 0" 
+                                class="btn button-with-mat-icon" 
+                                tooltip="Attachment" 
+                                (click)="openAttachmentDialog(task)">
+                                <mat-icon>attachment</mat-icon>
+                            </button>
                             <button *ngIf="task.is_hidden" class="btn button-with-mat-icon" tooltip="Hidden Task">
                                 <mat-icon>visibility_off</mat-icon>
                             </button>
@@ -66,7 +73,7 @@
                     <div class="set-right-card-margin d-flex flex-row justify-content-between w-100">
                         <div>
                             <div *ngIf="task.assignee_id === userId" style="display: inline;">
-                                <button *ngIf="task.status === taskInProgress && (task.background_color === 'bg-warning' || task.background_color === 'bg-danger')" tooltip="Extend duration" class="btn btn-primary button-with-mat-icon">
+                                <button *ngIf="task.status === taskInProgress && (task.background_color === 'bg-warning' || task.background_color === 'bg-danger')" tooltip="Extend Duration" class="btn btn-primary button-with-mat-icon">
                                     <mat-icon>add_alarm</mat-icon>
                                 </button> 
                                 <button *ngIf="task.status === taskInProgress" tooltip="Respond" class="btn btn-primary button-with-mat-icon" (click)="openReplyDialog(task.id, task.is_hidden)">

@@ -22,6 +22,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ProjectNotesDialogComponent } from './project-task-list/project-notes-dialog/project-notes-dialog.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TaskAttachmentDialogComponent } from './project-task-list/task-attachment-dialog/task-attachment-dialog.component';
+import { FileSaverModule } from 'ngx-filesaver';
 
 @NgModule({
   imports: [
@@ -38,14 +42,18 @@ import { ProjectNotesDialogComponent } from './project-task-list/project-notes-d
     MatTabsModule,
     MatIconModule,
     MatCardModule,
-    ClipboardModule
+    MatChipsModule,
+    MatProgressBarModule,
+    ClipboardModule,
+    FileSaverModule
   ],
   entryComponents: [
     AddTaskDialogComponent,
     RespondDialogComponent,
-    ProjectNotesDialogComponent
+    ProjectNotesDialogComponent,
+    TaskAttachmentDialogComponent
   ],
-  declarations: [ DashboardComponent, AddTaskDialogComponent, TaskAssignedToMeComponent, TaskAssignedByMeComponent, ProjectTaskListComponent, RespondDialogComponent, ProjectNotesDialogComponent ],
+  declarations: [ DashboardComponent, AddTaskDialogComponent, TaskAssignedToMeComponent, TaskAssignedByMeComponent, ProjectTaskListComponent, RespondDialogComponent, ProjectNotesDialogComponent, TaskAttachmentDialogComponent ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
     {
@@ -54,6 +62,6 @@ import { ProjectNotesDialogComponent } from './project-task-list/project-notes-d
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-  ],
+  ]
 })
 export class DashboardModule { }
