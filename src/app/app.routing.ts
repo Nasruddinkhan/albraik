@@ -92,7 +92,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
         canActivate: [AuthGuardService]
       },
-   
+      {
+        path: 'court-appointment',
+        loadChildren: () => import('./views/court-appointment/court-appointment.module').then(c => c.CourtAppointmentModule),
+        canActivate: [AuthGuardService]
+      },
       {
         path: 'users',
         loadChildren: () => import('./views/users/users.module').then(u => u.UserModule),
@@ -103,14 +107,16 @@ export const routes: Routes = [
         loadChildren: () => import('./views/master/master.module').then(u => u.MasterModule),
         canActivate: [AuthGuardService]
       },
-      
       {
-     
-
         path: 'contact',
         loadChildren: () => import('./views/users/contact/contact.module').then(u => u.ContactModule),
         canActivate: [AuthGuardService]
       },
+      {
+        path: 'system-mail',
+        loadChildren: () => import('./views/system-mail/system-mail.module').then(mail => mail.SystemMailModule),
+        canActivate: [AuthGuardService]
+      }
     ]
   },
   { path: '**', component: P404Component }

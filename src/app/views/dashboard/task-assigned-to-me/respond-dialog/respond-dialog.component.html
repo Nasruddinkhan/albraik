@@ -1,29 +1,85 @@
 <form [formGroup]="respondForm">
     <div class="row">
-        <div [class.col-sm-6]="setCourtMeeting">
+        <div [class.col-sm-6]="setAppointment">
+            <div class="text-center">استجابة مهمة</div>
             <mat-form-field style="width: 100%;">
                 <mat-label>التوجيه</mat-label>
-                <textarea matInput formControlName="description" rows="7" cols="50"></textarea>
+                <textarea matInput formControlName="description" rows="14" cols="50"></textarea>
                 <mat-error *ngIf="description.hasError('required')">Description is required</mat-error>
             </mat-form-field>
-            <label>
+            <label *ngIf="showSetAppointment">
                 <mat-checkbox (change)="checkboxChanged($event)">تعيين جلسة المحكمة</mat-checkbox>
             </label>
+            <div>
+                <label class="btn-file">
+                    اختر ملف<input type="file" name="attachment" (change)="fileChanged($event)" style="display: none;" multiple>
+                </label>
+                <div *ngIf="showFileIcon">
+                    <div *ngFor="let fileIconObj of fileIconList; let fileIndex = index " class="file-chip">
+                        <div class="row">
+                            <div class="col-sm-2 close-button">
+                                <mat-icon (click)="removeFile(fileIndex)" style="cursor: pointer; font-size: 1.3rem;">close</mat-icon>
+                            </div>
+                            <div class="col-sm-2" style="margin-top: 0.4rem; margin-right: 0.4rem; padding-right: 0rem;">
+                                <i style="font-size: 1.2rem;" [class]="fileIconObj.icon"></i>
+                            </div>
+                            <div class="col-sm-8" style="margin-right: -0.4rem; padding-right: 0rem">
+                                <div class="text-left" style="font-size: 10px;">{{ fileIconObj.name }}</div>
+                                <div class="text-right" style="font-size: 10px;">{{ fileIconObj.size }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div *ngIf="setCourtMeeting" class="col-sm-6">
+        <div *ngIf="setAppointment" class="col-sm-6">
             <div class="text-center">جلسة المحكمة</div>
-            <mat-form-field class="example-full-width">
-                <mat-label>تاريخ اجتماع المحكمة</mat-label>
-                <input 
-                    matInput
-                    formControlName="courtMeetingDate" 
-                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
-                    bsDatepicker>
-                <mat-error *ngIf="courtMeetingDate.hasError('required')">
-                    Court Meeting date is required
-                </mat-error>
+            <mat-form-field style="width: 100%;">
+                <mat-label>عنوان الجلسة</mat-label>
+                <textarea matInput formControlName="title" rows="1" cols="50"></textarea>
+                <mat-error *ngIf="title.hasError('required')">Title is required</mat-error>
             </mat-form-field>
+            <div class="row">
+                <div class="col-sm-8" style="padding-left: 10px">
+                    <mat-form-field class="w-50 d-inline">
+                        <mat-label>تاريخ الجلسة</mat-label>
+                        <input 
+                            matInput
+                            formControlName="appointmentDate" 
+                            [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
+                            bsDatepicker>
+                        <mat-error *ngIf="appointmentDate.hasError('required')">
+                            Appointment date is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-4" style="padding-right: 0px; margin-top: -1rem;">
+                    <ngb-timepicker class="w-100" formControlName="appointmentTime"></ngb-timepicker>
+                </div>
+            </div>
             <mat-form-field class="w-100" appearance="fill">
+                <mat-label>المحكمة</mat-label>
+                <mat-select formControlName="court" required>
+                    <mat-option>--</mat-option>
+                    <mat-option 
+                        *ngFor="let court of courtList" 
+                        [value]="court.id">
+                        {{ court.name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="court.hasError('required')">Please select a court</mat-error>
+            </mat-form-field>
+            <label>نوع الحاكم
+                <mat-radio-group 
+                    aria-label="نوع الحاكم"
+                    (change)="changeJudgeType($event)">
+                    <div>
+                        <mat-radio-button style="font-size: 0.8rem; font-weight: 10;" value="judge" checked>القاضي</mat-radio-button> &nbsp;&nbsp;
+                        <mat-radio-button value="group">الغرفة </mat-radio-button>
+                    </div>
+                </mat-radio-group>
+            </label>
+            <mat-form-field *ngIf="showJudgeDropDown" class="w-100" appearance="fill">
                 <mat-label>القاضي</mat-label>
                 <mat-select formControlName="judge" required>
                     <mat-option>--</mat-option>
@@ -35,7 +91,34 @@
                 </mat-select>
                 <mat-error *ngIf="judge.hasError('required')">Please select a judge</mat-error>
             </mat-form-field>
+            <mat-form-field *ngIf="showGroup" style="width: 100%;">
+                <mat-label>الغرفة</mat-label>
+                <textarea matInput formControlName="group" rows="1" cols="50"></textarea>
+                <mat-error *ngIf="group.hasError('required')">Group is required</mat-error>
+            </mat-form-field>
+            <label>نوع الجلسة
+                <mat-radio-group 
+                    aria-label="نوع الجلسة"
+                    formControlName="appointmentType">
+                    <div>
+                        <mat-radio-button style="font-size: 0.8rem; font-weight: 10;" value="virtual">جلسة عن بعد</mat-radio-button> &nbsp;&nbsp;
+                        <mat-radio-button value="physical" checked>جلسة حضورية </mat-radio-button>
+                    </div>
+                </mat-radio-group>
+            </label>
+            <mat-form-field style="width: 100%;">
+                <mat-label>ملاحظات</mat-label>
+                <textarea matInput formControlName="notes" rows="1" cols="50"></textarea>
+                <mat-error *ngIf="notes.hasError('required')">Notes is required</mat-error>
+            </mat-form-field>
         </div>
+    </div>
+    <div *ngIf="showProgressBar" class="progress-bar">
+        <p>تحميل المرفق</p>
+        <mat-progress-bar
+          [mode]="determinate"
+          [value]="progressBarValue">
+        </mat-progress-bar>
     </div>
 </form>
 <div class="dialog-button" mat-dialog-actions>

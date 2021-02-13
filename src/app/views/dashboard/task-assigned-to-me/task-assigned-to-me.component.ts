@@ -4,6 +4,7 @@ import { TaskStatus } from '../../../enum/TaskStatus';
 import { TaskType } from '../../../enum/TaskType';
 import { TaskModel } from '../../modal/task/task-model';
 import { TaskService } from '../../service/task/task.service';
+import { TaskAttachmentDialogComponent } from './../task-attachment-dialog/task-attachment-dialog.component';
 import { RespondDialogComponent } from './respond-dialog/respond-dialog.component';
 
 @Component({
@@ -12,7 +13,7 @@ import { RespondDialogComponent } from './respond-dialog/respond-dialog.componen
   styleUrls: ['./task-assigned-to-me.component.css']
 })
 export class TaskAssignedToMeComponent implements OnInit {
-  displayedColumns: string[] = ['projectNumber', 'projectName', 'taskDescription', 'taskResponse', 'date', 'duration', 'assignee', 'priority', 'quickResponse'];
+  displayedColumns: string[] = ['projectNumber', 'projectName', 'taskDescription', 'taskResponse', 'date', 'duration', 'assignee', 'priority', 'attachment', 'quickResponse'];
   tasks: TaskModel[];
   loading = true;
   constructor(private taskService: TaskService,
@@ -97,10 +98,20 @@ export class TaskAssignedToMeComponent implements OnInit {
     });
   }
 
-  openReplyDialog(taskId: number, isHidden: boolean) {
+  openAttachmentDialog(task: TaskModel, type: string) {
+    this.dialog.open(TaskAttachmentDialogComponent, {
+      data: {
+        type: type,
+        task: task
+      }
+    });
+  }
+
+  openReplyDialog(taskId: number, projectId: number, isHidden: boolean) {
     let dialogRef = this.dialog.open(RespondDialogComponent, {
       data: {
         taskId: taskId,
+        projectId: projectId,
         isHidden: isHidden
       }
     });
@@ -110,13 +121,15 @@ export class TaskAssignedToMeComponent implements OnInit {
     });
   }
 
-  openEditReplyDialog(taskId: number, responseId: number, isHidden: boolean, description: string) {
+  openEditReplyDialog(taskId: number, projectId: number, responseId: number, isHidden: boolean, description: string, oldAttachmentList) {
     let dialogRef = this.dialog.open(RespondDialogComponent, {
       data: {
         taskId: taskId,
+        projectId: projectId,
         responseId: responseId,
         isHidden: isHidden,
-        description: description
+        description: description,
+        oldAttachmentList: oldAttachmentList
       }
     });
     dialogRef.afterClosed().subscribe(closed => {

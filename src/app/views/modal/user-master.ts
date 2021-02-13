@@ -1,7 +1,7 @@
 import { DepartmentModel } from './department';
 import { JobTitleModel } from './jobtitle';
 import { RoleModel } from './role';
-//Using this model
+//This model is being used
 export class UserMaster{
     id:number;
     email : string;

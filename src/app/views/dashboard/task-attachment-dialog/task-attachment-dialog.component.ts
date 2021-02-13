@@ -1,10 +1,10 @@
 import { Component, ContentChild, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as FileSaver from 'file-saver';
-import { AttachmentModel } from '../../../modal/attachment/attachment';
-import { TaskModel } from '../../../modal/task/task-model';
-import { DocumentAttachmentService } from '../../../service/attachment/document-attachment.service';
-import { SnackbarService } from '../../../service/snackbar.service';
+import { AttachmentModel } from '../../modal/attachment/attachment';
+import { TaskModel } from '../../modal/task/task-model';
+import { DocumentAttachmentService } from '../../service/attachment/document-attachment.service';
+import { SnackbarService } from '../../service/snackbar.service';
 
 @Component({
   selector: 'app-task-attachment-dialog',
@@ -12,14 +12,20 @@ import { SnackbarService } from '../../../service/snackbar.service';
   styleUrls: ['./task-attachment-dialog.component.css']
 })
 export class TaskAttachmentDialogComponent implements OnInit {
+  type: string;
+  task: TaskModel;
   projectId: number;
-  constructor(@Inject(MAT_DIALOG_DATA) public task: TaskModel,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {
+                type: string,
+                task: TaskModel
+              },
               private attachmentService: DocumentAttachmentService,
               private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
-    console.log(this.task);
-    this.projectId = this.task.project_id;
+    this.type = this.data.type;
+    this.projectId = this.data.task.project_id;
+    this.task = this.data.task;
     this.task.attachment_list.forEach(attachment => {
       if (attachment.name.length > 18) {
         attachment['nameToDisplay'] = attachment.name.substr(0, 9)+"..."+attachment.name.substr(attachment.name.length-2, attachment.name.length);

@@ -8,10 +8,15 @@ import { formatDate } from '@angular/common';
 })
 export class DateLocaleFilter implements PipeTransform {
     constructor() { }
-    transform(value: string, dateFormat: string): any {
-        if (!value) { return ''; }
-        if (!dateFormat) { dateFormat = 'shortDate'; }
-        return formatDate(value, dateFormat, 'ar-SA');
+    // transform(value: string, dateFormat: string): any {
+    //     if (!value) { return ''; }
+    //     if (!dateFormat) { dateFormat = 'shortDate'; }
+    //     return formatDate(value, dateFormat, 'ar');
 
+    // }
+    transform(dateInMilli: number) {
+        if (!dateInMilli)
+            return null;
+        return new Date(dateInMilli).toLocaleDateString('ar');
     }
 }

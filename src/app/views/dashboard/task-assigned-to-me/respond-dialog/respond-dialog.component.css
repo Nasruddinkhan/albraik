@@ -1,3 +1,48 @@
 .example-full-width {
     width: 100%;
 }
+
+.btn-file {
+    border: 1px solid black;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font: initial;
+    background-color: whitesmoke;
+}
+
+.file-icon {
+    padding: 0px;
+    font-size: 20px;
+    margin-top: -0.75rem;
+}
+
+.file-chip {
+    background-color: #e0e0e0;
+    border-radius: 50px;
+    margin-bottom: 0.3rem;
+    padding: 0px 5px 0px 15px;
+    width: 200px;
+}
+
+.file-chip:hover {
+    background-color: #d1d1d1;
+}
+
+.close-button {
+    color: #ea3e3e;
+    margin-top: 0.4rem;
+}
+
+.progress-bar {
+    margin: 0.5rem 1rem;
+    color: black;
+    background-color: white;
+}
+
+.progress-bar p {
+    margin-bottom: 0.5rem !important;
+}
+
+label {
+    font-family: 'sakkal majalla' !important;
+}

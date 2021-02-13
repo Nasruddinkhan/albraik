@@ -9,3 +9,8 @@
 .black-border {
     border-bottom: 1px solid black;
 }
+
+.button-with-mat-icon {
+    border: none;
+    padding: 0px;
+}

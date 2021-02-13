@@ -1,0 +1,37 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<form [formGroup]="systemMailForm">
+    <div class="text-center">
+        إضافة بريد النظام
+    </div>
+    <div>
+        <label>
+            إلى: &nbsp;
+            <mat-checkbox *ngFor="let user of users" (change)="changeUserSelectionForTo($event, user)">
+                {{ user | fullName }} &nbsp;
+            </mat-checkbox>
+        </label>
+        <label>
+            cc: &nbsp;
+            <mat-checkbox *ngFor="let user of users" (change)="changeUserSelectionForCC($event, user)">
+                {{ user | fullName }} &nbsp;
+            </mat-checkbox>
+        </label>
+        <mat-form-field class="example-full-width">
+            <mat-label>موضوع</mat-label>
+            <input matInput formControlName="subject">
+            <mat-error *ngIf="subject.hasError('required')">
+              Subject is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;">
+            <mat-label>هيئة البريد الإلكتروني</mat-label>
+            <textarea matInput formControlName="body" rows="10" cols="7"></textarea>
+            <mat-error *ngIf="body.hasError('required')">Body is required</mat-error>
+        </mat-form-field>
+    </div>
+</form>
+
+<div class="dialog-button" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close> إغلاق </button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="systemMailForm.invalid" mat-dialog-close> إرسال </button>
+</div>

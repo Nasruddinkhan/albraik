@@ -8,7 +8,7 @@
         <ng-container matColumnDef="projectName">
             <th class="text-center" mat-header-cell *matHeaderCellDef> اسم المشروع </th>
             <td mat-cell *matCellDef="let task">
-                <a [style.color]="task.link_color" [routerLink]="['project-task-list', task.project_id+'-'+task.project_name]">
+                <a [style.color]="task.link_color" [routerLink]="['project/', task.project_id+'-'+task.project_name, 'task-list']">
                     {{ task.project_name }} 
                 </a>
             </td>
@@ -37,14 +37,35 @@
             <th class="text-center" mat-header-cell *matHeaderCellDef> الأهمية </th>
             <td [class]="task.color" mat-cell *matCellDef="let task"> {{ task.priority }} </td>
         </ng-container>
+        <ng-container matColumnDef="attachment">
+            <th class="text-center" style="width: 3%" mat-header-cell *matHeaderCellDef>  </th>
+            <td [class]="task.color" mat-cell *matCellDef="let task"> 
+                <div>
+                    <button
+                        *ngIf="task.attachment_list.length > 0"
+                        [class]="task.color+' '+'btn button-with-mat-icon'" 
+                        tooltip="Task Attachment" 
+                        (click)="openAttachmentDialog(task, 'TASK')">
+                        <mat-icon style="font-size: 1.3rem;">attachment</mat-icon>
+                    </button>
+                    <button
+                        *ngIf="task.task_reply && task.task_reply.attachment_list.length > 0"
+                        [class]="task.color+' '+'btn button-with-mat-icon'" 
+                        tooltip="Response Attachment" 
+                        (click)="openAttachmentDialog(task.task_reply, 'RESPONSE')">
+                        <mat-icon style="font-size: 1.3rem;">attachment</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
         <ng-container matColumnDef="quickResponse">
-            <th class="text-center" style="width: 10%" mat-header-cell *matHeaderCellDef>  </th>
+            <th class="text-center" style="width: 5%" mat-header-cell *matHeaderCellDef>  </th>
             <td [class]="task.color" style="padding-bottom: 8px;" mat-cell *matCellDef="let task">
-                <button *ngIf="task.display_respond_button" tooltip="Respond" class="btn btn-primary" (click)="openReplyDialog(task.id, task.is_hidden)">
-                    <i class="fa fa-reply" aria-hidden="true"></i>
+                <button *ngIf="task.display_respond_button" tooltip="Respond" [class]="task.color+' '+'btn button-with-mat-icon'" (click)="openReplyDialog(task.id, task.project_id, task.is_hidden)">
+                    <mat-icon style="font-size: 1.3rem;">reply</mat-icon>
                 </button> 
-                <button *ngIf="!task.display_respond_button" tooltip="Edit" class="btn btn-primary" (click)="openEditReplyDialog(task.id, task.task_reply.id, task.is_hidden, task.task_reply.description)">
-                    <i class="icon-pencil"></i>
+                <button *ngIf="!task.display_respond_button" tooltip="Edit" [class]="task.color+' '+'btn button-with-mat-icon'" (click)="openEditReplyDialog(task.id, task.project_id, task.task_reply.id, task.is_hidden, task.task_reply.description, task.task_reply.attachment_list)">
+                    <mat-icon style="font-size: 1.2rem;">edit</mat-icon>
                 </button> 
             </td>
         </ng-container>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.prod';
+import { AttachmentModel } from '../../modal/attachment/attachment';
 import { TaskModel } from '../../modal/task/task-model';
 
 @Injectable({
@@ -11,6 +12,10 @@ export class TaskService {
   private baseUrl = environment.taskManagementUrl + 'task-mgmt';
 
   constructor(private http: HttpClient) { }
+
+  getProjectAttachments(projectId: number): Observable<AttachmentModel[]> {
+    return this.http.get<AttachmentModel[]>(this.baseUrl+`/api/project/${projectId}/attachment`);
+  }
 
   getTaskAssignedToMe(): Observable<TaskModel[]> {
     return this.http.get<TaskModel[]>(this.baseUrl+"/api/project/task/assigned-to-me");

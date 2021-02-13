@@ -34,7 +34,7 @@
         </mat-error>
     </mat-form-field>
     <mat-form-field class="mr-3" appearance="fill">
-        <mat-label>وظيفة</mat-label>
+        <mat-label>الدور في النظام</mat-label>
         <mat-select formControlName="roleId" required>
           <mat-option>--</mat-option>
           <mat-option *ngFor="let role of roles" [value]="role.id">

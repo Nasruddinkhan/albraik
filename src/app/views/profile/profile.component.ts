@@ -90,6 +90,7 @@ export class ProfileComponent implements OnInit {
   getUserProfile(userId: string) {
     this.loading = true;
     this.userService.getUserDetails(userId).subscribe((res: UserModel) => {
+      console.log(res);
       this.user = res;
       this.loading = false;
       this.userProfileForm.setValue({

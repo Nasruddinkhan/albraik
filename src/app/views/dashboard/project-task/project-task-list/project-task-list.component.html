@@ -1,6 +1,6 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <mat-card>
-    <div class="mb-4 header">
+    <div class="mb-3 header">
         <mat-card-header>
             <div class="text-center title">
                 <mat-card-title>{{ projectId }}-{{ projectName }}</mat-card-title>
@@ -14,12 +14,23 @@
                 <button type="button" class="btn btn-md" (click)="refresh()"><div class="plus_bold" > <i class="fa fa-refresh" aria-hidden="true"></i> </div></button>
                 &nbsp;&nbsp;
                 <button type="button" class="btn btn-md" (click)="openNotesDialog()"><div class="plus_bold" > <i class="fa fa-sticky-note" aria-hidden="true"></i> </div></button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-md" [routerLink]="['../attachment-list']"><div class="plus_bold" > <i class="fa fa-paperclip"></i> </div></button>
             </div>
             <div class="pending-tasks">
                 <div class="circle bg-success">{{ greenTaskCount }}</div>
                 <div class="circle bg-warning">{{ yellowTaskCount }}</div>
                 <div class="circle bg-danger">{{ redTaskCount }}</div>
             </div>
+        </div>
+    </div>
+    <div class="involved-users">
+        <div *ngFor="let user of involvedUsers;" style="margin-right: 0.5rem;"> 
+            <span class="remove-user" tooltip="Remove User">
+                <mat-icon>close</mat-icon>
+            </span>
+            <img [src]="user.profilePicture ? user.profilePicture : '..\\..\\..\\..\\..\\assets\\img\\brand\\Logo.png'" alt="involved Users Profile Picture" height="80" width="80">
+            <p style="margin-right: 0.5rem; margin-bottom: 0.3rem;">{{ user | fullName }}</p>
         </div>
     </div>
     <div *ngIf="involvedUsers">
@@ -41,13 +52,13 @@
                                 *ngIf="(task.assignee_id === userId || task.assigner_id === userId) && task.attachment_list.length !== 0" 
                                 class="btn button-with-mat-icon" 
                                 tooltip="Attachment" 
-                                (click)="openAttachmentDialog(task)">
+                                (click)="openAttachmentDialog(task, 'TASK')">
                                 <mat-icon>attachment</mat-icon>
                             </button>
                             <button *ngIf="task.is_hidden" class="btn button-with-mat-icon" tooltip="Hidden Task">
                                 <mat-icon>visibility_off</mat-icon>
                             </button>
-                            <button class="btn button-with-mat-icon" tooltip="Copy Description" [cdkCopyToClipboard]="task.response_text">
+                            <button class="btn button-with-mat-icon" tooltip="Copy Description" [cdkCopyToClipboard]="task.description">
                                 <mat-icon>file_copy</mat-icon>
                             </button>
                         </div>
@@ -55,7 +66,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <p class="pl-3">{{ task.description }}</p>
-                    <p *ngIf="task.assigner_id === userId && task.task_reply" style="margin-bottom: 1.43rem;">&nbsp;&nbsp;</p>
+                    <p *ngIf="task.assigner_id === userId && task.status === taskFinished" style="margin-bottom: 1.43rem;">&nbsp;&nbsp;</p>
                     <hr style="margin-right: 20px; margin-left: 20px;">
                     <div style="padding: 0.5rem 1rem; margin-top: -0.383rem;">
                         <div class="d-flex flex-row justify-content-between">
@@ -73,16 +84,23 @@
                     <div class="set-right-card-margin d-flex flex-row justify-content-between w-100">
                         <div>
                             <div *ngIf="task.assignee_id === userId" style="display: inline;">
-                                <button *ngIf="task.status === taskInProgress && (task.background_color === 'bg-warning' || task.background_color === 'bg-danger')" tooltip="Extend Duration" class="btn btn-primary button-with-mat-icon">
-                                    <mat-icon>add_alarm</mat-icon>
+                                <button *ngIf="task.status === taskInProgress && (task.background_color === 'bg-warning' || task.background_color === 'bg-danger')" tooltip="Extend Duration" class="btn button-with-mat-icon">
+                                    <mat-icon style="font-size: 1.3rem;">add_alarm</mat-icon>
                                 </button> 
-                                <button *ngIf="task.status === taskInProgress" tooltip="Respond" class="btn btn-primary button-with-mat-icon" (click)="openReplyDialog(task.id, task.is_hidden)">
-                                    <mat-icon>reply</mat-icon>
+                                <button *ngIf="task.status === taskInProgress" tooltip="Respond" class="btn button-with-mat-icon" (click)="openReplyDialog(task.id, task.project_id, task.is_hidden)">
+                                    <mat-icon style="font-size: 1.3rem;">reply</mat-icon>
                                 </button> 
-                                <button *ngIf="task.status === taskCompleted || task.status === taskLateCompleted" tooltip="Edit" class="btn btn-primary button-with-mat-icon" (click)="openEditReplyDialog(task.id, task.task_reply.id, task.is_hidden, task.task_reply.description)">
-                                    <mat-icon>edit</mat-icon>
+                                <button *ngIf="task.status === taskCompleted || task.status === taskLateCompleted" tooltip="Edit" class="btn button-with-mat-icon" (click)="openEditReplyDialog(task.id, task.project_id, task.task_reply.id, task.is_hidden, task.task_reply.description, task.task_reply.attachment_list)">
+                                    <mat-icon style="font-size: 1.1rem;">edit</mat-icon>
                                 </button> 
                             </div>
+                            <button
+                                *ngIf="(task.assignee_id === userId || task.assigner_id === userId) && task.task_reply && task.task_reply.attachment_list.length !== 0" 
+                                class="btn button-with-mat-icon" 
+                                tooltip="Attachment" 
+                                (click)="openAttachmentDialog(task.task_reply, 'RESPONSE')">
+                                <mat-icon>attachment</mat-icon>
+                            </button>
                             <button class="btn button-with-mat-icon" tooltip="Copy Response" [cdkCopyToClipboard]="task.response_text">
                                 <mat-icon>file_copy</mat-icon>
                             </button>
@@ -98,16 +116,16 @@
                 </mat-card-header>
                 <mat-card-content>
                     <p class="pl-3">{{ task.response_text }}</p>
-                    <div *ngIf="task.assigner_id === userId && task.task_reply" class="pl-3 reaction">
+                    <div *ngIf="task.assigner_id === userId && task.status === taskFinished" class="pl-3 reaction">
                         <mat-icon
                             tooltip="Like" 
-                            [class.flip-icon-color]="task.task_reply.ike === taskLiked"
+                            [class.flip-like-icon-color]="task.task_reply.ike === taskLiked"
                             (click)="likeTaskReply(task)">
                             sentiment_very_satisfied
                         </mat-icon>
                         <mat-icon 
                             tooltip="Dislike" 
-                            [class.flip-icon-color]="task.task_reply.ike === taskDisliked"
+                            [class.flip-dislike-icon-color]="task.task_reply.ike === taskDisliked"
                             (click)="dislikeTaskReply(task)">
                             sentiment_very_dissatisfied
                         </mat-icon>

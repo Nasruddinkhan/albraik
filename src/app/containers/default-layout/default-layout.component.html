@@ -16,15 +16,32 @@
       <span class="fa fa-comment"></span>
       <span class="num">4</span>
     </a> -->
-    <mat-icon class="mr-3" matBadge="4" matBadgePosition="before" matBadgeColor="warn">warning</mat-icon>
+    
     <!-- <a class="mr-3 fa fa-bell">
       <span class="fa fa-comment"></span>
       <span class="num">4</span>
     </a> -->
+
+    <!-- <mat-icon class="mr-3" matBadge="4" matBadgePosition="before" matBadgeColor="warn">warning</mat-icon>
     <mat-icon class="mr-3" matBadge="7" matBadgePosition="before" matBadgeColor="warn">notifications</mat-icon>
-    <!-- <span class="mr-3"><i class="fa fa-envelope" aria-hidden="true"></i></span> -->
     <mat-icon class="mr-3" matBadge="3" matBadgePosition="before" matBadgeColor="warn">mail</mat-icon>
-    <mat-icon class="mr-3" matBadge="10" matBadgePosition="before" matBadgeColor="warn">account_balance</mat-icon>
+    <mat-icon class="mr-3" matBadge="10" matBadgePosition="before" matBadgeColor="warn">account_balance</mat-icon> -->
+
+    <mat-icon class="mr-3 cursor-pointer" matBadgeColor="warn">warning</mat-icon>
+    <mat-icon class="mr-3 cursor-pointer" matBadgeColor="warn">notifications</mat-icon>
+    <mat-icon routerLink="/system-mail/list" class="mr-3 cursor-pointer" matBadgeColor="warn">mail</mat-icon>
+    <mat-icon 
+        [matMenuTriggerFor]="courtMenu"
+        class="mr-3 cursor-pointer"
+        matBadgeColor="warn">
+        account_balance
+    </mat-icon>
+    <mat-menu #courtMenu="matMenu">
+      <div class="text-center" style="padding: 5px 16px;">
+        Upcoming Court Appointments <hr style="margin-top: 0.3rem; margin-bottom: 0.3rem;">
+        <a routerLink="/court-appointment/list">See All</a>
+      </div>
+    </mat-menu>
 
     <img [matMenuTriggerFor]="menu" style="cursor: pointer;" [src]="profilePictureUrl" alt="profile picture">
     <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->

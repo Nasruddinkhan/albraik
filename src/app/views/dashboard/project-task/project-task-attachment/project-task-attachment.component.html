@@ -1,0 +1,123 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<mat-card>
+    <div class="mb-4 header">
+        <mat-card-header>
+            <div class="text-center title">
+                <mat-card-title>{{ projectId }}-{{ projectName }}</mat-card-title>
+            </div>
+        </mat-card-header>
+        <hr>
+    </div>
+    <form [formGroup]="attachmentSearchForm">
+        <div id="icons" class="form-group row mr-3">
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-md" (click)="refreshAttachmentTable()"><div class="plus_bold" > <i class="fa fa-refresh" aria-hidden="true"></i> </div></button>
+            </div>
+            <div class="col-sm-4" style="padding-top: 0.2rem;">
+                <input 
+                    type="search" 
+                    formControlName="attachmentName"
+                    (keyup)="checkPressedKey($event)"
+                    class="form-control"
+                    placeholder="مرفق البحث">
+            </div>
+            <div class="col-sm-2">
+                <!-- <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>نوع المرفق</mat-label>
+                    <mat-select formControlName="attachmentType">
+                        <mat-option>--</mat-option>
+                        <mat-option 
+                            *ngFor="let attachmentType of attachmentTypeList" 
+                            [value]="attachmentType">
+                            {{ attachmentType }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <label style="margin-top: -1rem;">
+                    نوع المرفق
+                    <select style="height: 2.5rem;" class="custom-select custom-select-lg" formControlName="attachmentType">
+                        <option *ngFor="let type of attachmentTypeList" [value]="type">
+                            {{ type }}
+                        </option>
+                    </select>
+                </label>
+                <!-- <select class="form-control" formControlName="attachmentType">
+                    <option value="--" selected>--</option>
+                    <option *ngFor="let type of attachmentTypeList" [value]="type">
+                        {{ type }}
+                    </option>
+                </select> -->
+            </div>
+            <div class="col-sm-2">
+                <!-- <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>تم الرفع بواسطة</mat-label>
+                    <mat-select formControlName="uploadedBy" disableOptionCentering>
+                        <mat-option>--</mat-option>
+                        <mat-option 
+                            *ngFor="let user of attachmentUploadedByList" 
+                            [value]="user.id">
+                            {{ user.firstName+" "+user.familyName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <label style="margin-top: -1rem;">
+                    تم الرفع بواسطة
+                    <select style="height: 2.5rem;" class="custom-select custom-select-lg" formControlName="uploadedBy">
+                        <option>--</option>
+                        <option *ngFor="let user of attachmentUploadedByList" [value]="user.id">
+                            {{ user | fullName }}
+                        </option>
+                    </select>
+                </label>
+            </div>
+            <div class="col-sm-2" style="padding-top: 0.78rem; margin-top: -0.5rem;">
+                <mat-form-field class="example-full-width">
+                    <mat-label>تاريخ الرفع</mat-label>
+                    <input 
+                        matInput
+                        formControlName="uploadDate" 
+                        bsDatepicker #dp="bsDatepicker">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-md" (click)="searchAttachment()"><div class="plus_bold" > <i class="fa fa-search" aria-hidden="true"></i> </div></button>
+            </div>
+            <!-- <button class="btn btn-md" (click)="openSearchDialog()"><div class="plus_bold"> <i class="fa fa-search" aria-hidden="true"></i> </div></button> -->
+        </div>
+    </form>
+    <table *ngIf="attachmentUploadedByList" mat-table [dataSource]="attachmentFiltered ? filteredAttachmentList : projectAttachmentList" class="mat-elevation-z8">
+        <ng-container matColumnDef="srNo">
+            <th class="text-center" style="width: 5%;" mat-header-cell *matHeaderCellDef> الرقم </th>
+            <td mat-cell *matCellDef="let attachment"> {{ attachment.srNo }} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> اسم </th>
+            <td mat-cell *matCellDef="let attachment"> {{ attachment.name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> اكتب </th>
+            <td mat-cell *matCellDef="let attachment"> {{ attachment.type }} </td>
+        </ng-container>
+        <ng-container matColumnDef="size">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> بحجم </th>
+            <td mat-cell *matCellDef="let attachment"> {{ attachment.size | fileSize }} </td>
+        </ng-container>
+        <ng-container matColumnDef="uploadedBy">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> تم الرفع بواسطة </th>
+            <td mat-cell *matCellDef="let attachment"> {{ getUserName(attachment.created_by) }} </td>
+        </ng-container>
+        <ng-container matColumnDef="uploadDate">
+            <th class="text-center" mat-header-cell *matHeaderCellDef> تاريخ الرفع </th>
+            <td mat-cell *matCellDef="let attachment"> {{ attachment.created_time | localDate }} </td>
+        </ng-container>
+        <ng-container matColumnDef="download">
+            <th class="text-center" style="width: 5%;" mat-header-cell *matHeaderCellDef> تحميل </th>
+            <td mat-cell *matCellDef="let attachment"> <mat-icon style="cursor: pointer;" (click)="downloadAttachment(attachment)">cloud_download</mat-icon> </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let attachment; columns: displayedColumns;"></tr>
+    </table>
+    <div *ngIf="showNoAttachmentMessage" class="text-center mt-2">
+        <h4>لم يتم العثور على مرفق</h4>
+    </div>
+</mat-card>

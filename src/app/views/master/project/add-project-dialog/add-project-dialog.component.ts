@@ -15,6 +15,7 @@ import { DeedOfOwnershipComponent } from './deed-of-ownership/deed-of-ownership.
 import { AddCaseComponent } from './add-case/add-case.component';
 import { EstablishCompanyComponent } from './establish-company/establish-company.component';
 import { InheritanceComponent } from './inheritance/inheritance.component';
+import { ProjectType } from '../../../../enum/projectType';
 
 @Component({
   selector: 'app-add-project-dialog',
@@ -41,7 +42,7 @@ export class AddProjectDialogComponent implements OnInit {
               private snackbar: SnackbarService,
               private dialog: MatDialog) {
                 this.localeService.use(this.locale); 
-                this.project = new ProjectModel('','',null,'','','','','', false);
+                this.project = new ProjectModel(ProjectType.CASE,'',null,'','','','','', false);
               }
 
   ngOnInit(): void {
@@ -114,19 +115,19 @@ export class AddProjectDialogComponent implements OnInit {
   
   changeProjectType() {
     switch(this.projectType.value){
-      case "a2bd22d5-2703-444d-9628-b2fb040df14d":
+      case ProjectType.CASE:
         this.type =  "case";
         break;
-       case "ad76b91b-954c-4a1e-a843-f0cc0427d883":
+       case ProjectType.ESTABLISH_COMPANY:
         this.type =  "company-establishment";
         break;
-        case "8ae2e821-be58-44c9-8d9f-bfe74da56ee2":
+        case ProjectType.DEED_OF_OWNERSHIP:
           this.type =  "deed-ownership";
           break;
-        case "17c65cd8-c5eb-437e-a268-77e5ea75b661":
+        case ProjectType.VERDICT_EXECUTION:
           this.type =  "executed-case";
           break;
-        case "a2617168-6cfc-4227-b37b-3270264c6858":
+        case ProjectType.INHERITANCE:
           this.type =  "inherit";
           break;
       default:

@@ -6,3 +6,8 @@
 .btn {
     border: 1px solid white;
 }
+
+.button-with-mat-icon {
+    border: none;
+    padding: 0px;
+}

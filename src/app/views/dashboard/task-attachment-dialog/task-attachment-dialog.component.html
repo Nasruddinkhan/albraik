@@ -1,5 +1,6 @@
 <div class="text-center">
-    <h2>مرفق مهمة</h2>
+    <h2 *ngIf="type === 'TASK'">مرفق مهمة</h2>
+    <h2 *ngIf="type === 'RESPONSE'">مرفق استجابة</h2>
 </div>
 <div *ngFor="let attachment of task.attachment_list" class="file-chip">
     <div class="row">

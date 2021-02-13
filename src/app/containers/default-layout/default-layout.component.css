@@ -13,6 +13,10 @@
     outline: none;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .mat-toolbar-row {
     background-color: black;
     font-family: Roboto,Helvetica Neue,sans-serif;

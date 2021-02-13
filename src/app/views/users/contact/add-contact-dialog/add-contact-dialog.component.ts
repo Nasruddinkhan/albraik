@@ -80,7 +80,10 @@ export class AddContactDialogComponent implements OnInit, OnDestroy {
      this.snackService.success('إضافة المستخدم بنجاح');
      this.dialogSubmitted.setDialogSubmitted(true);
     },err => {
-      this.snackService.failure("!!!Something went wrong");
+      if (err.status === 409)
+        this.snackService.failure("Error: Contact already exists");
+      else
+        this.snackService.failure("!!!Something went wrong");
     });
   }
 

@@ -47,9 +47,19 @@
     background-color: #d1d1d1;
 }
 
+label {
+    font-family: 'sakkal majalla' !important;
+}
+
 .close-button {
     color: #ea3e3e;
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
+}
+
+.edit-filename-button {
+    margin-top: 0.4rem;
+    padding-right: 0rem;
+    margin-left: -1rem;
 }
 
 .progress-bar {

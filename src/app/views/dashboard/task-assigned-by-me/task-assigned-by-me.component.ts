@@ -6,6 +6,7 @@ import { TaskStatus } from '../../../enum/TaskStatus';
 import { TaskModel } from '../../modal/task/task-model';
 import { TaskService } from '../../service/task/task.service';
 import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component';
+import { TaskAttachmentDialogComponent } from './../task-attachment-dialog/task-attachment-dialog.component';
 
 @Component({
   selector: 'task-assigned-by-me',
@@ -13,7 +14,7 @@ import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.compo
   styleUrls: ['./task-assigned-by-me.component.css']
 })
 export class TaskAssignedByMeComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['projectNumber', 'projectName', 'taskDescription', 'taskResponse', 'respondDate', 'daysElapsed', 'assignee', 'priority', 'quickTaskAddition'];
+  displayedColumns: string[] = ['projectNumber', 'projectName', 'taskDescription', 'taskResponse', 'respondDate', 'daysElapsed', 'assignee', 'priority', 'attachment', 'quickTaskAddition'];
   tasks: TaskModel[];
   loading = true;
   addTaskSubscription: Subscription;
@@ -130,6 +131,15 @@ export class TaskAssignedByMeComponent implements OnInit, OnDestroy {
     // this.tasks.sort((a, b) => {
     //   return a.task_reply ? -1 : 1;
     // });
+  }
+
+  openAttachmentDialog(task: TaskModel, type: string) {
+    this.dialog.open(TaskAttachmentDialogComponent, {
+      data: {
+        type: type,
+        task: task
+      }
+    });
   }
 
   openQuickTaskAddDialog(task: TaskModel) {

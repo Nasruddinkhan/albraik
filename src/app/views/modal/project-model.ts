@@ -1,6 +1,8 @@
+import { ProjectType } from "../../enum/projectType";
+
 export class ProjectModel{
     project_id:number;
-    project_type_id: string;
+    project_type_id: ProjectType;
     name: string;
     start_date: Date;
     priority: string;
@@ -13,7 +15,7 @@ export class ProjectModel{
     created_by:string;
     company_id:string;
     is_active: boolean;
-    constructor( projectTypeId: string,
+    constructor( projectTypeId: ProjectType,
         name: string,
         startDate: Date,
         priority: string,

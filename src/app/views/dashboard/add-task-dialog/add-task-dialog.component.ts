@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { UserMaster } from '../../modal/user-master';
 import { UserService } from '../../service/user.service';
 import {
@@ -22,6 +22,7 @@ import { AddTaskDialogType } from '../../../enum/AddTaskDialogType';
 import { TaskStatus } from '../../../enum/TaskStatus';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { DocumentAttachmentService } from '../../service/attachment/document-attachment.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -33,9 +34,10 @@ export class AddTaskDialogComponent implements OnInit {
   addTaskForm: FormGroup;
   // projectSelectionEnabled = true;
   // assigneeSelectionEnabled = true;
+  showCourtAppointmentDropdown = false;
   showFileIcon = false;
   showProgressBar = false;
-  selectedFiles: File[];
+  selectedFiles: File[] = [];
   fileIconList: any[];
   greenTaskCount: number = 0;
   yellowTaskCount: number = 0;
@@ -44,6 +46,7 @@ export class AddTaskDialogComponent implements OnInit {
   users: UserMaster[];
   priorityList: any[];
   projectList: ProjectModel[] = [];
+  courtAppointmentList: any[];
   userId: string;
   locale = 'ar';
   minDate: Date;
@@ -54,6 +57,7 @@ export class AddTaskDialogComponent implements OnInit {
   attachmentList: any[] = [];
   uploadedFileCount = 0;
   progressBarValue = 0;
+  // datePickerOptions: Partial<BsDatepickerConfig>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
                 type: AddTaskDialogType,
@@ -76,6 +80,20 @@ export class AddTaskDialogComponent implements OnInit {
               }
 
   ngOnInit(): void {
+
+    this.courtAppointmentList = [
+      {
+        id: 1,
+        title: 'Court Appointment for case 227',
+        appointmentDate: '12 FEB 2020'
+      },
+      {
+        id: 2,
+        title: 'Court Appointment for case 394',
+        appointmentDate: '1 MARCH 2020'
+      },
+    ]
+
     this.userId = sessionStorage.getItem('userId');
     this.assigneeProfilePicture = '..\\..\\..\\..\\assets\\img\\brand\\Logo.png';
     this.addTaskForm = this.fb.group({
@@ -85,7 +103,7 @@ export class AddTaskDialogComponent implements OnInit {
       duration: [{ value: '', disabled: true }],
       due_date: ['', Validators.required],
       is_hidden: [false],
-      priority: ['', Validators.required]
+      priority: ['']
     });
     //If this dialog is opened from quick task add button OR project page OR dashboard page
     if (this.data.type === AddTaskDialogType.QUICK) {
@@ -102,6 +120,7 @@ export class AddTaskDialogComponent implements OnInit {
     }
     this.userService.findAllUsers().subscribe((res: UserMaster[]) => {
       this.users = res;
+      this.users = this.users.filter(user => !user.isFtl);
     });
     this.findAllProject(1);
     this.priorityList = [{'key': TaskPriority.LOW,'value' : 'Low منخفض '},{'key': TaskPriority.MEDIUM, 'value' : 'Medium متوسط '},{'key': TaskPriority.HIGH,'value':'High ​​مرتفع'}];
@@ -143,6 +162,22 @@ export class AddTaskDialogComponent implements OnInit {
     return this.addTaskForm.get('priority');
   }
 
+  get courtAppointment() {
+    return this.addTaskForm.get('courtAppointment');
+  }
+
+  courtAppointmentCheckboxChanged(event) {
+    if (event.checked) {
+      if (!this.addTaskForm.contains('courtAppointment'))
+        this.addTaskForm.addControl('courtAppointment', new FormControl('', Validators.required));
+      this.showCourtAppointmentDropdown = true;
+    } else {
+      if (this.addTaskForm.contains('courtAppointment'))
+        this.addTaskForm.removeControl('courtAppointment');
+      this.showCourtAppointmentDropdown = false;
+    }
+  }
+
   fileChanged(event: any) {
     let files: File[] = event.srcElement.files;
     let filesLength = files.length;
@@ -155,8 +190,8 @@ export class AddTaskDialogComponent implements OnInit {
       let temp = fileSizeString.split(".");
       let fileSize = temp[0]+"."+temp[0].substr(0, 1)+" KB";
       let fileName = files[i].name;
-      if (fileName.length > 18) {
-        fileName = fileName.substr(0, 9)+"..."+fileName.substr(fileName.length-7, fileName.length);
+      if (fileName.length > 27) {
+        fileName = fileName.substr(0, 18)+"..."+fileName.substr(fileName.length-7, fileName.length);
       }
       // console.log(fileType);
       let fileIconObj = {
@@ -267,7 +302,6 @@ export class AddTaskDialogComponent implements OnInit {
     //   this.assignProjectName();
     //   this.assignAssigneeName();
     // }
-    this.showProgressBar = true;
     if (this.data.type === AddTaskDialogType.ALL) {
       this.allTypeSubmissionHelper();
     } else if (this.data.type === AddTaskDialogType.QUICK) {
@@ -279,22 +313,27 @@ export class AddTaskDialogComponent implements OnInit {
       this.projectTypeSubmissionHelper();
     }
     let n = this.selectedFiles.length;
-    for (let i = 0; i < n; ++i) {
-      this.attachemntService.getPresignedUrlForDocUpload(this.project_id.value).subscribe(res => {
-        let dotPosition = this.selectedFiles[i].name.lastIndexOf(".");
-        let fileName = this.selectedFiles[i].name.substr(0, dotPosition);
-        let fileType = this.selectedFiles[i].name.substr(dotPosition+1);
-        this.attachmentList.push({
-          name: fileName,
-          type: fileType,
-          size: this.selectedFiles[i].size,
-          s3_key: res['s3key']
+    if (n > 0) {
+      this.showProgressBar = true;
+      for (let i = 0; i < n; ++i) {
+        this.attachemntService.getPresignedUrlForDocUpload(this.project_id.value).subscribe(res => {
+          let dotPosition = this.selectedFiles[i].name.lastIndexOf(".");
+          let fileName = this.selectedFiles[i].name.substr(0, dotPosition);
+          let fileType = this.selectedFiles[i].name.substr(dotPosition+1);
+          this.attachmentList.push({
+            name: fileName,
+            type: fileType,
+            size: this.selectedFiles[i].size,
+            s3_key: res['s3key']
+          });
+          this.uploadDocToS3(res['attachment_url'], this.selectedFiles[i]);
+        }, err => {
+          this.snackService.failure('!!!Something went wrong');
+          this.dialog.close();
         });
-        this.uploadDocToS3(res['attachment_url'], this.selectedFiles[i]);
-      }, err => {
-        this.snackService.failure('!!!Something went wrong');
-        this.dialog.close();
-      });
+      }
+    } else {
+      this.submitTaskForm();
     }
   }
  

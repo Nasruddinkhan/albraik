@@ -17,20 +17,23 @@
                 </div>
                 <div>
                     <label class="btn-file">
-                        Choose File<input type="file" name="attachment" (change)="fileChanged($event)" style="display: none;" multiple>
+                        اختر ملف<input type="file" name="attachment" (change)="fileChanged($event)" style="display: none;" multiple>
                     </label>
                     <div *ngIf="showFileIcon">
                         <div *ngFor="let fileIconObj of fileIconList; let fileIndex = index " class="file-chip">
                             <div class="row">
                                 <div class="col-sm-2 close-button">
-                                    <mat-icon (click)="removeFile(fileIndex)" style="cursor: pointer;">close</mat-icon>
+                                    <mat-icon (click)="removeFile(fileIndex)" style="cursor: pointer; font-size: 1.3rem;">close</mat-icon>
                                 </div>
-                                <div class="col-sm-2" style="margin-top: 0.45rem; margin-right: 0.4rem; padding-right: 0rem;">
-                                    <i style="font-size: 1.5rem;" [class]="fileIconObj.icon"></i>
+                                <div class="col-sm-2 edit-filename-button">
+                                    <mat-icon (click)="editFileName(fileIndex)" style="cursor: pointer; font-size: 1.3rem;">edit</mat-icon>
                                 </div>
-                                <div class="col-sm-8" style="margin-right: -0.4rem; padding-right: 0rem">
-                                    <div class="text-left">{{ fileIconObj.name }}</div>
-                                    <div class="text-right" style="font-size: 12px;">{{ fileIconObj.size }}</div>
+                                <div class="col-sm-2" style="margin-top: 0.4rem; margin-right: 0.4rem; margin-left: -0.3rem; padding-right: 0rem;">
+                                    <i style="font-size: 1.2rem;" [class]="fileIconObj.icon"></i>
+                                </div>
+                                <div class="col-sm-6" style="margin-right: -0.4rem; padding-right: 0rem">
+                                    <div class="text-left" style="font-size: 10px; margin-left: -1.2rem">{{ fileIconObj.name }}</div>
+                                    <div class="text-right" style="font-size: 10px;">{{ fileIconObj.size }}</div>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +64,7 @@
                         <mat-option 
                             *ngFor="let user of users" 
                             [value]="user.id">
-                            {{ user.firstName }} - {{ user.email }}
+                            {{ user | fullName }}
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="assignee_id.hasError('required')">Please choose an assignee</mat-error>
@@ -76,7 +79,7 @@
                 <img style="border-radius: 50%;" [src]="assigneeProfilePicture" alt="profile photo" width="40px" height="40px">
             </div>
             <div>
-                <mat-form-field class="w-100" appearance="fill">
+                <!-- <mat-form-field class="w-100" appearance="fill">
                     <mat-label>الأهمية</mat-label>
                     <mat-select formControlName="priority" required>
                         <mat-option>--</mat-option>
@@ -85,7 +88,7 @@
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="priority.hasError('required')">Please choose a priority</mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
             </div>
             <div>
                 <mat-form-field class="example-full-width">
@@ -95,7 +98,6 @@
                         matInput 
                         [minDate]="minDate"
                         formControlName="due_date" 
-                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }"
                         bsDatepicker #dp="bsDatepicker">
                     <mat-error *ngIf="due_date.hasError('required')">
                         Joining date is required
@@ -111,6 +113,25 @@
             <div>
                 <mat-checkbox formControlName="is_hidden" value="true">إجراء مخفي؟</mat-checkbox>
             </div>
+            <div>
+                <mat-checkbox (change)="courtAppointmentCheckboxChanged($event)">تعيين موعد المحكمة</mat-checkbox>
+            </div>
+            <div *ngIf="showCourtAppointmentDropdown">
+                <mat-form-field class="w-100" appearance="fill">
+                    <mat-label>موعد المحكمة</mat-label>
+                    <mat-select formControlName="courtAppointment" required>
+                        <mat-option>--</mat-option>
+                        <mat-option 
+                            *ngFor="let courtAppointment of courtAppointmentList" 
+                            [value]="courtAppointment.id">
+                            {{ courtAppointment.title +" - "+ courtAppointment.appointmentDate }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="courtAppointment.hasError('required')">Please choose an assignee</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- <mat-checkbox formControlName="is_hidden" value="true">إجراء مخفي؟</mat-checkbox>
+            <mat-checkbox (change)="courtAppointmentCheckboxChanged($event)">تعيين موعد المحكمة</mat-checkbox> -->
         </div>
     </div>
     <div *ngIf="showProgressBar" class="progress-bar">

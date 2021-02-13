@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.prod';
@@ -21,10 +21,17 @@ export class ProjectService {
     return this.http.get<SubjectType[]>(this.baseURL +`/api/project/type`);
   }
 
+  public getProjectDetails(idArray: number[]): Observable<ProjectModel[]> {
+    let idStringArray = idArray.map(id => id.toString());
+    let params = new HttpParams({
+      fromObject: { 'id': idStringArray }
+    })
+    return this.http.get<ProjectModel[]>(this.baseURL+`/api/project`, { params: params });
+  }
+
   public addProjectTask(project: ProjectModel):Observable<ProjectModel> {
     return this.http.post<ProjectModel>(this.baseURL+`/api/create/task`, project);
   }
-   
   
   public findAllProject(userId:string, pageNo:number):Observable<any>{
     return this.http.get(this.baseURL+`/api/task/${userId}/${pageNo}/allrecord`);

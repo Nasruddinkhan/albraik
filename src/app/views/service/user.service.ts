@@ -18,9 +18,10 @@ export class UserService {
     return this.http.get<UserMaster[]>(this.baseURL +`/api/user`);
   }
 
-  public getUsers(idArray: string[]): Observable<UserMaster[]> {
+  public getUsers(idArray: number[]): Observable<UserMaster[]> {
+    let idStringArray = idArray.map(id => id.toString());
     const params = new HttpParams({
-      fromObject: { 'id': idArray }
+      fromObject: { 'id': idStringArray }
     });
     return this.http.get<UserMaster[]>(this.baseURL+`/api/user`, { params });
   }

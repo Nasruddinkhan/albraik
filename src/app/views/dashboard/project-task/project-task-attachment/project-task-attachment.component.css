@@ -1,0 +1,29 @@
+.header .mat-card-header-text {
+    margin: 0px;
+}
+
+.header {
+    margin-top: 2rem;
+    margin-bottom: -1rem;
+}
+
+.header .mat-card-header {
+    margin-top: 1rem;
+}
+
+.header .mat-card-header .mat-card-title {
+    margin-bottom: 0px;
+}
+
+.header .title {
+    width: 100%;
+    margin-right: -2rem;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.mat-form-field-flex {
+    background-color: white !important;
+}

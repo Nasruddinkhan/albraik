@@ -36,6 +36,38 @@
     border-radius: 50%;
 }
 
+.involved-users {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.involved-users .remove-user {
+    position: absolute;
+    z-index: 1;
+    background-color: #e4e4e4;
+    border-radius: 50%;
+    height: 22px;
+    width: 21px;
+}
+
+.involved-users .remove-user:hover {
+    background-color: #cecece;
+}
+
+.involved-users div {
+    position: relative;
+}
+
+.involved-users .remove-user mat-icon {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: red;
+}
+
+.involved-users img {
+    border-radius: 50%;
+}
+
 mat-card-header .set-right-card-margin {
     margin-right: -1rem !important;
     margin-left: 1rem !important;
@@ -63,6 +95,39 @@ mat-card-header .set-right-card-margin {
     box-shadow: 0px 1px 3px 1px rgb(0, 0, 0, 0.4);
 }
 
+.file-icon {
+    padding: 0px;
+    font-size: 20px;
+    margin-top: -0.75rem;
+}
+
+.file-chip {
+    background-color: #e0e0e0;
+    border-radius: 50px;
+    margin-bottom: 0.3rem;
+    padding: 0px 5px 0px 15px;
+    width: 200px;
+}
+
+.file-chip:hover {
+    background-color: #d1d1d1;
+}
+
+.close-button {
+    color: #ea3e3e;
+    margin-top: 0.5rem;
+}
+
+.progress-bar {
+    margin: 0.5rem 1rem;
+    color: black;
+    background-color: white;
+}
+
+.progress-bar p {
+    margin-bottom: 0.5rem !important;
+}
+
 .col-sm-6 {
     padding-left: 5px;
     padding-right: 5px;
@@ -77,11 +142,24 @@ mat-icon {
     cursor: pointer;
 }
 
-.flip-icon-color {
+.flip-like-icon-color {
+    font-size: 23px !important;
     color: white;
     background-color: black;
-    padding: 1.2px 1px 1px 1px;
-    border-radius: 11px;
+    padding: 0.15px 0px 0px 0px;
+    border-radius: 50%;
+    color: white;
+    transition: height 0.4s, width 0.4s;
+    animation: 0.4s linear enlarge;
+}
+
+.flip-dislike-icon-color {
+    font-size: 23px !important;
+    color: white;
+    background-color: black;
+    padding: 0.1px 0.6px 0px 0px;
+    border-radius: 50%;
+    color: white;
     transition: height 0.4s, width 0.4s;
     animation: 0.4s linear enlarge;
 }
@@ -106,7 +184,7 @@ mat-icon {
 } */
 
 .reaction mat-icon {
-    font-size: 21px;
+    font-size: 23px;
 }
 
 #upper-left-corner {

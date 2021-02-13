@@ -5,7 +5,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DatepickerModule, BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,8 +17,15 @@ import {  arLocale } from 'ngx-bootstrap/locale';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { DeleteConfirmationDialogComponent } from './views/delete-confirmation-dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { ApplicationPipeModule } from './app.pipes.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
 
  defineLocale('ar', arLocale);
 
@@ -32,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
         PerfectScrollbarModule,
         CollapseModule.forRoot(),
         FormsModule,
+        ApplicationPipeModule,
         TranslateModule.forRoot(),
         ReactiveFormsModule,
         HttpClientModule,
@@ -41,17 +49,24 @@ import { MatButtonModule } from '@angular/material/button';
             maxOpened: 1,
             autoDismiss: true
           }),
-          PaginationModule.forRoot(),
-          BsDropdownModule.forRoot(),
-          TabsModule.forRoot(),
-          MatDialogModule,
-          MatButtonModule
+        PaginationModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        TabsModule.forRoot(),
+        MatDialogModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCheckboxModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        NgxMatNativeDateModule,
+        NgbModule
         ],
     entryComponents: [
         DeleteConfirmationDialogComponent
     ],
     exports:[  
         CommonModule, 
+        ApplicationPipeModule,
         TranslateModule,
         PerfectScrollbarModule,
         CollapseModule,
@@ -65,9 +80,31 @@ import { MatButtonModule } from '@angular/material/button';
         ChartsModule,
         PaginationModule,
         TabsModule,
-        TooltipModule
+        TooltipModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        NgxMatNativeDateModule,
+        MatIconModule,
+        MatTableModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        NgbModule
         ],
-        providers: [ DatePipe ],
+        providers: [ 
+            DatePipe,
+            { provide: BsDatepickerConfig, useValue: {
+                  ...new BsDatepickerConfig(),
+                  dateInputFormat: 'MM/DD/YYYY',
+                  adaptivePosition: true
+            }},
+            { provide: MAT_DIALOG_DEFAULT_OPTIONS,
+                useValue: {
+                  ...new MatDialogConfig(),
+                  maxHeight: '600px'
+                } as MatDialogConfig,
+            }
+        ],
         declarations: [DeleteConfirmationDialogComponent]
 
    })
